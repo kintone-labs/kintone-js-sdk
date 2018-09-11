@@ -1,0 +1,38 @@
+{
+  "name": "kintone-js-sdk",
+  "version": "0.1.1",
+  "description": "The SDK of kintone REST API client on browser",
+  "main": "src/main.js",
+  "license": "MIT",
+  "author": "Cybozu, Inc.",
+  "scripts": {
+    "build": "webpack --mode development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kintone/kintone-js-sdk"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "@cybozu/eslint-config": "^2.0.0",
+    "axios": "^0.18.0",
+    "cross-env": "^5.1.3",
+    "tunnel": "0.0.5"
+  },
+  "keywords": [
+    "kintone",
+    "app",
+    "cybozu",
+    "cybozu.com",
+    "kintone.com"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
+  }
+}
