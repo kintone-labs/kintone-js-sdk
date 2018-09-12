@@ -4,7 +4,7 @@
  */
 
 import {Connection} from './module/connection/Connection';
-import {Auth, App, Record, BulkRequest, KintoneException} from 'kintone-basejs-sdk';
+import {Auth, App, Record, BulkRequest, KintoneAPIException} from 'kintone-basejs-sdk';
 
 window.kintoneJSSDK = {
   Auth,
@@ -12,5 +12,5 @@ window.kintoneJSSDK = {
   App,
   Record,
   BulkRequest,
-  KintoneException,
+  KintoneAPIException,
 };

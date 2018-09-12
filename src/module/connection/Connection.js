@@ -3,12 +3,9 @@
  */
 
 import * as kintoneBaseJSSDK from 'kintone-basejs-sdk';
-
-//const kintoneAuth = new WeakMap();
-
-// /**
-//  * Connection module
-//  */
+/**
+ * Connection module
+ */
 export class Connection extends kintoneBaseJSSDK.Connection {
 
   /**
