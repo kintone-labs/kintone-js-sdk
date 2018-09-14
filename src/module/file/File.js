@@ -1,7 +1,7 @@
 /**
  * kintone api - js client
  */
-
+import {Connection} from '../connection/Connection';
 /**
  * File module
  */
@@ -25,6 +25,9 @@ export class File extends FileModule{
      * @return {Promise}
      */
   download(fileKey) {
+    if(window.kintone !== undefined) {
+      this.connection.setHeader('X-Requested-With', 'XMLHttpRequest');
+    }
     return super.download(fileKey);
   }
   /**
@@ -37,6 +40,7 @@ export class File extends FileModule{
     let formData = new FormData();
     if(window.kintone !== undefined) {
       formData.append("__REQUEST_TOKEN__", kintone.getRequestToken());
+      this.connection.setHeader('X-Requested-With', 'XMLHttpRequest');
     }
     formData.append("file", fileBlob, fileName);
     return super.upload(formData);
