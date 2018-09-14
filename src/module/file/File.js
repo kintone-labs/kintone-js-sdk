@@ -1,12 +1,9 @@
 /**
  * kintone api - js client
- * File module
  */
 
-'use-strict';
-
 /**
- * File module for JS
+ * File module
  */
 import {File as FileModule} from 'kintone-basejs-sdk';
 
