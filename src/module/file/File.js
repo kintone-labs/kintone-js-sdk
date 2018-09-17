@@ -37,12 +37,6 @@ export class File extends FileModule {
      * @return {Promise}
      */
   upload(fileName, fileBlob) {
-    const formData = new FormData();
-    if (window.kintone !== undefined) {
-      formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
-      this.connection.setHeader('X-Requested-With', 'XMLHttpRequest');
-    }
-    formData.append('file', fileBlob, fileName);
-    return super.upload(formData);
+    return this.connection.upload(fileName, fileBlob);
   }
 }
