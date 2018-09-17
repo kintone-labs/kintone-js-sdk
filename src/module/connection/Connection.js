@@ -42,6 +42,20 @@ export class Connection extends kintoneBaseJSSDK.Connection {
       });
     }
     return super.request(methodName, restAPIName, body);
-
+  }
+  /**
+   * Upload file from local to kintone environment
+   * @param {String} fileName
+   * @param {Blob} fileBlob
+   * @return {Promise}
+   */
+  upload(fileName, fileBlob) {
+    const formData = new FormData();
+    if (window.kintone !== undefined) {
+      formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
+      this.setHeader('X-Requested-With', 'XMLHttpRequest');
+    }
+    formData.append('file', fileBlob, fileName);
+    return super.requestFile('POST', 'FILE', formData);
   }
 }
