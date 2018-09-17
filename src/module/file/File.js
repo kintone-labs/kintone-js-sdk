@@ -7,7 +7,7 @@ import {Connection} from '../connection/Connection';
  */
 import {File as FileModule} from 'kintone-basejs-sdk';
 
-export class File extends FileModule{
+export class File extends FileModule {
   /**
      * The constructor for this module
      * @param {Connection} connection
@@ -25,7 +25,7 @@ export class File extends FileModule{
      * @return {Promise}
      */
   download(fileKey) {
-    if(window.kintone !== undefined) {
+    if (window.kintone !== undefined) {
       this.connection.setHeader('X-Requested-With', 'XMLHttpRequest');
     }
     return super.download(fileKey);
@@ -37,12 +37,12 @@ export class File extends FileModule{
      * @return {Promise}
      */
   upload(fileName, fileBlob) {
-    let formData = new FormData();
-    if(window.kintone !== undefined) {
-      formData.append("__REQUEST_TOKEN__", kintone.getRequestToken());
+    const formData = new FormData();
+    if (window.kintone !== undefined) {
+      formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
       this.connection.setHeader('X-Requested-With', 'XMLHttpRequest');
     }
-    formData.append("file", fileBlob, fileName);
+    formData.append('file', fileBlob, fileName);
     return super.upload(formData);
   }
 }
