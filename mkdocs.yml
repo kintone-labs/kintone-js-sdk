@@ -1,0 +1,32 @@
+site_name: kintone js SDK
+site_description: The SDK of kintone REST API client on browser
+site_favicon: favicon.ico
+
+repo_url: https://github.com/kintone/kintone-js-sdk
+theme:
+  name: 'material'
+  favicon: favicon.ico
+  palette:
+    primary: 'Light Blue'
+    accent: 'Light Blue'
+  logo:
+   icon: 'cloud'
+extra_javascript:
+  - 'asset/js/extra.js'
+extra_css:
+  - 'asset/style/extra.css'
+markdown_extensions:
+  - admonition
+
+pages:
+- Home: index.md
+- Getting Started: 
+  - Quickstart: getting-started/quickstart.md
+- Reference:
+  - Authentication: reference/authentication.md
+  - Connection: reference/connection.md
+  - Record: reference/record.md
+  - Bulk Request: reference/bulk-request.md
+  - App: reference/app.md
+  - Kintone APIException: reference/kintone-api-exception.md
+  - File: reference/file.md
