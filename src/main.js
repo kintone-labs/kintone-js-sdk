@@ -1,8 +1,3 @@
-/**
- * kintone api - nodejs client
- * kintone-nodeks-SDK
- */
-
 import {Connection} from './module/connection/Connection';
 import {File} from './module/file/File';
 import {Auth, App, Record, BulkRequest, KintoneAPIException} from 'kintone-basejs-sdk';
@@ -16,3 +11,11 @@ window.kintoneJSSDK = {
   File,
   KintoneAPIException,
 };
+
+export {Auth};
+export {Connection};
+export {App};
+export {Record};
+export {BulkRequest};
+export {File};
+export {KintoneAPIException};
