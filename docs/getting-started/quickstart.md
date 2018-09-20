@@ -1,7 +1,7 @@
 # Quickstart
 
 ## Create a customization
-### ES5
+### Using *kintone-js-sdk.min.js* file
 
 * Attach a below file from './dist' folder in kintone-js-sdk into kintone app
 ```
@@ -28,13 +28,13 @@ kintone-js-sdk.min.js
 )
 ![](../img/result.PNG)
 
-### ES6
+### Install package form npm
 Step 1: Run commands
 ```
 $ mkdir test
 $ cd ./test
 $ mkdir src
-$ mkdir build
+$ mkdir dist
 ```
 Step 2: Add the below files to test/ folder
 

@@ -23,11 +23,10 @@ Handle error responses from kintone Rest API
 
 ```javascript
 var appID = {your_invalid_app_id};
-kintoneApp.getApp(appID)
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getApp(appID).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 ** Response **
@@ -71,11 +70,10 @@ The result of Promise.Reject()
 
 ```javascript
 var appID = {your_invalid_app_id};
-kintoneApp.getApp(appID)
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.getAll());
-    });
+kintoneApp.getApp(appID).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.getAll());
+});
 ```
 
 </details>

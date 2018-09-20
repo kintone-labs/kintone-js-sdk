@@ -51,14 +51,12 @@ Promise
 ```javascript
 var app = /*{your_app_id}*/;
 var id = {your_record_id};
-kintoneRecord.getRecord(app, id)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.getRecord(app, id).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -95,14 +93,12 @@ var fields = [
     // another fieldCode
 ]
 var totalCount = /*{your_decide_true_or_false}*/;
-kintoneRecord.getRecords(app, query, fields, totalCount)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.getRecords(app, query, fields, totalCount).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -130,21 +126,19 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = 'your_app_id';
 var record = {
-    YourFieldCode: {
-        value: 'Value Of YourFieldCode'
-    },
-    // Another fieldcode here
+  YourFieldCode: {
+    value: 'Value Of YourFieldCode'
+  },
+  // Another fieldcode here
 };
-kintoneRecord.addRecord(app, record)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.addRecord(app, record).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -183,14 +177,12 @@ var records = [
     record,
     // another record
 ];
-kintoneRecord.addRecords(app, records)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.addRecords(app, records).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -220,23 +212,21 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
-var id = /*{your_record_id}*/;
+var app = 'your_app_id';
+var id = 'your_record_id';
 var record = {
     YourFieldCode: {
         value: 'Value Of YourFieldCode'
     },
     // Another fieldcode here
 };
-var revision = /*{revision_of_record}*/;
-kintoneRecord.updateRecordById(app, id, record, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var revision = 'revision_of_record';
+kintoneRecord.updateRecordById(app, id, record, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -266,26 +256,24 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = 'your_app_id';
 var updateKey = {
-    field: '{your_fieldcode}',
-    value: '{your_fieldcode_value}'
+  field: '{your_fieldcode}',
+  value: '{your_fieldcode_value}'
 };
 var record = {
-    YourFieldCode: {
-        value: 'Value Of YourFieldCode'
-    },
-    // Another fieldcode here
+  YourFieldCode: {
+    value: 'Value Of YourFieldCode'
+  },
+  // Another fieldcode here
 };
-var revision = /*{revision_of_record}*/;
-kintoneRecord.updateRecordByUpdateKey(app, updateKey, record, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var revision = 'revision_of_record';
+kintoneRecord.updateRecordByUpdateKey(app, updateKey, record, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -313,34 +301,34 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = 'your_app_id';
 var record = {
-    YourFieldCode: {
-        value: 'Value Of YourFieldCode'
-    },
-    // Another fieldcode here
+  YourFieldCode: {
+    value: 'Value Of YourFieldCode'
+  },
+  // Another fieldcode here
 };
 var recordUpdate = {
-    id: /*{your_record_id}*/, // Optional. Required, if updateKey will not be specified.
-    updateKey: { // Optional. Required, if id will not be specified.
-        field: '{your_field_code}',
-        value: '{your_field_code_value}'
-    },
-    record: record,
-    revision: /*{record_revision_number}*/ // Optional
+  id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
+  updateKey: { // Optional. Required, if id will not be specified.
+    field: '{your_field_code}',
+    value: '{your_field_code_value}'
+  },
+  record: record,
+  revision: 'record_revision_number' // Optional
 };
 var recordsUpdate = [
-    recordUpdate,
-    // Another recordUpdate
+  recordUpdate,
+  // Another recordUpdate
 ]
 kintoneRecord.updateRecords(app, recordsUpdate)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+  .then((rsp) => {
+    console.log(rsp);
+  })
+  .catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
 ```
 
 </details>
@@ -368,16 +356,16 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = 'your_app_id';
 var ids = [/*your_record_id*/]
 kintoneRecord.deleteRecords(app, ids)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+  .then((rsp) => {
+    console.log(rsp);
+  })
+  .catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
 ```
 
 </details>
@@ -405,18 +393,16 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = 'your_app_id';
 var idsWithRevision = {
-    /*your_record_id: revision_of_record*/
+  /*your_record_id: revision_of_record*/
 }
-kintoneRecord.deleteRecordsWithRevision(app, idsWithRevision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.deleteRecordsWithRevision(app, idsWithRevision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -446,19 +432,17 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
-var id = /*{your_record_id}*/;
+var app = 'your_app_id';
+var id = 'your_record_id';
 var assignees = [/*your_assignee(s)*/];
-var revision = /*{revision_of_record}*/;
+var revision = 'revision_of_record';
 
-kintoneRecord.updateRecordAssignees(app, id, assignees, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.updateRecordAssignees(app, id, assignees, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -489,20 +473,18 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
-var id = /*{your_record_id}*/;
-var action = /*{your_action_name}*/;
+var app = 'your_app_id';
+var id = 'your_record_id';
+var action = 'your_action_name';
 var assignee = '/*your_assignee(s)*/';
-var revision = /*{revision_of_record}*/;
+var revision = 'revision_of_record';
 
-kintoneRecord.updateRecordStatus(app, id, action, assignee, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.updateRecordStatus(app, id, action, assignee, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -530,25 +512,23 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = 'your_app_id';
 var recordStatusUpdateItem = {
-    id: /*your_record_id*/,
-    action: '/*your_action_name*/',
-    assignee: '/*your_assignee*/',
-    revision: /*your_record_revision*/
+  id: 'your_record_id',
+  action: 'your_action_name',
+  assignee: 'your_assignee',
+  revision: 'your_record_revision'
 }
 var records = [
-    recordStatusUpdateItem,
-    /*another data like recordStatusUpdateItem*/
+  recordStatusUpdateItem,
+  'another data like recordStatusUpdateItem'
 ];
-kintoneRecord.updateRecordsStatus(app, records)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.updateRecordsStatus(app, records).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -577,19 +557,17 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
-var id = /*{your_record_id}*/;
-var order = /*{your_order_type}*/; // asc or desc
-var offset = /*{your_offset_number}*/;
-var limit = /*{your_limit number}*/;
-kintoneRecord.getComments(app, id, order, offset, limit)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var app = 'your_app_id';
+var id = 'your_record_id';
+var order = 'your_order_type'; // asc or desc
+var offset = 'your_offset_number';
+var limit = 'your_limit number';
+kintoneRecord.getComments(app, id, order, offset, limit).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -616,26 +594,24 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
-var record = /*{your_record_id}*/;
+var app = 'your_app_id';
+var record = 'your_record_id';
 var comment = {
-    text: '/*your_comment_content*/',
-    mentions: [
-        {
-            code: '/*your_member_code*/',
-            type: '/*your_member_type*/' // either `USER` or `GROUP` or `ORGANIZATION`
-        },
-        // another mention here
-    ]
+  text: '/*your_comment_content*/',
+  mentions: [
+    {
+      code: '/*your_member_code*/',
+      type: '/*your_member_type*/' // either `USER` or `GROUP` or `ORGANIZATION`
+    },
+    // another mention here
+  ]
 };
-kintoneRecord.addComment(app, record, comment)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneRecord.addComment(app, record, comment).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -662,17 +638,15 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
-var record = /*{your_record_id}*/;
-var comment = /*{your_comment_id}*/;
-kintoneRecord.deleteComment(app, record, comment)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var app = 'your_app_id';
+var record = 'your_record_id';
+var comment = 'your_comment_id';
+kintoneRecord.deleteComment(app, record, comment).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>

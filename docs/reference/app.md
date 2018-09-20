@@ -53,14 +53,12 @@ Promise
 
 ```javascript
 var appId = {your_app_id};
-kintoneApp.getApp(appId)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getApp(appId).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -90,14 +88,12 @@ Promise
 ```javascript
 var limit = /*{your_limit_number}*/;
 var offset = /*{your_offset_number}*/;
-kintoneApp.getApps(offset, limit)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getApps(offset, limit).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -129,14 +125,12 @@ Promise
 var appIDs = [{YOUR_APP_ID_1}, {YOUR_APP_ID_2}, {YOUR_APP_ID_n}];
 var limit = /*{your_limit_number}*/;
 var offset = /*{your_offset_number}*/;
-kintoneApp.getAppsByIDs(appIDs, offset, limit)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getAppsByIDs(appIDs, offset, limit).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -168,14 +162,12 @@ Promise
 var codes = ['YOUR_APP_CODE_1', 'YOUR_APP_CODE_2'];
 var limit = /*{your_limit_number}*/;
 var offset = /*{your_offset_number}*/;
-kintoneApp.getAppsByCodes(codes, offset, limit)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getAppsByCodes(codes, offset, limit).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -207,14 +199,12 @@ Promise
 var name = 'your app name';
 var limit = /*{your_limit_number}*/;
 var offset = /*{your_offset_number}*/;
-kintoneApp.getAppsByName(name, offset, limit)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getAppsByName(name, offset, limit).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -246,14 +236,12 @@ Promise
 var spaceIds = [];
 var limit = /*{your_limit_number}*/;
 var offset = /*{your_offset_number}*/;
-kintoneApp.getAppsBySpaceIDs(spaceIds, offset, limit)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getAppsBySpaceIDs(spaceIds, offset, limit).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -286,17 +274,15 @@ Promise
 ** Source code **
 
 ```javascript
-const name = {your_app_name};
-const space = {space_of_app};
-const thread = {thread_id_in_space};
-kintoneApp.addPreviewApp(name, space, thread)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var name = {your_app_name};
+var space = {space_of_app};
+var thread = {thread_id_in_space};
+kintoneApp.addPreviewApp(name, space, thread).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -324,23 +310,21 @@ Promise
 ** Source code **
 
 ```javascript
-const appPreview = {
-        app: 'your_app_id',
-        revision: 'revision_of_app'
-    };
-const apps = [
-    appPreview
-    // Another app preview here
+var appPreview = {
+  app: 'your_app_id',
+  revision: 'revision_of_app'
+};
+var apps = [
+  appPreview
+// Another app preview here
 ];
-const revert = false;
-kintoneApp.deployAppSettings(apps, revert)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var revert = false;
+kintoneApp.deployAppSettings(apps, revert).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -367,22 +351,20 @@ Promise
 ** Source code **
 
 ```javascript
-const appPreview = {
-        app: 'your_app_id',
-        revision: 'revision_of_app'
-    };
-const apps = [
-    'your_app_id'
-    // Another app id here
+var appPreview = {
+  app: 'your_app_id',
+  revision: 'revision_of_app'
+};
+var apps = [
+  'your_app_id'
+// Another app id here
 ];
-kintoneApp.getAppDeployStatus(apps)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getAppDeployStatus(apps).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -413,27 +395,23 @@ Promise
 ```javascript
 var app = {your_app_id};
 var lang = {language_code}; // Ex: JA
-kintoneApp.getViews(app, lang)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getViews(app, lang).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 
 // Get a pre-live (preview) views
 var app = {your_app_id};
 var lang = {language_code}; // Ex: JA
 var isPreview = true;
-kintoneApp.getViews(app, lang, isPreview)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getViews(app, lang, isPreview).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -448,7 +426,7 @@ kintoneApp.getViews(app, lang, isPreview)
 | --- | --- | --- | --- |
 | app | Integer | yes | The app ID
 | views | JSONObject | yes | An object of data of Views. About the format, please look the sample below or [reference](#reference) at the end of this page|
-| revision | Boolean | (optional) | Specify the revision number of the settings that will be deployed.
+| revision | Integer | (optional) | Specify the revision number of the settings that will be deployed.
 
 **Return**
 
@@ -462,31 +440,29 @@ Promise
 ** Source code **
 
 ```javascript
-const app = {your_app_id};
-const views = {
-    "Your_view_name": {
-      "index": 0,
-      "type": "your_view_type", // Default: 'LIST', 'CALENDAR', 'CUSTOM'
-      "name": "Your_view_name",
-      "fields": [
-        "your_field_code"
-        // Another field code here
-      ],
-      "filterCond": "your_query",
-      "sort": "your_sort"      
-    }
-    // Another view here
-}; 
-const revision: 'settings_revision';
+var app = {your_app_id};
+var views = {
+  'Your_view_name': {
+    'index': 0,
+    'type': 'your_view_type', // Default: 'LIST', 'CALENDAR', 'CUSTOM'
+    'name': 'Your_view_name',
+    'fields': [
+      'your_field_code'
+      // Another field code here
+    ],
+    'filterCond': 'your_query',
+    'sort': 'your_sort'
+  }
+  // Another view here
+};
+var revision = 'settings_revision';
 
-kintoneApp.updateViews(app, views, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.updateViews(app, views, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -515,29 +491,25 @@ Promise
 ** Source code **
 
 ```javascript
-const app = {your_app_id};
-const lang = {language_code}; // Ex: JA
-kintoneApp.getGeneralSettings(app, lang)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var app = {your_app_id};
+var lang = {language_code}; // Ex: JA
+kintoneApp.getGeneralSettings(app, lang).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 
 // Get a pre-live (preview) general settings
-const app = {your_app_id};
-const lang = {language_code}; // Ex: JA
-const isPreview = true;
-kintoneApp.getGeneralSettings(app, lang, isPreview)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var app = {your_app_id};
+var lang = {language_code}; // Ex: JA
+var isPreview = true;
+kintoneApp.getGeneralSettings(app, lang, isPreview).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -552,7 +524,7 @@ kintoneApp.getGeneralSettings(app, lang, isPreview)
 | --- | --- | --- | --- |
 | app | Integer | yes | The app ID
 | generalSettings | JSONObject | (Conditional) | the description, name, icon, revision and color theme of an App.
-| revision | Boolean | (optional) | Specify the revision number of the settings that will be deployed.
+| revision | Integer | (optional) | Specify the revision number of the settings that will be deployed.
 
 **Return**
 
@@ -566,26 +538,24 @@ Promise
 ** Source code **
 
 ```javascript
-const app = {your_app_id};
-const generalSettings = {
-    "name": "APP_NAME",
-    "description": "Here is app description.",
-    "icon": {
-      "type": "icon_type", // specified: FILE, PRESET
-      "key": "icon_key"
-    },
-    "theme": "your_theme" // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
+var app = {your_app_id};
+var generalSettings = {
+  'name': 'APP_NAME',
+  'description': 'Here is app description.',
+  'icon': {
+    'type': 'icon_type', // specified: FILE, PRESET
+    'key': 'icon_key'
+  },
+  'theme': 'your_theme' // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
 };
-const revision = 'settings_revision';
+var revision = 'settings_revision';
 
-kintoneApp.updateGeneralSettings(app, generalSettings, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.updateGeneralSettings(app, generalSettings, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -616,27 +586,23 @@ Promise
 ```javascript
 var app = {your_app_id};
 var lang = {language_code}; // Ex: JA
-kintoneApp.getFormFields(app, lang)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getFormFields(app, lang).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 
 // Get a pre-live (preview) form fields
 var app = {your_app_id};
 var lang = {language_code}; // Ex: JA
 var isPreview = true;
-kintoneApp.getFormFields(app, lang, isPreview)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getFormFields(app, lang, isPreview).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -669,27 +635,25 @@ Promise
 ** Source code **
 
 ```javascript
-const app = {your_app_id};
-const fields = {
-    YourFieldCode: {
-      "type": "SINGLE_LINE_TEXT",
-      "code": "YourFieldCode",
-      "label": "Text (single-line)",
-      "noLabel": false,
-      "required": true,
-      "unique": true
-    }
-    // Another field here
+var app = {your_app_id};
+var fields = {
+  YourFieldCode: {
+    'type': 'SINGLE_LINE_TEXT',
+    'code': 'YourFieldCode',
+    'label': 'Text (single-line)',
+    'noLabel': false,
+    'required': true,
+    'unique': true
+  }
+  // Another field here
 };
-const revision = 'the_revision_of_the_settings ';
-kintoneApp.addFormFields(app, fields, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var revision = 'the_revision_of_the_settings ';
+kintoneApp.addFormFields(app, fields, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -722,27 +686,25 @@ Promise
 ** Source code **
 
 ```javascript
-const app = {your_app_id};
-const fields = {
-    YourFieldCode: {
-      "type": "SINGLE_LINE_TEXT",
-      "code": "YourFieldCode",
-      "label": "Text (single-line)",
-      "noLabel": false,
-      "required": true,
-      "unique": true
-    }
-    // Another field here
+var app = {your_app_id};
+var fields = {
+  YourFieldCode: {
+    'type': 'SINGLE_LINE_TEXT',
+    'code': 'YourFieldCode',
+    'label': 'Text (single-line)',
+    'noLabel': false,
+    'required': true,
+    'unique': true
+  }
+  // Another field here
 };
-const revision = 'the_revision_of_the_settings ';
-kintoneApp.updateFormFields(app, fields, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var revision = 'the_revision_of_the_settings ';
+kintoneApp.updateFormFields(app, fields, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -775,20 +737,18 @@ Promise
 ** Source code **
 
 ```javascript
-const app = {your_app_id};
-const fields =[
-     'your_field_cde'
-    // Another field code here
+var app = {your_app_id};
+var fields = [
+  'your_field_cde'
+  // Another field code here
 ];
-const revision = 'revision_of_the_Settings ';
-kintoneApp.deleteFormFields(app, fields, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+var revision = 'revision_of_the_Settings ';
+kintoneApp.deleteFormFields(app, fields, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -818,25 +778,21 @@ Promise
 ```javascript
 var app = {your_app_id};
 // Get form layout
-kintoneApp.getFormLayout(app)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getFormLayout(app).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 
 // Get a preview (pre-live) form layout
 var isPreview = true;
-kintoneApp.getFormLayout(app, isPreview)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.getFormLayout(app, isPreview).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -869,34 +825,32 @@ Promise
 ** Source code **
 
 ```javascript
-const app = {your_app_id};
-const fisrtRowLayout = {
-            "type": "kintone_layout_type", 
-            "fields": [
-                {
-                    "type": "kintone_field_type",
-                    "code": "your_field_code",
-                    "size": {
-                        "width": "your_field_width"
-                    }
-                }
-            ]
-        },
-const layout = [
-    fisrtRowLayout
-    // Another row layout here
-]
-const revision = 'settings_revision';
+var app = {your_app_id};
+var fisrtRowLayout = {
+  'type': 'kintone_layout_type',
+  'fields': [
+    {
+      'type': 'kintone_field_type',
+      'code': 'your_field_code',
+      'size': {
+        'width': 'your_field_width'
+      }
+    }
+  ]
+};
+var layout = [
+  fisrtRowLayout
+  // Another row layout here
+];
+var revision = 'settings_revision';
 
 // Update form layout
-kintoneApp.updateFormLayout(app, layout, revision)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneApp.updateFormLayout(app, layout, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>

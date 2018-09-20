@@ -26,7 +26,7 @@ var kintoneFile = new kintoneJSSDK.File(connection);
 
 ## Methods
 
-### upload(filePath)
+### upload(fileName, fileBlob)
 
 > Upload file into kintone
 
@@ -34,7 +34,8 @@ var kintoneFile = new kintoneJSSDK.File(connection);
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| filePath | String | yes | The full path of file on your environment
+| fileName | String | yes | The name of file
+| fileBlob | Blob | yes | The content of file
 
 **Return**
 
@@ -50,14 +51,12 @@ Promise
 ```javascript
 var fileBlob = 'your_file_blob';
 var fileName = 'your_file_name';
-kintoneFile.upload(fileName, fileBlob)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneFile.upload(fileName, fileBlob).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -86,14 +85,12 @@ Promise
 
 ```javascript
 var fileKey = 'your_file_Key';
-kintoneFile.download(fileKey)
-    .then(rsp => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.get());
-    });
+kintoneFile.download(fileKey).then(rsp => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
