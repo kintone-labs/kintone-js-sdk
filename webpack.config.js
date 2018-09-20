@@ -26,11 +26,5 @@ module.exports = (env = {}) => {
       tls: 'empty'
     },
     watch: env.watch
-    // plugins: [
-    //   new webpack.optimize.UglifyJsPlugin({
-    //     include: /\.min\.js$/,
-    //     minimize: true
-    //   })
-    // ]
   };
 };
