@@ -18,7 +18,6 @@
   "dependencies": {
     "kintone-basejs-sdk": "*",
     "axios": "^0.18.0",
-    "cross-env": "^5.1.3",
     "tunnel": "0.0.5"
   },
   "keywords": [
@@ -35,6 +34,7 @@
     "webpack": "^4.17.2",
     "@cybozu/eslint-config": "^2.0.0",
     "eslint": "^4.19.1",
+    "cross-env": "^5.1.3",
     "webpack-cli": "^3.1.0"
   }
 }
