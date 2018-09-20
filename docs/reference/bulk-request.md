@@ -163,6 +163,7 @@ var responseBulkRequest = kintoneBulkRequest
   .updateRecords(/*[Args]*/)
   .deleteRecords()
   .execute();
+
 responseBulkRequest.then((resp) => {
   console.log(resp);
 }).catch((err) => {
