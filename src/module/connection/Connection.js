@@ -35,10 +35,12 @@ export class Connection extends kintoneBaseJSSDK.Connection {
       return kintone.api(super.getUri(restAPIName), String(methodName).toUpperCase(), body).then((response) => {
         return response;
       }).catch(err => {
-        return {
+        const error = {
           response: {
             data: err
-          }};
+          }
+        };
+        throw new kintoneBaseJSSDK.KintoneAPIException(error);
       });
     }
     return super.request(methodName, restAPIName, body);
