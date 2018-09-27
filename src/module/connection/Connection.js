@@ -40,7 +40,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
             data: err
           }
         };
-        throw new kintoneBaseJSSDK.KintoneAPIException(error);
+        throw error;
       });
     }
     return super.request(methodName, restAPIName, body);
