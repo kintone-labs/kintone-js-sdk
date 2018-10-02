@@ -10,8 +10,8 @@ export class Connection extends kintoneBaseJSSDK.Connection {
 
   /**
      * @param {String} domain
-     * @param {KintoneAuth} auth
-     * @param {Integer} kintoneGuestSpaceID
+     * @param {kintoneBaseJSSDK.Auth} auth
+     * @param {Integer} guestSpaceID
      */
   constructor(domain, auth, guestSpaceID) {
     if (auth instanceof kintoneBaseJSSDK.Auth) {
