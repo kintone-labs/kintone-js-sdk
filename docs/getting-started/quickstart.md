@@ -59,6 +59,7 @@ Step 2: Add the below files to test/ folder
   },
   "dependencies": {
     "cross-env": "^5.1.3"
+    "kintone-js-sdk": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
