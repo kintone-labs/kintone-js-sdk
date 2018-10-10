@@ -28,7 +28,7 @@ kintone-js-sdk.min.js
 )
 ![](../img/result.PNG)
 
-### Install package form npm
+### Install package from npm
 Step 1: Run commands
 ```
 $ mkdir test

@@ -61,7 +61,7 @@ kintoneFile.upload(fileName, fileBlob).then((rsp) => {
 
 </details>
 
-### download(fileKey, outPutFilePath)
+### download(fileKey)
 
 > Download file from kintone
 

@@ -49,7 +49,7 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = {your_app_id};
 var id = {your_record_id};
 kintoneRecord.getRecord(app, id).then((rsp) => {
   console.log(rsp);
@@ -86,13 +86,13 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = {your_app_id};
 var query = '{your_query_string}';
 var fields = [
     '{your_field_code}',
     // another fieldCode
 ]
-var totalCount = /*{your_decide_true_or_false}*/;
+var totalCount = {your_decide_true_or_false};
 kintoneRecord.getRecords(app, query, fields, totalCount).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -166,7 +166,7 @@ Promise
 ** Source code **
 
 ```javascript
-var app = /*{your_app_id}*/;
+var app = {your_app_id};
 var record = {
     YourFieldCode: {
         value: 'Value Of YourFieldCode'

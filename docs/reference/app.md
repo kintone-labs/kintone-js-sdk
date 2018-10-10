@@ -86,8 +86,8 @@ Promise
 ** Source code **
 
 ```javascript
-var limit = /*{your_limit_number}*/;
-var offset = /*{your_offset_number}*/;
+var limit = {your_limit_number};
+var offset = {your_offset_number};
 kintoneApp.getApps(offset, limit).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -123,8 +123,8 @@ Promise
 
 ```javascript
 var appIDs = [{YOUR_APP_ID_1}, {YOUR_APP_ID_2}, {YOUR_APP_ID_n}];
-var limit = /*{your_limit_number}*/;
-var offset = /*{your_offset_number}*/;
+var limit = {your_limit_number};
+var offset = {your_offset_number};
 kintoneApp.getAppsByIDs(appIDs, offset, limit).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -160,8 +160,8 @@ Promise
 
 ```javascript
 var codes = ['YOUR_APP_CODE_1', 'YOUR_APP_CODE_2'];
-var limit = /*{your_limit_number}*/;
-var offset = /*{your_offset_number}*/;
+var limit = {your_limit_number};
+var offset = {your_offset_number};
 kintoneApp.getAppsByCodes(codes, offset, limit).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -197,8 +197,8 @@ Promise
 
 ```javascript
 var name = 'your app name';
-var limit = /*{your_limit_number}*/;
-var offset = /*{your_offset_number}*/;
+var limit = {your_limit_number};
+var offset = {your_offset_number};
 kintoneApp.getAppsByName(name, offset, limit).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -234,8 +234,8 @@ Promise
 
 ```javascript
 var spaceIds = [];
-var limit = /*{your_limit_number}*/;
-var offset = /*{your_offset_number}*/;
+var limit = {your_limit_number};
+var offset = {your_offset_number};
 kintoneApp.getAppsBySpaceIDs(spaceIds, offset, limit).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
