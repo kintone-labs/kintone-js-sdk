@@ -13,9 +13,11 @@ module.exports = (env = {}) => {
       rules: [
         {
           test: /\.js$/,
-          include: [require.resolve('kintone-basejs-sdk')],
           use: {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
           },
         }
       ]
