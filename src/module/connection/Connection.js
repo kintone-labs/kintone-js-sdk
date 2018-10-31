@@ -21,6 +21,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
       super(domain, new kintoneBaseJSSDK.Auth(), guestSpaceID);
       this.kintoneAuth = undefined;
     }
+    this.headers = [];
   }
   /**
      * request to URL
