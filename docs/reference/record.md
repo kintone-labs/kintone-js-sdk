@@ -15,10 +15,19 @@ Provide manipulate functions on records: get, update, delete, update the record 
 <details class="tab-container" open>
 <Summary>Init record module</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
+
 var kintoneRecord = new kintoneJSSDK.Record(connection);
+```
+
+** Nodejs **
+
+```javascript
+
+const kintone = require('kintone-js-sdk');
+let kintoneRecord = new kintone.Record(connection);
 ```
 
 </details>
@@ -46,11 +55,24 @@ Promise
 <details class="tab-container" open>
 <Summary>Get record</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = {your_app_id};
 var id = {your_record_id};
+kintoneRecord.getRecord(app, id).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const id = {your_record_id};
 kintoneRecord.getRecord(app, id).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -83,7 +105,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get records</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = {your_app_id};
@@ -93,6 +115,24 @@ var fields = [
     // another fieldCode
 ]
 var totalCount = {your_decide_true_or_false};
+kintoneRecord.getRecords(app, query, fields, totalCount).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const query = '{your_query_string}';
+const fields = [
+    '{your_field_code}',
+    // another fieldCode
+]
+const totalCount = /*{your_decide_true_or_false}*/;
 kintoneRecord.getRecords(app, query, fields, totalCount).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -123,7 +163,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add record</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -132,6 +172,24 @@ var record = {
     value: 'Value Of YourFieldCode'
   },
   // Another fieldcode here
+};
+kintoneRecord.addRecord(app, record).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const record = {
+    YourFieldCode: {
+        value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
 };
 kintoneRecord.addRecord(app, record).then((rsp) => {
   console.log(rsp);
@@ -163,7 +221,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add multi records</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = {your_app_id};
@@ -176,6 +234,28 @@ var record = {
 var records = [
     record,
     // another record
+];
+kintoneRecord.addRecords(app, records).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const record = {
+  YourFieldCode: {
+    value: 'Value Of YourFieldCode'
+  },
+  // Another fieldcode here
+};
+const records = [
+  record
+  // another record
 ];
 kintoneRecord.addRecords(app, records).then((rsp) => {
   console.log(rsp);
@@ -209,7 +289,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update record by ID</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -221,6 +301,26 @@ var record = {
     // Another fieldcode here
 };
 var revision = 'revision_of_record';
+kintoneRecord.updateRecordById(app, id, record, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const id = /*{your_record_id}*/;
+const record = {
+  YourFieldCode: {
+    value: 'Value Of YourFieldCode'
+  },
+  // Another fieldcode here
+};
+const revision = /*{revision_of_record}*/;
 kintoneRecord.updateRecordById(app, id, record, revision).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -253,7 +353,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update record by UpdateKey</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -268,6 +368,29 @@ var record = {
   // Another fieldcode here
 };
 var revision = 'revision_of_record';
+kintoneRecord.updateRecordByUpdateKey(app, updateKey, record, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const updateKey = {
+  field: '{your_fieldcode}',
+  value: '{your_fieldcode_value}'
+};
+const record = {
+  YourFieldCode: {
+    value: 'Value Of YourFieldCode'
+  },
+  // Another fieldcode here
+};
+const revision = /*{revision_of_record}*/;
 kintoneRecord.updateRecordByUpdateKey(app, updateKey, record, revision).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -298,7 +421,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update multi records</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -321,14 +444,43 @@ var recordsUpdate = [
   recordUpdate,
   // Another recordUpdate
 ]
-kintoneRecord.updateRecords(app, recordsUpdate)
-  .then((rsp) => {
+kintoneRecord.updateRecords(app, recordsUpdate).then((rsp) => {
     console.log(rsp);
-  })
-  .catch((err) => {
+  }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
     console.log(err.get());
   });
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const record = {
+    YourFieldCode: {
+        value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+};
+const recordUpdate = {
+    id: /*{your_record_id}*/, // Optional. Required, if updateKey will not be specified.
+    updateKey: { // Optional. Required, if id will not be specified.
+        field: '{your_field_code}',
+        value: '{your_field_code_value}'
+    },
+    record: record,
+    revision: /*{record_revision_number}*/ // Optional
+};
+const recordsUpdate = [
+    recordUpdate,
+    // Another recordUpdate
+]
+kintoneRecord.updateRecords(app, recordsUpdate).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -353,19 +505,30 @@ Promise
 <details class="tab-container" open>
 <Summary>Delete multi record</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
 var ids = [/*your_record_id*/]
-kintoneRecord.deleteRecords(app, ids)
-  .then((rsp) => {
+kintoneRecord.deleteRecords(app, ids).then((rsp) => {
     console.log(rsp);
-  })
-  .catch((err) => {
+  }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
     console.log(err.get());
   });
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const ids = [/*your_record_id*/]
+kintoneRecord.deleteRecords(app, ids).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
 ```
 
 </details>
@@ -390,12 +553,27 @@ Promise
 <details class="tab-container" open>
 <Summary>Delete record with revision</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
 var idsWithRevision = {
   /*your_record_id: revision_of_record*/
+}
+kintoneRecord.deleteRecordsWithRevision(app, idsWithRevision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const idsWithRevision = {
+    /*your_record_id: revision_of_record*/
 }
 kintoneRecord.deleteRecordsWithRevision(app, idsWithRevision).then((rsp) => {
   console.log(rsp);
@@ -429,13 +607,29 @@ Promise
 <details class="tab-container" open>
 <Summary>update record Assignees</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
 var id = 'your_record_id';
 var assignees = [/*your_assignee(s)*/];
 var revision = 'revision_of_record';
+
+kintoneRecord.updateRecordAssignees(app, id, assignees, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const id = /*{your_record_id}*/;
+const assignees = [/*your_assignee(s)*/];
+const revision = /*{revision_of_record}*/;
 
 kintoneRecord.updateRecordAssignees(app, id, assignees, revision).then((rsp) => {
   console.log(rsp);
@@ -470,7 +664,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update record status</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -478,6 +672,23 @@ var id = 'your_record_id';
 var action = 'your_action_name';
 var assignee = '/*your_assignee(s)*/';
 var revision = 'revision_of_record';
+
+kintoneRecord.updateRecordStatus(app, id, action, assignee, revision).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const id = /*{your_record_id}*/;
+const action = /*{your_action_name}*/;
+const assignee = '/*your_assignee(s)*/';
+const revision = /*{revision_of_record}*/;
 
 kintoneRecord.updateRecordStatus(app, id, action, assignee, revision).then((rsp) => {
   console.log(rsp);
@@ -509,7 +720,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update multi record status</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -522,6 +733,28 @@ var recordStatusUpdateItem = {
 var records = [
   recordStatusUpdateItem,
   'another data like recordStatusUpdateItem'
+];
+kintoneRecord.updateRecordsStatus(app, records).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const recordStatusUpdateItem = {
+    id: /*your_record_id*/,
+    action: '/*your_action_name*/',
+    assignee: '/*your_assignee*/',
+    revision: /*your_record_revision*/
+}
+const records = [
+    recordStatusUpdateItem,
+    /*another data like recordStatusUpdateItem*/
 ];
 kintoneRecord.updateRecordsStatus(app, records).then((rsp) => {
   console.log(rsp);
@@ -554,7 +787,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get comments</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -562,6 +795,22 @@ var id = 'your_record_id';
 var order = 'your_order_type'; // asc or desc
 var offset = 'your_offset_number';
 var limit = 'your_limit number';
+kintoneRecord.getComments(app, id, order, offset, limit).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const id = /*{your_record_id}*/;
+const order = /*{your_order_type}*/; // asc or desc
+const offset = /*{your_offset_number}*/;
+const limit = /*{your_limit number}*/;
 kintoneRecord.getComments(app, id, order, offset, limit).then((rsp) => {
   console.log(rsp);
 }).catch((err) => {
@@ -591,7 +840,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add comment</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -612,6 +861,29 @@ kintoneRecord.addComment(app, record, comment).then((rsp) => {
   // This SDK return err with KintoneAPIExeption
   console.log(err.get());
 });
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const record = /*{your_record_id}*/;
+const comment = {
+  text: '/*your_comment_content*/',
+  mentions: [
+    {
+      code: '/*your_member_code*/',
+      type: '/*your_member_type*/' // either `USER` or `GROUP` or `ORGANIZATION`
+    },
+    // another mention here
+  ]
+};
+kintoneRecord.addComment(app, record, comment).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
 ```
 
 </details>
@@ -635,7 +907,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Delete comment</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var app = 'your_app_id';
@@ -647,6 +919,20 @@ kintoneRecord.deleteComment(app, record, comment).then((rsp) => {
   // This SDK return err with KintoneAPIExeption
   console.log(err.get());
 });
+```
+
+** Nodejs **
+
+```javascript
+const app = /*{your_app_id}*/;
+const record = /*{your_record_id}*/;
+const comment = /*{your_comment_id}*/;
+kintoneRecord.deleteComment(app, record, comment).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
 ```
 
 </details>

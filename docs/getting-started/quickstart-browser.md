@@ -1,4 +1,4 @@
-# Quickstart
+# Quickstart Javascript
 
 ## Create a customization
 ### Using *kintone-js-sdk.min.js* file

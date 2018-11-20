@@ -19,10 +19,20 @@ Handle error responses from kintone Rest API
 <details class="tab-container" open>
 <Summary>Get app with error response</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var appID = {your_invalid_app_id};
+kintoneApp.getApp(appID).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+let appID = {your_invalid_app_id};
 kintoneApp.getApp(appID).catch((err) => {
   // This SDK return err with KintoneAPIExeption
   console.log(err.get());
@@ -66,7 +76,7 @@ The result of Promise.Reject()
 <details class="tab-container" open>
 <Summary>Get apps with error response</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var appID = {your_invalid_app_id};
@@ -74,6 +84,17 @@ kintoneApp.getApp(appID).catch((err) => {
   // This SDK return err with KintoneAPIExeption
   console.log(err.getAll());
 });
+```
+
+** Nodejs **
+
+```javascript
+let appID = {your_invalid_app_id};
+kintoneApp.getApp(appID)
+    .catch((err) => {
+        // This SDK return err with KintoneAPIExeption
+        console.log(err.getAll());
+    });
 ```
 
 </details>

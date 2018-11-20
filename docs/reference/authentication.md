@@ -18,10 +18,17 @@ This module allow we authenticate with kintone app by password authenticator or 
 <details class="tab-container" open>
 <Summary>Init authentication module</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var kintoneAuth = new kintoneJSSDK.Auth();
+```
+
+** Nodejs **
+
+```javascript
+const kintone = require('kintone-js-sdk');
+let kintoneAuth = new kintone.Auth();
 ```
 
 </details>
@@ -48,11 +55,19 @@ var kintoneAuth = new kintoneJSSDK.Auth();
 <details class="tab-container" open>
 <Summary>Set password authentication</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var username = '{your_user_name}';
 var password = '{your_password}';
+kintoneAuth.setPasswordAuth(username, password);
+```
+
+** Nodejs **
+
+```javascript
+let username = '{your_user_name}';
+let password = '{your_password}';
 kintoneAuth.setPasswordAuth(username, password);
 ```
 
@@ -76,11 +91,18 @@ kintoneAuth.setPasswordAuth(username, password);
 <details class="tab-container" open>
 <Summary>Set APIToken authentication</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var apiToken = '{your_token}';
 kintoneAuth.setApiToken(apiToken);
+```
+
+** Nodejs **
+
+```javascript
+let apiTokenString = '{your_token}';
+kintoneAuth.setApiToken(apiTokenString);
 ```
 
 </details>
@@ -105,11 +127,18 @@ kintoneAuth.setApiToken(apiToken);
 <details class="tab-container" open>
 <Summary>Set basic authentication</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var username = '{your_user_name}';
 var password = '{your_password}';
+kintoneAuth.setBasicAuth(username, password);
+```
+** Nodejs **
+
+```javascript
+let username = '{your_user_name}';
+let password = '{your_password}';
 kintoneAuth.setBasicAuth(username, password);
 ```
 

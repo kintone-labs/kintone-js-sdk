@@ -21,7 +21,8 @@ markdown_extensions:
 pages:
 - Home: index.md
 - Getting Started: 
-  - Quickstart: getting-started/quickstart.md
+  - Quickstart Javascript: getting-started/quickstart-browser.md
+  - Quickstart Nodejs: getting-started/quickstart-node.md
 - Reference:
   - Authentication: reference/authentication.md
   - Connection: reference/connection.md

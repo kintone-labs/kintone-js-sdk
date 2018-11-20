@@ -15,11 +15,19 @@ Download and upload file via kintone Rest API.
 <details class="tab-container" open>
 <Summary>Init app sample</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 
 var kintoneFile = new kintoneJSSDK.File(connection);
+```
+
+** Nodejs **
+
+```javascript
+
+const kintone = require('kintone-js-sdk');
+let kintoneFile = new kintone.File(connection);
 ```
 
 </details>
@@ -35,7 +43,8 @@ var kintoneFile = new kintoneJSSDK.File(connection);
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | fileName | String | yes | The name of file
-| fileBlob | Blob | yes | The content of file
+| fileBlob | Blob | yes | `This param only use for Javascript` <br> The content of file
+| fileContent | Stream | yes | `This param only use for Nodejs` <br> The content of file
 
 **Return**
 
@@ -46,7 +55,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Upload file sample</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var fileBlob = 'your_file_blob';
@@ -59,9 +68,22 @@ kintoneFile.upload(fileName, fileBlob).then((rsp) => {
 });
 ```
 
+** Nodejs **
+
+```javascript
+const fileContent = fs.createReadStream('./cd.png');
+const fileName = path.basename('./cd.png');
+kintoneFile.upload(fileName, fileContent).then((rsp) => {
+  console.log(rsp);
+}).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
 </details>
 
-### download(fileKey)
+### download(fileKey, outPutFilePath)
 
 > Download file from kintone
 
@@ -70,7 +92,7 @@ kintoneFile.upload(fileName, fileBlob).then((rsp) => {
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | fileKey | String | yes | The file key of the uploaded file on kintone.
-| outPutFilePath | String | yes | The full path of output file on your environment
+| outPutFilePath | String | yes | `This param only use for Nodejs` <br> The full path of output file on your environment
 
 **Return**
 
@@ -81,13 +103,24 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var fileKey = 'your_file_Key';
 kintoneFile.download(fileKey).then(rsp => {
   console.log(rsp);
 }).catch((err) => {
+  // This SDK return err with KintoneAPIExeption
+  console.log(err.get());
+});
+```
+
+** Nodejs **
+
+```javascript
+const fileKey = 'your_file_Key';
+const outPutFilePath = 'your_output_directory';
+kintoneFile.download(fileKey, outPutFilePath).catch((err) => {
   // This SDK return err with KintoneAPIExeption
   console.log(err.get());
 });

@@ -4,7 +4,8 @@
 
 ## Getting Started
 
-- [Quickstart](./getting-started/quickstart)
+- [Quickstart Javascript](./getting-started/quickstart-browser)
+- [Quickstart Nodejs](./getting-started/quickstart-node)
 
 ## Reference
 

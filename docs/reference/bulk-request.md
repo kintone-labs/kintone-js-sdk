@@ -24,11 +24,17 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <details class="tab-container" open>
 <Summary>Init bulk request module</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
-
 var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
+```
+
+** Nodejs **
+
+```javascript
+const kintone = require('kintone-js-sdk');
+let kintoneBulkRequest = new kintone.BulkRequest(connection);
 ```
 
 </details>
@@ -154,13 +160,33 @@ See at [Record - updateRecordsStatus](./record#updaterecordsstatusapp-records)
 <details class="tab-container" open>
 <Summary>Execute bulk request</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var responseBulkRequest = kintoneBulkRequest
   .addRecord(/*[Args]*/)
   .addRecords(/*[Args]*/)
   .updateRecords(/*[Args]*/)
+  .deleteRecords()
+  .execute();
+
+responseBulkRequest.then((resp) => {
+  console.log(resp);
+}).catch((err) => {
+  // write error to console
+  console.log(err.get());
+  // Throw error
+  err.throw();
+});
+```
+
+** Nodejs **
+
+```javascript
+const responseBulkRequest = kintoneBulkRequest
+  .addRecord(/* [Args]*/)
+  .addRecords(/* [Args]*/)
+  .updateRecords(/* [Args]*/)
   .deleteRecords()
   .execute();
 

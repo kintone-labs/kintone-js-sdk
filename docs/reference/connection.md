@@ -10,8 +10,8 @@
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| domain | String | yes | The username that is able to authenticate on kintone app
-| auth | [Auth](./authentication) | (condition) | The authentication object.
+| domain | String | (condition) | `Required for nodejs` <br> The domain that is able to authenticate on kintone app
+| auth | [Auth](./authentication) | (condition) | `Required for nodejs` <br> The authentication object.
 | guestSpaceID | Integer | (optional) | The guest space id. Use this parameter to connect to kintone guest space.
 
 **Sample code**
@@ -19,7 +19,7 @@
 <details class="tab-container" open>
 <Summary>Init Connection module</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 // Define Authentication object
@@ -28,14 +28,38 @@ var username = '{your_user_name}';
 var password = '{your_password}';
 kintoneAuth.setPasswordAuth(username, password);
 
-var myDomainName = 'my.domain.tld';
-var kintoneConnection = new kintoneJSSDK.Connection(myDomainName, kintoneAuth);
+// Define connection that included auth
+var kintoneConnection = new kintoneJSSDK.Connection( kintoneAuth);
+
+// Define connection that included guest space 
+var guestSpaceID = '{guest_Space_ID}';
+var kintoneConnectionWithGuestSpaceDemo =
+    new kintoneJSSDK.Connection(kintoneAuth, guestSpaceID);
+
+// Define connection without  auth
+var guestSpaceID = '{guest_Space_ID}';
+var kintoneConnectionWithGuestSpaceDemo =
+    new kintoneJSSDK.Connection(null, guestSpaceID);
+
+```
+
+** Nodejs **
+```javascript
+const kintone = require('kintone-js-sdk');
+
+// Define Authentication object
+let kintoneAuth = new kintone.Auth();
+let username = '{your_user_name}';
+let password = '{your_password}';
+kintoneAuth.setPasswordAuth(username, password);
+
+let myDomainName = 'my.domain.tld';
+let kintoneConnection = new kintone.Connection(myDomainName, kintoneAuth);
 
 // Define connection that included guest space
-var guestSpaceID = /*{guestSpaceID}*/;
-var kintoneConnectionWithGuestSpaceDemo =
-    new kintoneJSSDK.Connection(myDomainName, kintoneAuth, guestSpaceID);
-
+let guestSpaceID = /*{guestSpaceID}*/;
+let kintoneConnectionWithGuestSpaceDemo =
+    new kintone.Connection(myDomainName, kintoneAuth, guestSpaceID);
 ```
 
 </details>
@@ -62,11 +86,19 @@ var kintoneConnectionWithGuestSpaceDemo =
 <details class="tab-container" open>
 <Summary>Set header of the Connection</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var key = '{your_header_key}';
 var value = '{your_header_value}';
+kintoneConnection.setHeader(key, value);
+```
+
+** Nodejs **
+
+```javascript
+let key = '{your_header_key}';
+let value = '{your_header_value}';
 kintoneConnection.setHeader(key, value);
 ```
 
@@ -92,11 +124,19 @@ kintoneConnection.setHeader(key, value);
 <details class="tab-container" open>
 <Summary>Set header of the Connection</Summary>
 
-** Source code **
+** Javascript **
 
 ```javascript
 var key = '{your_option_key}';
 var value = '{your_option_value}';
+kintoneConnection.addRequestOption(key, value);
+```
+
+** Nodejs **
+
+```javascript
+let key = '{your_option_key}';
+let value = '{your_option_value}';
 kintoneConnection.addRequestOption(key, value);
 ```
 
@@ -122,7 +162,15 @@ kintoneConnection.addRequestOption(key, value);
 <details class="tab-container" open>
 <Summary>Set proxy for the Connection</Summary>
 
-** Source code **
+** Javascript **
+
+```javascript
+var proxyHost = '{your_proxy_host}';
+var proxyPort = '{your_proxy_post}';
+kintoneConnection.setProxy(proxyHost, proxyPort);
+```
+
+** Nodejs **
 
 ```javascript
 const proxyHost = '{your_proxy_host}';
