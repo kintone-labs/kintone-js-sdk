@@ -1,24 +1,19 @@
-/**
- * kintone api - js client
- */
-
-import * as kintoneBaseJSSDK from 'kintone-basejs-sdk';
+import * as kintoneBaseJSSDK from '../../../base/main';
 /**
  * Connection module
  */
 export class Connection extends kintoneBaseJSSDK.Connection {
 
   /**
-     * @param {String} domain
      * @param {kintoneBaseJSSDK.Auth} auth
      * @param {Integer} guestSpaceID
      */
-  constructor(domain, auth, guestSpaceID) {
+  constructor(auth, guestSpaceID) {
     if (auth instanceof kintoneBaseJSSDK.Auth) {
-      super(domain, auth, guestSpaceID);
+      super(window.location.host, auth, guestSpaceID);
       this.kintoneAuth = auth;
     } else {
-      super(domain, new kintoneBaseJSSDK.Auth(), guestSpaceID);
+      super(window.location.host, new kintoneBaseJSSDK.Auth(), guestSpaceID);
       this.kintoneAuth = undefined;
     }
     this.headers = [];

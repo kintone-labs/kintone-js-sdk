@@ -1,6 +1,6 @@
 import {Connection} from './module/connection/Connection';
 import {File} from './module/file/File';
-import {Auth, App, Record, BulkRequest, KintoneAPIException} from 'kintone-basejs-sdk';
+import {Auth, App, Record, BulkRequest, KintoneAPIException} from '../base/main';
 
 window.kintoneJSSDK = {
   Auth,

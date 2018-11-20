@@ -5,7 +5,7 @@ import {Connection} from '../connection/Connection';
 /**
  * File module
  */
-import {File as FileModule} from 'kintone-basejs-sdk';
+import {File as FileModule} from '../../../base/main';
 
 export class File extends FileModule {
   /**

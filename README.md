@@ -1,37 +1,35 @@
 # kintone-js-sdk
+Merge kintone_basejs_sdk, kintone_nodejs_sdk, kintone_js_sdk
 
-## Usage
-* Step 1: *Use kintone-js-sdk.min.js* file from './dist' folder
-* Step 2: Upload them to kintone following help site. ([Setting JavaScript Customization on kintone](https://get.kintone.help/hc/en-us)) Or add the copied URL.
-
-## Documents
-
-[kintone-js-sdk](https://kintone.github.io/kintone-js-sdk/)
-
-## How to build
-### Requirement
+# Install Dependencies
 ```
-* Node.js
-* Git
+npm install
 ```
 
-### Build
+For developer: <br/>
 ```
-$ git clone https://github.com/kintone/kintone-js-sdk.git
-$ cd kintone-js-sdk
-$ npm install
-$ npm run build
-
-```
-#### Output
-```
-./dist/kintone-js-sdk.min.js
+npm install --only=dev
 ```
 
-## License
+# Usage
+For using by script tag in html file, include <i>kintone-js-sdk.min.js</i> in <i>dist</i> folder <br/>
+For using by require module: <br/>
+```
+const kintone = require('kintone-js-sdk')
+```
 
-MIT
+# Build .min.js file
+```
+npm run build
+```
 
-## Copyright
+# Test
+For NodeJS: <br/>
+```
+npm run test-node
+```
 
-Copyright(c) Cybozu, Inc.
+For base JS: <br/>
+```
+npm run test-base
+```
