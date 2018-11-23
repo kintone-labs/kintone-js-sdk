@@ -12,8 +12,7 @@ kintone-js-sdk.min.js
 ```javascript
 (function () {
     kintone.events.on("app.record.detail.show", function (ev) {
-        var domain = "your_domain";
-        var conn = new kintoneJSSDK.Connection(domain);
+        var conn = new kintoneJSSDK.Connection();
         var app = new kintoneJSSDK.App(conn);
 
         app.getApps().then(rsp => {
@@ -22,7 +21,7 @@ kintone-js-sdk.min.js
             console.log(err.get());
         });
     });
-});
+}());
 ```
 * Attach index.js file into [kintone app setting](https://get.kintone.help/hc/en-us/articles/115001237528#App
 )
@@ -120,8 +119,7 @@ Step 3: Add the index.js file to src/ folder
 ```javacript
 import {Connection, App} from 'kintone-js-sdk';
 kintone.events.on("app.record.index.show", function (ev) {
-    const domain = "your_domain";
-    const conn = new Connection(domain);
+    const conn = new Connection();
     const app = new App(conn);
 
     app.getApps().then(rsp => {
@@ -129,7 +127,7 @@ kintone.events.on("app.record.index.show", function (ev) {
     }).catch(err => {
         console.log(err.get());
     });
-});
+}());
 ```
 
 
