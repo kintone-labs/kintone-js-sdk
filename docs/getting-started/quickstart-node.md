@@ -18,99 +18,99 @@ npm install --save kintone-js-sdk
 <details class="tab-container" open>
 <Summary>Get record sample</Summary>
 
-** Source code **
+<strong>Source code</strong>
+<pre class="inline-code">
 
-```javascript
+    const kintone = require('kintone-js-sdk');
 
-const kintone = require('kintone-js-sdk');
+    let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
+    let kintoneConnection = new kintone.Connection('your.FQDN.tld', kintoneAuthWithAPIToken);
 
-let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
-let kintoneConnection = new kintone.Connection('your.FQDN.tld', kintoneAuthWithAPIToken);
+    let kintoneRecord = new kintone.Record(kintoneConnection);
 
-let kintoneRecord = new kintone.Record(kintoneConnection);
+    let appID = {your_app_id};
+    let recordID = {record_id_that_will_be_retrived};
+    kintoneRecord.getRecord(appID, recordID)
+        .then((rsp) => {
+            console.log(rsp);
+        })
+        .catch((err) => {
+            // The promise function always reject with KintoneAPIExeption
+            console.log(err.get());
+        });
 
-let appID = {your_app_id};
-let recordID = {record_id_that_will_be_retrived};
-kintoneRecord.getRecord(appID, recordID)
-    .then((rsp) => {
-        console.log(rsp);
-    })
-    .catch((err) => {
-        // The promise function always reject with KintoneAPIExeption
-        console.log(err.get());
-    });
-```
+</pre>
+<strong>Response success</strong>
+<pre class="inline-code">
 
-** Response success**
-
-```javascript
-{
-    "record":{
-        // record data should be here
+    {
+        "record":{
+            // record data should be here
+        }
     }
-}
-```
 
-** Response error**
+</pre>
+<strong>Response error</strong>
+<pre class="inline-code">
 
-```javascript
-{
-    id: '{ID}',
-    code: '{CODE}',
-    message: '{Message string}',
-    errors: '{JSON String}'
-}
-```
+    {
+        id: '{ID}',
+        code: '{CODE}',
+        message: '{Message string}',
+        errors: '{JSON String}'
+    }
 
+</pre>
 </details>
 
 <details class="tab-container" open>
 <Summary>Get record sample with Async</Summary>
 
-** Source code **
+<strong>Source code</strong>
 
-```javascript
+<pre class="inline-code">
 
-const kintone = require('kintone-js-sdk');
+    const kintone = require('kintone-js-sdk');
 
-let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
-let kintoneConnection = new kintone.Connection('your.FQDN', kintoneAuthWithAPIToken);
+    let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
+    let kintoneConnection = new kintone.Connection('your.FQDN', kintoneAuthWithAPIToken);
 
-let kintoneRecord = new kintone.Record(kintoneConnection);
+    let kintoneRecord = new kintone.Record(kintoneConnection);
 
-let appID = {your_app_id};
-let recordID = {record_id_that_will_be_retrived};
-let getRecord = async () => {
-     try {
-        let recordResult = await kintoneRecord.getRecord(appID, recordID);
-        console.log(recordResult);
-    } catch (error) {
-        // The promise function always reject with KintoneAPIExeption
-        console.log(error.get());
+    let appID = {your_app_id};
+    let recordID = {record_id_that_will_be_retrived};
+    let getRecord = async () => {
+        try {
+            let recordResult = await kintoneRecord.getRecord(appID, recordID);
+            console.log(recordResult);
+        } catch (error) {
+            // The promise function always reject with KintoneAPIExeption
+            console.log(error.get());
+        }
     }
-}
-getRecord();
-```
+    getRecord();
 
-** Response success**
+</pre>
 
-```javascript
-{
-    "record":{
-        // record data should be here
+<strong>Response success</strong>
+
+<pre class="inline-code">
+    {
+        "record":{
+            // record data should be here
+        }
     }
-}
-```
+</pre>
 
-** Response error**
+<strong>Response error</strong>
 
-```javascript
-{ 
-    id: '{ID}',
-    code: '{CODE}',
-    message: '{Message string}',
-    errors: '{JSON String}'
-}
-```
+<pre class="inline-code">
+    { 
+        id: '{ID}',
+        code: '{CODE}',
+        message: '{Message string}',
+        errors: '{JSON String}'
+    }
+</pre>
 
 </details>

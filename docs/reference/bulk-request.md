@@ -24,18 +24,22 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <details class="tab-container" open>
 <Summary>Init bulk request module</Summary>
 
-** Javascript **
+<strong>Javascript</strong>
 
-```javascript
-var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
-```
+<pre class="inline-code">
 
-** Nodejs **
+  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
 
-```javascript
-const kintone = require('kintone-js-sdk');
-let kintoneBulkRequest = new kintone.BulkRequest(connection);
-```
+</pre>
+
+<strong>Nodejs</strong>
+
+<pre class="inline-code">
+
+  const kintone = require('kintone-js-sdk');
+  let kintoneBulkRequest = new kintone.BulkRequest(connection);
+
+</pre>
 
 </details>
 
@@ -160,45 +164,49 @@ See at [Record - updateRecordsStatus](./record#updaterecordsstatusapp-records)
 <details class="tab-container" open>
 <Summary>Execute bulk request</Summary>
 
-** Javascript **
+<strong>Javascript</strong>
 
-```javascript
-var responseBulkRequest = kintoneBulkRequest
-  .addRecord(/*[Args]*/)
-  .addRecords(/*[Args]*/)
-  .updateRecords(/*[Args]*/)
-  .deleteRecords()
-  .execute();
+<pre class="inline-code">
 
-responseBulkRequest.then((resp) => {
-  console.log(resp);
-}).catch((err) => {
-  // write error to console
-  console.log(err.get());
-  // Throw error
-  err.throw();
-});
-```
+  var responseBulkRequest = kintoneBulkRequest
+    .addRecord(/*[Args]*/)
+    .addRecords(/*[Args]*/)
+    .updateRecords(/*[Args]*/)
+    .deleteRecords()
+    .execute();
 
-** Nodejs **
+  responseBulkRequest.then((resp) => {
+    console.log(resp);
+  }).catch((err) => {
+    // write error to console
+    console.log(err.get());
+    // Throw error
+    err.throw();
+  });
 
-```javascript
-const responseBulkRequest = kintoneBulkRequest
-  .addRecord(/* [Args]*/)
-  .addRecords(/* [Args]*/)
-  .updateRecords(/* [Args]*/)
-  .deleteRecords()
-  .execute();
+</pre>
 
-responseBulkRequest.then((resp) => {
-  console.log(resp);
-}).catch((err) => {
-  // write error to console
-  console.log(err.get());
-  // Throw error
-  err.throw();
-});
-```
+<strong>Nodejs</strong>
+
+<pre class="inline-code">
+
+  const responseBulkRequest = kintoneBulkRequest
+    .addRecord(/* [Args]*/)
+    .addRecords(/* [Args]*/)
+    .updateRecords(/* [Args]*/)
+    .deleteRecords()
+    .execute();
+
+  responseBulkRequest.then((resp) => {
+    console.log(resp);
+  }).catch((err) => {
+    // write error to console
+    console.log(err.get());
+    // Throw error
+    err.throw();
+  });
+  
+</pre>
 
 </details>
 

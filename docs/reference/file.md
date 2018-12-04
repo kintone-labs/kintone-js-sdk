@@ -15,20 +15,22 @@ Download and upload file via kintone Rest API.
 <details class="tab-container" open>
 <Summary>Init app sample</Summary>
 
-** Javascript **
+<strong>Javascript</strong>
 
-```javascript
+<pre class="inline-code">
 
-var kintoneFile = new kintoneJSSDK.File(connection);
-```
+  var kintoneFile = new kintoneJSSDK.File(connection);
 
-** Nodejs **
+</pre>
 
-```javascript
+<strong>Nodejs</strong>
 
-const kintone = require('kintone-js-sdk');
-let kintoneFile = new kintone.File(connection);
-```
+<pre class="inline-code">
+
+  const kintone = require('kintone-js-sdk');
+  let kintoneFile = new kintone.File(connection);
+
+</pre>
 
 </details>
 
@@ -55,31 +57,35 @@ Promise
 <details class="tab-container" open>
 <Summary>Upload file sample</Summary>
 
-** Javascript **
+<strong>Javascript</strong>
 
-```javascript
-var fileBlob = 'your_file_blob';
-var fileName = 'your_file_name';
-kintoneFile.upload(fileName, fileBlob).then((rsp) => {
-  console.log(rsp);
-}).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
-  console.log(err.get());
-});
-```
+<pre class="inline-code">
 
-** Nodejs **
+  var fileBlob = 'your_file_blob';
+  var fileName = 'your_file_name';
+  kintoneFile.upload(fileName, fileBlob).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
 
-```javascript
-const fileContent = fs.createReadStream('./cd.png');
-const fileName = path.basename('./cd.png');
-kintoneFile.upload(fileName, fileContent).then((rsp) => {
-  console.log(rsp);
-}).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
-  console.log(err.get());
-});
-```
+</pre>
+
+<strong>Nodejs</strong>
+
+<pre class="inline-code">
+
+  const fileContent = fs.createReadStream('./cd.png');
+  const fileName = path.basename('./cd.png');
+  kintoneFile.upload(fileName, fileContent).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
 
 </details>
 
@@ -103,28 +109,32 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-** Javascript **
+<strong>Javascript</strong>
 
-```javascript
-var fileKey = 'your_file_Key';
-kintoneFile.download(fileKey).then(rsp => {
-  console.log(rsp);
-}).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
-  console.log(err.get());
-});
-```
+<pre class="inline-code">
 
-** Nodejs **
+  var fileKey = 'your_file_Key';
+  kintoneFile.download(fileKey).then(rsp => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
 
-```javascript
-const fileKey = 'your_file_Key';
-const outPutFilePath = 'your_output_directory';
-kintoneFile.download(fileKey, outPutFilePath).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
-  console.log(err.get());
-});
-```
+</pre>
+
+<strong>Nodejs</strong>
+
+<pre class="inline-code">
+
+  const fileKey = 'your_file_Key';
+  const outPutFilePath = 'your_output_directory';
+  kintoneFile.download(fileKey, outPutFilePath).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+  
+</pre>
 
 </details>
 
