@@ -19,7 +19,7 @@ Gets general information of an App, including the name, description, related Spa
 <details class="tab-container" open>
 <Summary>Init app sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -27,7 +27,7 @@ Gets general information of an App, including the name, description, related Spa
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -59,7 +59,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get app sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -73,7 +73,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
   
@@ -109,7 +109,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -124,7 +124,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -162,7 +162,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -178,7 +178,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -217,7 +217,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -233,7 +233,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -272,7 +272,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -289,7 +289,7 @@ Promise
 </pre>
 
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -328,7 +328,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -344,7 +344,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -387,7 +387,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add preview App sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -403,7 +403,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -441,7 +441,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Deploy app settings sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -463,7 +463,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -506,7 +506,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get app deploy status sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -527,7 +527,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -571,7 +571,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get views sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -597,7 +597,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -646,7 +646,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update views sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -676,7 +676,7 @@ Promise
   
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -729,7 +729,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get general settings sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -755,7 +755,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -804,7 +804,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update general settings sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -829,7 +829,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -877,7 +877,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get app form field sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -903,7 +903,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -956,7 +956,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add app form field sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -982,7 +982,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -1035,7 +1035,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update app form field sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -1061,7 +1061,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -1114,7 +1114,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Delete app form field sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -1133,7 +1133,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -1174,7 +1174,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get form layout sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -1198,7 +1198,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -1249,7 +1249,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update form layout sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -1282,7 +1282,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 

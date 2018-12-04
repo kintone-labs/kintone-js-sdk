@@ -24,7 +24,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <details class="tab-container" open>
 <Summary>Init bulk request module</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -32,7 +32,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -164,7 +164,7 @@ See at [Record - updateRecordsStatus](./record#updaterecordsstatusapp-records)
 <details class="tab-container" open>
 <Summary>Execute bulk request</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -186,7 +186,7 @@ See at [Record - updateRecordsStatus](./record#updaterecordsstatusapp-records)
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 

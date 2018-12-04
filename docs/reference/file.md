@@ -15,7 +15,7 @@ Download and upload file via kintone Rest API.
 <details class="tab-container" open>
 <Summary>Init app sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -23,7 +23,7 @@ Download and upload file via kintone Rest API.
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -57,7 +57,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Upload file sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -72,7 +72,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -109,7 +109,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get apps sample</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -123,7 +123,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 

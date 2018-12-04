@@ -19,7 +19,7 @@ Handle error responses from kintone Rest API
 <details class="tab-container" open>
 <Summary>Get app with error response</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -31,7 +31,7 @@ Handle error responses from kintone Rest API
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -43,7 +43,7 @@ Handle error responses from kintone Rest API
     
 </pre>
 
-<strong>Response</strong>
+<strong class="tab-name">Response</strong>
 
 <pre class="inline-code">
 
@@ -82,7 +82,7 @@ The result of Promise.Reject()
 <details class="tab-container" open>
 <Summary>Get apps with error response</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -94,7 +94,7 @@ The result of Promise.Reject()
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -113,7 +113,7 @@ The result of Promise.Reject()
 
 > This function will throw result of [get()](#get) function
 
-<strong>Parameter</strong>
+<strong class="tab-name">Parameter</strong>
 
 (none)
 

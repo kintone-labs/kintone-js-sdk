@@ -18,7 +18,7 @@ npm install --save kintone-js-sdk
 <details class="tab-container" open>
 <Summary>Get record sample</Summary>
 
-<strong>Source code</strong>
+<strong class="tab-name">Source code</strong>
 <pre class="inline-code">
 
     const kintone = require('kintone-js-sdk');
@@ -40,7 +40,7 @@ npm install --save kintone-js-sdk
         });
 
 </pre>
-<strong>Response success</strong>
+<strong class="tab-name">Response success</strong>
 <pre class="inline-code">
 
     {
@@ -50,7 +50,7 @@ npm install --save kintone-js-sdk
     }
 
 </pre>
-<strong>Response error</strong>
+<strong class="tab-name">Response error</strong>
 <pre class="inline-code">
 
     {
@@ -66,7 +66,7 @@ npm install --save kintone-js-sdk
 <details class="tab-container" open>
 <Summary>Get record sample with Async</Summary>
 
-<strong>Source code</strong>
+<strong class="tab-name">Source code</strong>
 
 <pre class="inline-code">
 
@@ -92,7 +92,7 @@ npm install --save kintone-js-sdk
 
 </pre>
 
-<strong>Response success</strong>
+<strong class="tab-name">Response success</strong>
 
 <pre class="inline-code">
     {
@@ -102,7 +102,7 @@ npm install --save kintone-js-sdk
     }
 </pre>
 
-<strong>Response error</strong>
+<strong class="tab-name">Response error</strong>
 
 <pre class="inline-code">
     { 

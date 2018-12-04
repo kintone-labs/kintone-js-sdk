@@ -15,7 +15,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 <details class="tab-container" open>
 <Summary>Init record module</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -23,7 +23,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -57,7 +57,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get record</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -72,7 +72,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -111,7 +111,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get records</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -131,7 +131,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -173,7 +173,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add record</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -193,7 +193,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -235,7 +235,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add multi records</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -259,7 +259,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -307,7 +307,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update record by ID</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -329,7 +329,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -375,7 +375,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update record by UpdateKey</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -400,7 +400,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -447,7 +447,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update multi records</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -480,7 +480,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -535,7 +535,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Delete multi record</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -550,7 +550,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -587,7 +587,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Delete record with revision</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -604,7 +604,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -645,7 +645,7 @@ Promise
 <details class="tab-container" open>
 <Summary>update record Assignees</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -663,7 +663,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -706,7 +706,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update record status</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -725,7 +725,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -766,7 +766,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Update multi record status</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -790,7 +790,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -837,7 +837,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Get comments</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -855,7 +855,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -894,7 +894,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Add comment</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -919,7 +919,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -965,7 +965,7 @@ Promise
 <details class="tab-container" open>
 <Summary>Delete comment</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -981,7 +981,7 @@ Promise
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 

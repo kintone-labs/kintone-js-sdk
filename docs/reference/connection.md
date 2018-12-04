@@ -19,7 +19,7 @@
 <details class="tab-container" open>
 <Summary>Init Connection module</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -44,7 +44,7 @@
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 <pre class="inline-code">
 
     const kintone = require('kintone-js-sdk');
@@ -89,7 +89,7 @@
 <details class="tab-container" open>
 <Summary>Set header of the Connection</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -99,7 +99,7 @@
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -131,7 +131,7 @@
 <details class="tab-container" open>
 <Summary>Set header of the Connection</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -141,7 +141,7 @@
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -173,7 +173,7 @@
 <details class="tab-container" open>
 <Summary>Set proxy for the Connection</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -183,7 +183,7 @@
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 

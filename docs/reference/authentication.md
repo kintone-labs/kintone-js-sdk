@@ -18,7 +18,7 @@ This module allow we authenticate with kintone app by password authenticator or 
 <details class="tab-container" open>
 <Summary>Init authentication module</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -26,7 +26,7 @@ This module allow we authenticate with kintone app by password authenticator or 
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -59,7 +59,7 @@ This module allow we authenticate with kintone app by password authenticator or 
 <details class="tab-container" open>
 <Summary>Set password authentication</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -69,7 +69,7 @@ This module allow we authenticate with kintone app by password authenticator or 
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -99,7 +99,7 @@ This module allow we authenticate with kintone app by password authenticator or 
 <details class="tab-container" open>
 <Summary>Set APIToken authentication</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -108,7 +108,7 @@ This module allow we authenticate with kintone app by password authenticator or 
 
 </pre>
 
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
@@ -139,7 +139,7 @@ This module allow we authenticate with kintone app by password authenticator or 
 <details class="tab-container" open>
 <Summary>Set basic authentication</Summary>
 
-<strong>Javascript</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
@@ -148,7 +148,7 @@ This module allow we authenticate with kintone app by password authenticator or 
     kintoneAuth.setBasicAuth(username, password);
 
 </pre>
-<strong>Nodejs</strong>
+<strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
