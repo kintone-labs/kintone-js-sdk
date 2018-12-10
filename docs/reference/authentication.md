@@ -1,7 +1,7 @@
 # Authentication
 
 Authentication module will be used by [Connection](./connection).
-This module allow we authenticate with kintone app by password authenticator or API token authenticator. This module is also support basic authenticator.
+This module allows authenticating with the Kintone app by password authenticator or API token authenticator. This module is also supported the basic authenticator.
 
 !!! warning
 
