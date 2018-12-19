@@ -19,51 +19,57 @@ Handle error responses from kintone Rest API
 <details class="tab-container" open>
 <Summary>Get app with error response</Summary>
 
-** Javascript **
+<strong class="tab-name">Javascript</strong>
 
-```javascript
-var appID = {your_invalid_app_id};
-kintoneApp.getApp(appID).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
-  console.log(err.get());
-});
-```
+<pre class="inline-code">
 
-** Nodejs **
+    var appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+    });
 
-```javascript
-let appID = {your_invalid_app_id};
-kintoneApp.getApp(appID).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
-  console.log(err.get());
-});
-```
+</pre>
 
-** Response **
+<strong class="tab-name">Nodejs</strong>
 
-```javascript
-{
-    "message":"{kintone_error_message}",
-    "id":"kintone_error_id",
-    "code":"{kintone_error_code}"
-}
-// In the some case, the kintone Rest API will response with detail errors
-{
-    "message":"{kintone_error_message}",
-    "id":"kintone_error_id",
-    "code":"{kintone_error_code}",
-    "errors": [
-        /*errors items here*/
-    ]
+<pre class="inline-code">
 
-}
-```
+    let appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+    });
+    
+</pre>
+
+<strong class="tab-name">Response</strong>
+
+<pre class="inline-code">
+
+    {
+        "message":"{kintone_error_message}",
+        "id":"kintone_error_id",
+        "code":"{kintone_error_code}"
+    }
+    // In the some case, the kintone Rest API will response with detail errors
+    {
+        "message":"{kintone_error_message}",
+        "id":"kintone_error_id",
+        "code":"{kintone_error_code}",
+        "errors": [
+            /*errors items here*/
+        ]
+
+    }
+
+</pre>
 
 </details>
 
 ### getAll()
 
-**Parameter **
+**Parameter**
 
 (none)
 
@@ -76,26 +82,30 @@ The result of Promise.Reject()
 <details class="tab-container" open>
 <Summary>Get apps with error response</Summary>
 
-** Javascript **
+<strong class="tab-name">Javascript</strong>
 
-```javascript
-var appID = {your_invalid_app_id};
-kintoneApp.getApp(appID).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
-  console.log(err.getAll());
-});
-```
+<pre class="inline-code">
 
-** Nodejs **
-
-```javascript
-let appID = {your_invalid_app_id};
-kintoneApp.getApp(appID)
-    .catch((err) => {
-        // This SDK return err with KintoneAPIExeption
-        console.log(err.getAll());
+    var appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.getAll());
     });
-```
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    let appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID)
+        .catch((err) => {
+            // This SDK return err with KintoneAPIExeption
+            console.log(err.getAll());
+        });
+
+</pre>
 
 </details>
 
@@ -103,7 +113,7 @@ kintoneApp.getApp(appID)
 
 > This function will throw result of [get()](#get) function
 
-**Parameter **
+<strong class="tab-name">Parameter</strong>
 
 (none)
 

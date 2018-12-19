@@ -10,7 +10,7 @@ theme:
     primary: 'Light Blue'
     accent: 'Light Blue'
   logo:
-   icon: 'cloud'
+    icon: 'cloud'
 extra_javascript:
   - 'asset/js/extra.js'
 extra_css:
