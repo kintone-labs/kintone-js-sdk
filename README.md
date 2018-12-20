@@ -1,1 +1,1 @@
-# kintone-nodejs-sdk
+# kintone-js-sdk
