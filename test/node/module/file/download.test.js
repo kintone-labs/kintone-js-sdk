@@ -18,29 +18,19 @@ const conn = new Connection(common.DOMAIN, auth);
 const fileModule = new File(conn);
 
 describe('dowload function', () => {
-  describe('common function', () => {
-    it('should return promise', () => {
-      nock('https://' + common.DOMAIN)
-        .get('/k/v1/file.json')
-        .reply(200, undefined);
-      const fileDownload = fileModule.download();
-      expect(fileDownload).toHaveProperty('then');
-      expect(fileDownload).toHaveProperty('catch');
-    });
-  });
-
   describe('success case', () => {
     describe('valid params are specificed', () => {
       it('[File-5]should download successfully file', () => {
         const fileKey = '201809040332204A3B5797BC804153AFF1BBB78C86CAE9207';
-        const filePath = './test/node/module/file/mock/download/test.png';
+        const filePath = './test/node/module/file/mock/test.txt';
         nock('https://' + common.DOMAIN)
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
-          .reply(200, undefined);
+          .reply(200, Buffer.from('hello buffer'));
         return fileModule.download(fileKey, filePath)
           .then(() => {
-            fs.readdir('./test/node/module/file/mock/download/', (err, list) => {
-              const existFile = list.includes('test.png');
+            // eslint-disable-next-line max-nested-callbacks
+            fs.readdir('./test/node/module/file/mock/', (err, list) => {
+              const existFile = list.includes('test.txt');
               expect(existFile).toBe(true);
             });
             // remove file
