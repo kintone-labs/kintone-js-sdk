@@ -1,11 +1,13 @@
 {
   "name": "kintone-js-sdk",
   "version": "0.1.1",
-  "description": "The SDK of kintone REST API client on browser",
-  "main": "src/main.js",
+  "description": "The SDK of kintone REST API client on node and browser",
+  "main": "./src/index.js",
   "license": "MIT",
   "author": "Cybozu, Inc.",
   "scripts": {
+    "test-base": "jest ./test/base",
+    "test-node": "jest ./test/node",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch"
   },
@@ -13,28 +15,33 @@
     "type": "git",
     "url": "https://github.com/kintone/kintone-js-sdk"
   },
-  "directories": {
-    "doc": "docs"
+  "bugs": {
+    "url": "https://github.com/kintone/kintone-js-sdk/issues"
   },
+  "homepage": "https://github.com/kintone/kintone-js-sdk#readme",
   "dependencies": {
-    "kintone-basejs-sdk": "*",
     "axios": "^0.18.0",
+    "jest-cli": "^23.6.0",
     "tunnel": "0.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@cybozu/eslint-config": "^3.0.1",
+    "babel-loader": "^8.0.2",
+    "eslint": "^5.0.0",
+    "jest": "^23.4.1",
+    "nock": "^9.6.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
   },
   "keywords": [
     "kintone",
     "app",
+    "nodejs",
     "cybozu",
     "cybozu.com",
     "kintone.com"
   ],
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "babel-loader": "^8.0.2",
-    "webpack": "^4.17.2",
-    "@cybozu/eslint-config": "^2.0.2",
-    "eslint": "^5.0.0",
-    "webpack-cli": "^3.1.0"
-  }
+  "sideEffects": false
 }
