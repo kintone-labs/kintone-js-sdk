@@ -254,7 +254,9 @@ class Connection {
 
   refreshHeader() {
     const header = [];
-    header.push(new HTTPHeader(CONNECTION_CONST.BASE.USER_AGENT, this.USER_AGENT));
+    if (this.USER_AGENT) {
+      header.push(new HTTPHeader(CONNECTION_CONST.BASE.USER_AGENT, this.USER_AGENT));
+    }
     this.headers = header;
   }
 }
