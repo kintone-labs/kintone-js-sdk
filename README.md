@@ -1,5 +1,5 @@
 # kintone-js-sdk
-Merge kintone_basejs_sdk, kintone_nodejs_sdk, kintone_js_sdk
+Using for nodejs and javascript
 
 # Install Dependencies
 ```
@@ -12,8 +12,8 @@ npm install --only=dev
 ```
 
 # Usage
-For using by script tag in html file, include <i>kintone-js-sdk.min.js</i> in <i>dist</i> folder <br/>
-For using by require module: <br/>
+* For using by script tag in html file, include <i>kintone-js-sdk.min.js</i> in <i>dist</i> folder <br/>
+* For using by require module: <br/>
 ```
 const kintone = require('kintone-js-sdk')
 ```
@@ -24,12 +24,12 @@ npm run build
 ```
 
 # Test
-For NodeJS: <br/>
+* For NodeJS: <br/>
 ```
 npm run test-node
 ```
 
-For base JS: <br/>
+* For base JS: <br/>
 ```
 npm run test-base
 ```
