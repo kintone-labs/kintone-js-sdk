@@ -12,7 +12,7 @@ Gets general information of an App, including the name, description, related Spa
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](./connection) | yes | The connection module of this SDK.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 **Sample code**
 
@@ -445,10 +445,6 @@ Promise
 
 <pre class="inline-code">
 
-  var appPreview = {
-    app: 'your_app_id',
-    revision: 'revision_of_app'
-  };
   var apps = [
     appPreview
   // Another app preview here
@@ -467,10 +463,6 @@ Promise
 
 <pre class="inline-code">
 
-  const appPreview = {
-          app: 'your_app_id',
-          revision: 'revision_of_app'
-      };
   const apps = [
       appPreview
       // Another app preview here
@@ -510,10 +502,6 @@ Promise
 
 <pre class="inline-code">
 
-  var appPreview = {
-    app: 'your_app_id',
-    revision: 'revision_of_app'
-  };
   var apps = [
     'your_app_id'
   // Another app id here
@@ -531,10 +519,6 @@ Promise
 
 <pre class="inline-code">
 
-  const appPreview = {
-          app: 'your_app_id',
-          revision: 'revision_of_app'
-      };
   const apps = [
       'your_app_id'
       // Another app id here

@@ -1,6 +1,6 @@
 # Authentication
 
-Authentication module will be used by [Connection](./connection).
+Authentication module will be used by [Connection](../connection).
 This module allows authenticating with the Kintone app by password authenticator or API token authenticator. This module is also supported the basic authenticator.
 
 !!! warning
@@ -52,7 +52,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 **Return**
 
-[Auth](./authentication)
+[Auth](../authentication)
 
 **Sample code**
 
@@ -93,7 +93,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 **Return**
 
-[Auth](./authentication)
+[Auth](../authentication)
 
 
 <details class="tab-container" open>
@@ -132,7 +132,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 **Return**
 
-[Auth](./authentication)
+[Auth](../authentication)
 
 **Sample code**
 

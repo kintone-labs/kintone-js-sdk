@@ -11,7 +11,7 @@
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | domain | String | (condition) | `Required for nodejs` <br> The domain that is able to authenticate on kintone app
-| auth | [Auth](./authentication) | (condition) | `Required for nodejs` <br> The authentication object.
+| auth | [Auth](../authentication) | (condition) | `Required for nodejs` <br> The authentication object.
 | guestSpaceID | Integer | (optional) | The guest space id. Use this parameter to connect to kintone guest space.
 
 **Sample code**
@@ -71,7 +71,7 @@
 
 ### setHeader(key, value)
 
-> Set new header of the [Connection](./connection)
+> Set new header of the [Connection](./#)
 
 **Parameter**
 
@@ -82,7 +82,7 @@
 
 **Return**
 
-[Connection](./connection)
+[Connection](./#)
 
 **Sample code**
 
@@ -124,7 +124,7 @@
 
 **Return**
 
-[Connection](./connection)
+[Connection](./#)
 
 **Sample code**
 
@@ -166,7 +166,7 @@
 
 **Return**
 
-[Connection](./connection)
+[Connection](./#)
 
 **Sample code**
 

@@ -17,7 +17,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](./connection) | yes | The connection module of this SDK.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 ### **Sample code**
 
@@ -51,7 +51,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 **Parameter**
 
-See at [Record - addRecord](./record#addrecordapp-record)
+See at [Record - addRecord](../record#addrecordapp-record)
 
 **Return**
 
@@ -61,7 +61,7 @@ See at [Record - addRecord](./record#addrecordapp-record)
 
 **Parameter**
 
-See at [Record - addRecords](./record#addrecordsapp-records)
+See at [Record - addRecords](../record#addrecordsapp-records)
 
 **Return**
 
@@ -71,7 +71,7 @@ See at [Record - addRecords](./record#addrecordsapp-records)
 
 **Parameter**
 
-See at [Record - updateRecordByID](./record#updaterecordbyidapp-id-record-revision)
+See at [Record - updateRecordByID](../record#updaterecordbyidapp-id-record-revision)
 
 **Return**
 
@@ -81,7 +81,7 @@ See at [Record - updateRecordByID](./record#updaterecordbyidapp-id-record-revisi
 
 **Parameter**
 
-See at [Record - updateRecordByUpdateKey](./record#updaterecordbyupdatekeyapp-updatekey-record-revision)
+See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyapp-updatekey-record-revision)
 
 **Return**
 
@@ -91,7 +91,7 @@ See at [Record - updateRecordByUpdateKey](./record#updaterecordbyupdatekeyapp-up
 
 **Parameter**
 
-See at [Record - updateRecords](./record#updaterecordsapp-records)
+See at [Record - updateRecords](../record#updaterecordsapp-records)
 
 **Return**
 
@@ -101,7 +101,7 @@ See at [Record - updateRecords](./record#updaterecordsapp-records)
 
 **Parameter**
 
-See at [Record - deleteRecords](./record#deleterecordsapp-ids)
+See at [Record - deleteRecords](../record#deleterecordsapp-ids)
 
 **Return**
 
@@ -111,7 +111,7 @@ See at [Record - deleteRecords](./record#deleterecordsapp-ids)
 
 **Parameter**
 
-See at [Record - deleteRecordsWithRevision](./record#deleterecordswithrevisionapp-idswithrevision)
+See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionapp-idswithrevision)
 
 **Return**
 
@@ -121,7 +121,7 @@ See at [Record - deleteRecordsWithRevision](./record#deleterecordswithrevisionap
 
 **Parameter**
 
-See at [Record - updateRecordAssignees](./record#updaterecordassigneesapp-id-assignees-revision)
+See at [Record - updateRecordAssignees](../record#updaterecordassigneesapp-id-assignees-revision)
 
 **Return**
 
@@ -131,7 +131,7 @@ See at [Record - updateRecordAssignees](./record#updaterecordassigneesapp-id-ass
 
 **Parameter**
 
-See at [Record - updateRecordStatus](./record#updaterecordstatusapp-id-action-assignee-revision)
+See at [Record - updateRecordStatus](../record#updaterecordstatusapp-id-action-assignee-revision)
 
 **Return**
 
@@ -141,7 +141,7 @@ See at [Record - updateRecordStatus](./record#updaterecordstatusapp-id-action-as
 
 **Parameter**
 
-See at [Record - updateRecordsStatus](./record#updaterecordsstatusapp-records)
+See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
 
 **Return**
 

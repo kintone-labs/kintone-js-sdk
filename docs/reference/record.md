@@ -8,7 +8,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](./connection) | yes | The connection module of this SDK.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 **Sample code**
 
@@ -320,7 +320,7 @@ Promise
       // Another fieldcode here
   };
   var revision = 'revision_of_record';
-  kintoneRecord.updateRecordById(app, id, record, revision).then((rsp) => {
+  kintoneRecord.updateRecordByID(app, id, record, revision).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -342,7 +342,7 @@ Promise
     // Another fieldcode here
   };
   const revision = /*{revision_of_record}*/;
-  kintoneRecord.updateRecordById(app, id, record, revision).then((rsp) => {
+  kintoneRecord.updateRecordByID(app, id, record, revision).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption

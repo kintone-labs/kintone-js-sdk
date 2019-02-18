@@ -46,17 +46,10 @@ Handle error responses from kintone Rest API
 <strong class="tab-name">Response</strong>
 
 <pre class="inline-code">
-
     {
-        "message":"{kintone_error_message}",
-        "id":"kintone_error_id",
-        "code":"{kintone_error_code}"
-    }
-    // In the some case, the kintone Rest API will response with detail errors
-    {
-        "message":"{kintone_error_message}",
         "id":"kintone_error_id",
         "code":"{kintone_error_code}",
+        "message":"{kintone_error_message}",
         "errors": [
             /*errors items here*/
         ]
@@ -104,6 +97,13 @@ The result of Promise.Reject()
             // This SDK return err with KintoneAPIExeption
             console.log(err.getAll());
         });
+
+</pre>
+
+<strong class="tab-name">Response</strong>
+
+<pre class="inline-code">
+    // Response error object
 
 </pre>
 
