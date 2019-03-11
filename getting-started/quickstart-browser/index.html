@@ -588,7 +588,7 @@ $ mkdir dist
   },
   &quot;dependencies&quot;: {
     &quot;cross-env&quot;: &quot;^5.1.3&quot;,
-    &quot;kintone-js-sdk&quot;: &quot;*&quot;
+    &quot;@kintone/kintone-js-sdk&quot;: &quot;*&quot;
   },
   &quot;devDependencies&quot;: {
     &quot;@babel/core&quot;: &quot;^7.0.0&quot;,
@@ -619,7 +619,7 @@ module.exports = (env = {}) =&gt; {
       rules: [
         {
           test: /\.js$/,
-          include: [require.resolve('kintone-js-sdk')],
+          include: [require.resolve('@kintone/kintone-js-sdk')],
           use: {
             loader: 'babel-loader'
           },
