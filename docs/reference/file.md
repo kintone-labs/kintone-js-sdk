@@ -8,7 +8,7 @@ Download and upload file via kintone Rest API.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](./connection) | yes | The connection module of this SDK.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 **Sample code**
 
@@ -79,6 +79,42 @@ Promise
   const fileContent = fs.createReadStream('./cd.png');
   const fileName = path.basename('./cd.png');
   kintoneFile.upload(fileName, fileContent).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+</details>
+
+### upload(filePath)
+
+> Upload file into kintone using <b>nodejs</b>
+
+**Parameter**
+
+| Name| Type| Required| Description |
+| --- | --- | --- | --- |
+| filePath | String | yes | The path of file
+
+**Return**
+
+Promise
+
+**Sample code**
+
+<details class="tab-container" open>
+<Summary>Upload file sample</Summary>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const filePath = './cd.png';
+  
+  kintoneFile.upload(filePath).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption

@@ -11,7 +11,7 @@ kintone-js-sdk.min.js
 
 ```javascript
 (function () {
-    kintone.events.on("app.record.detail.show", function (ev) {
+    kintone.events.on("app.record.index.show", function (ev) {
         var conn = new kintoneJSSDK.Connection();
         var app = new kintoneJSSDK.App(conn);
 
@@ -57,7 +57,7 @@ Step 2: Add the below files to test/ folder
     "doc": ""
   },
   "dependencies": {
-    "cross-env": "^5.1.3"
+    "cross-env": "^5.1.3",
     "kintone-js-sdk": "*"
   },
   "devDependencies": {
@@ -127,7 +127,7 @@ kintone.events.on("app.record.index.show", function (ev) {
     }).catch(err => {
         console.log(err.get());
     });
-}());
+});
 ```
 
 
