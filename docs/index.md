@@ -1,7 +1,4 @@
 # Home
-
-> kintone-js-sdk is the SDK of kintone REST API client on Node.js
-
 ## Getting Started
 
 - [Quickstart Javascript](./getting-started/quickstart-browser)

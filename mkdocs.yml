@@ -1,6 +1,7 @@
 site_name: kintone js SDK
 site_description: The SDK of kintone REST API client on browser
 site_favicon: favicon.ico
+edit_uri: ""
 
 repo_url: https://github.com/kintone/kintone-js-sdk
 theme:
