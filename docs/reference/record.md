@@ -27,7 +27,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 <pre class="inline-code">
 
-  const kintone = require('kintone-js-sdk');
+  const kintone = require('@kintone/kintone-js-sdk');
   let kintoneRecord = new kintone.Record(connection);
 
 </pre>

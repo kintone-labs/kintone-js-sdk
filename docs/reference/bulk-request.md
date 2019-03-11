@@ -36,7 +36,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 <pre class="inline-code">
 
-  const kintone = require('kintone-js-sdk');
+  const kintone = require('@kintone/kintone-js-sdk');
   let kintoneBulkRequest = new kintone.BulkRequest(connection);
 
 </pre>

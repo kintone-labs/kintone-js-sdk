@@ -21,7 +21,7 @@ npm install --save @kintone/kintone-js-sdk
 <strong class="tab-name">Source code</strong>
 <pre class="inline-code">
 
-    const kintone = require('kintone-js-sdk');
+    const kintone = require('@kintone/kintone-js-sdk');
 
     let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
     let kintoneConnection = new kintone.Connection('your.FQDN.tld', kintoneAuthWithAPIToken);
@@ -70,7 +70,7 @@ npm install --save @kintone/kintone-js-sdk
 
 <pre class="inline-code">
 
-    const kintone = require('kintone-js-sdk');
+    const kintone = require('@kintone/kintone-js-sdk');
 
     let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
     let kintoneConnection = new kintone.Connection('your.FQDN', kintoneAuthWithAPIToken);

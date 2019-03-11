@@ -31,7 +31,7 @@ Gets general information of an App, including the name, description, related Spa
 
 <pre class="inline-code">
 
-  const kintone = require('kintone-js-sdk');
+  const kintone = require('@kintone/kintone-js-sdk');
   let kintoneApp = new kintone.App(connection);
 
 </pre>

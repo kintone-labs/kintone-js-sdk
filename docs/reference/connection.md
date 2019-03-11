@@ -47,7 +47,7 @@
 <strong class="tab-name">Nodejs</strong>
 <pre class="inline-code">
 
-    const kintone = require('kintone-js-sdk');
+    const kintone = require('@kintone/kintone-js-sdk');
 
     // Define Authentication object
     let kintoneAuth = new kintone.Auth();

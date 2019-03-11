@@ -30,7 +30,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 <pre class="inline-code">
 
-    const kintone = require('kintone-js-sdk');
+    const kintone = require('@kintone/kintone-js-sdk');
     let kintoneAuth = new kintone.Auth();
 
 </pre>

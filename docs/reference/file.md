@@ -27,7 +27,7 @@ Download and upload file via kintone Rest API.
 
 <pre class="inline-code">
 
-  const kintone = require('kintone-js-sdk');
+  const kintone = require('@kintone/kintone-js-sdk');
   let kintoneFile = new kintone.File(connection);
 
 </pre>

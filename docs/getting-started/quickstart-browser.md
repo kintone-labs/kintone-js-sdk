@@ -58,7 +58,7 @@ Step 2: Add the below files to test/ folder
   },
   "dependencies": {
     "cross-env": "^5.1.3",
-    "kintone-js-sdk": "*"
+    "@kintone/kintone-js-sdk": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -88,7 +88,7 @@ module.exports = (env = {}) => {
       rules: [
         {
           test: /\.js$/,
-          include: [require.resolve('kintone-js-sdk')],
+          include: [require.resolve('@kintone/kintone-js-sdk')],
           use: {
             loader: 'babel-loader'
           },
