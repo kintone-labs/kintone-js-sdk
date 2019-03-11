@@ -1,74 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    
     <url>
-     <loc>/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
-        
     <url>
-     <loc>/getting-started/quickstart-browser/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/getting-started/quickstart-node/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
-    
-        
     <url>
-     <loc>/reference/authentication/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/reference/connection/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/reference/record/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/reference/bulk-request/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/reference/app/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/reference/kintone-api-exception/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
     <url>
-     <loc>/reference/file/</loc>
+     <loc>None</loc>
      <lastmod>2019-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    
-
 </urlset>
