@@ -10,7 +10,7 @@
 ```shell
 cd your-project
 npm init
-npm install --save kintone-js-sdk
+npm install --save @kintone/kintone-js-sdk
 ```
 
 ## Code example
