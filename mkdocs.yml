@@ -1,6 +1,6 @@
 site_name: kintone js SDK
 site_description: The SDK of kintone REST API client on browser
-site_favicon: favicon.ico
+
 
 repo_url: https://github.com/kintone/kintone-js-sdk
 site_url: https://kintone.github.io/kintone-js-sdk/
@@ -22,7 +22,7 @@ extra:
 markdown_extensions:
   - admonition
 
-pages:
+nav:
 - Home: index.md
 - Getting Started: 
   - Quickstart Javascript: getting-started/quickstart-browser.md
