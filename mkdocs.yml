@@ -1,11 +1,12 @@
 site_name: kintone js SDK
 site_description: The SDK of kintone REST API client on browser
 site_favicon: favicon.ico
-edit_uri: ""
 
 repo_url: https://github.com/kintone/kintone-js-sdk
+site_url: https://kintone.github.io/kintone-js-sdk/
 theme:
   name: 'material'
+  custom_dir: 'docs/custom_theme'
   favicon: favicon.ico
   palette:
     primary: 'Light Blue'
@@ -16,6 +17,8 @@ extra_javascript:
   - 'asset/js/extra.js'
 extra_css:
   - 'asset/style/extra.css'
+extra:
+  version: 0.1.0
 markdown_extensions:
   - admonition
 
