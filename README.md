@@ -1,35 +1,21 @@
 # kintone-js-sdk
-Using for nodejs and javascript
+REST API client of kintone for node.js and javascript 
 
-# Install Dependencies
-```
-npm install
-```
-
-For developer: <br/>
-```
-npm install --only=dev
-```
+# Installation
+npm i @kintone/kintone-js-sdk
 
 # Usage
-* For using by script tag in html file, include <i>kintone-js-sdk.min.js</i> in <i>dist</i> folder <br/>
-* For using by require module: <br/>
+* UMD: include <i>kintone-js-sdk.min.js</i> from <i>dist</i> folder <br/>
+* CommonJS: <br/>
 ```
 const kintone = require('kintone-js-sdk')
 ```
 
-# Build .min.js file
-```
-npm run build
-```
+# Document
+[kintone-js-sdk](https://kintone.github.io/kintone-js-sdk)
 
-# Test
-* For NodeJS: <br/>
-```
-npm run test-node
-```
+# License
+MIT License
 
-* For base JS: <br/>
-```
-npm run test-base
-```
+# Copyright
+Copyright(c) Cybozu, Inc.
