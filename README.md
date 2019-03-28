@@ -10,3 +10,12 @@ npm i @kintone/kintone-js-sdk
 ```
 const kintone = require('kintone-js-sdk')
 ```
+
+# Document
+[kintone-js-sdk](https://kintone.github.io/kintone-js-sdk)
+
+# License
+MIT License
+
+# Copyright
+Copyright(c) Cybozu, Inc.
