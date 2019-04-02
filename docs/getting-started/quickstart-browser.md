@@ -117,7 +117,7 @@ module.exports = (env = {}) => {
 Step 3: Add the index.js file to src/ folder
 
 ```javacript
-import {Connection, App} from 'kintone-js-sdk';
+import {Connection, App} from '@kintone/kintone-js-sdk';
 kintone.events.on("app.record.index.show", function (ev) {
     const conn = new Connection();
     const app = new App(conn);
