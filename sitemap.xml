@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/getting-started/quickstart-browser/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/getting-started/quickstart-node/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/reference/authentication/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/reference/connection/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/reference/record/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/reference/bulk-request/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/reference/app/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/reference/kintone-api-exception/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://kintone.github.io/kintone-js-sdk/reference/file/</loc>
-     <lastmod>2019-03-20</lastmod>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
