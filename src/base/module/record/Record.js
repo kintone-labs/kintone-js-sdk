@@ -52,7 +52,7 @@ class Record {
     return this.sendRequest('GET', 'records', getRecordsRequest);
   }
 
-  getAllRecordByQuery(app, query, fields, totalCount, offset, records) {
+  getAllRecordsByQuery(app, query, fields, totalCount, offset, records) {
     let allRecords = records || [];
     let offsetNum = offset || 0;
     const limit = LIMIT_RECORD;
@@ -66,7 +66,7 @@ class Record {
                 records: allRecords
             };
         }
-        return this.getAllRecordByQuery(app, query, fields, totalCount, limit, allRecords);
+        return this.getAllRecordsByQuery(app, query, fields, totalCount, limit, allRecords);
     });
   }
   /**
