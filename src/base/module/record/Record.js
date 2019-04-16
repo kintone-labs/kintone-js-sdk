@@ -54,19 +54,19 @@ class Record {
 
   getAllRecordsByQuery(app, query, fields, totalCount, offset, records) {
     let allRecords = records || [];
-    let offsetNum = offset || 0;
+    const offsetNum = offset || 0;
     const limit = LIMIT_RECORD;
-    let validQuery =(query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
+    const validQuery = (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
 
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
-        allRecords = allRecords.concat(response.records);
-        if (response.records.length < limit) {
-            return {
-                records: allRecords
-            };
-        }
-        return this.getAllRecordsByQuery(app, query, fields, totalCount, limit, allRecords);
+      allRecords = allRecords.concat(response.records);
+      if (response.records.length < limit) {
+        return {
+          records: allRecords
+        };
+      }
+      return this.getAllRecordsByQuery(app, query, fields, totalCount, limit, allRecords);
     });
   }
   /**
