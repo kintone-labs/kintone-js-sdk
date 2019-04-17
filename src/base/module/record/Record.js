@@ -1,11 +1,12 @@
 const Connection = require('../../connection/Connection');
 const RecordModel = require('../../model/record/RecordModels');
-const BulkRequest = require('../bulkRequest/BulkRequest');
+const BulkRequest = require('../../module/bulkRequest/BulkRequest');
 const common = require('../../utils/Common');
 
 const LIMIT_UPDATE_RECORD = 100;
+const LIMIT_POST_RECORD = 100;
 const NUM_BULK_REQUEST = 20;
-const LIMIT_RECORD = 500;
+const LIMIT_RECORD = 500
 
 /**
  * Record module
@@ -55,6 +56,24 @@ class Record {
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, query, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest);
   }
+
+  getAllRecordsByQuery(app, query, fields, totalCount, offset, records) {
+    let allRecords = records || [];
+    const offsetNum = offset || 0;
+    const limit = LIMIT_RECORD;
+    const validQuery = (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
+
+    const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
+    return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
+      allRecords = allRecords.concat(response.records);
+      if (response.records.length < limit) {
+        return {
+          records: allRecords
+        };
+      }
+      return this.getAllRecordsByQuery(app, query, fields, totalCount, offsetNum + limit, allRecords);
+    });
+  }
   /**
    * Add the record
    * @param {Number} app
@@ -76,6 +95,50 @@ class Record {
     const addRecordsRequest = new RecordModel.AddRecordsRequest(app);
     addRecordsRequest.setRecords(records);
     return this.sendRequest('POST', 'records', addRecordsRequest);
+  }
+
+   /**
+   * Add multi records
+   * @param {Number} app
+   * @param {Array<record>} records
+   * @param {Number} offset
+   * @return {Promise} Promise
+   */
+  addAllRecords(app, records, offset, results) {
+    const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_POST_RECORD;
+    let begin = offset || 0;
+    const length = records.length || 0;
+    const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
+    const recordsPerBulk = records.slice(begin, end);
+
+    let allResults = results || [];
+    return this.addBulkRecord(app, recordsPerBulk).then((response) => {
+      allResults = allResults.concat(response);
+      begin += numRecordsPerBulk;
+      if (records.length <= begin) {
+          return allResults;
+      }
+      return this.addAllRecords(app, records, begin, allResults);
+    })
+  }
+
+  addBulkRecord(app, records) {
+    const bulkRequest = new BulkRequest(this.connection);
+    const length = records.length;
+    const loopTimes = Math.ceil(length / LIMIT_POST_RECORD);
+    for (let index = 0; index < loopTimes; index++) {
+      const begin = index * LIMIT_POST_RECORD;
+      const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + LIMIT_POST_RECORD;
+      const recordsPerRequest = records.slice(begin, end);
+      bulkRequest.addRecords(app, recordsPerRequest);
+    }
+    return bulkRequest.execute().then((rsp) => {
+      let allrecords = [];
+      rsp.results.forEach(result => {
+        allrecords = records.concat(result.records);
+      });
+      return allrecords;
+    });
   }
 
   /**
