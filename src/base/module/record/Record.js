@@ -1,6 +1,11 @@
 const Connection = require('../../connection/Connection');
 const RecordModel = require('../../model/record/RecordModels');
+const BulkRequest = require('../bulkRequest/BulkRequest');
 const common = require('../../utils/Common');
+
+const LIMIT_UPDATE_RECORD = 100;
+const NUM_BULK_REQUEST = 20;
+const LIMIT_RECORD = 500
 
 /**
  * Record module
@@ -215,6 +220,29 @@ class Record {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
 
     return this.sendRequest('PUT', 'RECORDS_STATUS', updateRecordsRequest);
+  }
+  /**
+     * updateAllRecords for use with update all records
+     * @param {Number} app
+     * @param {Object} records
+     * @return {UpdateRecordsResponse}
+ */
+  updateAllRecords(app, records, offset, results) {
+    const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
+    let begin = offset || 0;
+    const length = records.length || 0;
+    const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + numRecordsPerBulk;
+    const recordsPerBulk = records.slice(begin, end);
+
+    let allResults = results || [];
+    return this.updateBulkRecord(app, recordsPerBulk).then((response) => {
+      allResults = allResults.concat(response);
+      begin += numRecordsPerBulk;
+      if (records.length <= begin) {
+          return allResults;
+      }
+      return this.updateAllRecords(app, records, begin, allResults);
+    })
   }
   /**
      * createRecordStatusItem for use with update multi record status
