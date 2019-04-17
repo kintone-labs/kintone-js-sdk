@@ -2,10 +2,6 @@ const Connection = require('../../connection/Connection');
 const RecordModel = require('../../model/record/RecordModels');
 const BulkRequest = require('../../module/bulkRequest/BulkRequest');
 const common = require('../../utils/Common');
-const LIMIT_UPDATE_RECORD = 100;
-const LIMIT_POST_RECORD = 100;
-const NUM_BULK_REQUEST = 20;
-const LIMIT_RECORD = 500
 
 const LIMIT_UPDATE_RECORD = 100;
 const LIMIT_POST_RECORD = 100;
