@@ -4,10 +4,11 @@
  */
 
 const nock = require('nock');
-const common = require('../../utils/common');
 
-const {Connection, Auth, Record, KintoneAPIException} = require(common.MAIN_PATH);
-const {API_ROUTE, URI} = require('../../utils/constant');
+const common = require('../../../utils/common');
+
+const {Connection, Auth, Record, KintoneAPIException} = require(common.MAIN_PATH_BASE);
+const {API_ROUTE, URI} = require('../../../utils/constant');
 
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
