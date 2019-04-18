@@ -22,11 +22,6 @@ module.exports = (env = {}) => {
         }
       ]
     },
-    node: {
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty'
-    },
     watch: env.watch
   };
 };
