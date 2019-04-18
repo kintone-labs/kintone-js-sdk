@@ -1,6 +1,11 @@
 const Connection = require('../../connection/Connection');
 const RecordModel = require('../../model/record/RecordModels');
+const BulkRequest = require('../bulkRequest/BulkRequest');
 const common = require('../../utils/Common');
+const LIMIT_RECORD = 500;
+
+const LIMIT_UPDATE_RECORD = 100;
+const NUM_BULK_REQUEST = 20;
 const LIMIT_RECORD = 500;
 
 /**
@@ -233,6 +238,50 @@ class Record {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
 
     return this.sendRequest('PUT', 'RECORDS_STATUS', updateRecordsRequest);
+  }
+
+  updateBulkRecord(app, records) {
+    const bulkRequest = new BulkRequest(this.connection);
+    const length = records.length;
+    const loopTimes = Math.ceil(length / LIMIT_UPDATE_RECORD);
+    for (let index = 0; index < loopTimes; index++) {
+      const begin = index * LIMIT_UPDATE_RECORD;
+      const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + LIMIT_UPDATE_RECORD;
+      const recordsPerRequest = records.slice(begin, end);
+      bulkRequest.updateRecords(app, recordsPerRequest);
+    }
+    return bulkRequest.execute().then((rsp) => {
+      let allrecords = [];
+      rsp.results.forEach(result => {
+        allrecords = allrecords.concat(result.records);
+      });
+      return allrecords;
+    });
+  }
+  /**
+     * updateAllRecords for use with update all records
+     * @param {Number} app
+     * @param {Object} records
+     * @return {UpdateRecordsResponse}
+ */
+  updateAllRecords(app, records, offset, results) {
+    const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
+    let begin = offset || 0;
+    const length = records.length || 0;
+    const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + numRecordsPerBulk;
+    const recordsPerBulk = records.slice(begin, end);
+
+    let allResults = results || [];
+    return this.updateBulkRecord(app, recordsPerBulk).then((response) => {
+      allResults = allResults.concat(response);
+      begin += numRecordsPerBulk;
+      if (records.length <= begin) {
+        return {
+          'records': allResults
+        };
+      }
+      return this.updateAllRecords(app, records, begin, allResults);
+    });
   }
   /**
      * createRecordStatusItem for use with update multi record status
