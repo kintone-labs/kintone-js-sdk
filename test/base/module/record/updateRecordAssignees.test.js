@@ -5,9 +5,9 @@
  */
 const nock = require('nock');
 
-const common = require('../../utils/common');
+const common = require('../../../utils/common');
 
-const {Connection, Auth, Record, KintoneAPIException} = require(common.MAIN_PATH);
+const {Connection, Auth, Record, KintoneAPIException} = require(common.MAIN_PATH_BASE);
 const RECORDS_ASSIGNEES_ROUTE = '/k/v1/record/assignees.json';
 const RECORDS_ASSIGNEES_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/record/assignees.json`;
 const URI = 'https://' + common.DOMAIN;

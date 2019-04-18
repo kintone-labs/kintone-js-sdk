@@ -5,9 +5,9 @@
  */
 const nock = require('nock');
 
-const common = require('../../utils/common');
+const common = require('../../../utils/common');
 
-const {Connection, Auth, App, KintoneAPIException} = require(common.MAIN_PATH);
+const {Connection, Auth, App, KintoneAPIException} = require(common.MAIN_PATH_BASE);
 const APP_VIEW_ROUTE = '/k/v1/preview/app/views.json';
 const APP_VIEW_GUEST_SPACE_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/preview/app/views.json`;
 
