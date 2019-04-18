@@ -352,7 +352,7 @@ class Record {
     return bulkRequest.execute().then((rsp) => {
       let allrecords = [];
       rsp.results.forEach(result => {
-        allrecords = records.concat(result.records);
+        allrecords = allrecords.concat(result.records);
       });
       return allrecords;
     });
@@ -375,7 +375,9 @@ class Record {
       allResults = allResults.concat(response);
       begin += numRecordsPerBulk;
       if (records.length <= begin) {
-        return allResults;
+        return {
+          'records': allResults
+        };
       }
       return this.updateAllRecords(app, records, begin, allResults);
     });
