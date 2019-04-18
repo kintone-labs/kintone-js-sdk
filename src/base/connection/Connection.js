@@ -1,7 +1,4 @@
 const axios = require('axios');
-const tunnel = require('tunnel');
-const FormData = require('form-data');
-
 const Auth = require('../authentication/Auth');
 const HTTPHeader = require('../model/http/HTTPHeader');
 const KintoneAPIException = require('../exception/KintoneAPIException');
@@ -9,7 +6,6 @@ const packageFile = require('../../../package.json');
 
 const CONNECTION_CONST = require('./constant');
 const DEFAULT_PORT = '443';
-const CONTENT_TYPE_KEY = 'Content-Type';
 /**
  * Connection module
  */
@@ -136,19 +132,7 @@ class Connection {
   download(body) {
     return this.requestFile('GET', 'FILE', body);
   }
-  /**
-   * upload file to kintone
-   * @param {String} fileName
-   * @param {String} fileContent
-   * @return {Promise}
-   */
-  upload(fileName, fileContent) {
-    const formData = new FormData();
-    formData.append('file', fileContent, fileName);
-
-    this.setHeader(CONTENT_TYPE_KEY, formData.getHeaders()['content-type']);
-    return this.requestFile('POST', 'FILE', formData);
-  }
+  
 
   serializeParams(object) {
     const parseParams = (obj, prefix) => {
@@ -236,19 +220,6 @@ class Connection {
       throw new Error(`${auth} not an instance of Auth`);
     }
     this.auth = auth;
-    return this;
-  }
-  /**
-   * Sett proxy for request
-   * @param {String} proxyHost
-   * @param {String} proxyPort
-   * @return {this}
-   */
-  setProxy(proxyHost, proxyPort) {
-    const httpsAgent = tunnel.httpsOverHttp({
-      proxy: {host: proxyHost, port: proxyPort}
-    });
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
     return this;
   }
 

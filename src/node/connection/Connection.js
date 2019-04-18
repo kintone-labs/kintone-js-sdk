@@ -1,7 +1,12 @@
-const CONNECTION_CONST = require('./constant');
+/* eslint-disable node/no-extraneous-require */
+const tunnel = require('tunnel');
+const FormData = require('form-data');
 
+const CONNECTION_CONST = require('./constant');
 const packageFile = require('../../../package.json');
 const BaseConnection = require('../../base/main').Connection;
+
+const CONTENT_TYPE_KEY = 'Content-Type';
 
 class Connection extends BaseConnection {
   /**
@@ -30,6 +35,34 @@ class Connection extends BaseConnection {
         .replace('{version}', packageFile.version || '(none)')
     );
 
+  }
+
+  /**
+   * Set proxy for request
+   * @param {String} proxyHost
+   * @param {String} proxyPort
+   * @return {this}
+   */
+  setProxy(proxyHost, proxyPort) {
+    const httpsAgent = tunnel.httpsOverHttp({
+      proxy: {host: proxyHost, port: proxyPort}
+    });
+    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    return this;
+  }
+
+  /**
+   * upload file to kintone
+   * @param {String} fileName
+   * @param {String} fileContent
+   * @return {Promise}
+   */
+  upload(fileName, fileContent) {
+    const formData = new FormData();
+    formData.append('file', fileContent, fileName);
+
+    this.setHeader(CONTENT_TYPE_KEY, formData.getHeaders()['content-type']);
+    return this.requestFile('POST', 'FILE', formData);
   }
 }
 module.exports = Connection;
