@@ -2,9 +2,9 @@
  * test record module
  */
 const nock = require('nock');
-const common = require('../../utils/common');
-const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH);
-const {API_ROUTE, URI} = require('../../utils/constant');
+const common = require('../../../utils/common');
+const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
+const {API_ROUTE, URI} = require('../../../utils/constant');
 
 const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
 const conn = new Connection(common.DOMAIN, auth);
