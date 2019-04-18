@@ -1,10 +1,11 @@
 const Connection = require('../../connection/Connection');
 const RecordModel = require('../../model/record/RecordModels');
-const BulkRequest = require('../bulkRequest/BulkRequest');
+const BulkRequest = require('../../module/bulkRequest/BulkRequest');
 const common = require('../../utils/Common');
-const LIMIT_RECORD = 500;
 
 const LIMIT_UPDATE_RECORD = 100;
+const LIMIT_POST_RECORD = 100;
+const LIMIT_DELETE_RECORD = 100;
 const NUM_BULK_REQUEST = 20;
 const LIMIT_RECORD = 500;
 
@@ -94,6 +95,50 @@ class Record {
     const addRecordsRequest = new RecordModel.AddRecordsRequest(app);
     addRecordsRequest.setRecords(records);
     return this.sendRequest('POST', 'records', addRecordsRequest);
+  }
+
+  /**
+   * Add multi records
+   * @param {Number} app
+   * @param {Array<record>} records
+   * @param {Number} offset
+   * @return {Promise} Promise
+   */
+  addAllRecords(app, records, offset, results) {
+    const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_POST_RECORD;
+    let begin = offset || 0;
+    const length = records.length || 0;
+    const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
+    const recordsPerBulk = records.slice(begin, end);
+
+    let allResults = results || [];
+    return this.addBulkRecord(app, recordsPerBulk).then((response) => {
+      allResults = allResults.concat(response);
+      begin += numRecordsPerBulk;
+      if (records.length <= begin) {
+        return allResults;
+      }
+      return this.addAllRecords(app, records, begin, allResults);
+    })
+  }
+
+  addBulkRecord(app, records) {
+    const bulkRequest = new BulkRequest(this.connection);
+    const length = records.length;
+    const loopTimes = Math.ceil(length / LIMIT_POST_RECORD);
+    for (let index = 0; index < loopTimes; index++) {
+      const begin = index * LIMIT_POST_RECORD;
+      const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + LIMIT_POST_RECORD;
+      const recordsPerRequest = records.slice(begin, end);
+      bulkRequest.addRecords(app, recordsPerRequest);
+    }
+    return bulkRequest.execute().then((rsp) => {
+      let allrecords = [];
+      rsp.results.forEach(result => {
+        allrecords = records.concat(result.records);
+      });
+      return allrecords;
+    });
   }
 
   /**
@@ -199,6 +244,60 @@ class Record {
     return this.sendRequest('DELETE', 'records', deleteRecordsRequest);
   }
 
+  deleteBulkRecord(app, ids) {
+    const bulkRequest = new BulkRequest(this.connection);
+    const length = ids.length;
+    const loopTimes = Math.ceil(length / LIMIT_DELETE_RECORD);
+    for (let index = 0; index < loopTimes; index++) {
+      const begin = index * LIMIT_DELETE_RECORD;
+      const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + LIMIT_DELETE_RECORD;
+      const idsPerRequest = ids.slice(begin, end);
+      bulkRequest.deleteRecords(app, idsPerRequest);
+    }
+    return bulkRequest.execute();
+  }
+
+  deleteAllRecords(app, ids, offset, results) {
+    const numIdsPerBulk = NUM_BULK_REQUEST * LIMIT_DELETE_RECORD;
+    let begin = offset || 0;
+    const length = ids.length || 0;
+    const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + numIdsPerBulk;
+    const idsPerBulk = ids.slice(begin, end);
+  
+    let allResults = results || [];
+    return this.deleteBulkRecord(app, idsPerBulk).then((response) => {
+      allResults = allResults.concat(response);
+      begin += numIdsPerBulk;
+      if (ids.length <= begin) {
+        return allResults;
+      }
+      return this.deleteAllRecords(app, ids, begin, allResults);
+    });
+  }
+
+  /**
+     * deleteAllRecordsByQuery for use with update all records
+     * @param {Number} app
+     * @param {String} query
+     * @return {}
+  **/
+  deleteAllRecordsByQuery(app, query) {
+    return this.getAllRecordsByQuery(app, query).then((resp) => {
+      const ids = [];
+      const records = resp.records;
+      if (!records || !records.length) {
+        return {};
+      }
+      for (let i = 0; i < records.length; i++) {
+        ids.push(records[i].$id.value);
+      }
+      return this.deleteAllRecords(app, ids).then((response) => {
+        return response;
+      });
+    });
+  }
+
+
   /**
      * Update assignees of the specific record
      * @param {Number} app
@@ -263,7 +362,7 @@ class Record {
      * @param {Number} app
      * @param {Object} records
      * @return {UpdateRecordsResponse}
- */
+  **/
   updateAllRecords(app, records, offset, results) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
     let begin = offset || 0;
