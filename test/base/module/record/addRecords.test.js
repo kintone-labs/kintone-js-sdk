@@ -5,8 +5,8 @@
  */
 const nock = require('nock');
 
-const common = require('../../utils/common');
-const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH);
+const common = require('../../../utils/common');
+const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);

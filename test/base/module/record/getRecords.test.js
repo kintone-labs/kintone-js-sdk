@@ -4,9 +4,9 @@
  */
 
 const nock = require('nock');
-const common = require('../../utils/common');
+const common = require('../../../utils/common');
 
-const {Connection, Auth, Record, KintoneAPIException} = require(common.MAIN_PATH);
+const {Connection, Auth, Record, KintoneAPIException} = require(common.MAIN_PATH_BASE);
 const RECORDS_ROUTE = '/k/v1/records.json';
 const URI = 'https://' + common.DOMAIN;
 

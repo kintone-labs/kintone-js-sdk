@@ -3,8 +3,8 @@
  * test app module
  */
 const nock = require('nock');
-const common = require('../../utils/common');
-const {Connection, Auth, App} = require(common.MAIN_PATH);
+const common = require('../../../utils/common');
+const {Connection, Auth, App} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
 const conn = new Connection(common.DOMAIN, auth);
