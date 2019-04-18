@@ -1,6 +1,7 @@
 const Connection = require('../../connection/Connection');
 const RecordModel = require('../../model/record/RecordModels');
 const common = require('../../utils/Common');
+const LIMIT_RECORD = 500;
 
 /**
  * Record module
@@ -49,6 +50,23 @@ class Record {
   getRecords(app, query, fields, totalCount) {
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, query, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest);
+  }
+
+  getAllRecordsByQuery(app, query, fields, totalCount, offset, records) {
+    let allRecords = records || [];
+    const offsetNum = offset || 0;
+    const limit = LIMIT_RECORD;
+    const validQuery = (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
+    const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
+    return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
+      allRecords = allRecords.concat(response.records);
+      if (response.records.length < limit) {
+        return {
+          records: allRecords
+        };
+      }
+      return this.getAllRecordsByQuery(app, query, fields, totalCount, offsetNum + limit, allRecords);
+    });
   }
   /**
    * Add the record

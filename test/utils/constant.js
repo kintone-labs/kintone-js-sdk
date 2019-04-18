@@ -15,7 +15,8 @@ const API_ROUTE = {
   GUEST_APP: `/k/guest/${COMMON.GUEST_SPACEID}/v1/app.json`,
   APPS: `/k/v1/apps.json`,
   GUEST_APPS: `/k/guest/${COMMON.GUEST_SPACEID}/v1/apps.json`,
-  USER_AGENT: `${PACKAGE_FILE.name}/${PACKAGE_FILE.version}`
+  USER_AGENT: `${PACKAGE_FILE.name}/${PACKAGE_FILE.version}`,
+  GET_RECORDS_LIMIT: 500
 };
 
 module.exports = {API_ROUTE, URI};
