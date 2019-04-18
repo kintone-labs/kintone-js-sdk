@@ -2,7 +2,7 @@
  * Constants
  */
 const COMMON = require('./common.js');
-const PACKAGE_FILE = require('../../../package');
+const PACKAGE_FILE = require('../../package');
 const URI = 'https://' + COMMON.DOMAIN;
 const API_ROUTE = {
   RECORD: `/k/v1/record.json`,

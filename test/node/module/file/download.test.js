@@ -1,14 +1,15 @@
+/* eslint-disable node/no-unpublished-require */
 /**
  * kintone api - nodejs client
  * test record module
  */
 
 const nock = require('nock');
-const common = require('../../common');
+const common = require('../../../utils/common');
 
 const fs = require('fs');
 
-const {Auth, File, Connection, KintoneAPIException} = require(common.MAIN_PATH);
+const {Auth, File, Connection, KintoneAPIException} = require(common.MAIN_PATH_NODE);
 
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);

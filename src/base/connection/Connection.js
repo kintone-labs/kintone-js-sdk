@@ -132,7 +132,6 @@ class Connection {
   download(body) {
     return this.requestFile('GET', 'FILE', body);
   }
-  
 
   serializeParams(object) {
     const parseParams = (obj, prefix) => {
