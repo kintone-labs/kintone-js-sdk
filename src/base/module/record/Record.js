@@ -113,10 +113,12 @@ class Record {
 
     let allResults = results || [];
     return this.addBulkRecord(app, recordsPerBulk).then((response) => {
-      allResults = allResults.concat(response);
+      allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
       if (records.length <= begin) {
-        return allResults;
+        return {
+          results: allResults
+        };
       }
       return this.addAllRecords(app, records, begin, allResults);
     })
@@ -132,12 +134,8 @@ class Record {
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.addRecords(app, recordsPerRequest);
     }
-    return bulkRequest.execute().then((rsp) => {
-      let allrecords = [];
-      rsp.results.forEach(result => {
-        allrecords = records.concat(result.records);
-      });
-      return allrecords;
+    return bulkRequest.execute().then((response) => {
+      return response;
     });
   }
 
