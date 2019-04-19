@@ -155,8 +155,9 @@ Promise
 
 ## getAllRecordsByQuery(app, query, fields, totalCount)
 
-> * Retrieves details of multiple records from an app using a query string.
-> * Retrieves all records over limitation of kintone
+>* Retrieves details of all records from an app using a query string.
+>* Can't indicate limit and offset of query.
+>* Number of records can be retrieved at once is greater than the default limitations
 
 **Parameter**
 
