@@ -68,7 +68,8 @@ class Record {
       allRecords = allRecords.concat(response.records);
       if (response.records.length < limit) {
         return {
-          records: allRecords
+          records: allRecords,
+          totalCount: totalCount ? allRecords.length : null
         };
       }
       return this.getAllRecordsByQuery(app, query, fields, totalCount, offsetNum + limit, allRecords);
