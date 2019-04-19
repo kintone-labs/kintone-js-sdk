@@ -263,7 +263,7 @@ class Record {
     const length = ids.length || 0;
     const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + numIdsPerBulk;
     const idsPerBulk = ids.slice(begin, end);
-  
+
     let allResults = results || [];
     return this.deleteBulkRecord(app, idsPerBulk).then((response) => {
       allResults = allResults.concat(response);
@@ -382,6 +382,28 @@ class Record {
       return this.updateAllRecords(app, records, begin, allResults);
     });
   }
+
+  /**
+   * Upsert record by update-key
+   * @param {Number} app
+   * @param {Object} updateKey
+   * @param {Object} record
+   * @param {Number} revision
+   * @return {Promise}
+   */
+  upsertRecord(app, updateKey, record, revision) {
+    const query = `${updateKey.field} = "${updateKey.value}"`;
+    return this.getRecords(app, query, [updateKey.field], false).then((resp) => {
+      if (updateKey.value === '' || resp.records.length < 1) {
+        record[updateKey.field] = { value: updateKey.value };
+        return this.addRecord(app, record);
+      } else if (resp.records.length === 1) {
+        return this.updateRecordByUpdateKey(app, updateKey, record, revision);
+      }
+      throw new Error(`${updateKey.field} is not unique field`);
+    });
+  }
+
   /**
      * createRecordStatusItem for use with update multi record status
      * @param {Number} recordIDInput
