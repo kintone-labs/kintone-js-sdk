@@ -17,7 +17,7 @@ describe('addAllRecords function', () => {
   });
 
   describe('Successful case', () => {
-    it('[Record-1] Add successfully all records', () => {
+    it('[Record-1] Add successfully all records smaller than 2000', () => {
       const appID = 4;
       const recordsData = [];
       const recordsDataLength = 2000;
@@ -78,54 +78,54 @@ describe('addAllRecords function', () => {
     });
   });
 
-//   describe('error case', () => {
-//     /**
-//      * Missing required field
-//      * The error will be displayed when using method without app ID
-//      */
-//     it('[Record-2] - should return the error in the result when using method without app ID', () => {
-//       const appID = null;
-//       const recordsData = [{
-//         'app': appID,
-//         'records': [
-//           {
-//             'Text': {
-//               'value': 'Silver plates'
-//             }
-//           }
-//         ]
-//       }];
-//       const expectResult = {
-//         'id': 'JkEZZDZMRe3ZkrfCWRaq',
-//         'code': 'CB_VA01',
-//         'message': 'Missing or invalid input.',
-//         'errors': {
-//           'app': {
-//             'messages': [
-//               'Required field.'
-//             ]
-//           }
-//         }
-//       };
-//       nock(URI)
-//         .post(BULK_REQUEST_API_ROUTE, (rqBody) => {
-//           return true;
-//         })
-//         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-//           expect(authHeader).toBe(Buffer.from(common.USERNAME + ':' + common.PASSWORD).toString('base64'));
-//           return true;
-//         })
-//         .matchHeader('Content-Type', (type) => {
-//           expect(type).toBe('application/json;charset=utf-8');
-//           return true;
-//         })
-//         .reply(400, expectResult);
+  describe('error case', () => {
+    /**
+     * Missing required field
+     * The error will be displayed when using method without app ID
+     */
+    it('[Record-2] - should return the error in the result when using method without app ID', () => {
+      const appID = null;
+      const recordsData = [{
+        'app': appID,
+        'records': [
+          {
+            'Text': {
+              'value': 'Silver plates'
+            }
+          }
+        ]
+      }];
+      const expectResult = {
+        'id': 'JkEZZDZMRe3ZkrfCWRaq',
+        'code': 'CB_VA01',
+        'message': 'Missing or invalid input.',
+        'errors': {
+          'app': {
+            'messages': [
+              'Required field.'
+            ]
+          }
+        }
+      };
+      nock(URI)
+        .post(BULK_REQUEST_API_ROUTE, (rqBody) => {
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(Buffer.from(common.USERNAME + ':' + common.PASSWORD).toString('base64'));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(400, expectResult);
 
-//       const addRecordResult = recordModule.addAllRecords(appID, recordsData);
-//       return addRecordResult.catch((err) => {
-//         expect(err).toBeInstanceOf(KintoneAPIException);
-//         expect(err.get()).toMatchObject(expectResult);
-//       });
-//     });
-//   });
+      const addRecordResult = recordModule.addAllRecords(appID, recordsData);
+      return addRecordResult.catch((err) => {
+        expect(err).toBeInstanceOf(KintoneAPIException);
+        expect(err.get()).toMatchObject(expectResult);
+      });
+    });
+  });
 });
