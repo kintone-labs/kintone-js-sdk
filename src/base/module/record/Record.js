@@ -119,7 +119,7 @@ class Record {
         return allResults;
       }
       return this.addAllRecords(app, records, begin, allResults);
-    })
+    });
   }
 
   addBulkRecord(app, records) {
@@ -395,7 +395,7 @@ class Record {
     const query = `${updateKey.field} = "${updateKey.value}"`;
     return this.getRecords(app, query, [updateKey.field], false).then((resp) => {
       if (updateKey.value === '' || resp.records.length < 1) {
-        record[updateKey.field] = { value: updateKey.value };
+        record[updateKey.field] = {value: updateKey.value};
         return this.addRecord(app, record);
       } else if (resp.records.length === 1) {
         return this.updateRecordByUpdateKey(app, updateKey, record, revision);
