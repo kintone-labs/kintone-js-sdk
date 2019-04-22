@@ -105,24 +105,36 @@ class Record {
    * @param {Number} offset
    * @return {Promise} Promise
    */
-  addAllRecords(app, records, offset, results) {
+  addAllRecordsRecursive(app, records, offset, results) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_POST_RECORD;
     let begin = offset || 0;
+    records = records || [];
     const length = records.length || 0;
     const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
     const recordsPerBulk = records.slice(begin, end);
-
     let allResults = results || [];
     return this.addBulkRecord(app, recordsPerBulk).then((response) => {
       allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
       if (records.length <= begin) {
-        return {
-          results: allResults
-        };
+        return allResults;
       }
-      return this.addAllRecords(app, records, begin, allResults);
-    })
+      return this.addAllRecordsRecursive(app, records, begin, allResults);
+    }).catch(errors => {
+      const errorResponse = allResults.concat(errors);
+      throw errorResponse;
+    });
+
+  }
+  addAllRecords(app, records) {
+    return this.addAllRecordsRecursive(app, records).then((response) => {
+      return {
+        results: response
+      };
+    }).catch(errors => {
+      const errorsResponse = {results: errors};
+      throw errorsResponse;
+    });
   }
 
   addBulkRecord(app, records) {
@@ -135,9 +147,7 @@ class Record {
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.addRecords(app, recordsPerRequest);
     }
-    return bulkRequest.execute().then((response) => {
-      return response;
-    });
+    return bulkRequest.execute();
   }
 
   /**
@@ -262,7 +272,7 @@ class Record {
     const length = ids.length || 0;
     const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + numIdsPerBulk;
     const idsPerBulk = ids.slice(begin, end);
-  
+
     let allResults = results || [];
     return this.deleteBulkRecord(app, idsPerBulk).then((response) => {
       allResults = allResults.concat(response);
