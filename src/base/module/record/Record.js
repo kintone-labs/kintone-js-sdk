@@ -122,7 +122,7 @@ class Record {
         };
       }
       return this.addAllRecords(app, records, begin, allResults);
-    })
+    });
   }
 
   addBulkRecord(app, records) {
@@ -262,7 +262,7 @@ class Record {
     const length = ids.length || 0;
     const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + numIdsPerBulk;
     const idsPerBulk = ids.slice(begin, end);
-  
+
     let allResults = results || [];
     return this.deleteBulkRecord(app, idsPerBulk).then((response) => {
       allResults = allResults.concat(response);
@@ -348,13 +348,7 @@ class Record {
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.updateRecords(app, recordsPerRequest);
     }
-    return bulkRequest.execute().then((rsp) => {
-      let allrecords = [];
-      rsp.results.forEach(result => {
-        allrecords = allrecords.concat(result.records);
-      });
-      return allrecords;
-    });
+    return bulkRequest.execute();
   }
   /**
      * updateAllRecords for use with update all records
@@ -371,14 +365,32 @@ class Record {
 
     let allResults = results || [];
     return this.updateBulkRecord(app, recordsPerBulk).then((response) => {
-      allResults = allResults.concat(response);
+      allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
       if (records.length <= begin) {
         return {
-          'records': allResults
+          'results': allResults
         };
       }
       return this.updateAllRecords(app, records, begin, allResults);
+    }).catch(err => {
+      const numOfBulk = Math.ceil(records.length / numRecordsPerBulk);
+      const numBulkSuccess = Math.ceil(allResults.length / numRecordsPerBulk);
+      let error = [];
+      if (numBulkSuccess > 0) {
+        for (let index = 0; index < numBulkSuccess; index++) {
+          error = error.concat(allResults);
+        }
+      }
+      error = error.concat(err);
+
+      if (numOfBulk > numBulkSuccess + 1) {
+        const numBulkNotExecute = numOfBulk - (numBulkSuccess + 1);
+        for (let index = 0; index < (numBulkNotExecute * NUM_BULK_REQUEST); index++) {
+          error = error.concat([{}]);
+        }
+      }
+      throw error;
     });
   }
   /**
