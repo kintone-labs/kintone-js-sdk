@@ -13,8 +13,14 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+
+
 const conn = new Connection(common.DOMAIN, auth);
 const recordModule = new Record(conn);
+
+const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const recordModuleGuest = new Record(connGuest);
+
 describe('getAllRecordsByQuery function', () => {
   describe('success case', () => {
     it('[Record-270] Verify the records are returned correctly (query, fields, totalCount)', () => {
@@ -112,34 +118,32 @@ describe('getAllRecordsByQuery function', () => {
           expect(rsp).toMatchObject(expectResponse);
         });
     });
-    it('[Record-273] The records are still returned when querying with invalid fields but the invalid fields are not returned', () => {
+    it('[Record-278] When user does not have View permission for field, the data of this field is not displayed', () => {
+      // let rsp = Page.getDivText('no_permission_field');
+      // assert.notProperty(JSON.parse(rsp).records[0], 'Text');
+    });
+    it('[Record-279] Verify record data displays when getting the record of app in guest space', () => {
       const body = {
         app: '844',
         query: 'Created_datetime = TODAY()',
         totalCount: true,
-        fields: ['recordID', 'abc']
+        fields: ['recordID']
       };
 
-      const recordsData = [];
-      const recordsDataLenght = 260;
-      for (let index = 0; index < recordsDataLenght; index++) {
-        recordsData.push(
-          {
-            'recordID': {
-              'type': 'RECORD_NUMBER',
-              'value': index + 1
-            }
-          });
-      }
+      const recordsData = [{
+        'recordID': {
+          'type': 'RECORD_NUMBER',
+          'value': 1
+        }
+      }];
 
       const expectResponse = {
         'records': recordsData,
-        'totalCount': recordsDataLenght
+        'totalCount': 1
       };
-
-      let expectURL = `${API_ROUTE.RECORDS}?app=${body.app}`;
+      let expectURL = `${API_ROUTE.GUEST_RECORDS}?app=${body.app}`;
       expectURL += `&query=${encodeURIComponent(`${body.query} limit ${API_ROUTE.GET_RECORDS_LIMIT} offset 0`)}`;
-      expectURL += `&fields[0]=${body.fields[0]}&fields[1]=${body.fields[1]}&totalCount=${body.totalCount}`;
+      expectURL += `&fields[0]=${body.fields[0]}&totalCount=${body.totalCount}`;
       nock(URI)
         .get(expectURL)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -147,7 +151,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(200, expectResponse);
-      return recordModule.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+      return recordModuleGuest.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
         .then(rsp => {
           expect(rsp).toHaveProperty('records');
           expect(rsp).toMatchObject(expectResponse);
@@ -337,6 +341,38 @@ describe('getAllRecordsByQuery function', () => {
         })
         .reply(520, expectResult);
       return recordModule.getAllRecordsByQuery(undefined, body.query)
+        .catch((err) => {
+          expect(err).toBeInstanceOf(KintoneAPIException);
+          expect(err.get()).toMatchObject(expectResult);
+        });
+    });
+    it('[Record-276] Error will display when user does not have View records permission for the app', () => {
+      const expectResult = ERROR_MESSAGE.PERMISSION_ERROR;
+      const appId = 1;
+      nock(URI)
+        .get(`${API_ROUTE.RECORDS}?app=${appId}&query=${encodeURIComponent(`limit ${API_ROUTE.GET_RECORDS_LIMIT} offset 0`)}`)
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(Buffer.from(common.USERNAME + ':' + common.PASSWORD).toString('base64'));
+          return true;
+        })
+        .reply(520, expectResult);
+      return recordModule.getAllRecordsByQuery(appId)
+        .catch((err) => {
+          expect(err).toBeInstanceOf(KintoneAPIException);
+          expect(err.get()).toMatchObject(expectResult);
+        });
+    });
+    it('[Record-277] Error will display when user does not have View records permission for the record', () => {
+      const expectResult = ERROR_MESSAGE.PERMISSION_ERROR;
+      const appID = 1;
+      nock(URI)
+        .get(`${API_ROUTE.RECORDS}?app=${appID}&query=${encodeURIComponent(`limit ${API_ROUTE.GET_RECORDS_LIMIT} offset 0`)}`)
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(Buffer.from(common.USERNAME + ':' + common.PASSWORD).toString('base64'));
+          return true;
+        })
+        .reply(520, expectResult);
+      return recordModule.getAllRecordsByQuery(appID)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);

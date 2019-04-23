@@ -5,6 +5,7 @@
     },
     "PERMISSION_ERROR": {
         "code": "CB_NO02",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "No privilege to proceed."
     },
     "MISSING_APPS_ERROR": {
