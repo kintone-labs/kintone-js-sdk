@@ -119,8 +119,40 @@ describe('getAllRecordsByQuery function', () => {
         });
     });
     it('[Record-278] When user does not have View permission for field, the data of this field is not displayed', () => {
-      // let rsp = Page.getDivText('no_permission_field');
-      // assert.notProperty(JSON.parse(rsp).records[0], 'Text');
+      const body = {
+        app: '844',
+        query: 'Created_datetime = TODAY()',
+        totalCount: true,
+        fields: ['recordID', 'abc']
+      };
+
+      const recordsData = [{
+        'recordID': {
+          'type': 'RECORD_NUMBER',
+          'value': 1
+        }
+      }];
+
+      const expectResponse = {
+        'records': recordsData,
+        'totalCount': 1
+      };
+
+      let expectURL = `${API_ROUTE.RECORDS}?app=${body.app}`;
+      expectURL += `&query=${encodeURIComponent(`${body.query} limit ${API_ROUTE.GET_RECORDS_LIMIT} offset 0`)}`;
+      expectURL += `&fields[0]=${body.fields[0]}&fields[1]=${body.fields[1]}&totalCount=${body.totalCount}`;
+      nock(URI)
+        .get(expectURL)
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(Buffer.from(common.USERNAME + ':' + common.PASSWORD).toString('base64'));
+          return true;
+        })
+        .reply(200, expectResponse);
+      return recordModule.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+        .then(rsp => {
+          expect(rsp).toHaveProperty('records');
+          expect(rsp).toMatchObject(expectResponse);
+        });
     });
     it('[Record-279] Verify record data displays when getting the record of app in guest space', () => {
       const body = {
