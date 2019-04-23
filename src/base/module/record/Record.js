@@ -312,14 +312,14 @@ class Record {
       }
       return this.deleteAllRecords(app, ids).then((response) => {
         return {results: response};
-      }).catch(errors => {
-        if (!Array.isArray(errors)) {
-          const emptyArray = [];
-          errors = emptyArray.concat(errors);
-        }
-        const errorsResponse = {results: errors};
-        throw errorsResponse;
       });
+    }).catch(errors => {
+      if (!Array.isArray(errors)) {
+        const emptyArray = [];
+        errors = emptyArray.concat(errors);
+      }
+      const errorsResponse = {results: errors};
+      throw errorsResponse;
     });
   }
 
