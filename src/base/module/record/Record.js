@@ -120,8 +120,10 @@ class Record {
       }
       return this.addAllRecordsRecursive(app, records, begin, allResults);
     }).catch(errors => {
-      const errorResponse = allResults.concat(errors);
-      throw errorResponse;
+      if (errors.length <= NUM_BULK_REQUEST) {
+        errors = allResults.concat(errors);
+      }
+      throw errors;
     });
 
   }
@@ -265,7 +267,7 @@ class Record {
     return bulkRequest.execute();
   }
 
-  deleteAllRecords(app, ids, offset, results) {
+  deleteAllRecords(app, ids, offset = 0, results = []) {
     const numIdsPerBulk = NUM_BULK_REQUEST * LIMIT_DELETE_RECORD;
     let begin = offset || 0;
     const length = ids.length || 0;
@@ -274,12 +276,17 @@ class Record {
 
     let allResults = results || [];
     return this.deleteBulkRecord(app, idsPerBulk).then((response) => {
-      allResults = allResults.concat(response);
+      allResults = allResults.concat(response.results);
       begin += numIdsPerBulk;
       if (ids.length <= begin) {
         return allResults;
       }
       return this.deleteAllRecords(app, ids, begin, allResults);
+    }).catch(errors => {
+      if (errors.length <= NUM_BULK_REQUEST) {
+        errors = allResults.concat(errors);
+      }
+      throw errors;
     });
   }
 
@@ -300,7 +307,10 @@ class Record {
         ids.push(records[i].$id.value);
       }
       return this.deleteAllRecords(app, ids).then((response) => {
-        return response;
+        return {results: response};
+      }).catch(errors => {
+        const errorsResponse = {results: errors};
+        throw errorsResponse;
       });
     });
   }
