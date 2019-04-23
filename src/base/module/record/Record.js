@@ -105,10 +105,9 @@ class Record {
    * @param {Number} offset
    * @return {Promise} Promise
    */
-  addAllRecordsRecursive(app, records, offset, results) {
+  addAllRecordsRecursive(app, records = [], offset = 0, results = []) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_POST_RECORD;
     let begin = offset || 0;
-    records = records || [];
     const length = records.length || 0;
     const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
     const recordsPerBulk = records.slice(begin, end);
