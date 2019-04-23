@@ -4,6 +4,7 @@
         "message": "Using this API token, you cannot run the specified API."
     },
     "PERMISSION_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_NO02",
         "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "No privilege to proceed."
@@ -44,6 +45,7 @@
         }
     },
     "MISSING_APPS_ID_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -55,6 +57,7 @@
         }
     },
     "MISSING_NAME_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -159,6 +162,18 @@
         "message": "Missing or invalid input.",
         "errors": {
             "views[%VARIABLE].type": {
+                "messages": [
+                    "Required field."
+                ]
+            }
+        }
+    },
+    "MISSING_REQUEST_DATA_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
+        "code": "CB_VA01",
+        "message": "Missing or invalid input.",
+        "errors": {
+            "requests": {
                 "messages": [
                     "Required field."
                 ]
@@ -695,6 +710,7 @@
         "message": "limit must be 500 or less."
     },
     "INVALID_FIELD_TYPE_NUMBER_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -706,6 +722,7 @@
         }
     },
     "INVALID_VALUE_DUPLICATED_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -717,6 +734,7 @@
         }
     },
     "MISSING_REQUIRED_FIELD_ADD_RECORD_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -867,6 +885,7 @@
         }
     },
     "FIELD_NUMBER_LESS_THAN_VALUE_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -878,10 +897,12 @@
         }
     },
     "ADD_FIELD_STATUS_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "GAIA_UN10",
         "message": "Cannot update field whose type is STATUS."
     },
     "ADD_RECORD_SYSTEM_FIELD_WITHOUT_ADMIN_PERMISSION": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "GAIA_BF02",
         "message": "App permissions are required to add records with specifying a value in the \"%VARIABLE\" field."
     },
