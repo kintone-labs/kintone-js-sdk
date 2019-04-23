@@ -33,6 +33,7 @@
     },
     "MISSING_APP_ID_ERROR": {
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "id": {

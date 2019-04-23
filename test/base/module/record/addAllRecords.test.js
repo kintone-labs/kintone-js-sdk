@@ -5,7 +5,7 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const {API_ROUTE, URI} = require('../../../utils/constant');
-
+const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
 const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
 const conn = new Connection(common.DOMAIN, auth);
 const recordModule = new Record(conn);
@@ -17,15 +17,15 @@ describe('addAllRecords function', () => {
   });
 
   describe('Successful case', () => {
-    it('[Record-1] Add successfully all records smaller than 2000', () => {
-      const appID = 4;
+    it('[Record-282] The records are added successfully', () => {
+      const appID = API_ROUTE.APP;
       const recordsData = [];
-      const recordsDataLength = 2000;
+      const NUMBER_RECORDS = 2;
       const expectBodys = {'requests': []};
       const expectResults = {'results': []};
       const resultsIds = [];
       const resultsRevisons = [];
-      for (let index = 0; index < recordsDataLength; index++) {
+      for (let index = 0; index < NUMBER_RECORDS; index++) {
         recordsData.push({
           Text: {
             value: 'test'
@@ -35,7 +35,7 @@ describe('addAllRecords function', () => {
         resultsIds.push(index);
         resultsRevisons.push(index);
       }
-      const loopTimes = Math.ceil(recordsDataLength / API_ROUTE.UPDATE_RECORDS_LIMIT);
+      const loopTimes = Math.ceil(NUMBER_RECORDS / API_ROUTE.UPDATE_RECORDS_LIMIT);
       
       for (let index = 0; index < loopTimes; index++) {
         const start = index * API_ROUTE.UPDATE_RECORDS_LIMIT;
@@ -69,11 +69,12 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-        
       const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
+        expect(rsp.results[0].ids.length).toEqual(expectResults.results[0].ids.length);
+        expect(rsp.results[0].revisions.length).toEqual(expectResults.results[0].revisions.length);
       });
     });
   });
@@ -83,8 +84,8 @@ describe('addAllRecords function', () => {
      * Missing required field
      * The error will be displayed when using method without app ID
      */
-    it('[Record-2] - should return the error in the result when using method without app ID', () => {
-      const appID = null;
+    it('[Record-283] - The error will be displayed when using invalid app ID (unexisted, negative number, 0)', () => {
+      const appID = 99999;
       const recordsData = [{
         'app': appID,
         'records': [
@@ -95,18 +96,7 @@ describe('addAllRecords function', () => {
           }
         ]
       }];
-      const expectResult = {
-        'id': 'JkEZZDZMRe3ZkrfCWRaq',
-        'code': 'CB_VA01',
-        'message': 'Missing or invalid input.',
-        'errors': {
-          'app': {
-            'messages': [
-              'Required field.'
-            ]
-          }
-        }
-      };
+      const expectResult = ERROR_MESSAGE.
       nock(URI)
         .post(BULK_REQUEST_API_ROUTE, (rqBody) => {
           return true;
