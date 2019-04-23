@@ -356,7 +356,7 @@ class Record {
      * @param {Object} records
      * @return {UpdateRecordsResponse}
   **/
-  updateAllRecords(app, records, offset, results) {
+  updateAllRecordsRecursive(app, records, offset, results) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
     let begin = offset || 0;
     const length = records.length || 0;
@@ -368,29 +368,25 @@ class Record {
       allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
       if (records.length <= begin) {
-        return {
-          'results': allResults
-        };
+        return allResults;
       }
-      return this.updateAllRecords(app, records, begin, allResults);
+      return this.updateAllRecordsRecursive(app, records, begin, allResults);
     }).catch(err => {
-      const numOfBulk = Math.ceil(records.length / numRecordsPerBulk);
-      const numBulkSuccess = Math.ceil(allResults.length / numRecordsPerBulk);
-      let error = [];
-      if (numBulkSuccess > 0) {
-        for (let index = 0; index < numBulkSuccess; index++) {
-          error = error.concat(allResults);
-        }
-      }
-      error = error.concat(err);
-
-      if (numOfBulk > numBulkSuccess + 1) {
-        const numBulkNotExecute = numOfBulk - (numBulkSuccess + 1);
-        for (let index = 0; index < (numBulkNotExecute * NUM_BULK_REQUEST); index++) {
-          error = error.concat([{}]);
-        }
+      let error = err;
+      if (err.length <= NUM_BULK_REQUEST) {
+        error = allResults.concat(err);
       }
       throw error;
+    });
+  }
+  updateAllRecords(app, records) {
+    return this.updateAllRecordsRecursive(app, records).then(rsp => {
+      return {
+        'results': rsp
+      };
+    }).catch(err => {
+      const errorsResponse = {results: err};
+      throw errorsResponse;
     });
   }
   /**
