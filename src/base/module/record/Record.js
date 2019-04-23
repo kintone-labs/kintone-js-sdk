@@ -368,18 +368,18 @@ class Record {
   updateAllRecordsRecursive(app, records, offset, results) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
     let begin = offset || 0;
-    const length = records.length || 0;
+    const validRecord = Array.isArray(records) ? records : [];
+    const length = validRecord.length;
     const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + numRecordsPerBulk;
-    const recordsPerBulk = records.slice(begin, end);
-
+    const recordsPerBulk = validRecord.slice(begin, end);
     let allResults = results || [];
     return this.updateBulkRecord(app, recordsPerBulk).then((response) => {
       allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
-      if (records.length <= begin) {
+      if (length <= begin) {
         return allResults;
       }
-      return this.updateAllRecordsRecursive(app, records, begin, allResults);
+      return this.updateAllRecordsRecursive(app, validRecord, begin, allResults);
     }).catch(err => {
       let error = err;
       if (err.length <= NUM_BULK_REQUEST) {
