@@ -399,9 +399,9 @@ class Record {
       }
       return this.updateAllRecordsRecursive(app, validRecord, begin, allResults);
     }).catch(err => {
-      let error = err;
+      let error = Array.isArray(err) ? err : [err];
       if (err.length <= NUM_BULK_REQUEST) {
-        error = allResults.concat(err);
+        error = allResults.concat(error);
       }
       throw error;
     });
