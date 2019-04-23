@@ -105,23 +105,34 @@ class Record {
    * @param {Number} offset
    * @return {Promise} Promise
    */
-  addAllRecords(app, records, offset, results) {
+  addAllRecordsRecursive(app, records = [], offset = 0, results = []) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_POST_RECORD;
     let begin = offset || 0;
     const length = records.length || 0;
     const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
     const recordsPerBulk = records.slice(begin, end);
-
     let allResults = results || [];
     return this.addBulkRecord(app, recordsPerBulk).then((response) => {
       allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
       if (records.length <= begin) {
-        return {
-          results: allResults
-        };
+        return allResults;
       }
-      return this.addAllRecords(app, records, begin, allResults);
+      return this.addAllRecordsRecursive(app, records, begin, allResults);
+    }).catch(errors => {
+      const errorResponse = allResults.concat(errors);
+      throw errorResponse;
+    });
+
+  }
+  addAllRecords(app, records) {
+    return this.addAllRecordsRecursive(app, records).then((response) => {
+      return {
+        results: response
+      };
+    }).catch(errors => {
+      const errorsResponse = {results: errors};
+      throw errorsResponse;
     });
   }
 
@@ -135,9 +146,7 @@ class Record {
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.addRecords(app, recordsPerRequest);
     }
-    return bulkRequest.execute().then((response) => {
-      return response;
-    });
+    return bulkRequest.execute();
   }
 
   /**
