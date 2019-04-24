@@ -10,9 +10,22 @@
     },
     "MISSING_APPS_ERROR": {
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "apps": {
+                "messages": [
+                    "Required field."
+                ]
+            }
+        }
+    },
+    "MISSING_REQUEST_DATA_ERROR": {
+        "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
+        "message": "Missing or invalid input.",
+        "errors": {
+            "requests": {
                 "messages": [
                     "Required field."
                 ]
@@ -166,6 +179,7 @@
     },
     "NEGATIVE_APPID_ERROR": {
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "id": {
@@ -706,6 +720,7 @@
     },
     "INVALID_VALUE_DUPLICATED_ERROR": {
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "record%VARIABLE.value": {
@@ -739,6 +754,7 @@
     },
     "INCORRECT_REVISION_RECORD_ERROR": {
         "code": "GAIA_CO02",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "The revision is not the latest. Someone may update a record."
     },
     "COMMENTS_FEATURE_DISABLED_ERROR": {
@@ -867,6 +883,7 @@
     },
     "FIELD_NUMBER_LESS_THAN_VALUE_ERROR": {
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "record%VARIABLE.value": {
@@ -905,6 +922,7 @@
     },
     "UPDATE_RECORD_CREATED_AT_ERROR": {
         "code": "GAIA_UN10",
+        "id": "JkEZZDZMRe3ZkrfCWRaq",
         "message": "Cannot update field whose type is CREATED_AT."
     },
     "UPDATE_RECORD_MODIFIED_AT_ERROR": {
@@ -913,6 +931,7 @@
     },
     "EDIT_RECORD_WITHOUT_FIELD_PERMISSION": {
         "code": "GAIA_FU01",
+        "id": "JkEZZDZMRe3ZkrfCWRaq",
         "message": "Edit permissions are required to edit field \"%VARIABLE\"."
     }
 }
