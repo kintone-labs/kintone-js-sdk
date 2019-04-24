@@ -153,7 +153,7 @@ Promise
 
 </details>
 
-## getAllRecordsByQuery(app, query, fields, totalCount)
+### getAllRecordsByQuery(app, query, fields, totalCount)
 
 >* Retrieves details of all records from an app using a query string.
 >* Can't indicate limit and offset of query.
@@ -391,8 +391,58 @@ Promise
   kintoneRecord.addAllRecords(app, records).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
   });
 
 </pre>
@@ -415,8 +465,58 @@ Promise
   kintoneRecord.addAllRecords(app, records).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
   });
 
 </pre>
@@ -702,8 +802,58 @@ Promise
   kintoneRecord.updateAllRecords(app, recordsUpdate).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
-      // This SDK return err with KintoneAPIExeption
-      console.log(err.get());
+      // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
     });
 
 </pre>
@@ -735,8 +885,58 @@ Promise
   kintoneRecord.updateAllRecords(app, recordsUpdate).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
   });
 
 </pre>
@@ -881,8 +1081,58 @@ Promise
       console.log(rsp);
   })
   .catch((err) => {
-      // This SDK return err with KintoneAPIException
-      console.log(err.get());
+      // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
   });
 
 </pre>
@@ -897,8 +1147,58 @@ Promise
       console.log(rsp);
   })
   .catch((err) => {
-      // This SDK return err with KintoneAPIException
-      console.log(err.get());
+      /// Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
   });
 
 </pre>
