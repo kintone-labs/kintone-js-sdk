@@ -18,7 +18,8 @@ const API_ROUTE = {
   BULK_REQUEST: `/k/v1/bulkRequest.json`,
   USER_AGENT: `${PACKAGE_FILE.name}/${PACKAGE_FILE.version}`,
   GET_RECORDS_LIMIT: 500,
-  UPDATE_RECORDS_LIMIT: 100
+  UPDATE_RECORDS_LIMIT: 100,
+  BULK_REQUEST_LIMIT: 20
 };
 
 module.exports = {API_ROUTE, URI};
