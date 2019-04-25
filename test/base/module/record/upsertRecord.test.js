@@ -11,7 +11,7 @@ const nock = require('nock');
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const common = require('../../../utils/common');
 
-const {Connection, Auth, Record, KintoneAPIException} = require(common.MAIN_PATH_BASE);
+const {Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 // const RECORDS_ROUTE = '/k/v1/records.json';
 
 
