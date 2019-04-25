@@ -1205,6 +1205,82 @@ Promise
 
 </details>
 
+
+### upsertRecord(app, updateKey, record, revision)
+
+Insert or update a record to kintone app.
+Insert the record if the updateKey doesn't exists and update the record if the updateKey exists.
+
+**Parameter**
+
+| Name| Type| Required| Description |
+| --- | --- | --- | --- |
+| app | Integer | yes | The kintone app ID
+| updateKey | JSONObject | yes | The unique key of the record to be updated. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| record | JSONObject | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| revision | Integer | (optional) | The revision number of record
+
+**Return**
+
+Promise
+
+**Sample code**
+
+<details class="tab-container" open>
+<Summary>Update record by UpdateKey</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = 'your_app_id';
+  var updateKey = {
+    field: '{your_fieldcode}',
+    value: '{your_fieldcode_value}'
+  };
+  var record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  var revision = 'revision_of_record';
+  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = /*{your_app_id}*/;
+  const updateKey = {
+    field: '{your_fieldcode}',
+    value: '{your_fieldcode_value}'
+  };
+  const record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  const revision = 'revision_of_record';
+  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+</details>
+
 ### updateRecordAssignees(app, id, assignees, revision)
 
 > Update assignees of a record.
