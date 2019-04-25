@@ -4,15 +4,29 @@
         "message": "Using this API token, you cannot run the specified API."
     },
     "PERMISSION_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_NO02",
         "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "No privilege to proceed."
     },
     "MISSING_APPS_ERROR": {
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "apps": {
+                "messages": [
+                    "Required field."
+                ]
+            }
+        }
+    },
+    "MISSING_REQUEST_DATA_ERROR": {
+        "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
+        "message": "Missing or invalid input.",
+        "errors": {
+            "requests": {
                 "messages": [
                     "Required field."
                 ]
@@ -33,6 +47,7 @@
     },
     "MISSING_APP_ID_ERROR": {
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "id": {
@@ -43,6 +58,7 @@
         }
     },
     "MISSING_APPS_ID_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -54,6 +70,7 @@
         }
     },
     "MISSING_NAME_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -164,9 +181,22 @@
             }
         }
     },
+    "MISSING_REQUEST_DATA_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
+        "code": "CB_VA01",
+        "message": "Missing or invalid input.",
+        "errors": {
+            "requests": {
+                "messages": [
+                    "Required field."
+                ]
+            }
+        }
+    },
     "NEGATIVE_APPID_ERROR": {
         "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "id": {
@@ -696,6 +726,7 @@
         "message": "limit must be 500 or less."
     },
     "INVALID_FIELD_TYPE_NUMBER_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -707,7 +738,9 @@
         }
     },
     "INVALID_VALUE_DUPLICATED_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "record%VARIABLE.value": {
@@ -718,6 +751,7 @@
         }
     },
     "MISSING_REQUIRED_FIELD_ADD_RECORD_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
@@ -741,6 +775,7 @@
     },
     "INCORRECT_REVISION_RECORD_ERROR": {
         "code": "GAIA_CO02",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "The revision is not the latest. Someone may update a record."
     },
     "COMMENTS_FEATURE_DISABLED_ERROR": {
@@ -868,7 +903,9 @@
         }
     },
     "FIELD_NUMBER_LESS_THAN_VALUE_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
         "errors": {
             "record%VARIABLE.value": {
@@ -879,10 +916,12 @@
         }
     },
     "ADD_FIELD_STATUS_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "GAIA_UN10",
         "message": "Cannot update field whose type is STATUS."
     },
     "ADD_RECORD_SYSTEM_FIELD_WITHOUT_ADMIN_PERMISSION": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "GAIA_BF02",
         "message": "App permissions are required to add records with specifying a value in the \"%VARIABLE\" field."
     },
@@ -907,6 +946,7 @@
     },
     "UPDATE_RECORD_CREATED_AT_ERROR": {
         "code": "GAIA_UN10",
+        "id": "JkEZZDZMRe3ZkrfCWRaq",
         "message": "Cannot update field whose type is CREATED_AT."
     },
     "UPDATE_RECORD_MODIFIED_AT_ERROR": {
@@ -915,6 +955,7 @@
     },
     "EDIT_RECORD_WITHOUT_FIELD_PERMISSION": {
         "code": "GAIA_FU01",
+        "id": "JkEZZDZMRe3ZkrfCWRaq",
         "message": "Edit permissions are required to edit field \"%VARIABLE\"."
     }
 }

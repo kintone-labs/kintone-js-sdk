@@ -16,6 +16,7 @@ const API_ROUTE = {
   APPS: `/k/v1/apps.json`,
   GUEST_APPS: `/k/guest/${COMMON.GUEST_SPACEID}/v1/apps.json`,
   BULK_REQUEST: `/k/v1/bulkRequest.json`,
+  GUEST_BULK_REQUEST: `/k/guest/${COMMON.GUEST_SPACEID}/v1/bulkRequest.json`,
   USER_AGENT: `${PACKAGE_FILE.name}/${PACKAGE_FILE.version}`,
   GET_RECORDS_LIMIT: 500,
   UPDATE_RECORDS_LIMIT: 100,
