@@ -194,6 +194,7 @@
         }
     },
     "NEGATIVE_APPID_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "id": "Jt2jVNMHlZxXPufVeZCz",
         "message": "Missing or invalid input.",
@@ -206,6 +207,7 @@
         }
     },
     "NEGATIVE_APP_ID_ERROR": {
+        "id": "Jt2jVNMHlZxXPufVeZCz",
         "code": "CB_VA01",
         "message": "Missing or invalid input.",
         "errors": {
