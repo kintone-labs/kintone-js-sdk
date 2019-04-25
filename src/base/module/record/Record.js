@@ -68,7 +68,8 @@ class Record {
       allRecords = allRecords.concat(response.records);
       if (response.records.length < limit) {
         return {
-          records: allRecords
+          records: allRecords,
+          totalCount: totalCount ? allRecords.length : null
         };
       }
       return this.getAllRecordsByQuery(app, query, fields, totalCount, offsetNum + limit, allRecords);
@@ -104,21 +105,40 @@ class Record {
    * @param {Number} offset
    * @return {Promise} Promise
    */
-  addAllRecords(app, records, offset, results) {
+  addAllRecordsRecursive(app, records = [], offset = 0, results = []) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_POST_RECORD;
     let begin = offset || 0;
     const length = records.length || 0;
     const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
     const recordsPerBulk = records.slice(begin, end);
-
     let allResults = results || [];
     return this.addBulkRecord(app, recordsPerBulk).then((response) => {
-      allResults = allResults.concat(response);
+      allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
       if (records.length <= begin) {
         return allResults;
       }
-      return this.addAllRecords(app, records, begin, allResults);
+      return this.addAllRecordsRecursive(app, records, begin, allResults);
+    }).catch(errors => {
+      if (errors.length <= NUM_BULK_REQUEST) {
+        errors = allResults.concat(errors);
+      }
+      throw errors;
+    });
+
+  }
+  addAllRecords(app, records) {
+    return this.addAllRecordsRecursive(app, records).then((response) => {
+      return {
+        results: response
+      };
+    }).catch(errors => {
+      if (!Array.isArray(errors)) {
+        const emptyArray = [];
+        errors = emptyArray.concat(errors);
+      }
+      const errorsResponse = {results: errors};
+      throw errorsResponse;
     });
   }
 
@@ -132,13 +152,7 @@ class Record {
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.addRecords(app, recordsPerRequest);
     }
-    return bulkRequest.execute().then((rsp) => {
-      let allrecords = [];
-      rsp.results.forEach(result => {
-        allrecords = records.concat(result.records);
-      });
-      return allrecords;
-    });
+    return bulkRequest.execute();
   }
 
   /**
@@ -257,7 +271,7 @@ class Record {
     return bulkRequest.execute();
   }
 
-  deleteAllRecords(app, ids, offset, results) {
+  deleteAllRecords(app, ids, offset = 0, results = []) {
     const numIdsPerBulk = NUM_BULK_REQUEST * LIMIT_DELETE_RECORD;
     let begin = offset || 0;
     const length = ids.length || 0;
@@ -266,12 +280,17 @@ class Record {
 
     let allResults = results || [];
     return this.deleteBulkRecord(app, idsPerBulk).then((response) => {
-      allResults = allResults.concat(response);
+      allResults = allResults.concat(response.results);
       begin += numIdsPerBulk;
       if (ids.length <= begin) {
         return allResults;
       }
       return this.deleteAllRecords(app, ids, begin, allResults);
+    }).catch(errors => {
+      if (errors.length <= NUM_BULK_REQUEST) {
+        errors = allResults.concat(errors);
+      }
+      throw errors;
     });
   }
 
@@ -292,8 +311,15 @@ class Record {
         ids.push(records[i].$id.value);
       }
       return this.deleteAllRecords(app, ids).then((response) => {
-        return response;
+        return {results: response};
       });
+    }).catch(errors => {
+      if (!Array.isArray(errors)) {
+        const emptyArray = [];
+        errors = emptyArray.concat(errors);
+      }
+      const errorsResponse = {results: errors};
+      throw errorsResponse;
     });
   }
 
@@ -349,13 +375,7 @@ class Record {
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.updateRecords(app, recordsPerRequest);
     }
-    return bulkRequest.execute().then((rsp) => {
-      let allrecords = [];
-      rsp.results.forEach(result => {
-        allrecords = allrecords.concat(result.records);
-      });
-      return allrecords;
-    });
+    return bulkRequest.execute();
   }
   /**
      * updateAllRecords for use with update all records
@@ -363,23 +383,37 @@ class Record {
      * @param {Object} records
      * @return {UpdateRecordsResponse}
   **/
-  updateAllRecords(app, records, offset, results) {
+  updateAllRecordsRecursive(app, records, offset, results) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
     let begin = offset || 0;
-    const length = records.length || 0;
+    const validRecord = Array.isArray(records) ? records : [];
+    const length = validRecord.length;
     const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + numRecordsPerBulk;
-    const recordsPerBulk = records.slice(begin, end);
-
+    const recordsPerBulk = validRecord.slice(begin, end);
     let allResults = results || [];
     return this.updateBulkRecord(app, recordsPerBulk).then((response) => {
-      allResults = allResults.concat(response);
+      allResults = allResults.concat(response.results);
       begin += numRecordsPerBulk;
-      if (records.length <= begin) {
-        return {
-          'records': allResults
-        };
+      if (length <= begin) {
+        return allResults;
       }
-      return this.updateAllRecords(app, records, begin, allResults);
+      return this.updateAllRecordsRecursive(app, validRecord, begin, allResults);
+    }).catch(err => {
+      let error = Array.isArray(err) ? err : [err];
+      if (err.length <= NUM_BULK_REQUEST) {
+        error = allResults.concat(error);
+      }
+      throw error;
+    });
+  }
+  updateAllRecords(app, records) {
+    return this.updateAllRecordsRecursive(app, records).then(rsp => {
+      return {
+        'results': rsp
+      };
+    }).catch(err => {
+      const errorsResponse = {results: err};
+      throw errorsResponse;
     });
   }
 

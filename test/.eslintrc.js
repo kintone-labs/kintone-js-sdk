@@ -1,6 +1,7 @@
 module.exports = {
     "env": {
-      "jest": true
+      "jest": true,
+      node: true
     }
 };
    
