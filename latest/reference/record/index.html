@@ -416,6 +416,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getallrecordsbyqueryapp-query-fields-totalcount" title="getAllRecordsByQuery(app, query, fields, totalCount)" class="md-nav__link">
+    getAllRecordsByQuery(app, query, fields, totalCount)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#addrecordapp-record" title="addRecord(app, record)" class="md-nav__link">
     addRecord(app, record)
   </a>
@@ -425,6 +432,13 @@
           <li class="md-nav__item">
   <a href="#addrecordsapp-records" title="addRecords(app, records)" class="md-nav__link">
     addRecords(app, records)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addallrecordsapp-records" title="addAllRecords(app, records)" class="md-nav__link">
+    addAllRecords(app, records)
   </a>
   
 </li>
@@ -451,6 +465,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#updateallrecordsapp-records" title="updateAllRecords(app, records)" class="md-nav__link">
+    updateAllRecords(app, records)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#deleterecordsapp-ids" title="deleteRecords(app, ids)" class="md-nav__link">
     deleteRecords(app, ids)
   </a>
@@ -460,6 +481,20 @@
           <li class="md-nav__item">
   <a href="#deleterecordswithrevisionapp-idswithrevision" title="deleteRecordsWithRevision(app, idsWithRevision)" class="md-nav__link">
     deleteRecordsWithRevision(app, idsWithRevision)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteallrecordsbyqueryapp-query" title="deleteAllRecordsByQuery(app, query)" class="md-nav__link">
+    deleteAllRecordsByQuery(app, query)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upsertrecordapp-updatekey-record-revision" title="upsertRecord(app, updateKey, record, revision)" class="md-nav__link">
+    upsertRecord(app, updateKey, record, revision)
   </a>
   
 </li>
@@ -632,6 +667,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getallrecordsbyqueryapp-query-fields-totalcount" title="getAllRecordsByQuery(app, query, fields, totalCount)" class="md-nav__link">
+    getAllRecordsByQuery(app, query, fields, totalCount)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#addrecordapp-record" title="addRecord(app, record)" class="md-nav__link">
     addRecord(app, record)
   </a>
@@ -641,6 +683,13 @@
           <li class="md-nav__item">
   <a href="#addrecordsapp-records" title="addRecords(app, records)" class="md-nav__link">
     addRecords(app, records)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addallrecordsapp-records" title="addAllRecords(app, records)" class="md-nav__link">
+    addAllRecords(app, records)
   </a>
   
 </li>
@@ -667,6 +716,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#updateallrecordsapp-records" title="updateAllRecords(app, records)" class="md-nav__link">
+    updateAllRecords(app, records)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#deleterecordsapp-ids" title="deleteRecords(app, ids)" class="md-nav__link">
     deleteRecords(app, ids)
   </a>
@@ -676,6 +732,20 @@
           <li class="md-nav__item">
   <a href="#deleterecordswithrevisionapp-idswithrevision" title="deleteRecordsWithRevision(app, idsWithRevision)" class="md-nav__link">
     deleteRecordsWithRevision(app, idsWithRevision)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteallrecordsbyqueryapp-query" title="deleteAllRecordsByQuery(app, query)" class="md-nav__link">
+    deleteAllRecordsByQuery(app, query)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upsertrecordapp-updatekey-record-revision" title="upsertRecord(app, updateKey, record, revision)" class="md-nav__link">
+    upsertRecord(app, updateKey, record, revision)
   </a>
   
 </li>
@@ -943,6 +1013,95 @@
 </pre>
 
 <p></details></p>
+<h3 id="getallrecordsbyqueryapp-query-fields-totalcount">getAllRecordsByQuery(app, query, fields, totalCount)</h3>
+<blockquote>
+<ul>
+<li>Retrieves details of all records from an app using a query string.</li>
+<li>Can't indicate limit and offset of query.</li>
+<li>Number of records can be retrieved at once is greater than the default limitations</li>
+</ul>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>String</td>
+<td>(optional)</td>
+<td><a href="https://developer.kintone.io/hc/en-us/articles/213149287#getrecords">The query string</a> that will specify what records will be responded.</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>Array&lt;String></td>
+<td>(optional)</td>
+<td>List of field codes you want in the response.</td>
+</tr>
+<tr>
+<td>totalCount</td>
+<td>Boolean</td>
+<td>(optional)</td>
+<td>If "true", the request will retrieve total count of records match with query conditions.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Get all records by query without limitation</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+  var app = /*{your_app_id}*/;
+  var query = '{your_query_string}';
+  var fields = [
+      '{your_field_code}',
+      // another fieldCode
+  ]
+  var totalCount = /*{your_decide_true_or_false}*/;
+  kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err.get());
+  });
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+  const app = /*{your_app_id}*/;
+  const query = '{your_query_string}';
+  const fields = [
+      '{your_field_code}',
+      // another fieldCode
+  ]
+  const totalCount = /*{your_decide_true_or_false}*/;
+  kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err.get());
+  });
+
+</pre>
+
+<p></details></p>
 <h3 id="addrecordapp-record">addRecord(app, record)</h3>
 <blockquote>
 <p>Add one record to an app.</p>
@@ -1092,6 +1251,190 @@
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
     console.log(err.get());
+  });
+
+</pre>
+
+<p></details></p>
+<h3 id="addallrecordsapp-records">addAllRecords(app, records)</h3>
+<blockquote>
+<ul>
+<li>Add multiple records to an app.</li>
+<li>Can insert over 2000 records to kintone app, but can't do rollback.</li>
+</ul>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>records</td>
+<td>Array&lt;JSONObject></td>
+<td>yes</td>
+<td>List of records data to be add to kintone app. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Add all records without limitation</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+  var app = {your_app_id};
+  var record = {
+      YourFieldCode: {
+          value: 'Value Of YourFieldCode'
+      },
+      // Another fieldcode here
+  };
+  var records = [
+      record,
+      // another record
+  ];
+  kintoneRecord.addAllRecords(app, records).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
+  });
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+  const app = /*{your_app_id}*/;
+  const record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  const records = [
+    record
+    // another record
+  ];
+  kintoneRecord.addAllRecords(app, records).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    AddRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
   });
 
 </pre>
@@ -1378,6 +1721,208 @@
 </pre>
 
 <p></details></p>
+<h3 id="updateallrecordsapp-records">updateAllRecords(app, records)</h3>
+<blockquote>
+<ul>
+<li>Updates details of multiple records in an app, by specifying their record number, or a different unique key.</li>
+<li>Can update over 2000 records to kintone app, but can't do rollback.</li>
+</ul>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>records</td>
+<td>Array&lt;JSONObject></td>
+<td>yes</td>
+<td>The record data will be added to kintone app. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Update all records without limitation</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+  var app = 'your_app_id';
+  var record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  var recordUpdate = {
+    id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
+    updateKey: { // Optional. Required, if id will not be specified.
+      field: '{your_field_code}',
+      value: '{your_field_code_value}'
+    },
+    record: record,
+    revision: 'record_revision_number' // Optional
+  };
+  var recordsUpdate = [
+    recordUpdate,
+    // Another recordUpdate
+  ]
+  kintoneRecord.updateAllRecords(app, recordsUpdate).then((rsp) => {
+      console.log(rsp);
+    }).catch((err) => {
+      // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
+    });
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+  const app = /*{your_app_id}*/;
+  const record = {
+      YourFieldCode: {
+          value: 'Value Of YourFieldCode'
+      },
+      // Another fieldcode here
+  };
+  const recordUpdate = {
+      id: /*{your_record_id}*/, // Optional. Required, if updateKey will not be specified.
+      updateKey: { // Optional. Required, if id will not be specified.
+          field: '{your_field_code}',
+          value: '{your_field_code_value}'
+      },
+      record: record,
+      revision: /*{record_revision_number}*/ // Optional
+  };
+  const recordsUpdate = [
+      recordUpdate,
+      // Another recordUpdate
+  ]
+  kintoneRecord.updateAllRecords(app, recordsUpdate).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    UpdateRecordsResponse,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
+  });
+
+</pre>
+
+<p></details></p>
 <h3 id="deleterecordsapp-ids">deleteRecords(app, ids)</h3>
 <blockquote>
 <p>Deletes multiple records in an app.</p>
@@ -1499,6 +2044,268 @@
       /*your_record_id: revision_of_record*/
   }
   kintoneRecord.deleteRecordsWithRevision(app, idsWithRevision).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+<p></details></p>
+<h3 id="deleteallrecordsbyqueryapp-query">deleteAllRecordsByQuery(app, query)</h3>
+<blockquote>
+<ul>
+<li>Deletes all records in an app by query string</li>
+<li>Can delete over 2000 records, but can't do rollback.</li>
+</ul>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>query</td>
+<td>String</td>
+<td>(optional)</td>
+<td><a href="https://developer.kintone.io/hc/en-us/articles/213149287#getrecords">The query string</a> that will specify what records will be responded.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Delete all records by query string</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+  var app = 'your_app_id';
+  var query = 'your_query_string';
+  kintoneRecord.deleteAllRecordsByQuery(app, query).then((rsp) => {
+      console.log(rsp);
+  })
+  .catch((err) => {
+      // Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
+  });
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+  const app = 'your_app_id';
+  const query = 'your_query_string';
+  kintoneRecord.deleteAllRecordsByQuery(app, query).then((rsp) => {
+      console.log(rsp);
+  })
+  .catch((err) => {
+      /// Ex: User update 6000 records: 
+    // Case 1: the error occur in record 0
+    // err response
+    // {
+    //   results: [KintoneAPIException, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{}]
+    // }
+    // Case 2: the error occur in record 4000
+    // err response
+    // {
+    //   results: [
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    RecordsResponseDelete,
+    //    KintoneAPIException,
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //    {}
+    //  ]
+    // }
+  });
+
+</pre>
+
+<p></details></p>
+<h3 id="upsertrecordapp-updatekey-record-revision">upsertRecord(app, updateKey, record, revision)</h3>
+<p>Insert or update a record to kintone app.
+Insert the record if the updateKey doesn't exists and update the record if the updateKey exists.</p>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>updateKey</td>
+<td>JSONObject</td>
+<td>yes</td>
+<td>The unique key of the record to be updated. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+<tr>
+<td>record</td>
+<td>JSONObject</td>
+<td>yes</td>
+<td>The record data will be added to kintone app. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+<tr>
+<td>revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The revision number of record</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Update record by UpdateKey</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+  var app = 'your_app_id';
+  var updateKey = {
+    field: '{your_fieldcode}',
+    value: '{your_fieldcode_value}'
+  };
+  var record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  var revision = 'revision_of_record';
+  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+  const app = /*{your_app_id}*/;
+  const updateKey = {
+    field: '{your_fieldcode}',
+    value: '{your_fieldcode_value}'
+  };
+  const record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  const revision = 'revision_of_record';
+  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
