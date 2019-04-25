@@ -181,13 +181,13 @@ Promise
 
 <pre class="inline-code">
 
-  var app = /*{your_app_id}*/;
+  var app = '{your_app_id}';
   var query = '{your_query_string}';
   var fields = [
       '{your_field_code}',
       // another fieldCode
   ]
-  var totalCount = /*{your_decide_true_or_false}*/;
+  var totalCount = '{your_decide_true_or_false}';
   kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -201,13 +201,13 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = '{your_app_id}';
   const query = '{your_query_string}';
   const fields = [
       '{your_field_code}',
       // another fieldCode
   ]
-  const totalCount = /*{your_decide_true_or_false}*/;
+  const totalCount = '{your_decide_true_or_false}';
   kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -377,7 +377,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = '{your_app_id}';
   var record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -443,6 +443,7 @@ Promise
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -451,7 +452,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = '{your_app_id}';
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -517,6 +518,7 @@ Promise
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -854,6 +856,7 @@ Promise
     //    {}
     //  ]
     // }
+    console.log(err)
     });
 
 </pre>
@@ -937,6 +940,7 @@ Promise
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -1133,6 +1137,7 @@ Promise
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -1199,6 +1204,7 @@ Promise
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
