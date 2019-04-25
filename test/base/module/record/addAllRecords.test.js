@@ -833,5 +833,84 @@ describe('addAllRecords function', () => {
       });
     });
 
+    it('[Record-331] Handle error in bulk', () => {
+      const appID = 4;
+      const recordsDataLenght = 6000;
+      const recordsData = [];
+      const expectBodys = {'requests': []};
+      const expectResultsBulk1 = {'results': []};
+      const expectResultsBulk2 = {'results': []};
+      const resultsIds = [];
+      const resultsRevisons = [];
+      for (let index = 0; index < recordsDataLenght; index++) {
+        recordsData.push({
+          Text_0: {
+            value: 'test'
+          } 
+        });
+        resultsIds.push(index);
+        resultsRevisons.push(index);
+      }
+
+      for (let index = 0; index < Math.ceil(recordsDataLenght / API_ROUTE.UPDATE_RECORDS_LIMIT); index++) {
+        const start = index * API_ROUTE.UPDATE_RECORDS_LIMIT;
+        const end = start + API_ROUTE.UPDATE_RECORDS_LIMIT;
+        expectBodys.requests.push({
+          'api': API_ROUTE.RECORDS,
+          'method': 'POST',
+          'payload': {
+            'app': appID,
+            'records': recordsData.slice(start, end)
+          }
+        });
+        
+        if (index < API_ROUTE.BULK_REQUEST_LIMIT) {
+          expectResultsBulk1.results.push({
+            'ids': resultsIds.slice(start, end),
+            'revisions': resultsRevisons.slice(start, end)
+          });
+
+          if (index === 0) {
+            const error = ERROR_MESSAGE.UPDATE_RECORD_CREATED_AT_ERROR;
+            expectResultsBulk2.results.push(error);
+          } else {
+            expectResultsBulk2.results.push({});
+          }
+        }
+      }
+      nock(URI)
+        .post(API_ROUTE.BULK_REQUEST, (rqBody) => {
+          const expecrtBodysBukl1 = {'requests': expectBodys.requests.slice(0, API_ROUTE.BULK_REQUEST_LIMIT)};
+          expect(rqBody).toEqual(expecrtBodysBukl1);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResultsBulk1)
+        .post(API_ROUTE.BULK_REQUEST, (rqBody) => {
+          const expectBodysBukl2 = {'requests': expectBodys.requests.slice(API_ROUTE.BULK_REQUEST_LIMIT, (API_ROUTE.BULK_REQUEST_LIMIT * 2))};
+          expect(rqBody).toEqual(expectBodysBukl2);
+          return true;
+        })
+        .reply(404, expectResultsBulk2);
+
+      const addAllRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      return addAllRecordsResult.catch((error) => {
+        const kintoneException = {response: {
+          data: ERROR_MESSAGE.UPDATE_RECORD_CREATED_AT_ERROR
+        }};
+        expectResultsBulk2.results[0] = new KintoneAPIException(kintoneException);
+        const expectResult = expectResultsBulk1;
+        expectResult.results = expectResult.results.concat(expectResultsBulk2.results);
+        expect(error).toHaveProperty('results');
+        expect(error).toMatchObject(expectResult);
+      });
+    });
   });
 });
