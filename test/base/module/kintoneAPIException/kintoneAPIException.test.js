@@ -1,8 +1,8 @@
 const axios = require('axios');
 const nock = require('nock');
 
-const common = require('../../utils/common');
-const {KintoneAPIException} = require(common.MAIN_PATH);
+const common = require('../../../utils/common');
+const {KintoneAPIException} = require(common.MAIN_PATH_BASE);
 
 const expectResult = {
   'code': 'CB_VA01',

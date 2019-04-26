@@ -1,10 +1,11 @@
+/* eslint-disable node/no-unpublished-require */
 /**
  * test connection and setProxy function
  */
 const nock = require('nock');
-const common = require('../../utils/common');
-const {Connection, Auth} = require(common.MAIN_PATH);
-const {API_ROUTE, URI} = require('../../utils/constant');
+const common = require('../../../utils/common');
+const {Connection, Auth} = require(common.MAIN_PATH_NODE);
+const {API_ROUTE, URI} = require('../../../utils/constant');
 
 const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
 const conn = new Connection(common.DOMAIN, auth);
@@ -45,8 +46,12 @@ describe('Connection module', () => {
     });
 
     it('Return a promisse when "request" function is called', () => {
-      expect(conn.request('GET', '/page-not-found')).toHaveProperty('then');
-      expect(conn.request('GET', '/page-not-found')).toHaveProperty('catch');
+      nock(URI)
+        .get('/page-not-found')
+        .reply(400, {});
+      const rsp = conn.request('GET', '/page-not-found');
+      expect(rsp).toHaveProperty('then');
+      expect(rsp).toHaveProperty('catch');
     });
 
     it(`Should have valid user-agent`, () => {

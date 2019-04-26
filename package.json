@@ -1,8 +1,9 @@
 {
   "name": "@kintone/kintone-js-sdk",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "The SDK of kintone REST API client on node and browser",
-  "main": "./src/index.js",
+  "main": "./src/node/main.js",
+  "browser": "./src/browser/main.js",
   "license": "MIT",
   "author": "Cybozu, Inc.",
   "scripts": {

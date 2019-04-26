@@ -4,9 +4,9 @@
  */
 const nock = require('nock');
 
-const common = require('../../utils/common');
+const common = require('../../../utils/common');
 
-const {App, Auth, Connection, KintoneAPIException} = require(common.MAIN_PATH);
+const {App, Auth, Connection, KintoneAPIException} = require(common.MAIN_PATH_BASE);
 
 const URI = 'https://' + common.DOMAIN;
 const APP_PREVIEW_SETTINGS_ROUTE = '/k/v1/preview/app/settings.json';

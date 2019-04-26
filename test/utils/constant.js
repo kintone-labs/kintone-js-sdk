@@ -2,7 +2,7 @@
  * Constants
  */
 const COMMON = require('./common.js');
-const PACKAGE_FILE = require('../../../package');
+const PACKAGE_FILE = require('../../package');
 const URI = 'https://' + COMMON.DOMAIN;
 const API_ROUTE = {
   RECORD: `/k/v1/record.json`,
@@ -15,7 +15,12 @@ const API_ROUTE = {
   GUEST_APP: `/k/guest/${COMMON.GUEST_SPACEID}/v1/app.json`,
   APPS: `/k/v1/apps.json`,
   GUEST_APPS: `/k/guest/${COMMON.GUEST_SPACEID}/v1/apps.json`,
-  USER_AGENT: `${PACKAGE_FILE.name}/${PACKAGE_FILE.version}`
+  BULK_REQUEST: `/k/v1/bulkRequest.json`,
+  GUEST_BULK_REQUEST: `/k/guest/${COMMON.GUEST_SPACEID}/v1/bulkRequest.json`,
+  USER_AGENT: `${PACKAGE_FILE.name}/${PACKAGE_FILE.version}`,
+  GET_RECORDS_LIMIT: 500,
+  UPDATE_RECORDS_LIMIT: 100,
+  BULK_REQUEST_LIMIT: 20
 };
 
 module.exports = {API_ROUTE, URI};
