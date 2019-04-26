@@ -493,13 +493,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#upsertrecordapp-updatekey-record-revision" title="upsertRecord(app, updateKey, record, revision)" class="md-nav__link">
-    upsertRecord(app, updateKey, record, revision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#updaterecordassigneesapp-id-assignees-revision" title="updateRecordAssignees(app, id, assignees, revision)" class="md-nav__link">
     updateRecordAssignees(app, id, assignees, revision)
   </a>
@@ -739,13 +732,6 @@
           <li class="md-nav__item">
   <a href="#deleteallrecordsbyqueryapp-query" title="deleteAllRecordsByQuery(app, query)" class="md-nav__link">
     deleteAllRecordsByQuery(app, query)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#upsertrecordapp-updatekey-record-revision" title="upsertRecord(app, updateKey, record, revision)" class="md-nav__link">
-    upsertRecord(app, updateKey, record, revision)
   </a>
   
 </li>
@@ -1066,13 +1052,13 @@
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
 
-  var app = /*{your_app_id}*/;
+  var app = '{your_app_id}';
   var query = '{your_query_string}';
   var fields = [
       '{your_field_code}',
       // another fieldCode
   ]
-  var totalCount = /*{your_decide_true_or_false}*/;
+  var totalCount = '{your_decide_true_or_false}';
   kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -1085,13 +1071,13 @@
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = '{your_app_id}';
   const query = '{your_query_string}';
   const fields = [
       '{your_field_code}',
       // another fieldCode
   ]
-  const totalCount = /*{your_decide_true_or_false}*/;
+  const totalCount = '{your_decide_true_or_false}';
   kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -1296,7 +1282,7 @@
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = '{your_app_id}';
   var record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -1362,6 +1348,7 @@
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -1369,7 +1356,7 @@
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = '{your_app_id}';
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -1435,6 +1422,7 @@
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -1836,6 +1824,7 @@
     //    {}
     //  ]
     // }
+    console.log(err)
     });
 
 </pre>
@@ -1918,6 +1907,7 @@
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -2151,6 +2141,7 @@
     //    {}
     //  ]
     // }
+    console.log(err)
   });
 
 </pre>
@@ -2216,100 +2207,7 @@
     //    {}
     //  ]
     // }
-  });
-
-</pre>
-
-<p></details></p>
-<h3 id="upsertrecordapp-updatekey-record-revision">upsertRecord(app, updateKey, record, revision)</h3>
-<p>Insert or update a record to kintone app.
-Insert the record if the updateKey doesn't exists and update the record if the updateKey exists.</p>
-<p><strong>Parameter</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>app</td>
-<td>Integer</td>
-<td>yes</td>
-<td>The kintone app ID</td>
-</tr>
-<tr>
-<td>updateKey</td>
-<td>JSONObject</td>
-<td>yes</td>
-<td>The unique key of the record to be updated. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
-</tr>
-<tr>
-<td>record</td>
-<td>JSONObject</td>
-<td>yes</td>
-<td>The record data will be added to kintone app. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
-</tr>
-<tr>
-<td>revision</td>
-<td>Integer</td>
-<td>(optional)</td>
-<td>The revision number of record</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Return</strong></p>
-<p>Promise</p>
-<p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Update record by UpdateKey</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
-<pre class="inline-code">
-
-  var app = 'your_app_id';
-  var updateKey = {
-    field: '{your_fieldcode}',
-    value: '{your_fieldcode_value}'
-  };
-  var record = {
-    YourFieldCode: {
-      value: 'Value Of YourFieldCode'
-    },
-    // Another fieldcode here
-  };
-  var revision = 'revision_of_record';
-  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
-    console.log(rsp);
-  }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
-  });
-
-</pre>
-
-<p><strong class="tab-name">Nodejs</strong></p>
-<pre class="inline-code">
-
-  const app = /*{your_app_id}*/;
-  const updateKey = {
-    field: '{your_fieldcode}',
-    value: '{your_fieldcode_value}'
-  };
-  const record = {
-    YourFieldCode: {
-      value: 'Value Of YourFieldCode'
-    },
-    // Another fieldcode here
-  };
-  const revision = 'revision_of_record';
-  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
-    console.log(rsp);
-  }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    console.log(err)
   });
 
 </pre>
