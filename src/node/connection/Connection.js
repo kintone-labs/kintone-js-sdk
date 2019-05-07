@@ -38,7 +38,7 @@ class Connection extends BaseConnection {
   }
 
   /**
-   * Set proxy for request
+   * Set http proxy for request
    * @param {String} proxyHost
    * @param {String} proxyPort
    * @param {String} proxyUsername
@@ -51,6 +51,24 @@ class Connection extends BaseConnection {
       proxy.proxyAuth = `${proxyUsername}:${proxyPassword}`;
     }
     const httpsAgent = tunnel.httpsOverHttp({ proxy });
+    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    return this;
+  }
+
+  /**
+   * Set https proxy for request
+   * @param {String} proxyHost
+   * @param {String} proxyPort
+   * @param {String} proxyUsername
+   * @param {String} proxyPassword
+   * @return {this}
+   */
+  setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword) {
+    const proxy = {host: proxyHost, port: proxyPort};
+    if (proxyUsername && proxyPassword) {
+      proxy.proxyAuth = `${proxyUsername}:${proxyPassword}`;
+    }
+    const httpsAgent = tunnel.httpsOverHttps({ proxy });
     this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
     return this;
   }
