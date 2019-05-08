@@ -63,9 +63,15 @@ class Connection extends BaseConnection {
    * @return {this}
    */
   setProxy(proxyHost, proxyPort) {
-    const httpsAgent = tunnel.httpsOverHttp({
+    const option = {
       proxy: {host: proxyHost, port: proxyPort}
-    });
+    };
+
+    if (this.auth.getCert()) {
+      option.pfx = this.auth.getCert();
+      option.passphrase = this.auth.getPassWordCert();
+    }
+    const httpsAgent = tunnel.httpsOverHttp(option);
     this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
     return this;
   }
