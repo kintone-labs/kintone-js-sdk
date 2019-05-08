@@ -1,6 +1,7 @@
 /* eslint-disable node/no-extraneous-require */
 const tunnel = require('tunnel');
 const FormData = require('form-data');
+const https = require('https');
 
 const CONNECTION_CONST = require('./constant');
 const packageFile = require('../../../package.json');
@@ -25,6 +26,7 @@ class Connection extends BaseConnection {
 
     this.setAuth(auth);
     this.addRequestOption(CONNECTION_CONST.BASE.PROXY, false);
+    this.setClientCert();
 
     // set default user-agent
     this.setHeader(
@@ -35,6 +37,23 @@ class Connection extends BaseConnection {
         .replace('{version}', packageFile.version || '(none)')
     );
 
+  }
+
+  /**
+   * Set certificate for request by data
+   * @param {String} proxyHost
+   * @param {String} proxyPort
+   * @return {this}
+   */
+  setClientCert() {
+    if (!this.auth.getCert()) {
+      return;
+    }
+    const httpsAgent = new https.Agent({
+      pfx: this.auth.getCert(),
+      passphrase: this.auth.getPassWordCert()
+    });
+    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
   }
 
   /**
