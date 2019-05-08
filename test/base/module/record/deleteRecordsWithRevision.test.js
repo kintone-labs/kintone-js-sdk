@@ -21,7 +21,7 @@ describe('deleteRecordsWithRevision function', () => {
         }
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE')
+        .delete(API_ROUTE.RECORDS)
         .reply(200, {});
       const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
       expect(deleteRecordsWithRevisionResult).toHaveProperty('then');
@@ -46,7 +46,7 @@ describe('deleteRecordsWithRevision function', () => {
 
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -84,7 +84,7 @@ describe('deleteRecordsWithRevision function', () => {
       const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
       const recordInGuestSpace = new Record(connGuestSpace);
       nock(URI)
-        .intercept(API_ROUTE.GUEST_RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.GUEST_RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -120,7 +120,7 @@ describe('deleteRecordsWithRevision function', () => {
       };
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -157,7 +157,7 @@ describe('deleteRecordsWithRevision function', () => {
 
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -211,7 +211,7 @@ describe('deleteRecordsWithRevision function', () => {
       };
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -250,7 +250,7 @@ describe('deleteRecordsWithRevision function', () => {
       const expectResult = {'code': 'GAIA_RE01', 'id': 'IBcz0R6tmn0b06i88cdt', 'message': 'The specified record (ID: 4444) is not found.'};
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -283,7 +283,7 @@ describe('deleteRecordsWithRevision function', () => {
       };
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -316,7 +316,7 @@ describe('deleteRecordsWithRevision function', () => {
       };
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -345,7 +345,7 @@ describe('deleteRecordsWithRevision function', () => {
       const expectResult = {'code': 'CB_NO02', 'id': 'oKRIYVazSkB4H2CC7txn', 'message': 'No privilege to proceed.'};
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -374,7 +374,7 @@ describe('deleteRecordsWithRevision function', () => {
       const expectResult = {'code': 'CB_NO02', 'id': 'WBOTx9jU4RpBh5RKYfyv', 'message': 'No privilege to proceed.'};
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -407,7 +407,7 @@ describe('deleteRecordsWithRevision function', () => {
       };
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -435,7 +435,7 @@ describe('deleteRecordsWithRevision function', () => {
       const expectResult = {'code': 'CB_IJ01', 'id': 'WBOTx9jU4RpBh5RKYfyv', 'message': 'Missing or invalid input.'};
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -463,7 +463,7 @@ describe('deleteRecordsWithRevision function', () => {
       const expectResult = {'code': 'CB_IJ01', 'id': 'mcK2gEgAgS7HdEOLQSXj', 'message': 'Invalid JSON string.'};
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })
@@ -511,7 +511,7 @@ describe('deleteRecordsWithRevision function', () => {
       const expectResult = {'code': 'CB_VA01', 'id': 'fI40R4N5Kg6XFzDppGIf', 'message': '入力内容が正しくありません。'};
 
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
           return true;
         })

@@ -18,7 +18,7 @@ describe('deleteRecords function', () => {
         ids: [1]
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE')
+        .delete(API_ROUTE.RECORDS)
         .reply(200, {});
       const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
       expect(deleteRecordsResult).toHaveProperty('then');
@@ -33,7 +33,7 @@ describe('deleteRecords function', () => {
         ids: [1]
       };
       nock(URI + ':443')
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -60,7 +60,7 @@ describe('deleteRecords function', () => {
         ids: [1, 3, 2, 4, 5]
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -87,7 +87,7 @@ describe('deleteRecords function', () => {
         ids: [1]
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -106,7 +106,7 @@ describe('deleteRecords function', () => {
         ids: [1]
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -128,7 +128,7 @@ describe('deleteRecords function', () => {
       const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
       const recordInGuestSpace = new Record(connGuestSpace);
       nock(URI)
-        .intercept(API_ROUTE.GUEST_RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.GUEST_RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -152,7 +152,7 @@ describe('deleteRecords function', () => {
         ]
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -179,7 +179,7 @@ describe('deleteRecords function', () => {
         'message': 'The specified record (ID: 1000000) is not found.'
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -200,7 +200,7 @@ describe('deleteRecords function', () => {
       };
       const expectedResult = {'code': 'CB_NO02', 'id': 'DbTLTAJWHM70iV7jmpaW', 'message': 'No privilege to proceed.'};
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -232,7 +232,7 @@ describe('deleteRecords function', () => {
         }
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -263,7 +263,7 @@ describe('deleteRecords function', () => {
         }
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.ids).toEqual(data.ids);
           return true;
         })
@@ -294,7 +294,7 @@ describe('deleteRecords function', () => {
         }
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           return true;
         })
@@ -324,7 +324,7 @@ describe('deleteRecords function', () => {
         }
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
@@ -361,7 +361,7 @@ describe('deleteRecords function', () => {
         }
       };
       nock(URI)
-        .intercept(API_ROUTE.RECORDS, 'DELETE', (rqBody) => {
+        .delete(API_ROUTE.RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.ids).toEqual(data.ids);
           return true;
