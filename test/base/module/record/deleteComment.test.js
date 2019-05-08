@@ -26,7 +26,7 @@ describe('deleteComment function', () => {
   describe('common cases', () => {
     it('should return a promise', () => {
       nock(URI)
-        .intercept(ROUTE, 'DELETE')
+        .delete(ROUTE)
         .reply(200, {});
 
       const actualResult = recordModule.deleteComment();
@@ -44,7 +44,7 @@ describe('deleteComment function', () => {
       };
 
       nock(URI)
-        .intercept(ROUTE, 'DELETE', reqBody => {
+        .delete(ROUTE, reqBody => {
           expect(reqBody).toHaveProperty('app');
           return true;
         })
@@ -74,7 +74,7 @@ describe('deleteComment function', () => {
       };
 
       nock(URI)
-        .intercept(ROUTE, 'DELETE', reqBody => {
+        .delete(ROUTE, reqBody => {
           expect(reqBody).toHaveProperty('app');
           return true;
         })
@@ -104,7 +104,7 @@ describe('deleteComment function', () => {
       };
 
       nock(URI)
-        .intercept(ROUTE_GUEST, 'DELETE', reqBody => {
+        .delete(ROUTE_GUEST, reqBody => {
           expect(reqBody).toHaveProperty('app');
           return true;
         })
@@ -134,7 +134,7 @@ describe('deleteComment function', () => {
       };
 
       nock(URI)
-        .intercept(ROUTE_GUEST, 'DELETE', reqBody => {
+        .delete(ROUTE_GUEST, reqBody => {
           expect(reqBody).toHaveProperty('app');
           return true;
         })
@@ -171,7 +171,7 @@ describe('deleteComment function', () => {
           '指定したコメントが存在しません。削除された可能性があります。'
       };
       nock(URI)
-        .intercept(ROUTE, 'DELETE', reqBody => {
+        .delete(ROUTE, reqBody => {
           expect(reqBody).toMatchObject(data);
           return true;
         })
