@@ -46,11 +46,11 @@ class Connection extends BaseConnection {
    * @return {this}
    */
   setClientCert() {
-    if (!this.auth.getCert()) {
+    if (!this.auth.getClientCertData()) {
       return;
     }
     const httpsAgent = new https.Agent({
-      pfx: this.auth.getCert(),
+      pfx: this.auth.getClientCertData(),
       passphrase: this.auth.getPassWordCert()
     });
     this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
@@ -67,8 +67,8 @@ class Connection extends BaseConnection {
       proxy: {host: proxyHost, port: proxyPort}
     };
 
-    if (this.auth.getCert()) {
-      option.pfx = this.auth.getCert();
+    if (this.auth.getClientCertData()) {
+      option.pfx = this.auth.getClientCertData();
       option.passphrase = this.auth.getPassWordCert();
     }
     const httpsAgent = tunnel.httpsOverHttp(option);

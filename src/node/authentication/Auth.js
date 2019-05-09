@@ -42,12 +42,10 @@ class Auth extends BaseAuth {
   }
 
   /**
-   * Get the certificate
-   * @param {fileContent} cert
-   * @param {String} password
+   * Get the client certificate data
    * @return {cert}
    */
-  getCert() {
+  getClientCertData() {
     return this.cert;
   }
 
