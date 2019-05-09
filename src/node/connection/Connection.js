@@ -1,6 +1,7 @@
 /* eslint-disable node/no-extraneous-require */
 const tunnel = require('tunnel');
 const FormData = require('form-data');
+const https = require('https');
 
 const CONNECTION_CONST = require('./constant');
 const packageFile = require('../../../package.json');
@@ -25,6 +26,7 @@ class Connection extends BaseConnection {
 
     this.setAuth(auth);
     this.addRequestOption(CONNECTION_CONST.BASE.PROXY, false);
+    this.setClientCert();
 
     // set default user-agent
     this.setHeader(
@@ -38,15 +40,38 @@ class Connection extends BaseConnection {
   }
 
   /**
+   * Set certificate for request by data
+   * @param {String} proxyHost
+   * @param {String} proxyPort
+   * @return {this}
+   */
+  setClientCert() {
+    if (!this.auth.getClientCertData()) {
+      return;
+    }
+    const httpsAgent = new https.Agent({
+      pfx: this.auth.getClientCertData(),
+      passphrase: this.auth.getPassWordCert()
+    });
+    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+  }
+
+  /**
    * Set proxy for request
    * @param {String} proxyHost
    * @param {String} proxyPort
    * @return {this}
    */
   setProxy(proxyHost, proxyPort) {
-    const httpsAgent = tunnel.httpsOverHttp({
+    const option = {
       proxy: {host: proxyHost, port: proxyPort}
-    });
+    };
+
+    if (this.auth.getClientCertData()) {
+      option.pfx = this.auth.getClientCertData();
+      option.passphrase = this.auth.getPassWordCert();
+    }
+    const httpsAgent = tunnel.httpsOverHttp(option);
     this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
     return this;
   }
