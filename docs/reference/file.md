@@ -151,6 +151,7 @@ Promise
 
   var fileKey = 'your_file_Key';
   kintoneFile.download(fileKey).then(rsp => {
+    //file blob
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption

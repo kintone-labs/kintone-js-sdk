@@ -159,3 +159,72 @@ This module allows authenticating with the Kintone app by password authenticator
 </pre>
 
 </details>
+
+### setClientCert(BinaryData cert, String password)
+
+> Setting Authentication with the client certificate & password set.
+
+**Parameter**
+
+| Name| Type| Required| Description |
+| --- | --- | --- | --- |
+| cert | BinaryData | yes | Binary data of client certificate
+| password | String | yes | Password of client certificate
+
+**Return**
+
+[Auth](../authentication)
+
+**Sample code**
+
+<details class="tab-container" open>
+<Summary>Set client certificate</Summary>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    const filePath = 'your_cert_path_file'
+    const fileContent = fs.readFileSync(filePath);
+    const certPassword = "your_cert_file_password"
+    
+    //set client cert by file content and password
+    kintoneAuth.setClientCert(fileContent, certPassword);
+    
+</pre>
+
+</details>
+
+### setClientCertByPath(String filePath, String password)
+
+> Setting Authentication with the client certificate & password set by file path
+
+**Parameter**
+
+| Name| Type| Required| Description |
+| --- | --- | --- | --- |
+| filePath | String | yes | File path to client certificate
+| password | String | yes | Password of client certificate
+
+**Return**
+
+[Auth](../authentication)
+
+**Sample code**
+
+<details class="tab-container" open>
+<Summary>Set client certificate by path</Summary>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    const filePath = './cybozu.pfx'
+    const certPassword = "your_cert_file_password"
+    
+    //set client cert by file path and password
+    kintoneAuth.setClientCertByPath(filePath, certPassword);
+    
+</pre>
+
+</details>
