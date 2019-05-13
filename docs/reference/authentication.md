@@ -178,13 +178,13 @@ This module allows authenticating with the Kintone app by password authenticator
 **Sample code**
 
 <details class="tab-container" open>
-<Summary>Set client certificate</Summary>
+<Summary>Set client certificate by binary data</Summary>
 
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
-    const filePath = 'your_cert_path_file'
+    const filePath = "your_cert_path_file"
     const fileContent = fs.readFileSync(filePath);
     const certPassword = "your_cert_file_password"
     
@@ -219,7 +219,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 <pre class="inline-code">
 
-    const filePath = './cybozu.pfx'
+    const filePath = "your_cert_path_file"
     const certPassword = "your_cert_file_password"
     
     //set client cert by file path and password
