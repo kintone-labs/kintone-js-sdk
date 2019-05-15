@@ -487,7 +487,10 @@ class Record {
           recordsForPost.push(record);
         }
       }
-      return executeUpsertBulkRequest(recordsForPost, recordsForPut);
+      return executeUpsertBulkRequest(recordsForPost, recordsForPut).catch(err => {
+        const errorsResponse = {results: err};
+        throw errorsResponse;
+      });
     });
   }
 
