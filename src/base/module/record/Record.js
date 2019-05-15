@@ -491,6 +491,10 @@ class Record {
         const errorsResponse = {results: err};
         throw errorsResponse;
       });
+    }).catch(errors => {
+      const errorsArray = Array.isArray(errors) ? errors : [errors];
+      const errorsResponse = {results: errorsArray};
+      throw errorsResponse;
     });
   }
 
