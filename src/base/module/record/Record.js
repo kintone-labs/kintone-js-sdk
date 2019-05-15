@@ -446,7 +446,8 @@ class Record {
    * @return {Promise}
    */
   upsertRecords(app, records) {
-    if (records.length > LIMIT_UPSERT_RECORD) {
+    const validRecords = Array.isArray(records) ? records : [];
+    if (validRecords.length > LIMIT_UPSERT_RECORD) {
       throw new Error(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
     }
 
@@ -476,21 +477,18 @@ class Record {
       const allRecords = resp.records;
       const recordsForPut = [];
       const recordsForPost = [];
-      for (let i = 0; i < records.length; i++) {
-        if (doesExistSameFieldValue(allRecords, records[i])) {
-          recordsForPut.push(records[i]);
+      for (let i = 0; i < validRecords.length; i++) {
+        if (doesExistSameFieldValue(allRecords, validRecords[i])) {
+          recordsForPut.push(validRecords[i]);
         } else {
-          const record = records[i].record;
-          record[records[i].updateKey.field] = {
-            value: records[i].updateKey.value
+          const record = validRecords[i].record;
+          record[validRecords[i].updateKey.field] = {
+            value: validRecords[i].updateKey.value
           };
           recordsForPost.push(record);
         }
       }
-      return executeUpsertBulkRequest(recordsForPost, recordsForPut).catch(err => {
-        const errorsResponse = {results: err};
-        throw errorsResponse;
-      });
+      return executeUpsertBulkRequest(recordsForPost, recordsForPut);
     }).catch(errors => {
       const errorsArray = Array.isArray(errors) ? errors : [errors];
       const errorsResponse = {results: errorsArray};
