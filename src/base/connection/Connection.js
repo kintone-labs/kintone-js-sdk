@@ -6,6 +6,7 @@ const packageFile = require('../../../package.json');
 
 const CONNECTION_CONST = require('./constant');
 const DEFAULT_PORT = '443';
+
 /**
  * Connection module
  */
@@ -114,6 +115,7 @@ class Connection {
     } else {
       requestOptions.data = body;
     }
+    this.axiousInterceptErrRsp();
     // Execute request
     const request = axios(requestOptions).then(response => {
       return response.data;
@@ -122,6 +124,35 @@ class Connection {
     });
     this.refreshHeader();
     return request;
+  }
+
+  axiousInterceptErrRsp() {
+    axios.interceptors.response.use(
+      response => {
+        return response;
+      },
+      error => {
+        if (
+          error.request.responseType === 'blob' &&
+            error.response.data instanceof Blob &&
+            error.response.data.type &&
+            error.response.data.type.toLowerCase().indexOf('json') !== -1
+        ) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              error.response.data = JSON.parse(reader.result);
+              resolve(Promise.reject(error));
+            };
+            reader.onerror = () => {
+              reject(error);
+            };
+            reader.readAsText(error.response.data);
+          });
+        }
+        return Promise.reject(error);
+      }
+    );
   }
 
   /**
