@@ -1232,7 +1232,7 @@ Promise
 **Sample code**
 
 <details class="tab-container" open>
-<Summary>Update record by UpdateKey</Summary>
+<Summary>Upsert record by UpdateKey</Summary>
 
 <strong class="tab-name">Javascript</strong>
 
@@ -1279,6 +1279,148 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+</details>
+
+### upsertRecords(app, records)
+
+Insert or update up to 1500 records to kintone app.
+If the records are over 1500, It is thrown Error.
+Insert the records if the updateKey doesn't exists and update the records if the updateKey exists.
+
+**Parameter**
+
+| Name| Type| Required| Description |
+| --- | --- | --- | --- |
+| app | Integer | yes | The kintone app ID
+| records | Array<JSONObject> | yes | The record data Array which has updateKey and record. About the format, please look the sample below or [reference](#reference) at the end of this page.
+
+**Return**
+
+Promise
+
+**Sample code**
+
+<details class="tab-container" open>
+<Summary>Upsert records by UpdateKey</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = 'your_app_id';
+  var records = [
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_1'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 1'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_2'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 2'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_3'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 3'
+        },
+      }
+    }
+  ];
+  recordModule.upsertRecords(app, records).then((resp) => {
+    console.log(resp);
+  }).catch((e) => {
+    /// Ex: User upsert over 100 records: 
+    // Case 1: the error occurs on a first record
+    // err response
+    // {
+    //   results: [KintoneAPIException, {},...]
+    // }
+    // Case 2: the error occurs on the 100th or more record 
+    // err response
+    // {
+    //   results: [{},..., KintoneAPIException, {},...]
+    // }
+    console.log(err.get());
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = 'your_app_id';
+  const records = [
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_1'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 1'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_2'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 2'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_3'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 3'
+        },
+      }
+    }
+  ];
+  recordModule.upsertRecords(app, records).then((resp) => {
+    console.log(resp);
+  }).catch((e) => {
+    /// Ex: User upsert over 100 records: 
+    // Case 1: the error occurs on a first record
+    // err response
+    // {
+    //   results: [KintoneAPIException, {},...]
+    // }
+    // Case 2: the error occurs on the 100th or more record 
+    // err response
+    // {
+    //   results: [{},..., KintoneAPIException, {},...]
+    // }
     console.log(err.get());
   });
 
