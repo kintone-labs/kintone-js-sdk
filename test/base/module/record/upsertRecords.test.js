@@ -14,6 +14,8 @@ const conn = new Connection(common.DOMAIN, auth);
 const recordModule = new Record(conn);
 
 const appID = 84;
+const LIMIT_UPSERT_RECORD = 1500;
+
 describe('upsertRecords function', () => {
   describe('success case', () => {
     // eslint-disable-next-line max-statements
@@ -151,7 +153,7 @@ describe('upsertRecords function', () => {
           return true;
         })
         .matchHeader('Content-Type', (type) => {
-          expect(type).toEqual(expect.stringContaining('application/json'));
+          expect(type).toEqual(expect.stringContaining('application/json;charset=utf-8'));
           return true;
         })
         .reply(200, expectResults);
@@ -160,6 +162,33 @@ describe('upsertRecords function', () => {
         expect(upsertRecordsResult).toHaveProperty('catch');
         expect(resp).toEqual(expectResults);
       });
+    });
+  });
+
+  describe('error case', () => {
+    it('should return error when upsert over 1500 records', () => {
+      const recordsDataLenght = 1501;
+      const recordsWithUpd8Key = [];
+      for (let index = 0; index < recordsDataLenght; index++) {
+        const recordForPut = {
+          updateKey: {
+            field: 'Text_0',
+            value: 'update' + index
+          },
+          record: {
+            Text_1: {
+              value: index
+            }
+          }
+        };
+        recordsWithUpd8Key.push(recordForPut);
+      }
+      const message = `upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`;
+      try {
+        recordModule.upsertRecords(appID, recordsWithUpd8Key);
+      } catch (e) {
+        expect(e.message).toEqual(message);
+      }
     });
   });
 });
