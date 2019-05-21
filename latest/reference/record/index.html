@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -66,7 +66,11 @@
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
+    
       <link rel="stylesheet" href="../../asset/style/extra.css">
+    
+    
+      
     
     
   </head>
@@ -104,7 +108,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#record" tabindex="1" class="md-skip">
+      <a href="#record" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -136,7 +140,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="https://kintone.github.io/kintone-js-sdk/">kintone js SDK</a> <a style="text-decoration: underline;" href="https://kintone.github.io/kintone-js-sdk/latest/versions">v0.2.0</a>
+            <a href="https://kintone.github.io/kintone-js-sdk/">kintone js SDK</a> <a style="text-decoration: underline;" href="https://kintone.github.io/kintone-js-sdk/latest/versions">v0.3.0</a>
         </div>
       </div>
  
@@ -182,20 +186,18 @@
 
   
 
-
-  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
           </div>
         </div>
       
@@ -231,20 +233,18 @@
 
   
 
-
-  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -488,6 +488,20 @@
           <li class="md-nav__item">
   <a href="#deleteallrecordsbyqueryapp-query" title="deleteAllRecordsByQuery(app, query)" class="md-nav__link">
     deleteAllRecordsByQuery(app, query)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upsertrecordapp-updatekey-record-revision" title="upsertRecord(app, updateKey, record, revision)" class="md-nav__link">
+    upsertRecord(app, updateKey, record, revision)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upsertrecordsapp-records" title="upsertRecords(app, records)" class="md-nav__link">
+    upsertRecords(app, records)
   </a>
   
 </li>
@@ -737,6 +751,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#upsertrecordapp-updatekey-record-revision" title="upsertRecord(app, updateKey, record, revision)" class="md-nav__link">
+    upsertRecord(app, updateKey, record, revision)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upsertrecordsapp-records" title="upsertRecords(app, records)" class="md-nav__link">
+    upsertRecords(app, records)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#updaterecordassigneesapp-id-assignees-revision" title="updateRecordAssignees(app, id, assignees, revision)" class="md-nav__link">
     updateRecordAssignees(app, id, assignees, revision)
   </a>
@@ -832,16 +860,19 @@
 </tbody>
 </table>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Init record module</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Init record module</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var kintoneRecord = new kintoneJSSDK.Record(connection);
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const kintone = require('@kintone/kintone-js-sdk');
@@ -849,7 +880,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h2 id="methods">Methods</h2>
 <h3 id="getrecordapp-id">getRecord(app, id)</h3>
 <blockquote>
@@ -883,9 +915,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Get record</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Get record</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = {your_app_id};
@@ -899,7 +933,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -913,7 +948,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="getrecordsapp-query-fields-totalcount">getRecords(app, query, fields, totalCount)</h3>
 <blockquote>
 <p>Retrieves details of multiple records from an app using a query string.</p>
@@ -958,9 +994,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Get records</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Get records</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = {your_app_id};
@@ -979,7 +1017,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -998,7 +1037,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="getallrecordsbyqueryapp-query-fields-totalcount">getAllRecordsByQuery(app, query, fields, totalCount)</h3>
 <blockquote>
 <ul>
@@ -1047,9 +1087,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Get all records by query without limitation</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Get all records by query without limitation</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = '{your_app_id}';
@@ -1068,7 +1110,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = '{your_app_id}';
@@ -1087,7 +1130,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="addrecordapp-record">addRecord(app, record)</h3>
 <blockquote>
 <p>Add one record to an app.</p>
@@ -1120,9 +1164,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Add record</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Add record</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -1141,7 +1187,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -1160,7 +1207,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="addrecordsapp-records">addRecords(app, records)</h3>
 <blockquote>
 <p>Add multiple records to an app.</p>
@@ -1193,9 +1241,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Add multi records</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Add multi records</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = {your_app_id};
@@ -1218,7 +1268,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -1241,7 +1292,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="addallrecordsapp-records">addAllRecords(app, records)</h3>
 <blockquote>
 <ul>
@@ -1277,9 +1329,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Add all records without limitation</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Add all records without limitation</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = '{your_app_id}';
@@ -1353,7 +1407,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = '{your_app_id}';
@@ -1427,7 +1482,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="updaterecordbyidapp-id-record-revision">updateRecordByID(app, id, record, revision)</h3>
 <blockquote>
 <p>Updates details of 1 record in an app by specifying its record number.</p>
@@ -1472,9 +1528,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Update record by ID</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Update record by ID</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -1495,7 +1553,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -1516,7 +1575,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="updaterecordbyupdatekeyapp-updatekey-record-revision">updateRecordByUpdateKey(app, updateKey, record, revision)</h3>
 <p>Updates details of 1 record in an app by unique key.</p>
 <p><strong>Parameter</strong></p>
@@ -1559,9 +1619,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Update record by UpdateKey</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Update record by UpdateKey</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -1585,7 +1647,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -1609,7 +1672,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="updaterecordsapp-records">updateRecords(app, records)</h3>
 <blockquote>
 <p>Updates details of multiple records in an app, by specifying their record number, or a different unique key.</p>
@@ -1642,9 +1706,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Update multi records</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Update multi records</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -1676,7 +1742,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -1708,7 +1775,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="updateallrecordsapp-records">updateAllRecords(app, records)</h3>
 <blockquote>
 <ul>
@@ -1744,9 +1812,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Update all records without limitation</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Update all records without limitation</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -1829,7 +1899,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -1911,8 +1982,8 @@
   });
 
 </pre>
+</details>
 
-<p></details></p>
 <h3 id="deleterecordsapp-ids">deleteRecords(app, ids)</h3>
 <blockquote>
 <p>Deletes multiple records in an app.</p>
@@ -1945,9 +2016,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Delete multi record</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Delete multi record</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -1961,7 +2034,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -1975,7 +2049,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="deleterecordswithrevisionapp-idswithrevision">deleteRecordsWithRevision(app, idsWithRevision)</h3>
 <blockquote>
 <p>Deletes multiple records in an app with revision.</p>
@@ -2008,9 +2083,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Delete record with revision</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Delete record with revision</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2026,7 +2103,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -2042,7 +2120,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="deleteallrecordsbyqueryapp-query">deleteAllRecordsByQuery(app, query)</h3>
 <blockquote>
 <ul>
@@ -2078,9 +2157,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Delete all records by query string</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Delete all records by query string</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2146,7 +2227,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = 'your_app_id';
@@ -2212,7 +2294,261 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
+<h3 id="upsertrecordapp-updatekey-record-revision">upsertRecord(app, updateKey, record, revision)</h3>
+<p>Insert or update a record to kintone app.
+Insert the record if the updateKey doesn't exists and update the record if the updateKey exists.</p>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>updateKey</td>
+<td>JSONObject</td>
+<td>yes</td>
+<td>The unique key of the record to be updated. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+<tr>
+<td>record</td>
+<td>JSONObject</td>
+<td>yes</td>
+<td>The record data will be added to kintone app. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+<tr>
+<td>revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The revision number of record</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Upsert record by UpdateKey</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = 'your_app_id';
+  var updateKey = {
+    field: 'your_fieldcode',
+    value: 'your_fieldcode_value'
+  };
+  var record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  var revision = 'revision_of_record';
+  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = /*{your_app_id}*/;
+  const updateKey = {
+    field: '{your_fieldcode}',
+    value: '{your_fieldcode_value}'
+  };
+  const record = {
+    YourFieldCode: {
+      value: 'Value Of YourFieldCode'
+    },
+    // Another fieldcode here
+  };
+  const revision = 'revision_of_record';
+  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIExeption
+    console.log(err.get());
+  });
+
+</pre>
+
+</details>
+
+<h3 id="upsertrecordsapp-records">upsertRecords(app, records)</h3>
+<p>Insert or update up to 1500 records to kintone app.
+If the records are over 1500, It is thrown Error.
+Insert the records if the updateKey doesn't exists and update the records if the updateKey exists.</p>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>records</td>
+<td>Array<JSONObject></td>
+<td>yes</td>
+<td>The record data Array which has updateKey and record. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Upsert records by UpdateKey</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = 'your_app_id';
+  var records = [
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_1'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 1'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_2'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 2'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_3'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 3'
+        },
+      }
+    }
+  ];
+  recordModule.upsertRecords(app, records).then((resp) => {
+    console.log(resp);
+  }).catch((e) => {
+    /// Ex: User upsert over 100 records: 
+    // Case 1: the error occurs on a first record
+    // err response
+    // {
+    //   results: [KintoneAPIException, {},...]
+    // }
+    // Case 2: the error occurs on the 100th or more record 
+    // err response
+    // {
+    //   results: [{},..., KintoneAPIException, {},...]
+    // }
+    console.log(err.get());
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = 'your_app_id';
+  const records = [
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_1'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 1'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_2'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 2'
+        },
+      }
+    },
+    {
+      updateKey: {
+        field: 'your_fieldcode',
+        value: 'your_fieldcode_value_3'
+      },
+      record: {
+        YourFieldCode: {
+          value: 'Value Of YourFieldCode 3'
+        },
+      }
+    }
+  ];
+  recordModule.upsertRecords(app, records).then((resp) => {
+    console.log(resp);
+  }).catch((e) => {
+    /// Ex: User upsert over 100 records: 
+    // Case 1: the error occurs on a first record
+    // err response
+    // {
+    //   results: [KintoneAPIException, {},...]
+    // }
+    // Case 2: the error occurs on the 100th or more record 
+    // err response
+    // {
+    //   results: [{},..., KintoneAPIException, {},...]
+    // }
+    console.log(err.get());
+  });
+
+</pre>
+
+</details>
+
 <h3 id="updaterecordassigneesapp-id-assignees-revision">updateRecordAssignees(app, id, assignees, revision)</h3>
 <blockquote>
 <p>Update assignees of a record.</p>
@@ -2257,9 +2593,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>update record Assignees</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>update record Assignees</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2276,7 +2614,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -2293,7 +2632,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="updaterecordstatusapp-id-action-assignee-revision">updateRecordStatus(app, id, action, assignee, revision)</h3>
 <blockquote>
 <p>Updates the Status of a record of an app.</p>
@@ -2344,9 +2684,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Update record status</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Update record status</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2364,7 +2706,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -2382,7 +2725,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="updaterecordsstatusapp-records">updateRecordsStatus(app, records)</h3>
 <blockquote>
 <p>Updates the Status of multiple records of an app.</p>
@@ -2415,9 +2759,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Update multi record status</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Update multi record status</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2440,7 +2786,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -2463,7 +2810,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="getcommentsapp-record-order-offset-limit">getComments(app, record, order, offset, limit)</h3>
 <p><strong>Parameter</strong></p>
 <table>
@@ -2511,9 +2859,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Get comments</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Get comments</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2530,7 +2880,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -2547,7 +2898,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="addcommentapp-record-comment">addComment(app, record, comment)</h3>
 <p><strong>Parameter</strong></p>
 <table>
@@ -2583,9 +2935,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Add comment</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Add comment</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2609,7 +2963,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -2633,7 +2988,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="deletecommentapp-record-comment">deleteComment(app, record, comment)</h3>
 <p><strong>Parameter</strong></p>
 <table>
@@ -2669,9 +3025,11 @@
 <p><strong>Return</strong></p>
 <p>Promise</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Delete comment</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Delete comment</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
   var app = 'your_app_id';
@@ -2686,7 +3044,8 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
   const app = /*{your_app_id}*/;
@@ -2701,7 +3060,8 @@
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://developer.kintone.io/hc/en-us/articles/213149287/">Get Record</a> <code>on developer network</code></li>
@@ -2777,22 +3137,17 @@
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../../assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../asset/js/extra.js"></script>
-      
-    
-    
       
     
   </body>

@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -66,7 +66,11 @@
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
+    
       <link rel="stylesheet" href="../../asset/style/extra.css">
+    
+    
+      
     
     
   </head>
@@ -104,7 +108,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#connection" tabindex="1" class="md-skip">
+      <a href="#connection" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -136,7 +140,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="https://kintone.github.io/kintone-js-sdk/">kintone js SDK</a> <a style="text-decoration: underline;" href="https://kintone.github.io/kintone-js-sdk/latest/versions">v0.2.0</a>
+            <a href="https://kintone.github.io/kintone-js-sdk/">kintone js SDK</a> <a style="text-decoration: underline;" href="https://kintone.github.io/kintone-js-sdk/latest/versions">v0.3.0</a>
         </div>
       </div>
  
@@ -182,20 +186,18 @@
 
   
 
-
-  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
           </div>
         </div>
       
@@ -231,20 +233,18 @@
 
   
 
-
-  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -609,9 +609,11 @@
 </tbody>
 </table>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Init Connection module</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Init Connection module</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     // Define Authentication object
@@ -635,27 +637,29 @@
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong>
-<pre class="inline-code"></p>
-<pre><code>const kintone = require('@kintone/kintone-js-sdk');
+<strong class="tab-name">Nodejs</strong>
+<pre class="inline-code">
 
-// Define Authentication object
-let kintoneAuth = new kintone.Auth();
-let username = '{your_user_name}';
-let password = '{your_password}';
-kintoneAuth.setPasswordAuth(username, password);
+    const kintone = require('@kintone/kintone-js-sdk');
 
-let myDomainName = 'my.domain.tld';
-let kintoneConnection = new kintone.Connection(myDomainName, kintoneAuth);
+    // Define Authentication object
+    let kintoneAuth = new kintone.Auth();
+    let username = '{your_user_name}';
+    let password = '{your_password}';
+    kintoneAuth.setPasswordAuth(username, password);
 
-// Define connection that included guest space
-let guestSpaceID = /*{guestSpaceID}*/;
-let kintoneConnectionWithGuestSpaceDemo =
-    new kintone.Connection(myDomainName, kintoneAuth, guestSpaceID);
-</code></pre>
+    let myDomainName = 'my.domain.tld';
+    let kintoneConnection = new kintone.Connection(myDomainName, kintoneAuth);
+
+    // Define connection that included guest space
+    let guestSpaceID = /*{guestSpaceID}*/;
+    let kintoneConnectionWithGuestSpaceDemo =
+        new kintone.Connection(myDomainName, kintoneAuth, guestSpaceID);
+
 </pre>
 
-<p></details></p>
+</details>
+
 <h2 id="methods">Methods</h2>
 <h3 id="setheaderkey-value">setHeader(key, value)</h3>
 <blockquote>
@@ -689,9 +693,11 @@ let kintoneConnectionWithGuestSpaceDemo =
 <p><strong>Return</strong></p>
 <p><a href="./#">Connection</a></p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Set header of the Connection</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Set header of the Connection</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     var key = '{your_header_key}';
@@ -700,7 +706,8 @@ let kintoneConnectionWithGuestSpaceDemo =
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
     let key = '{your_header_key}';
@@ -709,7 +716,8 @@ let kintoneConnectionWithGuestSpaceDemo =
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="addrequestoptionkey-value">addRequestOption(key, value)</h3>
 <blockquote>
 <p>Add option that supported by <a href="https://www.npmjs.com/package/axios">axios</a> option</p>
@@ -742,9 +750,11 @@ let kintoneConnectionWithGuestSpaceDemo =
 <p><strong>Return</strong></p>
 <p><a href="./#">Connection</a></p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Set header of the Connection</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Set header of the Connection</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     var key = '{your_option_key}';
@@ -753,7 +763,8 @@ let kintoneConnectionWithGuestSpaceDemo =
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
     let key = '{your_option_key}';
@@ -762,7 +773,8 @@ let kintoneConnectionWithGuestSpaceDemo =
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="setproxyproxyhost-proxyport">setProxy(proxyHost, proxyPort)</h3>
 <blockquote>
 <p>Set the proxy for the <a href="https://www.npmjs.com/package/axios">axios</a> option</p>
@@ -795,9 +807,11 @@ let kintoneConnectionWithGuestSpaceDemo =
 <p><strong>Return</strong></p>
 <p><a href="./#">Connection</a></p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Set proxy for the Connection</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Set proxy for the Connection</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     var proxyHost = '{your_proxy_host}';
@@ -806,7 +820,8 @@ let kintoneConnectionWithGuestSpaceDemo =
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
     const proxyHost = '{your_proxy_host}';
@@ -815,7 +830,7 @@ let kintoneConnectionWithGuestSpaceDemo =
 
 </pre>
 
-<p></details></p>
+</details>
                 
                   
                 
@@ -879,22 +894,17 @@ let kintoneConnectionWithGuestSpaceDemo =
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../../assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../asset/js/extra.js"></script>
-      
-    
-    
       
     
   </body>

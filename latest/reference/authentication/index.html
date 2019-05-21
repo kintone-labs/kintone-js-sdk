@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -66,7 +66,11 @@
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
+    
       <link rel="stylesheet" href="../../asset/style/extra.css">
+    
+    
+      
     
     
   </head>
@@ -104,7 +108,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#authentication" tabindex="1" class="md-skip">
+      <a href="#authentication" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -136,7 +140,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="https://kintone.github.io/kintone-js-sdk/">kintone js SDK</a> <a style="text-decoration: underline;" href="https://kintone.github.io/kintone-js-sdk/latest/versions">v0.2.0</a>
+            <a href="https://kintone.github.io/kintone-js-sdk/">kintone js SDK</a> <a style="text-decoration: underline;" href="https://kintone.github.io/kintone-js-sdk/latest/versions">v0.3.0</a>
         </div>
       </div>
  
@@ -182,20 +186,18 @@
 
   
 
-
-  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
           </div>
         </div>
       
@@ -231,20 +233,18 @@
 
   
 
-
-  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -398,6 +398,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#setclientcertbinarydata-cert-string-password" title="setClientCert(BinaryData cert, String password)" class="md-nav__link">
+    setClientCert(BinaryData cert, String password)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setclientcertbypathstring-filepath-string-password" title="setClientCertByPath(String filePath, String password)" class="md-nav__link">
+    setClientCertByPath(String filePath, String password)
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -547,6 +561,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#setclientcertbinarydata-cert-string-password" title="setClientCert(BinaryData cert, String password)" class="md-nav__link">
+    setClientCert(BinaryData cert, String password)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setclientcertbypathstring-filepath-string-password" title="setClientCertByPath(String filePath, String password)" class="md-nav__link">
+    setClientCertByPath(String filePath, String password)
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -584,16 +612,19 @@ This module allows authenticating with the Kintone app by password authenticator
 <p><strong>Parameter</strong></p>
 <p>(none)</p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Init authentication module</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Init authentication module</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     var kintoneAuth = new kintoneJSSDK.Auth();
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
     const kintone = require('@kintone/kintone-js-sdk');
@@ -601,7 +632,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h2 id="methods">Methods</h2>
 <h3 id="setpasswordauthusername-password">setPasswordAuth(username, password)</h3>
 <blockquote>
@@ -635,9 +667,11 @@ This module allows authenticating with the Kintone app by password authenticator
 <p><strong>Return</strong></p>
 <p><a href="../authentication">Auth</a></p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Set password authentication</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Set password authentication</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     var username = '{your_user_name}';
@@ -646,7 +680,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
     let username = '{your_user_name}';
@@ -655,7 +690,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="setapitokenapitoken">setApiToken(apiToken)</h3>
 <blockquote>
 <p>Set Api Token for Authentication module.</p>
@@ -681,9 +717,11 @@ This module allows authenticating with the Kintone app by password authenticator
 </table>
 <p><strong>Return</strong></p>
 <p><a href="../authentication">Auth</a></p>
-<p><details class="tab-container" open>
-<Summary>Set APIToken authentication</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Set APIToken authentication</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     var apiToken = '{your_token}';
@@ -691,7 +729,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 </pre>
 
-<p><strong class="tab-name">Nodejs</strong></p>
+<strong class="tab-name">Nodejs</strong>
+
 <pre class="inline-code">
 
     let apiTokenString = '{your_token}';
@@ -699,7 +738,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 </pre>
 
-<p></details></p>
+</details>
+
 <h3 id="setbasicauthusername-password">setBasicAuth(username, password)</h3>
 <blockquote>
 <p>Set Basic authentication for Authentication module.</p>
@@ -732,9 +772,11 @@ This module allows authenticating with the Kintone app by password authenticator
 <p><strong>Return</strong></p>
 <p><a href="../authentication">Auth</a></p>
 <p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Set basic authentication</Summary></p>
-<p><strong class="tab-name">Javascript</strong></p>
+<details class="tab-container" open>
+<Summary>Set basic authentication</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
 <pre class="inline-code">
 
     var username = '{your_user_name}';
@@ -742,8 +784,8 @@ This module allows authenticating with the Kintone app by password authenticator
     kintoneAuth.setBasicAuth(username, password);
 
 </pre>
+<strong class="tab-name">Nodejs</strong>
 
-<p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
 
     let username = '{your_user_name}';
@@ -752,7 +794,106 @@ This module allows authenticating with the Kintone app by password authenticator
 
 </pre>
 
-<p></details></p>
+</details>
+
+<h3 id="setclientcertbinarydata-cert-string-password">setClientCert(BinaryData cert, String password)</h3>
+<blockquote>
+<p>Setting Authentication with the client certificate &amp; password set.</p>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cert</td>
+<td>BinaryData</td>
+<td>yes</td>
+<td>Binary data of client certificate</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>yes</td>
+<td>Password of client certificate</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p><a href="../authentication">Auth</a></p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Set client certificate by binary data</Summary>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    const filePath = "your_cert_path_file"
+    const fileContent = fs.readFileSync(filePath);
+    const certPassword = "your_cert_file_password"
+
+    //set client cert by file content and password
+    kintoneAuth.setClientCert(fileContent, certPassword);
+
+</pre>
+
+</details>
+
+<h3 id="setclientcertbypathstring-filepath-string-password">setClientCertByPath(String filePath, String password)</h3>
+<blockquote>
+<p>Setting Authentication with the client certificate &amp; password set by file path</p>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filePath</td>
+<td>String</td>
+<td>yes</td>
+<td>File path to client certificate</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>yes</td>
+<td>Password of client certificate</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p><a href="../authentication">Auth</a></p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Set client certificate by path</Summary>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    const filePath = "your_cert_path_file"
+    const certPassword = "your_cert_file_password"
+
+    //set client cert by file path and password
+    kintoneAuth.setClientCertByPath(filePath, certPassword);
+
+</pre>
+
+</details>
                 
                   
                 
@@ -816,22 +957,17 @@ This module allows authenticating with the Kintone app by password authenticator
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../../assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../asset/js/extra.js"></script>
-      
-    
-    
       
     
   </body>
