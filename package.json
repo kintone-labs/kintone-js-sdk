@@ -1,6 +1,6 @@
 {
   "name": "@kintone/kintone-js-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The SDK of kintone REST API client on node and browser",
   "main": "./src/node/main.js",
   "browser": "./src/browser/main.js",
@@ -23,7 +23,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "jest-cli": "23.6.0",
-    "tunnel": "0.0.5"
+    "tunnel": "0.0.6"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",

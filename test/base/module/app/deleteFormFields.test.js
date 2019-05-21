@@ -33,7 +33,7 @@ describe('deleteFormFields function', () => {
     const app = 1;
     it('should return promise', () => {
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE')
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE)
         .reply(200, {});
 
       const getAppResult = appModule.deleteFormFields(app);
@@ -56,7 +56,7 @@ describe('deleteFormFields function', () => {
         'revision': '13'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -87,7 +87,7 @@ describe('deleteFormFields function', () => {
         'revision': '13'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -119,7 +119,7 @@ describe('deleteFormFields function', () => {
         'revision': '13'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -151,7 +151,7 @@ describe('deleteFormFields function', () => {
         'revision': '13'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_GUEST_SPACE_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_GUEST_SPACE_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -183,7 +183,7 @@ describe('deleteFormFields function', () => {
         'revision': '13'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -213,7 +213,7 @@ describe('deleteFormFields function', () => {
         'revision': '13'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.fields).toEqual(common.generateRecord(number, data.fields));
           return true;
@@ -242,7 +242,7 @@ describe('deleteFormFields function', () => {
         'message': 'Using this API token, you cannot run the specified API.'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE')
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE)
         .matchHeader(common.API_TOKEN, (authHeader) => {
           expect(authHeader).toBe(common.API_TOKEN);
           return true;
@@ -274,7 +274,7 @@ describe('deleteFormFields function', () => {
         }
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -314,7 +314,7 @@ describe('deleteFormFields function', () => {
         }
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -356,7 +356,7 @@ describe('deleteFormFields function', () => {
         }
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -391,7 +391,7 @@ describe('deleteFormFields function', () => {
         'message': 'The field (code: Error_field_code) not found.'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -433,7 +433,7 @@ describe('deleteFormFields function', () => {
         }
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })
@@ -473,7 +473,7 @@ describe('deleteFormFields function', () => {
         }
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
           expect(rqBody.fields).toMatchObject(common.generateRecord(number, data.fields));
           return true;
@@ -509,7 +509,7 @@ describe('deleteFormFields function', () => {
         'message': 'No privilege to proceed.'
       };
       nock(URI)
-        .intercept(`${APP_FORM_FIELD_PREVIEW_ROUTE}`, 'DELETE', (rqBody) => {
+        .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody).toEqual(data);
           return true;
         })

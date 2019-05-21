@@ -8,6 +8,7 @@ const LIMIT_POST_RECORD = 100;
 const LIMIT_DELETE_RECORD = 100;
 const NUM_BULK_REQUEST = 20;
 const LIMIT_RECORD = 500;
+const LIMIT_UPSERT_RECORD = 1500;
 
 /**
  * Record module
@@ -415,6 +416,106 @@ class Record {
       const errorsResponse = {results: err};
       throw errorsResponse;
     });
+  }
+
+  /**
+   * Upsert record by update-key
+   * @param {Number} app
+   * @param {Object} updateKey
+   * @param {Object} record
+   * @param {Number} revision
+   * @return {Promise}
+   */
+  upsertRecord(app, updateKey, record, revision) {
+    const query = `${updateKey.field} = "${updateKey.value}"`;
+    return this.getRecords(app, query, [updateKey.field], false).then((resp) => {
+      if (updateKey.value === '' || resp.records.length < 1) {
+        record[updateKey.field] = {value: updateKey.value};
+        return this.addRecord(app, record);
+      } else if (resp.records.length === 1) {
+        return this.updateRecordByUpdateKey(app, updateKey, record, revision);
+      }
+      throw new Error(`${updateKey.field} is not unique field`);
+    });
+  }
+
+  /**
+   * Upsert records by update-key
+   * @param {Number} app
+   * @param {Object} recordsWithUpdatekey
+   * @return {Promise}
+   */
+  upsertRecords(app, records) {
+    const validRecords = Array.isArray(records) ? records : [];
+    if (validRecords.length > LIMIT_UPSERT_RECORD) {
+      throw new Error(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
+    }
+
+    const doesExistSameFieldValue = (allRecords, comparedRecord) => {
+      if (comparedRecord.updateKey.value === '') {
+        // updateKey.value is '' => post
+        return false;
+      }
+      for (let i = 0; i < allRecords.length; i++) {
+        if (allRecords[i][comparedRecord.updateKey.field].value === comparedRecord.updateKey.value) {
+          // exist => put
+          return true;
+        }
+      }
+      // doesn't exist => post
+      return false;
+    };
+
+    const executeUpsertBulkRequest = (recordsForPost, recordsForPut) => {
+      let bulkRequest = new BulkRequest(this.connection);
+      bulkRequest = this.makeBulkReq(app, bulkRequest, recordsForPost, 'POST');
+      bulkRequest = this.makeBulkReq(app, bulkRequest, recordsForPut, 'PUT');
+      return bulkRequest.execute();
+    };
+
+    return this.getAllRecordsByQuery(app).then((resp) => {
+      const allRecords = resp.records;
+      const recordsForPut = [];
+      const recordsForPost = [];
+      for (let i = 0; i < validRecords.length; i++) {
+        if (doesExistSameFieldValue(allRecords, validRecords[i])) {
+          recordsForPut.push(validRecords[i]);
+        } else {
+          const record = validRecords[i].record;
+          record[validRecords[i].updateKey.field] = {
+            value: validRecords[i].updateKey.value
+          };
+          recordsForPost.push(record);
+        }
+      }
+      return executeUpsertBulkRequest(recordsForPost, recordsForPut);
+    }).catch(errors => {
+      const errorsArray = Array.isArray(errors) ? errors : [errors];
+      const errorsResponse = {results: errorsArray};
+      throw errorsResponse;
+    });
+  }
+
+  makeBulkReq(app, bulkRequest, records, method) {
+    let recordLimit = 0;
+    if (method === 'POST') {
+      recordLimit = LIMIT_POST_RECORD;
+    } else if (method === 'PUT') {
+      recordLimit = LIMIT_UPDATE_RECORD;
+    }
+    const length = records.length;
+    const loopTimes = Math.ceil(length / recordLimit);
+    for (let index = 0; index < loopTimes; index++) {
+      const begin = index * recordLimit;
+      const end = (length - begin) < recordLimit ? length : begin + recordLimit;
+      const recordsPerRequest = records.slice(begin, end);
+      if (method === 'POST') {
+        bulkRequest.addRecords(app, recordsPerRequest);
+      } else if (method === 'PUT') {
+        bulkRequest.updateRecords(app, recordsPerRequest);
+      }
+    }
+    return bulkRequest;
   }
 
   /**
