@@ -15,7 +15,11 @@ export class File {
      * The constructor for this module
      * @param {Connection} connection
      */
-  constructor(connection) {
+  constructor(conn) {
+    let connection = conn;
+    if (!connection) {
+      connection = new Connection();
+    }
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection}` +
                   `not an instance of kintoneConnection`);
