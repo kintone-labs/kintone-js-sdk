@@ -11,7 +11,7 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 
 const filePath = './test/node/module/authenticate/mock/test.pfx';
 const pfxFile = fs.readFileSync(filePath);
-const certPass = 'your_cert_pass';
+const certPass = 'test';
 
 describe('Connection module', () => {
   describe('success case', () => {
@@ -59,7 +59,7 @@ describe('Connection module', () => {
         expect(rsp).toMatchObject(expectResult);
         return appModule.getApp(appID);
       }).catch(err => {
-        const expectCertFile = {passphrase: 'your_cert_pass', pfx: pfxFile};
+        const expectCertFile = {passphrase: certPass, pfx: pfxFile};
         expect(err.errorRaw.response.config.httpsAgent.options).toMatchObject(expectCertFile);
       });
     });
@@ -108,7 +108,7 @@ describe('Connection module', () => {
         expect(rsp).toMatchObject(expectResult);
         return appModule.getApp(appID);
       }).catch(err => {
-        const expectCertFile = {passphrase: 'your_cert_pass', pfx: pfxFile};
+        const expectCertFile = {passphrase: certPass, pfx: pfxFile};
         expect(err.errorRaw.response.config.httpsAgent.options).toMatchObject(expectCertFile);
       });
     });
