@@ -17,7 +17,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 ### **Sample code**
 
@@ -27,11 +27,8 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
+  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
 
 </pre>
 

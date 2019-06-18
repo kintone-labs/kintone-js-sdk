@@ -8,7 +8,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 **Sample code**
 
@@ -18,11 +18,8 @@ Provide manipulate functions on records: get, update, delete, update the record 
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneRecord = new kintoneJSSDK.Record(connection);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneRecord = new kintoneJSSDK.Record();
+  var kintoneRecord = new kintoneJSSDK.Record(connection);
 
 </pre>
 
