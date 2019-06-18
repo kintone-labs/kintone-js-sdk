@@ -12,7 +12,7 @@ Gets general information of an App, including the name, description, related Spa
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 **Sample code**
 
@@ -22,11 +22,8 @@ Gets general information of an App, including the name, description, related Spa
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneApp = new kintoneJSSDK.App(connection);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneApp = new kintoneJSSDK.App();
+  var kintoneApp = new kintoneJSSDK.App(connection);
 
 </pre>
 

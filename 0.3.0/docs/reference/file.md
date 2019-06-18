@@ -8,7 +8,7 @@ Download and upload file via kintone Rest API.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| connection | [Connection](../connection) | yes | The connection module of this SDK.
 
 **Sample code**
 
@@ -18,11 +18,8 @@ Download and upload file via kintone Rest API.
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneFile = new kintoneJSSDK.File(connection);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneFile = new kintoneJSSDK.File();
+  var kintoneFile = new kintoneJSSDK.File(connection);
 
 </pre>
 
