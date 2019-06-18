@@ -6,7 +6,6 @@ const FormData = require('form-data');
 const https = require('https');
 
 const CONNECTION_CONST = require('./constant');
-const packageFile = require('../../../package.json');
 const BaseConnection = require('../../base/main').Connection;
 const KintoneAPIException = require('../../base/main').KintoneAPIException;
 
@@ -22,15 +21,6 @@ class Connection extends BaseConnection {
   constructor(domain, auth, guestSpaceID) {
     super(domain, auth, guestSpaceID);
     this.setClientCert();
-
-    // set default user-agent
-    this.setHeader(
-      CONNECTION_CONST.BASE.USER_AGENT,
-      CONNECTION_CONST.BASE.USER_AGENT_BASE_VALUE
-        .replace('{name}',
-          packageFile.name || 'kintone-nodejs-sdk')
-        .replace('{version}', packageFile.version || '(none)')
-    );
   }
 
   /**
@@ -171,7 +161,7 @@ class Connection extends BaseConnection {
       try {
         tls.createSecureContext(requestOptions.httpsAgent.options);
       } catch (err) {
-        return Promise.reject(err);
+        return Promise.reject(new KintoneAPIException(err));
       }
     }
     // set data to param if using GET method
