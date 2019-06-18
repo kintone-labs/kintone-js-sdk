@@ -2,7 +2,7 @@
 
 
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
   <head>
     
@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
       
       
         
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -66,11 +66,7 @@
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
-    
       <link rel="stylesheet" href="../../asset/style/extra.css">
-    
-    
-      
     
     
   </head>
@@ -108,7 +104,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#quickstart-nodejs" tabindex="1" class="md-skip">
+      <a href="../../#quickstart-nodejs" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -186,18 +182,20 @@
 
   
 
-<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
+
+  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
     </div>
-  
-  <div class="md-source__repository">
-    GitHub
-  </div>
-</a>
+  </a>
+
           </div>
         </div>
       
@@ -233,18 +231,20 @@
 
   
 
-<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
+
+  <a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
     </div>
-  
-  <div class="md-source__repository">
-    GitHub
-  </div>
-</a>
+  </a>
+
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -544,59 +544,52 @@ npm install --save @kintone/kintone-js-sdk
 </code></pre>
 
 <h2 id="code-example">Code example</h2>
-<details class="tab-container" open>
-<Summary>Get record sample</Summary>
+<p><details class="tab-container" open>
+<Summary>Get record sample</Summary></p>
+<p><strong class="tab-name">Source code</strong>
+<pre class="inline-code"></p>
+<pre><code>const kintone = require('@kintone/kintone-js-sdk');
 
-<strong class="tab-name">Source code</strong>
-<pre class="inline-code">
+let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
+let kintoneConnection = new kintone.Connection('your.FQDN.tld', kintoneAuthWithAPIToken);
 
-    const kintone = require('@kintone/kintone-js-sdk');
+let kintoneRecord = new kintone.Record(kintoneConnection);
 
-    let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
-    let kintoneConnection = new kintone.Connection('your.FQDN.tld', kintoneAuthWithAPIToken);
-
-    let kintoneRecord = new kintone.Record(kintoneConnection);
-
-    let appID = {your_app_id};
-    let recordID = {record_id_that_will_be_retrived};
-    kintoneRecord.getRecord(appID, recordID)
-        .then((rsp) => {
-            console.log(rsp);
-        })
-        .catch((err) => {
-            // The promise function always reject with KintoneAPIExeption
-            console.log(err.get());
-        });
-
-</pre>
+let appID = {your_app_id};
+let recordID = {record_id_that_will_be_retrived};
+kintoneRecord.getRecord(appID, recordID)
+    .then((rsp) =&gt; {
+        console.log(rsp);
+    })
+    .catch((err) =&gt; {
+        // The promise function always reject with KintoneAPIExeption
+        console.log(err.get());
+    });
+</code></pre>
+<p></pre>
 <strong class="tab-name">Response success</strong>
-<pre class="inline-code">
-
-    {
-        "record":{
-            // record data should be here
-        }
+<pre class="inline-code"></p>
+<pre><code>{
+    "record":{
+        // record data should be here
     }
-
-</pre>
+}
+</code></pre>
+<p></pre>
 <strong class="tab-name">Response error</strong>
-<pre class="inline-code">
-
-    {
-        id: '{ID}',
-        code: '{CODE}',
-        message: '{Message string}',
-        errors: '{JSON String}'
-    }
-
-</pre>
-</details>
-
-<details class="tab-container" open>
-<Summary>Get record sample with Async</Summary>
-
-<strong class="tab-name">Source code</strong>
-
+<pre class="inline-code"></p>
+<pre><code>{
+    id: '{ID}',
+    code: '{CODE}',
+    message: '{Message string}',
+    errors: '{JSON String}'
+}
+</code></pre>
+<p></pre>
+</details></p>
+<p><details class="tab-container" open>
+<Summary>Get record sample with Async</Summary></p>
+<p><strong class="tab-name">Source code</strong></p>
 <pre class="inline-code">
 
     const kintone = require('@kintone/kintone-js-sdk');
@@ -621,8 +614,7 @@ npm install --save @kintone/kintone-js-sdk
 
 </pre>
 
-<strong class="tab-name">Response success</strong>
-
+<p><strong class="tab-name">Response success</strong></p>
 <pre class="inline-code">
     {
         "record":{
@@ -631,8 +623,7 @@ npm install --save @kintone/kintone-js-sdk
     }
 </pre>
 
-<strong class="tab-name">Response error</strong>
-
+<p><strong class="tab-name">Response error</strong></p>
 <pre class="inline-code">
     { 
         id: '{ID}',
@@ -642,7 +633,7 @@ npm install --save @kintone/kintone-js-sdk
     }
 </pre>
 
-</details>
+<p></details></p>
                 
                   
                 
@@ -706,17 +697,22 @@ npm install --save @kintone/kintone-js-sdk
           Material for MkDocs</a>
       </div>
       
+        
+      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.d9aa80ab.js"></script>
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../asset/js/extra.js"></script>
+      
+    
+    
       
     
   </body>
