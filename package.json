@@ -30,7 +30,7 @@
     "@cybozu/eslint-config": "3.0.1",
     "babel-loader": "8.0.2",
     "eslint": "5.0.0",
-    "jest": "23.4.1",
+    "jest": "24.8.0",
     "nock": "9.6.0",
     "webpack": "4.17.2",
     "webpack-cli": "3.1.0"
