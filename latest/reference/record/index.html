@@ -111,14 +111,13 @@
     
       <!-- Application header -->
 <header class="md-header" data-md-component="header">
-
   <!-- Top-level navigation -->
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
-
+ 
       <!-- Link to home -->
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../0.3.0/"
+        <a href="../"
             title="kintone js SDK"
             class="md-header-nav__button md-logo">
           
@@ -126,27 +125,27 @@
           
         </a>
       </div>
-
+ 
       <!-- Button to toggle drawer -->
       <div class="md-flex__cell md-flex__cell--shrink">
         <label class="md-icon md-icon--menu md-header-nav__button"
             for="__drawer"></label>
       </div>
-
+ 
       <!-- Header title -->
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="../0.3.0">kintone js SDK</a>&nbsp;<a style="text-decoration: underline;" href="../latest/versions">v0.3.0</a>
+            <a href="../">kintone js SDK</a> <a style="text-decoration: underline;" href="../latest/versions">v0.3.1</a>
         </div>
       </div>
-
+ 
       <!-- Button to open search dialogue -->
       <div class="md-flex__cell md-flex__cell--shrink">
         
           <label class="md-icon md-icon--search md-header-nav__button"
               for="__search"></label>
-
+ 
           <!-- Search interface -->
           
 <div class="md-search" data-md-component="search" role="dialog">
@@ -173,7 +172,7 @@
 </div>
         
       </div>
-
+ 
       <!-- Repository containing source -->
       
         <div class="md-flex__cell md-flex__cell--shrink">
@@ -855,8 +854,8 @@
 <tr>
 <td>connection</td>
 <td><a href="../connection">Connection</a></td>
-<td>yes</td>
-<td>The connection module of this SDK.</td>
+<td>(optional)</td>
+<td>The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.</td>
 </tr>
 </tbody>
 </table>
@@ -865,8 +864,11 @@
 <Summary>Init record module</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
+  // with connection
   var kintoneRecord = new kintoneJSSDK.Record(connection);
+
+  // without connection, module will use session authentication of kintone
+  var kintoneRecord = new kintoneJSSDK.Record();
 
 </pre>
 
