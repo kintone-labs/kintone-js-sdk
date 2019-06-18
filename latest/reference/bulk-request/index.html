@@ -774,8 +774,11 @@
 <Summary>Init bulk request module</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
+  // with connection
   var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
+
+  // without connection
+  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
 
 </pre>
 
