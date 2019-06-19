@@ -70,7 +70,7 @@ class Record {
         return kintoneRC.getAllRecords(myCursor.id);
       })
       .then((allRecords)=>{
-        if (allRecords.length < myCursor.totalCount) {
+        if (allRecords.totalCount < myCursor.totalCount) {
           return kintoneRC.deleteCursor(myCursor.id);
         }
         return allRecords;

@@ -73,7 +73,10 @@ class RecordCursor {
         throw error;
       }
     }
-    return allRecords;
+    return {
+      records: allRecords,
+      totalCount: allRecords.length
+    };
   }
   /**
    * Delete cursor
