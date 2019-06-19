@@ -3,7 +3,7 @@
  * kintone-nodeks-SDK
  */
 
-const {App, Record, BulkRequest, KintoneAPIException} = require('../base/main');
+const {App, Record, BulkRequest, KintoneAPIException, RecordCursor} = require('../base/main');
 
 module.exports = {
   Auth: require('./authentication/Auth'),
@@ -12,5 +12,6 @@ module.exports = {
   Record,
   BulkRequest,
   KintoneAPIException,
-  File: require('./module/file/File')
+  File: require('./module/file/File'),
+  RecordCursor
 };
