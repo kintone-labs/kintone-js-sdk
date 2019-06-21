@@ -6,7 +6,7 @@ const packageFile = require('../../../package.json');
 
 const CONNECTION_CONST = require('./constant');
 const DEFAULT_PORT = '443';
-
+const FILE_RESPONSE_TYPE_KEY = 'responseType';
 /**
  * Connection module
  */
@@ -118,6 +118,7 @@ class Connection {
     this.axiousInterceptErrRsp();
     // Execute request
     const request = axios(requestOptions).then(response => {
+      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
       return response.data;
     }).catch(err => {
       throw new KintoneAPIException(err);
@@ -228,6 +229,10 @@ class Connection {
    */
   addRequestOption(key, value) {
     this.options[key] = value;
+    return this;
+  }
+  removeRequestOption(key) {
+    delete this.options[key];
     return this;
   }
   /**

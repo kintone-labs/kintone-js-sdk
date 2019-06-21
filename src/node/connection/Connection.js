@@ -10,6 +10,7 @@ const BaseConnection = require('../../base/main').Connection;
 const KintoneAPIException = require('../../base/main').KintoneAPIException;
 
 const CONTENT_TYPE_KEY = 'Content-Type';
+const FILE_RESPONSE_TYPE_KEY = 'responseType';
 
 class Connection extends BaseConnection {
   /**
@@ -172,6 +173,7 @@ class Connection extends BaseConnection {
     }
     // Execute request
     const request = axios(requestOptions).then(response => {
+      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
       return response.data;
     }).catch(err => {
       throw new KintoneAPIException(err);
