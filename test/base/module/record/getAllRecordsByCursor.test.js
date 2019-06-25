@@ -17,10 +17,9 @@ describe('getAllRecords function', ()=>{
       const appID = 1;
       const fields = [];
       const query = '';
-      const size = 2;
 
       const record = new Record(conn);
-      return record.getAllRecordsByCursor(appID, query, fields, size)
+      return record.getAllRecordsByCursor(appID, query, fields)
         .then((recordsResponse)=>{
           expect(recordsResponse).toHaveProperty('records');
           expect(Array.isArray(recordsResponse.records)).toBe(true);
