@@ -173,10 +173,11 @@ class Connection extends BaseConnection {
     }
     // Execute request
     const request = axios(requestOptions).then(response => {
-      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
       return response.data;
     }).catch(err => {
       throw new KintoneAPIException(err);
+    }).finally(() => {
+      // this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
     });
     this.refreshHeader();
     return request;
