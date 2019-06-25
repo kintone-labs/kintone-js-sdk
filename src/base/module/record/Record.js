@@ -71,12 +71,9 @@ class Record {
       })
       .then((allRecords)=>{
         if (allRecords.totalCount < myCursor.totalCount) {
-          return kintoneRC.deleteCursor(myCursor.id);
+          kintoneRC.deleteCursor(myCursor.id);
         }
         return allRecords;
-      })
-      .then((deleteResponse)=>{
-        return deleteResponse;
       });
   }
 
