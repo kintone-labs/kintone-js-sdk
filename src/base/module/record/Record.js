@@ -12,6 +12,8 @@ const NUM_BULK_REQUEST = 20;
 const LIMIT_RECORD = 500;
 const LIMIT_UPSERT_RECORD = 1500;
 
+const DEFAULT_CURSOR_SIZE = 500;
+
 /**
  * Record module
  */
@@ -61,10 +63,10 @@ class Record {
     return this.sendRequest('GET', 'records', getRecordsRequest);
   }
 
-  getAllRecordsByCursor(app, query, fields, size) {
+  getAllRecordsByCursor(app, query, fields) {
     const kintoneRC = new RecordCursor(this.connection);
     let myCursor;
-    return kintoneRC.createCursor(app, fields, query, size)
+    return kintoneRC.createCursor(app, fields, query, DEFAULT_CURSOR_SIZE)
       .then((creatCursorResponse)=>{
         myCursor = creatCursorResponse;
         return kintoneRC.getAllRecords(myCursor.id);
