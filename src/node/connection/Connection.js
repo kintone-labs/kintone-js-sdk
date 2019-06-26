@@ -170,14 +170,13 @@ class Connection extends BaseConnection {
       requestOptions.params = body;
     } else {
       requestOptions.data = body;
+      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
     }
     // Execute request
     const request = axios(requestOptions).then(response => {
       return response.data;
     }).catch(err => {
       throw new KintoneAPIException(err);
-    }).finally(() => {
-      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
     });
     this.refreshHeader();
     return request;
