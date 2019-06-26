@@ -10,6 +10,8 @@ const BaseConnection = require('../../base/main').Connection;
 const KintoneAPIException = require('../../base/main').KintoneAPIException;
 
 const CONTENT_TYPE_KEY = 'Content-Type';
+const FILE_RESPONSE_TYPE_KEY = 'responseType';
+const FILE_RESPONSE_TYPE_VALUE = 'arraybuffer';
 
 class Connection extends BaseConnection {
   /**
@@ -152,7 +154,7 @@ class Connection extends BaseConnection {
     });
 
     // Set request options
-    const requestOptions = this.options;
+    const requestOptions = JSON.parse(JSON.stringify(this.options));
     requestOptions.method = String(methodName).toUpperCase();
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
@@ -167,6 +169,7 @@ class Connection extends BaseConnection {
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
+      requestOptions[FILE_RESPONSE_TYPE_KEY] = FILE_RESPONSE_TYPE_VALUE;
     } else {
       requestOptions.data = body;
     }
