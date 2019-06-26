@@ -177,7 +177,7 @@ class Connection extends BaseConnection {
     }).catch(err => {
       throw new KintoneAPIException(err);
     }).finally(() => {
-      // this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
+      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
     });
     this.refreshHeader();
     return request;
