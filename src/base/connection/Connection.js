@@ -106,7 +106,7 @@ class Connection {
     });
 
     // Set request options
-    const requestOptions = Object.assign({}, this.options);
+    const requestOptions = JSON.parse(JSON.stringify(this.options));
     requestOptions.method = String(methodName).toUpperCase();
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
