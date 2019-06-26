@@ -14,7 +14,7 @@ const conn = new Connection(common.DOMAIN, auth);
 describe('getRecords function', ()=>{
   describe('Successful case', () => {
     it('1 record block is get successfully', ()=>{
-      const appID = 1;
+      const app = 1;
       const fields = [];
       const query = '';
       const size = 2;
@@ -22,7 +22,7 @@ describe('getRecords function', ()=>{
       let cursorID;
 
       const rc = new RecordCursor(conn);
-      return rc.createCursor(appID, fields, query, size)
+      return rc.createCursor({app, fields, query, size})
         .then((response)=>{
           expect(response).toHaveProperty('id');
           expect(response).toHaveProperty('totalCount');

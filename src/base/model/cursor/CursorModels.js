@@ -7,5 +7,5 @@ module.exports = {
   // TODO: Write unit test
   CreateRecordCursorRequest: require('./recordCursor/CreateRecordCursorRequest'),
   GetRecordCursorRequest: require('./recordCursor/GetRecordCursorRequest'),
-  DeleteRecordCursroRequest: require('./recordCursor/DeleteCursorRequest')
+  DeleteRecordCursorRequest: require('./recordCursor/DeleteCursorRequest')
 };

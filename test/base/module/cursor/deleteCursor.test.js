@@ -14,13 +14,13 @@ const conn = new Connection(common.DOMAIN, auth);
 describe('deleteCursor function', ()=>{
   describe('Successful case', () => {
     it('Cursor is deleted successfully', ()=>{
-      const appID = 1;
+      const app = 1;
       const fields = [];
       const query = '';
       const size = 2;
 
       const rc = new RecordCursor(conn);
-      return rc.createCursor(appID, fields, query, size)
+      return rc.createCursor({app, fields, query, size})
         .then((response)=>{
           expect(response).toHaveProperty('id');
           expect(response).toHaveProperty('totalCount');

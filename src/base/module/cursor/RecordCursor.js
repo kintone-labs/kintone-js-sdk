@@ -26,7 +26,7 @@ class RecordCursor {
    * @param {RecordModel} model
    * @return {Promise} Promise
    */
-  sendRequest(method, url, model) {
+  sendRequest({method, url, model}) {
     return common.sendRequest(method, url, model, this.connection);
   }
 
@@ -38,9 +38,13 @@ class RecordCursor {
    * @param {Integer} size
    * @return {Promise}
    */
-  createCursor(app, fields, query, size) {
-    const createCursorRequest = new CursorModel.CreateRecordCursorRequest(app, fields, query, size);
-    return this.sendRequest('POST', 'RECORD_CURSOR', createCursorRequest);
+  createCursor({app, fields, query, size}) {
+    const createCursorRequest = new CursorModel.CreateRecordCursorRequest({app, fields, query, size});
+    return this.sendRequest({
+      method: 'POST',
+      url: 'RECORD_CURSOR',
+      model: createCursorRequest
+    });
   }
   /**
    * Get 1 block of records
@@ -49,7 +53,11 @@ class RecordCursor {
    */
   getRecords(cursorID) {
     const getRecordCursorRequest = new CursorModel.GetRecordCursorRequest(cursorID);
-    return this.sendRequest('GET', 'RECORD_CURSOR', getRecordCursorRequest);
+    return this.sendRequest({
+      method: 'GET',
+      url: 'RECORD_CURSOR',
+      model: getRecordCursorRequest
+    });
   }
   /**
    * Get all records
@@ -84,8 +92,12 @@ class RecordCursor {
    * @return {Promise}
    */
   deleteCursor(cursorID) {
-    const deleteRecordCursorRequest = new CursorModel.DeleteRecordCursroRequest(cursorID);
-    return this.sendRequest('DELETE', 'RECORD_CURSOR', deleteRecordCursorRequest);
+    const deleteRecordCursorRequest = new CursorModel.DeleteRecordCursorRequest(cursorID);
+    return this.sendRequest({
+      method: 'DELETE',
+      url: 'RECORD_CURSOR',
+      model: deleteRecordCursorRequest
+    });
   }
 }
 

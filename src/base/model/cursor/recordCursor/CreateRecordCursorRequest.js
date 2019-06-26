@@ -5,13 +5,13 @@
 class CreateRecordCursorRequest {
   /**
    * constructor for CreateRecordCursorRequest
-   * @param {Integer} appID
+   * @param {Integer} app
    * @param {Array<String>} fields
    * @param {String} query
    * @param {Integer} size
    */
-  constructor(appID, fields, query, size) {
-    this.app = appID;
+  constructor({app, fields, query, size}) {
+    this.app = app;
     this.fields = fields;
     this.query = query;
     this.size = size;
