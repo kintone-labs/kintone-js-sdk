@@ -7,6 +7,7 @@ const packageFile = require('../../../package.json');
 const CONNECTION_CONST = require('./constant');
 const DEFAULT_PORT = '443';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
+const FILE_RESPONSE_TYPE_VALUE = 'blob';
 /**
  * Connection module
  */
@@ -105,16 +106,16 @@ class Connection {
     });
 
     // Set request options
-    const requestOptions = this.options;
+    const requestOptions = Object.assign({}, this.options);
     requestOptions.method = String(methodName).toUpperCase();
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
+      requestOptions[FILE_RESPONSE_TYPE_KEY] = FILE_RESPONSE_TYPE_VALUE;
     } else {
       requestOptions.data = body;
-      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
     }
     this.axiousInterceptErrRsp();
     // Execute request

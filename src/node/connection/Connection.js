@@ -11,6 +11,7 @@ const KintoneAPIException = require('../../base/main').KintoneAPIException;
 
 const CONTENT_TYPE_KEY = 'Content-Type';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
+const FILE_RESPONSE_TYPE_VALUE = 'arraybuffer';
 
 class Connection extends BaseConnection {
   /**
@@ -153,7 +154,7 @@ class Connection extends BaseConnection {
     });
 
     // Set request options
-    const requestOptions = this.options;
+    const requestOptions = Object.assign({}, this.options);
     requestOptions.method = String(methodName).toUpperCase();
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
@@ -168,9 +169,9 @@ class Connection extends BaseConnection {
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
+      requestOptions[FILE_RESPONSE_TYPE_KEY] = FILE_RESPONSE_TYPE_VALUE;
     } else {
       requestOptions.data = body;
-      this.removeRequestOption(FILE_RESPONSE_TYPE_KEY);
     }
     // Execute request
     const request = axios(requestOptions).then(response => {
