@@ -4,7 +4,7 @@
  */
 
 const common = require('../../../utils/common');
-const {RecordCursor, Connection, Auth} = require('../../../../src/base/main');
+const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
 
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
@@ -35,6 +35,25 @@ describe('getRecords function', ()=>{
           expect(recordsResponse.records.length).toEqual(size);
           expect(recordsResponse).toHaveProperty('next');
           return rc.deleteCursor(cursorID);
+        });
+    });
+  });
+
+  describe('Error case', () => {
+    it('Get records of invalid app ID', ()=>{
+      const app = -1;
+
+      const ILLEGAL_REQUEST = {
+        code: 'CB_IL02',
+        message: 'Illegal request.',
+        errors: {}
+      };
+
+      const rc = new RecordCursor(conn);
+      return rc.getAllRecords(app)
+        .catch((err)=>{
+          expect(err).toBeInstanceOf(KintoneAPIException);
+          expect(err.get()).toMatchObject(ILLEGAL_REQUEST);
         });
     });
   });

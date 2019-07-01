@@ -4,7 +4,7 @@
  */
 
 const common = require('../../../utils/common');
-const {RecordCursor, Connection, Auth} = require('../../../../src/base/main');
+const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
 
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
@@ -28,6 +28,25 @@ describe('deleteCursor function', ()=>{
         })
         .then(()=>{
           expect(true);
+        });
+    });
+  });
+
+  describe('Error case', () => {
+    it('Cursor is deleted fail with wrong cursor ID', ()=>{
+      const wrongID = '123';
+
+      const ILLEGAL_REQUEST = {
+        code: 'CB_IL02',
+        message: 'Illegal request.',
+        errors: {}
+      };
+
+      const rc = new RecordCursor(conn);
+      return rc.deleteCursor(wrongID)
+        .catch((err)=>{
+          expect(err).toBeInstanceOf(KintoneAPIException);
+          expect(err.get()).toMatchObject(ILLEGAL_REQUEST);
         });
     });
   });
