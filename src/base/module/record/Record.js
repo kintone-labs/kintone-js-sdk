@@ -76,6 +76,10 @@ class Record {
           kintoneRC.deleteCursor(myCursor.id);
         }
         return allRecords;
+      })
+      .catch((err)=>{
+        kintoneRC.deleteCursor(myCursor.id);
+        throw err;
       });
   }
 
