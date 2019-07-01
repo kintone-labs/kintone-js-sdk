@@ -8,27 +8,14 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 const common = require('../../../utils/common');
 
 const {Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
-// const RECORDS_ROUTE = '/k/v1/records.json';
-
 
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 const conn = new Connection(common.DOMAIN, auth);
 const recordModule = new Record(conn);
-describe('getRecords function', () => {
-  describe('common case', () => {
-    it('should return a promise', () => {
-      nock(URI)
-        .get(`${API_ROUTE.RECORDS}`)
-        .reply(200, {records: []});
-      const getRecordsResult = recordModule.getRecords();
-      expect(getRecordsResult).toHaveProperty('then');
-      expect(getRecordsResult).toHaveProperty('catch');
-    });
-  });
-
+describe('upsertRecord function', () => {
   describe('success case', () => {
-    it('[case 3] can update record', () => {
+    it('[case 1] can update record', () => {
       const updateKey = {
         field: 'Text_0',
         value: '1234'
@@ -79,7 +66,7 @@ describe('getRecords function', () => {
           expect(rsp).toHaveProperty('revision');
         });
     });
-    it('[case 4] can add record', () => {
+    it('[case 2] can add record', () => {
       const updateKey = {
         field: 'Text_0',
         value: '1234'
@@ -139,7 +126,7 @@ describe('getRecords function', () => {
           expect(rsp.id).toBe('100');
         });
     });
-    it('[case 5] can update record', () => {
+    it('[case 3] can update record by number field', () => {
       const updateKey = {
         field: 'Text_0',
         value: 1234
@@ -193,7 +180,7 @@ describe('getRecords function', () => {
   });
 
   describe('error case', () => {
-    it('[case 6] should return error when getting multi records by updateKey', () => {
+    it('[case 4] should return error when getting multi records by updateKey', () => {
       const updateKey = {
         field: 'Text_0',
         value: 1234
