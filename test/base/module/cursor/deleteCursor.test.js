@@ -28,6 +28,9 @@ describe('deleteCursor function', ()=>{
         })
         .then(()=>{
           expect(true);
+        })
+        .catch((err)=>{
+          expect(false);
         });
     });
   });

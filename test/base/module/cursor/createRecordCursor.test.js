@@ -25,6 +25,9 @@ describe('createCursor function', ()=>{
           expect(response).toHaveProperty('id');
           expect(response).toHaveProperty('totalCount');
           rc.deleteCursor(response.id);
+        })
+        .catch((err)=>{
+          expect(false);
         });
     });
   });

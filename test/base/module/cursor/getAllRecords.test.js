@@ -35,6 +35,9 @@ describe('getAllRecords function', ()=>{
           expect(recordsResponse.records.length).toEqual(totalCount);
           expect(recordsResponse).toHaveProperty('totalCount');
           expect(recordsResponse.totalCount).toEqual(totalCount);
+        })
+        .catch((err)=>{
+          expect(false);
         });
     });
   });

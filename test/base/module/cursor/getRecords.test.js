@@ -35,6 +35,9 @@ describe('getRecords function', ()=>{
           expect(recordsResponse.records.length).toEqual(size);
           expect(recordsResponse).toHaveProperty('next');
           return rc.deleteCursor(cursorID);
+        })
+        .catch((err)=>{
+          expect(false);
         });
     });
   });
