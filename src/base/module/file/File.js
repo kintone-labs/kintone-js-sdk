@@ -27,7 +27,6 @@ class File {
 
     const dataRequest =
               new FileModel.GetFileRequest(fileKey);
-    this.connection.addRequestOption(RESPONSE_TYPE_KEY, RESPONSE_TYPE_VALUE);
     return this.connection.download(dataRequest.toJSON());
   }
   /**
