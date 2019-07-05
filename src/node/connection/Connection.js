@@ -61,7 +61,7 @@ class Connection extends BaseConnection {
       option.pfx = this.auth.getClientCertData();
       option.passphrase = this.auth.getPassWordCert();
     }
-    const httpsAgent = tunnel.httpsOverHttp({ proxy });
+    const httpsAgent = tunnel.httpsOverHttp(option);
     this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
     return this;
   }
@@ -85,7 +85,7 @@ class Connection extends BaseConnection {
       option.pfx = this.auth.getClientCertData();
       option.passphrase = this.auth.getPassWordCert();
     }
-    const httpsAgent = tunnel.httpsOverHttps({ proxy });
+    const httpsAgent = tunnel.httpsOverHttps(option);
     this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
     return this;
   }
