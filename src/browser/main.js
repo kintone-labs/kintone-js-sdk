@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import {Connection} from './module/connection/Connection';
 import {File} from './module/file/File';
 import {App} from './module/app/App';
