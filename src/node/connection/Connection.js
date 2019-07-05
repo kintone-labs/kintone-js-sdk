@@ -43,21 +43,49 @@ class Connection extends BaseConnection {
   }
 
   /**
-   * Set proxy for request
+   * Set http proxy for request
    * @param {String} proxyHost
    * @param {String} proxyPort
+   * @param {String} proxyUsername
+   * @param {String} proxyPassword
    * @return {this}
    */
-  setProxy(proxyHost, proxyPort) {
+  setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword) {
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
-
+    if (proxyUsername && proxyPassword) {
+      option.proxy.proxyAuth = `${proxyUsername}:${proxyPassword}`;
+    }
     if (this.auth.getClientCertData()) {
       option.pfx = this.auth.getClientCertData();
       option.passphrase = this.auth.getPassWordCert();
     }
     const httpsAgent = tunnel.httpsOverHttp(option);
+    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    return this;
+  }
+
+  /**
+   * Set https proxy for request
+   * @param {String} proxyHost
+   * @param {String} proxyPort
+   * @param {String} proxyUsername
+   * @param {String} proxyPassword
+   * @return {this}
+   */
+  setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword) {
+    const option = {
+      proxy: {host: proxyHost, port: proxyPort}
+    };
+    if (proxyUsername && proxyPassword) {
+      option.proxy.proxyAuth = `${proxyUsername}:${proxyPassword}`;
+    }
+    if (this.auth.getClientCertData()) {
+      option.pfx = this.auth.getClientCertData();
+      option.passphrase = this.auth.getPassWordCert();
+    }
+    const httpsAgent = tunnel.httpsOverHttps(option);
     this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
     return this;
   }
