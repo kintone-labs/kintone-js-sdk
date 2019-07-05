@@ -6,6 +6,8 @@ const packageFile = require('../../../package.json');
 
 const CONNECTION_CONST = require('./constant');
 const DEFAULT_PORT = '443';
+const FILE_RESPONSE_TYPE_KEY = 'responseType';
+const FILE_RESPONSE_TYPE_VALUE = 'blob';
 /**
  * Connection module
  */
@@ -104,16 +106,18 @@ class Connection {
     });
 
     // Set request options
-    const requestOptions = this.options;
+    const requestOptions = this.copyObject(this.options);
     requestOptions.method = String(methodName).toUpperCase();
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
+      requestOptions[FILE_RESPONSE_TYPE_KEY] = FILE_RESPONSE_TYPE_VALUE;
     } else {
       requestOptions.data = body;
     }
+    this.axiousInterceptErrRsp();
     // Execute request
     const request = axios(requestOptions).then(response => {
       return response.data;
@@ -122,6 +126,71 @@ class Connection {
     });
     this.refreshHeader();
     return request;
+  }
+
+  copyObject(obj) {
+    if (!Object.assign) {
+      Object.defineProperty(Object, 'assign', {
+        enumerable: false,
+        configurable: true,
+        writable: true,
+        value: function(target) {
+          'use strict';
+          if (target === undefined || target === null) {
+            throw new TypeError('Cannot convert first argument to object');
+          }
+
+          const to = Object(target);
+          for (let i = 1; i < arguments.length; i++) {
+            let nextSource = arguments[i];
+            if (nextSource === undefined || nextSource === null) {
+              continue;
+            }
+            nextSource = Object(nextSource);
+
+            const keysArray = Object.keys(Object(nextSource));
+            for (let nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+              const nextKey = keysArray[nextIndex];
+              const desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+              if (desc !== undefined && desc.enumerable) {
+                to[nextKey] = nextSource[nextKey];
+              }
+            }
+          }
+          return to;
+        }
+      });
+    }
+    return Object.assign({}, obj);
+  }
+
+  axiousInterceptErrRsp() {
+    axios.interceptors.response.use(
+      response => {
+        return response;
+      },
+      error => {
+        if (
+          error.request.responseType === 'blob' &&
+            error.response.data instanceof Blob &&
+            error.response.data.type &&
+            error.response.data.type.toLowerCase().indexOf('json') !== -1
+        ) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              error.response.data = JSON.parse(reader.result);
+              resolve(Promise.reject(error));
+            };
+            reader.onerror = () => {
+              reject(error);
+            };
+            reader.readAsText(error.response.data);
+          });
+        }
+        return Promise.reject(error);
+      }
+    );
   }
 
   /**
@@ -197,6 +266,10 @@ class Connection {
    */
   addRequestOption(key, value) {
     this.options[key] = value;
+    return this;
+  }
+  removeRequestOption(key) {
+    delete this.options[key];
     return this;
   }
   /**

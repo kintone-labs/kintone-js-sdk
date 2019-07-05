@@ -1,6 +1,6 @@
 {
   "name": "@kintone/kintone-js-sdk",
-  "version": "0.2.0",
+  "version": "0.3.2",
   "description": "The SDK of kintone REST API client on node and browser",
   "main": "./src/node/main.js",
   "browser": "./src/browser/main.js",
@@ -21,9 +21,8 @@
   },
   "homepage": "https://github.com/kintone/kintone-js-sdk#readme",
   "dependencies": {
-    "axios": "0.18.0",
-    "jest-cli": "23.6.0",
-    "tunnel": "0.0.5"
+    "axios": "0.19.0",
+    "tunnel": "0.0.6"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",
@@ -31,7 +30,7 @@
     "@cybozu/eslint-config": "3.0.1",
     "babel-loader": "8.0.2",
     "eslint": "5.0.0",
-    "jest": "23.4.1",
+    "jest": "24.8.0",
     "nock": "9.6.0",
     "webpack": "4.17.2",
     "webpack-cli": "3.1.0"

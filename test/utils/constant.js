@@ -12,6 +12,7 @@ const API_ROUTE = {
   RECORDS: `/k/v1/records.json`,
   GUEST_RECORDS: `/k/guest/${COMMON.GUEST_SPACEID}/v1/records.json`,
   APP: `/k/v1/app.json`,
+  FILE: `/k/v1/file.json`,
   GUEST_APP: `/k/guest/${COMMON.GUEST_SPACEID}/v1/app.json`,
   APPS: `/k/v1/apps.json`,
   GUEST_APPS: `/k/guest/${COMMON.GUEST_SPACEID}/v1/apps.json`,
