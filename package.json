@@ -4,6 +4,7 @@
   "description": "The SDK of kintone REST API client on node and browser",
   "main": "./src/node/main.js",
   "browser": "./src/browser/main.js",
+  "unpkg": "./dist/kintone-js-sdk.min.js",
   "license": "MIT",
   "author": "Cybozu, Inc.",
   "scripts": {
@@ -25,6 +26,7 @@
     "form-data": "2.5.0",
     "tunnel": "0.0.6"
   },
+  "files": ["dist", "src"],
   "devDependencies": {
     "@babel/core": "7.0.0",
     "@babel/preset-env": "7.0.0",
