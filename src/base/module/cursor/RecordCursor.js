@@ -1,5 +1,6 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
+require('@babel/polyfill');
 const Connection = require('../../connection/Connection');
 const common = require('../../utils/Common');
 const CursorModel = require('../../model/cursor/CursorModels');
@@ -18,6 +19,7 @@ class RecordCursor {
       throw new Error(`${connection} not an instance of Connection`);
     }
     this.connection = connection;
+    Promise.resolve().finally();
   }
 
   /**
