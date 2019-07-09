@@ -848,7 +848,7 @@ let kintoneConnectionWithGuestSpaceDemo =
 <p></details></p>
 <h3 id="sethttpsproxyproxyhost-proxyport-proxyusername-proxypassword">setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)</h3>
 <blockquote>
-<p>Set proxy for the connection module</p>
+<p>Set SSL-secured proxy for the connection module</p>
 </blockquote>
 <p><strong>Parameter</strong></p>
 <table>
@@ -899,7 +899,7 @@ let kintoneConnectionWithGuestSpaceDemo =
     var proxyPort = '{your_proxy_post}';
     var proxyUsername = '{your_proxy_user}';
     var proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
+    kintoneConnection.setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
 
 </pre>
 
@@ -910,7 +910,7 @@ let kintoneConnectionWithGuestSpaceDemo =
     const proxyPort = '{your_proxy_post}';
     const proxyUsername = '{your_proxy_user}';
     const proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
+    kintoneConnection.setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
 
 </pre>
 
