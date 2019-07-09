@@ -404,8 +404,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setproxyproxyhost-proxyport" title="setProxy(proxyHost, proxyPort)" class="md-nav__link">
-    setProxy(proxyHost, proxyPort)
+  <a href="#setproxyproxyhost-proxyport-proxyusername-proxypassword" title="setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
+    setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
   </a>
   
 </li>
@@ -541,8 +541,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setproxyproxyhost-proxyport" title="setProxy(proxyHost, proxyPort)" class="md-nav__link">
-    setProxy(proxyHost, proxyPort)
+  <a href="#setproxyproxyhost-proxyport-proxyusername-proxypassword" title="setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
+    setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
   </a>
   
 </li>
@@ -572,9 +572,9 @@
                 
                 
                 <h1 id="connection">Connection</h1>
-<p><a href="#">Connection</a> module will used as a connector to connect to kintone Rest API</p>
+<p><a href="#">Connection</a> module is used to connect to kintone Rest API</p>
 <blockquote>
-<p>This module excute the request process by <a href="https://www.npmjs.com/package/axios">axios</a> npm.</p>
+<p>This module execute requests using <a href="https://www.npmjs.com/package/axios">axios</a></p>
 </blockquote>
 <h2 id="constructor">Constructor</h2>
 <p><strong>Parameter</strong></p>
@@ -763,9 +763,9 @@ let kintoneConnectionWithGuestSpaceDemo =
 </pre>
 
 <p></details></p>
-<h3 id="setproxyproxyhost-proxyport">setProxy(proxyHost, proxyPort)</h3>
+<h3 id="setproxyproxyhost-proxyport-proxyusername-proxypassword">setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)</h3>
 <blockquote>
-<p>Set the proxy for the <a href="https://www.npmjs.com/package/axios">axios</a> option</p>
+<p>Set proxy for the connection module</p>
 </blockquote>
 <p><strong>Parameter</strong></p>
 <table>
@@ -789,6 +789,18 @@ let kintoneConnectionWithGuestSpaceDemo =
 <td>String</td>
 <td>yes</td>
 <td>The proxy port number</td>
+</tr>
+<tr>
+<td>proxyUsername</td>
+<td>String</td>
+<td>optional</td>
+<td>The username for proxy authentication. This parameter is required when proxy has authentication.</td>
+</tr>
+<tr>
+<td>proxyPassword</td>
+<td>String</td>
+<td>optional</td>
+<td>The proxy port number. This parameter is required when proxy has authentication.</td>
 </tr>
 </tbody>
 </table>
