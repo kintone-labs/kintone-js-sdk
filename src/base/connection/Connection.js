@@ -6,7 +6,8 @@ const packageFile = require('../../../package.json');
 
 const CONNECTION_CONST = require('./constant');
 const DEFAULT_PORT = '443';
-
+const FILE_RESPONSE_TYPE_KEY = 'responseType';
+const FILE_RESPONSE_TYPE_VALUE = 'blob';
 /**
  * Connection module
  */
@@ -105,13 +106,14 @@ class Connection {
     });
 
     // Set request options
-    const requestOptions = this.options;
+    const requestOptions = this.copyObject(this.options);
     requestOptions.method = String(methodName).toUpperCase();
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
+      requestOptions[FILE_RESPONSE_TYPE_KEY] = FILE_RESPONSE_TYPE_VALUE;
     } else {
       requestOptions.data = body;
     }
@@ -124,6 +126,42 @@ class Connection {
     });
     this.refreshHeader();
     return request;
+  }
+
+  copyObject(obj) {
+    if (!Object.assign) {
+      Object.defineProperty(Object, 'assign', {
+        enumerable: false,
+        configurable: true,
+        writable: true,
+        value: function(target) {
+          'use strict';
+          if (target === undefined || target === null) {
+            throw new TypeError('Cannot convert first argument to object');
+          }
+
+          const to = Object(target);
+          for (let i = 1; i < arguments.length; i++) {
+            let nextSource = arguments[i];
+            if (nextSource === undefined || nextSource === null) {
+              continue;
+            }
+            nextSource = Object(nextSource);
+
+            const keysArray = Object.keys(Object(nextSource));
+            for (let nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+              const nextKey = keysArray[nextIndex];
+              const desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+              if (desc !== undefined && desc.enumerable) {
+                to[nextKey] = nextSource[nextKey];
+              }
+            }
+          }
+          return to;
+        }
+      });
+    }
+    return Object.assign({}, obj);
   }
 
   axiousInterceptErrRsp() {
@@ -228,6 +266,10 @@ class Connection {
    */
   addRequestOption(key, value) {
     this.options[key] = value;
+    return this;
+  }
+  removeRequestOption(key) {
+    delete this.options[key];
     return this;
   }
   /**

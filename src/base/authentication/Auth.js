@@ -80,7 +80,7 @@ class Auth {
       headerCredentials.push(
         new KintoneHTTPHeader(
           AUTH_CONST.HEADER_KEY_AUTH_BASIC,
-          'Basic ' + (new Buffer(this.basicAuth.getUsername() + ':' + this.basicAuth.getPassword()).toString('base64'))
+          'Basic ' + (Buffer.from(this.basicAuth.getUsername() + ':' + this.basicAuth.getPassword()).toString('base64'))
         )
       );
     }
@@ -88,7 +88,7 @@ class Auth {
       headerCredentials.push(
         new KintoneHTTPHeader(
           AUTH_CONST.HEADER_KEY_AUTH_PASSWORD,
-          new Buffer(this.passwordAuth.getUsername() + ':' + this.passwordAuth.getPassword()).toString('base64')
+          Buffer.from(this.passwordAuth.getUsername() + ':' + this.passwordAuth.getPassword()).toString('base64')
         )
       );
     }

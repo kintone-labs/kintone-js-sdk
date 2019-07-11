@@ -83,7 +83,20 @@ class Record {
       });
   }
 
-  getAllRecordsByQuery(app, query, fields, totalCount, offset, records) {
+  /**
+   * Get multi records more than default limitation number by query
+   * TODO: Parse to response model
+   * @param {Number} app
+   * @param {String} query
+   * @param {Array<String>} fields
+   * @param {Boolean} totalCount
+   * @return {Promise} Promise
+   */
+  getAllRecordsByQuery(app, query, fields, totalCount) {
+    return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null);
+  }
+
+  getAllRecordsByQueryRecursive(app, query, fields, totalCount, offset, records) {
     let allRecords = records || [];
     const offsetNum = offset || 0;
     const limit = LIMIT_RECORD;
@@ -97,9 +110,10 @@ class Record {
           totalCount: totalCount ? allRecords.length : null
         };
       }
-      return this.getAllRecordsByQuery(app, query, fields, totalCount, offsetNum + limit, allRecords);
+      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, offsetNum + limit, allRecords);
     });
   }
+
   /**
    * Add the record
    * @param {Number} app
