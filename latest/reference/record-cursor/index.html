@@ -13,7 +13,7 @@
         <meta name="description" content="The SDK of kintone REST API client on browser">
       
       
-        <link rel="canonical" href="https://kintone.github.io/kintone-js-sdk/reference/bulk-request/">
+        <link rel="canonical" href="https://kintone.github.io/kintone-js-sdk/reference/record-cursor/">
       
       
       
@@ -40,7 +40,7 @@
     
     
       
-        <title>Bulk Request - kintone js SDK</title>
+        <title>Record Cursor - kintone js SDK</title>
       
     
     
@@ -104,7 +104,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#bulk-request" tabindex="1" class="md-skip">
+      <a href="../../#record-cursor" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -370,18 +370,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../record-cursor/" title="Record Cursor" class="md-nav__link">
-      Record Cursor
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -393,11 +381,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Bulk Request
+        Record Cursor
       </label>
     
-    <a href="./" title="Bulk Request" class="md-nav__link md-nav__link--active">
-      Bulk Request
+    <a href="./" title="Record Cursor" class="md-nav__link md-nav__link--active">
+      Record Cursor
     </a>
     
       
@@ -415,26 +403,6 @@
     Constructor
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parameter" title="Parameter" class="md-nav__link">
-    Parameter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sample-code" title="Sample code" class="md-nav__link">
-    Sample code
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -446,91 +414,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#addrecordapp-record" title="addRecord(app, record)" class="md-nav__link">
-    addRecord(app, record)
+  <a href="#createcursoroption" title="createCursor(option)" class="md-nav__link">
+    createCursor(option)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#addrecordsapp-records" title="addRecords(app, records)" class="md-nav__link">
-    addRecords(app, records)
+  <a href="#getrecordscursorid" title="getRecords(cursorID)" class="md-nav__link">
+    getRecords(cursorID)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#updaterecordbyidapp-id-record-revision" title="updateRecordByID(app, id, record, revision)" class="md-nav__link">
-    updateRecordByID(app, id, record, revision)
+  <a href="#getallrecordscursorid" title="getAllRecords(cursorID)" class="md-nav__link">
+    getAllRecords(cursorID)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#updaterecordbyupdatekeyapp-updatekey-record-revision" title="updateRecordByUpdateKey(app, updateKey, record, revision)" class="md-nav__link">
-    updateRecordByUpdateKey(app, updateKey, record, revision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordsapp-records" title="updateRecords(app, records)" class="md-nav__link">
-    updateRecords(app, records)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deleterecordsapp-ids" title="deleteRecords(app, ids)" class="md-nav__link">
-    deleteRecords(app, ids)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deleterecordswithrevisionapp-idswithrevision" title="deleteRecordsWithRevision(app, idsWithRevision)" class="md-nav__link">
-    deleteRecordsWithRevision(app, idsWithRevision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordassigneesapp-record-assignees-revision" title="updateRecordAssignees(app, record, assignees, revision)" class="md-nav__link">
-    updateRecordAssignees(app, record, assignees, revision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordstatusapp-id-action-assignee-revision" title="updateRecordStatus(app, id, action, assignee, revision)" class="md-nav__link">
-    updateRecordStatus(app, id, action, assignee, revision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordsstatusapp-records" title="updateRecordsStatus(app, records)" class="md-nav__link">
-    updateRecordsStatus(app, records)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#execute" title="execute()" class="md-nav__link">
-    execute()
+  <a href="#deletecursorcursorid" title="deleteCursor(cursorID)" class="md-nav__link">
+    deleteCursor(cursorID)
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference" title="Reference" class="md-nav__link">
-    Reference
-  </a>
   
 </li>
       
@@ -542,6 +454,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bulk-request/" title="Bulk Request" class="md-nav__link">
+      Bulk Request
+    </a>
   </li>
 
         
@@ -611,26 +535,6 @@
     Constructor
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parameter" title="Parameter" class="md-nav__link">
-    Parameter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sample-code" title="Sample code" class="md-nav__link">
-    Sample code
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -642,91 +546,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#addrecordapp-record" title="addRecord(app, record)" class="md-nav__link">
-    addRecord(app, record)
+  <a href="#createcursoroption" title="createCursor(option)" class="md-nav__link">
+    createCursor(option)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#addrecordsapp-records" title="addRecords(app, records)" class="md-nav__link">
-    addRecords(app, records)
+  <a href="#getrecordscursorid" title="getRecords(cursorID)" class="md-nav__link">
+    getRecords(cursorID)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#updaterecordbyidapp-id-record-revision" title="updateRecordByID(app, id, record, revision)" class="md-nav__link">
-    updateRecordByID(app, id, record, revision)
+  <a href="#getallrecordscursorid" title="getAllRecords(cursorID)" class="md-nav__link">
+    getAllRecords(cursorID)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#updaterecordbyupdatekeyapp-updatekey-record-revision" title="updateRecordByUpdateKey(app, updateKey, record, revision)" class="md-nav__link">
-    updateRecordByUpdateKey(app, updateKey, record, revision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordsapp-records" title="updateRecords(app, records)" class="md-nav__link">
-    updateRecords(app, records)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deleterecordsapp-ids" title="deleteRecords(app, ids)" class="md-nav__link">
-    deleteRecords(app, ids)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deleterecordswithrevisionapp-idswithrevision" title="deleteRecordsWithRevision(app, idsWithRevision)" class="md-nav__link">
-    deleteRecordsWithRevision(app, idsWithRevision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordassigneesapp-record-assignees-revision" title="updateRecordAssignees(app, record, assignees, revision)" class="md-nav__link">
-    updateRecordAssignees(app, record, assignees, revision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordstatusapp-id-action-assignee-revision" title="updateRecordStatus(app, id, action, assignee, revision)" class="md-nav__link">
-    updateRecordStatus(app, id, action, assignee, revision)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updaterecordsstatusapp-records" title="updateRecordsStatus(app, records)" class="md-nav__link">
-    updateRecordsStatus(app, records)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#execute" title="execute()" class="md-nav__link">
-    execute()
+  <a href="#deletecursorcursorid" title="deleteCursor(cursorID)" class="md-nav__link">
+    deleteCursor(cursorID)
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference" title="Reference" class="md-nav__link">
-    Reference
-  </a>
   
 </li>
       
@@ -746,23 +594,14 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/kintone/kintone-js-sdk/edit/master/docs/reference/bulk-request.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/kintone/kintone-js-sdk/edit/master/docs/reference/record-cursor.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="bulk-request">Bulk Request</h1>
-<p>The Bulk Request API allows multiple API requests to run on multiple kintone apps. The below API can be used with the Bulk Request API:</p>
-<ul>
-<li>Add Record</li>
-<li>Add Records</li>
-<li>Update Record</li>
-<li>Update Records</li>
-<li>Delete Records</li>
-<li>Update Status</li>
-<li>Update Statuses</li>
-<li>Update Assignees</li>
-</ul>
+                <h1 id="record-cursor">Record Cursor</h1>
+<p>Provide functions to work with kintone Cursor</p>
+<p>Currently there's only cursor for records.</p>
 <h2 id="constructor">Constructor</h2>
-<h3 id="parameter"><strong>Parameter</strong></h3>
+<p><strong>Parameter</strong></p>
 <table>
 <thead>
 <tr>
@@ -781,140 +620,384 @@
 </tr>
 </tbody>
 </table>
-<h3 id="sample-code"><strong>Sample code</strong></h3>
+<p><strong>Sample code</strong></p>
 <p><details class="tab-container" open>
-<Summary>Init bulk request module</Summary></p>
+<Summary>Init Record Cursor module</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-  // with connection
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
+    (function(kintoneJSSDK) {
+        'use strict';
+        const kintoneConnection = kintoneJSSDK.Connection;
+        const kintoneRecordCursorModule = kintoneJSSDK.RecordCursor;
+
+        // Init Connection
+        const conn = new kintoneConnection();
+
+        // Init RecordCursor module
+        const kintoneRC = new kintoneRecordCursorModule(conn)
+
+        //...
+    }(window.kintoneJSSDK));
 
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
 
-  const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneBulkRequest = new kintone.BulkRequest(connection);
+    const kintone = require('@kintone/kintone-js-sdk');
+
+    const username = 'YOUR_USERNAME';
+    const password = 'YOUR_PASSWORD';
+    const domain = 'YOUR_DOMAIN';
+    const appID = YOUR_APP_ID;
+
+    const kintoneAuth = (new kintone.Auth()).setPasswordAuth(username, password);
+    const kintoneConn = new kintone.Connection(domain, kintoneAuth);
+
+    const kintoneRC = new kintone.RecordCursor(kintoneConn);
 
 </pre>
 
 <p></details></p>
 <h2 id="methods">Methods</h2>
+<h3 id="createcursoroption">createCursor(option)</h3>
 <blockquote>
-<p>All below methods (excluded <code>execute()</code> method) will add request to queue, you must execute the <code>execute()</code> function to get result of BulkRequest.</p>
-</blockquote>
-<h3 id="addrecordapp-record">addRecord(app, record)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#addrecordapp-record">Record - addRecord</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="addrecordsapp-records">addRecords(app, records)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#addrecordsapp-records">Record - addRecords</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="updaterecordbyidapp-id-record-revision">updateRecordByID(app, id, record, revision)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#updaterecordbyidapp-id-record-revision">Record - updateRecordByID</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="updaterecordbyupdatekeyapp-updatekey-record-revision">updateRecordByUpdateKey(app, updateKey, record, revision)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#updaterecordbyupdatekeyapp-updatekey-record-revision">Record - updateRecordByUpdateKey</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="updaterecordsapp-records">updateRecords(app, records)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#updaterecordsapp-records">Record - updateRecords</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="deleterecordsapp-ids">deleteRecords(app, ids)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#deleterecordsapp-ids">Record - deleteRecords</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="deleterecordswithrevisionapp-idswithrevision">deleteRecordsWithRevision(app, idsWithRevision)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#deleterecordswithrevisionapp-idswithrevision">Record - deleteRecordsWithRevision</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="updaterecordassigneesapp-record-assignees-revision">updateRecordAssignees(app, record, assignees, revision)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#updaterecordassigneesapp-id-assignees-revision">Record - updateRecordAssignees</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="updaterecordstatusapp-id-action-assignee-revision">updateRecordStatus(app, id, action, assignee, revision)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#updaterecordstatusapp-id-action-assignee-revision">Record - updateRecordStatus</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="updaterecordsstatusapp-records">updateRecordsStatus(app, records)</h3>
-<p><strong>Parameter</strong></p>
-<p>See at <a href="../record#updaterecordsstatusapp-records">Record - updateRecordsStatus</a></p>
-<p><strong>Return</strong></p>
-<p><a href="#bulkrequest">BulkRequest</a></p>
-<h3 id="execute">execute()</h3>
-<blockquote>
-<p>Execute the bulk request and get data response</p>
+<p>Create a cursor.</p>
 </blockquote>
 <p><strong>Parameter</strong></p>
-<p>(none)</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>option</td>
+<td>Object</td>
+<td>yes</td>
+<td>Cursor option</td>
+</tr>
+<tr>
+<td>option.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>option.fields</td>
+<td>Array&lt;String></td>
+<td>(optional)</td>
+<td>List of field codes you want in the response.</td>
+</tr>
+<tr>
+<td>option.query</td>
+<td>String</td>
+<td>(optional)</td>
+<td><a href="https://developer.kintone.io/hc/en-us/articles/213149287#getrecords">The query string</a> that will specify what records will be responded.</td>
+</tr>
+<tr>
+<td>option.size</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>Number of records to retrieve per request. <br> Default: 100. <br>Maximum: 500.</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Return</strong></p>
-<p>[Promise]</p>
+<p>Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone. </p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>The cursor ID</td>
+</tr>
+<tr>
+<td>totalCount</td>
+<td>Integer</td>
+<td>The total count of records that match the query conditions</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Sample code</strong></p>
 <p><details class="tab-container" open>
-<Summary>Execute bulk request</Summary></p>
+<Summary>Init Record Cursor module</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
 
-  var responseBulkRequest = kintoneBulkRequest
-    .addRecord(/*[Args]*/)
-    .addRecords(/*[Args]*/)
-    .updateRecords(/*[Args]*/)
-    .deleteRecords()
-    .execute();
+    (function(kintoneJSSDK) {
+        'use strict';
+        const kintoneConnection = kintoneJSSDK.Connection;
+        const kintoneRecordCursorModule = kintoneJSSDK.RecordCursor;
 
-  responseBulkRequest.then((resp) => {
-    console.log(resp);
-  }).catch((err) => {
-    // write error to console
-    console.log(err.get());
-    // Throw error
-    err.throw();
-  });
+        // Init Connection
+        const conn = new kintoneConnection();
+
+        // Init RecordCursor module
+        const kintoneRC = new kintoneRecordCursorModule(conn)
+
+        const rcOption = {
+            app: appID,
+            fields: [],
+            query: '',
+            size: 2
+        }
+
+        kintoneRC.createCursor(rcOption)
+            .then(function(creatCursorResponse){
+                myCursor = creatCursorResponse;
+                console.log('Cursor ID: ' + myCursor.id );
+                console.log('Total Count: ' + myCursor.totalCount );
+            })
+    }(window.kintoneJSSDK));
 
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
 
-  const responseBulkRequest = kintoneBulkRequest
-    .addRecord(/* [Args]*/)
-    .addRecords(/* [Args]*/)
-    .updateRecords(/* [Args]*/)
-    .deleteRecords()
-    .execute();
+    const kintone = require('@kintone/kintone-js-sdk');
 
-  responseBulkRequest.then((resp) => {
-    console.log(resp);
-  }).catch((err) => {
-    // write error to console
-    console.log(err.get());
-    // Throw error
-    err.throw();
-  });
+    const username = 'YOUR_USERNAME';
+    const password = 'YOUR_PASSWORD';
+    const domain = 'YOUR_DOMAIN';
+    const appID = YOUR_APP_ID;
+
+    const kintoneAuth = (new kintone.Auth()).setPasswordAuth(username, password);
+    const kintoneConn = new kintone.Connection(domain, kintoneAuth);
+
+    const kintoneRC = new kintone.RecordCursor(kintoneConn);
+
+    const rcOption = {
+        app: appID,
+        fields: [],
+        query: '',
+        size: 2
+    }
+
+    kintoneRC.createCursor(rcOption)
+        .then(function(creatCursorResponse){
+            myCursor = creatCursorResponse;
+            console.log('Cursor ID: ' + myCursor.id );
+            console.log('Total Count: ' + myCursor.totalCount );
+        })
 
 </pre>
 
 <p></details></p>
-<h2 id="reference">Reference</h2>
-<ul>
-<li><a href="https://developer.kintone.io/hc/en-us/articles/213149287/">Get Record</a> <code>on developer network</code></li>
-</ul>
+<h3 id="getrecordscursorid">getRecords(cursorID)</h3>
+<blockquote>
+<p>Get one block of records.</p>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cursorID</td>
+<td>String</td>
+<td>yes</td>
+<td>Cursor ID</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise&lt;GetRecordCursorResponse&gt;</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>records</td>
+<td>Array</td>
+<td>The array of records data</td>
+</tr>
+<tr>
+<td>next</td>
+<td>Boolean</td>
+<td>Show if there's more records to get from kintone for cursor.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Get Records Once</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+    kintoneRC.getRecords(myCursor.id)
+        .then(function(getRecordsResponse){
+            console.log('RecordCursor result: ');
+            console.log(getRecordsResponse);
+        })
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+    kintoneRC.getRecords(myCursor.id)
+        .then((getRecordsResponse) => {
+            console.log('RecordCursor result: ');
+            console.log(getRecordsResponse);
+        })
+
+</pre>
+
+<p></details></p>
+<h3 id="getallrecordscursorid">getAllRecords(cursorID)</h3>
+<blockquote>
+<p>Get all records </p>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cursorID</td>
+<td>String</td>
+<td>yes</td>
+<td>Cursor ID</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise&lt;GetRecordsResponse&gt;</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>records</td>
+<td>Array</td>
+<td>The array of records data</td>
+</tr>
+<tr>
+<td>totalCount</td>
+<td>Integer</td>
+<td>The number of records response.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Get All Records</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+    kintoneRC.getAllRecords(myCursor.id)
+        .then(function(getAllRecordsResponse){
+            console.log('RecordCursor result: ');
+            console.log(getAllRecordsResponse);
+        })
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+    kintoneRC.getAllRecords(myCursor.id)
+        .then((getAllRecordsResponse) => {
+            console.log('RecordCursor result: ');
+            console.log(getAllRecordsResponse);
+        })
+
+</pre>
+
+<p></details></p>
+<h3 id="deletecursorcursorid">deleteCursor(cursorID)</h3>
+<blockquote>
+<p>Delete a cursor</p>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cursorID</td>
+<td>String</td>
+<td>yes</td>
+<td>Cursor ID</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>None</p>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Delete Cursor</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+
+    kintoneRC.deleteCursor(myCursor.id)
+        .then(function(){
+            console.log('Cursor Deleted');
+        })
+        .catch(function(error){
+            console.log('Delete cursor fail');
+            console.log(error)
+        })
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+    kintoneRC.deleteCursor(myCursor.id)
+        .then(function(){
+            console.log('Cursor Deleted');
+        })
+        .catch(function(error){
+            console.log('Delete cursor fail');
+            console.log(error)
+        })
+
+</pre>
+
+<p></details></p>
                 
                   
                 
@@ -935,7 +1018,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../record-cursor/" title="Record Cursor" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../record/" title="Record" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -944,19 +1027,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Record Cursor
+                Record
               </span>
             </div>
           </a>
         
         
-          <a href="../app/" title="App" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../bulk-request/" title="Bulk Request" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                App
+                Bulk Request
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -423,6 +423,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getallrecordsbycursoroption" title="getAllRecordsByCursor(option)" class="md-nav__link">
+    getAllRecordsByCursor(option)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#addrecordapp-record" title="addRecord(app, record)" class="md-nav__link">
     addRecord(app, record)
   </a>
@@ -577,6 +584,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../record-cursor/" title="Record Cursor" class="md-nav__link">
+      Record Cursor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../bulk-request/" title="Bulk Request" class="md-nav__link">
       Bulk Request
     </a>
@@ -676,6 +695,13 @@
           <li class="md-nav__item">
   <a href="#getallrecordsbyqueryapp-query-fields-totalcount" title="getAllRecordsByQuery(app, query, fields, totalCount)" class="md-nav__link">
     getAllRecordsByQuery(app, query, fields, totalCount)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getallrecordsbycursoroption" title="getAllRecordsByCursor(option)" class="md-nav__link">
+    getAllRecordsByCursor(option)
   </a>
   
 </li>
@@ -1110,6 +1136,98 @@
   ]
   const totalCount = '{your_decide_true_or_false}';
   kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err.get());
+  });
+
+</pre>
+
+<p></details></p>
+<h3 id="getallrecordsbycursoroption">getAllRecordsByCursor(option)</h3>
+<blockquote>
+<ul>
+<li>Retrieves details of all records from an app using a query string.</li>
+<li>Can't indicate limit and offset of query.</li>
+<li>Number of records can be retrieved at once is greater than the default limitations</li>
+</ul>
+</blockquote>
+<p><strong>Parameter</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>option</td>
+<td>Object</td>
+<td>yes</td>
+<td>Option to create cursor</td>
+</tr>
+<tr>
+<td>option.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+<tr>
+<td>option.query</td>
+<td>String</td>
+<td>(optional)</td>
+<td><a href="https://developer.kintone.io/hc/en-us/articles/213149287#getrecords">The query string</a> that will specify what records will be responded.</td>
+</tr>
+<tr>
+<td>option.fields</td>
+<td>Array&lt;String></td>
+<td>(optional)</td>
+<td>List of field codes you want in the response.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<p><details class="tab-container" open>
+<Summary>Get all records by cursor</Summary></p>
+<p><strong class="tab-name">Javascript</strong></p>
+<pre class="inline-code">
+  var rcOption = {
+    app: {your_app_id},
+    fields: [
+      '{your_field_code}',
+      // another fieldCode
+    ],
+    query: '{your_query_string}'
+  };
+
+  kintoneRecord.getAllRecordsByCursor(rcOption).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err.get());
+  });
+
+</pre>
+
+<p><strong class="tab-name">Nodejs</strong></p>
+<pre class="inline-code">
+
+  const rcOption = {
+    app: {your_app_id},
+    fields: [
+      '{your_field_code}',
+      // another fieldCode
+    ],
+    query: '{your_query_string}'
+  };
+
+  kintoneRecord.getAllRecordsByCursor(rcOption).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
@@ -3025,13 +3143,13 @@ Insert the records if the updateKey doesn't exists and update the records if the
           </a>
         
         
-          <a href="../bulk-request/" title="Bulk Request" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../record-cursor/" title="Record Cursor" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Bulk Request
+                Record Cursor
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
