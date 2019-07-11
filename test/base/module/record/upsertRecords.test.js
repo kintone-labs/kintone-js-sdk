@@ -53,13 +53,11 @@ describe('upsertRecords function', () => {
         };
         recordsForPut.push(recordForPut);
         recordsForPost.push({
-          record: {
-            Text_0: {
-              value: 'add' + index
-            },
-            Text_1: {
-              value: index
-            }
+          Text_0: {
+            value: 'add' + index
+          },
+          Text_1: {
+            value: index
           }
         });
         resultsForPut.push({
@@ -76,22 +74,6 @@ describe('upsertRecords function', () => {
         const end = start + API_ROUTE.UPDATE_RECORDS_LIMIT;
         expectBodys.requests.push({
           'api': API_ROUTE.RECORDS,
-          'method': 'PUT',
-          'payload': {
-            'app': appID,
-            'records': recordsForPut.slice(start, end)
-          }
-        });
-        expectResults.results.push({
-          'records': resultsForPut.slice(start, end)
-        });
-      }
-
-      for (let index = 0; index < Math.ceil(recordsDataLenght / API_ROUTE.UPDATE_RECORDS_LIMIT); index++) {
-        const start = index * API_ROUTE.UPDATE_RECORDS_LIMIT;
-        const end = start + API_ROUTE.UPDATE_RECORDS_LIMIT;
-        expectBodys.requests.push({
-          'api': API_ROUTE.RECORDS,
           'method': 'POST',
           'payload': {
             'app': appID,
@@ -103,8 +85,23 @@ describe('upsertRecords function', () => {
           'revisions': resultsForPost.revisions.slice(start, end)
         });
       }
+      for (let index = 0; index < Math.ceil(recordsDataLenght / API_ROUTE.UPDATE_RECORDS_LIMIT); index++) {
+        const start = index * API_ROUTE.UPDATE_RECORDS_LIMIT;
+        const end = start + API_ROUTE.UPDATE_RECORDS_LIMIT;
+        expectBodys.requests.push({
+          'api': API_ROUTE.RECORDS,
+          'method': 'PUT',
+          'payload': {
+            'app': appID,
+            'records': recordsForPut.slice(start, end)
+          }
+        });
+        expectResults.results.push({
+          'records': resultsForPut.slice(start, end)
+        });
+      }
       const recordsForGet = [];
-      for (let index = 0; index < 500; index++) {
+      for (let index = 0; index < 499; index++) {
         const record = {
           record_id: {
             type: 'RECORD_NUMBER',
@@ -122,19 +119,16 @@ describe('upsertRecords function', () => {
         recordsForGet.push(record);
       }
       const body = {
-        app: appID,
-        totalCount: false,
+        app: appID
       };
 
       const expectResponsePerRequest = [{'records': recordsForGet}];
 
       let expectURL1 = `${API_ROUTE.RECORDS}?app=${body.app}`;
       expectURL1 += `&query=${encodeURIComponent(`limit ${API_ROUTE.GET_RECORDS_LIMIT} offset 0`)}`;
-      expectURL1 += `&totalCount=${body.totalCount}`;
 
       let expectURL2 = `${API_ROUTE.BULK_REQUEST}?app=${body.app}`;
       expectURL2 += `&query=${encodeURIComponent(`limit ${API_ROUTE.GET_RECORDS_LIMIT} offset 0`)}`;
-      expectURL2 += `&totalCount=${body.totalCount}`;
       nock(URI)
         .get(expectURL1)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -142,8 +136,6 @@ describe('upsertRecords function', () => {
           return true;
         })
         .reply(200, expectResponsePerRequest[0])
-
-      nock(URI)
         .post(expectURL2, (rqBody) => {
           expect(rqBody).toEqual(expectBodys);
           return true;
@@ -157,11 +149,15 @@ describe('upsertRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
+
       const upsertRecordsResult = recordModule.upsertRecords(appID, recordsWithUpd8Key).then((resp) => {
-        expect(upsertRecordsResult).toHaveProperty('then');
-        expect(upsertRecordsResult).toHaveProperty('catch');
         expect(resp).toEqual(expectResults);
+      }).catch((err) => {
+        throw new Error(err.results[0].errorRaw.message);
       });
+      expect(upsertRecordsResult).toHaveProperty('then');
+      expect(upsertRecordsResult).toHaveProperty('catch');
+      return upsertRecordsResult;
     });
   });
 

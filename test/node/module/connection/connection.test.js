@@ -20,6 +20,10 @@ describe('Connection module', () => {
       expect(conn.setProxy(common.PROXY_HOST, common.PROXY_PORT)).toBeInstanceOf(Connection);
     });
 
+    it('Should return a connection when "setProxy" function is called with proxy auth', () => {
+      expect(conn.setProxy(common.PROXY_HOST, common.PROXY_PORT, common.PROXY_AUTH_USER, common.PROXY_AUTH_PASS)).toBeInstanceOf(Connection);
+    });
+
     it('Should return a connection when "setHeader" function is called', () => {
       expect(conn.setHeader('json', true)).toBeInstanceOf(Connection);
     });
@@ -66,6 +70,45 @@ describe('Connection module', () => {
         expect(err.config.headers['User-Agent']).toEqual(expectProxy);
       });
     });
+
+    it(`Should have valid user-agent when using proxy auth`, () => {
+      nock(URI)
+        .get(`API_ROUTE.RECORD_GET?app=1`)
+        .reply(400, {});
+
+      conn.setProxy(common.PROXY_HOST, common.PROXY_PORT, common.PROXY_AUTH_USER, common.PROXY_AUTH_PASS);
+      const response = conn.request('GET', 'API_ROUTE.RECORD_GET', {app: 1});
+      const expectProxy = API_ROUTE.USER_AGENT;
+      return response.catch((err) => {
+        expect(err.config.headers['User-Agent']).toEqual(expectProxy);
+      });
+    });
+
+    it(`Should have valid user-agent for https proxy`, () => {
+      nock(URI)
+        .get(`API_ROUTE.RECORD_GET?app=1`)
+        .reply(400, {});
+
+      conn.setHttpsProxy(common.PROXY_HOST, common.PROXY_PORT);
+      const response = conn.request('GET', 'API_ROUTE.RECORD_GET_TEST', {app: 1});
+      const expectProxy = API_ROUTE.USER_AGENT;
+      return response.catch((err) => {
+        expect(err.config.headers['User-Agent']).toEqual(expectProxy);
+      });
+    });
+
+    it(`Should have valid user-agent for https proxy with auth`, () => {
+      nock(URI)
+        .get(`API_ROUTE.RECORD_GET?app=1`)
+        .reply(400, {});
+
+      conn.setHttpsProxy(common.PROXY_HOST, common.PROXY_PORT, common.PROXY_AUTH_USER, common.PROXY_AUTH_PASS);
+      const response = conn.request('GET', 'API_ROUTE.RECORD_GET_TEST', {app: 1});
+      const expectProxy = API_ROUTE.USER_AGENT;
+      return response.catch((err) => {
+        expect(err.config.headers['User-Agent']).toEqual(expectProxy);
+      });
+    });
   });
 
   describe('setProxy function - Valid request', () => {
@@ -79,6 +122,22 @@ describe('Connection module', () => {
       const expectProxy = {
         host: common.PROXY_HOST,
         port: common.PROXY_PORT
+      };
+      return response.catch((err) => {
+        expect(err.config.httpsAgent.options.proxy).toMatchObject(expectProxy);
+      });
+    });
+    it(`[setProxy-1.1] Set proxy to request when using setProxy function with proxy auth`, () => {
+      nock(URI)
+        .get(`API_ROUTE.RECORD_GET?app=1`)
+        .reply(400, {});
+
+      conn.setProxy(common.PROXY_HOST, common.PROXY_PORT, common.PROXY_AUTH_USER, common.PROXY_AUTH_PASS);
+      const response = conn.request('GET', 'API_ROUTE.RECORD_GET_TEST', {app: 1});
+      const expectProxy = {
+        host: common.PROXY_HOST,
+        port: common.PROXY_PORT,
+        proxyAuth: `${common.PROXY_AUTH_USER}:${common.PROXY_AUTH_PASS}`
       };
       return response.catch((err) => {
         expect(err.config.httpsAgent.options.proxy).toMatchObject(expectProxy);
