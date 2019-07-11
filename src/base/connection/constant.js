@@ -55,7 +55,6 @@ const constant = function() {
       SPACE_TEMPLATE: 'template/space',
       SPACE_THREAD: 'space/thread',
       SPACE_THREAD_COMMENT: 'space/thread/comment',
-      RECORD_CURSOR: 'records/cursor'
     },
   };
 };

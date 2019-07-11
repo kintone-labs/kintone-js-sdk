@@ -1,8 +1,6 @@
-/* eslint-disable no-async-promise-executor, require-atomic-updates */
 const Connection = require('../../connection/Connection');
 const RecordModel = require('../../model/record/RecordModels');
 const BulkRequest = require('../../module/bulkRequest/BulkRequest');
-const RecordCursor = require('../../module/cursor/RecordCursor');
 const common = require('../../utils/Common');
 
 const LIMIT_UPDATE_RECORD = 100;
@@ -11,8 +9,6 @@ const LIMIT_DELETE_RECORD = 100;
 const NUM_BULK_REQUEST = 20;
 const LIMIT_RECORD = 500;
 const LIMIT_UPSERT_RECORD = 1500;
-
-const DEFAULT_CURSOR_SIZE = 500;
 
 /**
  * Record module
@@ -61,26 +57,6 @@ class Record {
   getRecords(app, query, fields, totalCount) {
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, query, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest);
-  }
-
-  getAllRecordsByCursor({app, query, fields}) {
-    const kintoneRC = new RecordCursor(this.connection);
-    let myCursor;
-    return kintoneRC.createCursor({app, fields, query, DEFAULT_CURSOR_SIZE})
-      .then((creatCursorResponse)=>{
-        myCursor = creatCursorResponse;
-        return kintoneRC.getAllRecords(myCursor.id);
-      })
-      .then((allRecords)=>{
-        if (allRecords.totalCount < myCursor.totalCount) {
-          kintoneRC.deleteCursor(myCursor.id);
-        }
-        return allRecords;
-      })
-      .catch((err)=>{
-        kintoneRC.deleteCursor(myCursor.id);
-        throw err;
-      });
   }
 
   /**
