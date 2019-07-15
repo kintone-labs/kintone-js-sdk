@@ -3,7 +3,8 @@ import {File} from './module/file/File';
 import {App} from './module/app/App';
 import {Record} from './module/record/Record';
 import {BulkRequest} from './module/bulkRequest/BulkRequest';
-import {Auth, KintoneAPIException, RecordCursor} from '../base/main';
+import {RecordCursor} from './module/cursor/RecordCursor';
+import {Auth, KintoneAPIException} from '../base/main';
 
 window.kintoneJSSDK = {
   Auth,
