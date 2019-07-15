@@ -170,7 +170,7 @@ Promise&lt;GetRecordCursorResponse&gt;
 | Name| Type| Description |
 | --- | --- | --- |
 | records | Array | The array of records data
-| next | Boolean | Show if there's more records to get from kintone for cursor.
+| next | Boolean | Show states whether there are more records to get from kintone of cursor.
 
 **Sample code**
 
