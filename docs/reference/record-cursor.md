@@ -111,7 +111,7 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
             
         kintoneRC.createCursor(rcOption)
             .then(function(creatCursorResponse){
-                myCursor = creatCursorResponse;
+                const myCursor = creatCursorResponse;
                 console.log('Cursor ID: ' + myCursor.id );
                 console.log('Total Count: ' + myCursor.totalCount );
             })
@@ -144,7 +144,7 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
 
     kintoneRC.createCursor(rcOption)
         .then(function(creatCursorResponse){
-            myCursor = creatCursorResponse;
+            const myCursor = creatCursorResponse;
             console.log('Cursor ID: ' + myCursor.id );
             console.log('Total Count: ' + myCursor.totalCount );
         })
