@@ -155,7 +155,9 @@
 
 ### setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
 
-> Set proxy for the connection module
+> Set proxy for the connection module. <br>
+> This function is available on node.js environment only. <br>
+> On Browser environment, proxy settings are controlled by the Browser.
 
 **Parameter**
 
@@ -174,18 +176,6 @@
 
 <details class="tab-container" open>
 <Summary>Set proxy for the Connection</Summary>
-
-<strong class="tab-name">Javascript</strong>
-
-<pre class="inline-code">
-
-    var proxyHost = '{your_proxy_host}';
-    var proxyPort = '{your_proxy_post}';
-    var proxyUsername = '{your_proxy_user}';
-    var proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
-
-</pre>
 
 <strong class="tab-name">Nodejs</strong>
 
@@ -203,7 +193,9 @@
 
 ### setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
 
-> Set SSL-secured proxy for the connection module
+> Set SSL-secured proxy for the connection module. <br> 
+> This function is available on node.js environment only. <br>
+> On Browser environment, proxy settings are controlled by the Browser.
 
 **Parameter**
 
@@ -222,18 +214,6 @@
 
 <details class="tab-container" open>
 <Summary>Set proxy for the Connection</Summary>
-
-<strong class="tab-name">Javascript</strong>
-
-<pre class="inline-code">
-
-    var proxyHost = '{your_proxy_host}';
-    var proxyPort = '{your_proxy_post}';
-    var proxyUsername = '{your_proxy_user}';
-    var proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
-
-</pre>
 
 <strong class="tab-name">Nodejs</strong>
 
