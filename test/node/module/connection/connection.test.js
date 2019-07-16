@@ -53,9 +53,11 @@ describe('Connection module', () => {
       nock(URI)
         .get('/page-not-found')
         .reply(400, {});
-      const rsp = conn.request('GET', '/page-not-found');
-      expect(rsp).toHaveProperty('then');
-      expect(rsp).toHaveProperty('catch');
+      const rsp = conn.request('GET', '/page-not-found').catch(()=>{
+        expect(rsp).toHaveProperty('then');
+        expect(rsp).toHaveProperty('catch');
+      });
+      return rsp;
     });
 
     it(`Should have valid user-agent`, () => {
