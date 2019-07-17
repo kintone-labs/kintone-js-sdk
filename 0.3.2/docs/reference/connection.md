@@ -1,8 +1,8 @@
 # Connection
 
-[Connection](#) module is used to connect to kintone Rest API
+[Connection](#) module will used as a connector to connect to kintone Rest API
 
-> This module execute requests using [axios](https://www.npmjs.com/package/axios)
+> This module excute the request process by [axios](https://www.npmjs.com/package/axios) npm.
 
 ## Constructor
 
@@ -153,11 +153,9 @@
 
 </details>
 
-### setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
+### setProxy(proxyHost, proxyPort)
 
-> Set proxy for the connection module. <br>
-> This function is available on node.js environment only. <br>
-> On Browser environment, proxy settings are controlled by the Browser.
+> Set the proxy for the [axios](https://www.npmjs.com/package/axios) option
 
 **Parameter**
 
@@ -165,8 +163,6 @@
 | --- | --- | --- | --- |
 | proxyHost | String | yes | The proxy host name
 | proxyPort | String | yes | The proxy port number
-| proxyUsername | String | optional | The username for proxy authentication. This parameter is required when proxy has authentication.
-| proxyPassword | String | optional | The proxy port number. This parameter is required when proxy has authentication.
 
 **Return**
 
@@ -177,53 +173,23 @@
 <details class="tab-container" open>
 <Summary>Set proxy for the Connection</Summary>
 
-<strong class="tab-name">Nodejs</strong>
+<strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
-    const proxyHost = '{your_proxy_host}';
-    const proxyPort = '{your_proxy_post}';
-    const proxyUsername = '{your_proxy_user}';
-    const proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
-    
+    var proxyHost = '{your_proxy_host}';
+    var proxyPort = '{your_proxy_post}';
+    kintoneConnection.setProxy(proxyHost, proxyPort);
+
 </pre>
 
-</details>
-
-### setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
-
-> Set SSL-secured proxy for the connection module. <br> 
-> This function is available on node.js environment only. <br>
-> On Browser environment, proxy settings are controlled by the Browser.
-
-**Parameter**
-
-| Name| Type| Required| Description |
-| --- | --- | --- | --- |
-| proxyHost | String | yes | The proxy host name
-| proxyPort | String | yes | The proxy port number
-| proxyUsername | String | optional | The username for proxy authentication. This parameter is required when proxy has authentication.
-| proxyPassword | String | optional | The proxy port number. This parameter is required when proxy has authentication.
-
-**Return**
-
-[Connection](./#)
-
-**Sample code**
-
-<details class="tab-container" open>
-<Summary>Set proxy for the Connection</Summary>
-
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
 
     const proxyHost = '{your_proxy_host}';
     const proxyPort = '{your_proxy_post}';
-    const proxyUsername = '{your_proxy_user}';
-    const proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
+    kintoneConnection.setProxy(proxyHost, proxyPort);
     
 </pre>
 

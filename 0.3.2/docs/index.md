@@ -9,7 +9,6 @@
 - [Authentication](./reference/authentication)
 - [Connection](./reference/connection)
 - [Record](./reference/record)
-- [RecordCursor](./reference/record-cursor)
 - [BulkRequest](./reference/bulk-request)
 - [App](./reference/app)
 - [File](./reference/file)
