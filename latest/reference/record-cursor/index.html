@@ -757,7 +757,7 @@
 
         kintoneRC.createCursor(rcOption)
             .then(function(creatCursorResponse){
-                myCursor = creatCursorResponse;
+                const myCursor = creatCursorResponse;
                 console.log('Cursor ID: ' + myCursor.id );
                 console.log('Total Count: ' + myCursor.totalCount );
             })
@@ -789,7 +789,7 @@
 
     kintoneRC.createCursor(rcOption)
         .then(function(creatCursorResponse){
-            myCursor = creatCursorResponse;
+            const myCursor = creatCursorResponse;
             console.log('Cursor ID: ' + myCursor.id );
             console.log('Total Count: ' + myCursor.totalCount );
         })
@@ -839,7 +839,7 @@
 <tr>
 <td>next</td>
 <td>Boolean</td>
-<td>Show if there's more records to get from kintone for cursor.</td>
+<td>Show states whether there are more records to get from kintone of cursor.</td>
 </tr>
 </tbody>
 </table>
