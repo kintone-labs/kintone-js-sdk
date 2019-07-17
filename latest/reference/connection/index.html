@@ -410,13 +410,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#sethttpsproxyproxyhost-proxyport-proxyusername-proxypassword" title="setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
-    setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -562,13 +555,6 @@
           <li class="md-nav__item">
   <a href="#setproxyproxyhost-proxyport-proxyusername-proxypassword" title="setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
     setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sethttpsproxyproxyhost-proxyport-proxyusername-proxypassword" title="setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
-    setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
   </a>
   
 </li>
@@ -845,66 +831,6 @@ On Browser environment, proxy settings are controlled by the Browser.</p>
     const proxyUsername = '{your_proxy_user}';
     const proxyPassword = '{your_proxy_password}';
     kintoneConnection.setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
-
-</pre>
-
-<p></details></p>
-<h3 id="sethttpsproxyproxyhost-proxyport-proxyusername-proxypassword">setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)</h3>
-<blockquote>
-<p>Set SSL-secured proxy for the connection module. <br> 
-This function is available on node.js environment only. <br>
-On Browser environment, proxy settings are controlled by the Browser.</p>
-</blockquote>
-<p><strong>Parameter</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>proxyHost</td>
-<td>String</td>
-<td>yes</td>
-<td>The proxy host name</td>
-</tr>
-<tr>
-<td>proxyPort</td>
-<td>String</td>
-<td>yes</td>
-<td>The proxy port number</td>
-</tr>
-<tr>
-<td>proxyUsername</td>
-<td>String</td>
-<td>optional</td>
-<td>The username for proxy authentication. This parameter is required when proxy has authentication.</td>
-</tr>
-<tr>
-<td>proxyPassword</td>
-<td>String</td>
-<td>optional</td>
-<td>The proxy port number. This parameter is required when proxy has authentication.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Return</strong></p>
-<p><a href="./#">Connection</a></p>
-<p><strong>Sample code</strong></p>
-<p><details class="tab-container" open>
-<Summary>Set proxy for the Connection</Summary></p>
-<p><strong class="tab-name">Nodejs</strong></p>
-<pre class="inline-code">
-
-    const proxyHost = '{your_proxy_host}';
-    const proxyPort = '{your_proxy_post}';
-    const proxyUsername = '{your_proxy_user}';
-    const proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
 
 </pre>
 
