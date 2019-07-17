@@ -11,4 +11,5 @@ module.exports = {
   Auth: require('./authentication/Auth'),
   File: require('./module/file/File'),
   KintoneAPIException: require('./exception/KintoneAPIException'),
+  RecordCursor: require('./module/cursor/RecordCursor')
 };
