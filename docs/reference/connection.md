@@ -190,3 +190,41 @@
 </pre>
 
 </details>
+
+### setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
+
+> Set SSL-secured proxy for the connection module. <br> 
+> This function is available on node.js environment only. <br>
+> On Browser environment, proxy settings are controlled by the Browser.
+
+**Parameter**
+
+| Name| Type| Required| Description |
+| --- | --- | --- | --- |
+| proxyHost | String | yes | The proxy host name
+| proxyPort | String | yes | The proxy port number
+| proxyUsername | String | optional | The username for proxy authentication. This parameter is required when proxy has authentication.
+| proxyPassword | String | optional | The proxy port number. This parameter is required when proxy has authentication.
+
+**Return**
+
+[Connection](./#)
+
+**Sample code**
+
+<details class="tab-container" open>
+<Summary>Set proxy for the Connection</Summary>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    const proxyHost = '{your_proxy_host}';
+    const proxyPort = '{your_proxy_post}';
+    const proxyUsername = '{your_proxy_user}';
+    const proxyPassword = '{your_proxy_password}';
+    kintoneConnection.setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
+    
+</pre>
+
+</details>
