@@ -12,13 +12,15 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 const filePath = './test/node/module/authenticate/mock/test.pfx';
 const pfxFile = fs.readFileSync(filePath);
 const certPass = 'test';
+const paramPasswordAuth = {username: common.USERNAME, password: common.PASSWORD};
+const paramClientCertByPath = {filePath: filePath, password: certPass};
 
 describe('Connection module', () => {
   describe('success case', () => {
     it(`[setClientCertByPath-9] 'Verify that connect succesfully by certificate path`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCertByPath(filePath, certPass);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
       const appModule = new App(conn);
 
@@ -65,8 +67,8 @@ describe('Connection module', () => {
     });
     it(`[setClientCertByPath-10] Verify that connect succesfully by certificate path with proxy http`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCertByPath(filePath, certPass);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
       conn.setProxy(common.PROXY_HOST, common.PROXY_PORT);
       const appModule = new App(conn);
@@ -117,8 +119,8 @@ describe('Connection module', () => {
   describe('error case', () => {
     it(`[setClientCertByPath-12] Verify that the error will be displayed when use certificate data for wrong user`, () => {
       const auth = new Auth()
-        .setPasswordAuth('wrong_user', common.PASSWORD)
-        .setClientCertByPath(filePath, certPass);
+        .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
+        .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
       const appModule = new App(conn);
 
@@ -138,8 +140,8 @@ describe('Connection module', () => {
 
     it(`[setClientCertByPath-13] Verify that the error will be displayed when use wrong password`, () => {
       const auth = new Auth()
-        .setPasswordAuth('wrong_user', common.PASSWORD)
-        .setClientCertByPath(filePath, 'wrong_password');
+        .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
+        .setClientCertByPath({filePath: filePath, password: 'wrong_password'});
       const conn = new Connection(common.DOMAIN, auth);
       const appModule = new App(conn);
 
@@ -158,8 +160,8 @@ describe('Connection module', () => {
 
     it(`[setClientCertByPath-14] 'Verify that the error will be displayed when use invalid certificate path`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCertByPath(filePath, certPass);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
       const appModule = new App(conn);
 
@@ -180,15 +182,15 @@ describe('Connection module', () => {
       const errors = `File path is not valid`;
       const authInfo = () => {
         const auth = new Auth();
-        auth.setClientCertByPath(undefined, certPass);
+        auth.setClientCertByPath({filePath: undefined, password: certPass});
       };
       expect(authInfo).toThrow(errors);
     });
 
     it(`[setClientCertByPath-16] 'Verify that the error will be displayed when using method without password`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCertByPath(filePath);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCertByPath({filePath: filePath});
       const conn = new Connection(common.DOMAIN, auth);
       const file = new File(conn);
 
