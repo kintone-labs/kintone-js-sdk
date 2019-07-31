@@ -15,13 +15,14 @@ const FILE_RESPONSE_TYPE_VALUE = 'arraybuffer';
 
 class Connection extends BaseConnection {
   /**
-     * @param {String} domain
-     * @param {Auth} auth
-     * @param {Number} guestSpaceID
+     * @param {Object} connectionData
+     * @param {String} connectionData.domain
+     * @param {Auth} connectionData.auth
+     * @param {Number} connectionData.guestSpaceID
      */
 
-  constructor(domain, auth, guestSpaceID) {
-    super(domain, auth, guestSpaceID);
+  constructor({domain, auth, guestSpaceID}) {
+    super({domain, auth, guestSpaceID});
     this.setClientCert();
   }
 
@@ -44,13 +45,14 @@ class Connection extends BaseConnection {
 
   /**
    * Set http proxy for request
-   * @param {String} proxyHost
-   * @param {String} proxyPort
-   * @param {String} proxyUsername
-   * @param {String} proxyPassword
+   * @param {Object} proxyData
+   * @param {String} proxyData.proxyHost
+   * @param {String} proxyData.proxyPort
+   * @param {String} proxyData.proxyUsername
+   * @param {String} proxyData.proxyPassword
    * @return {this}
    */
-  setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword) {
+  setProxy({proxyHost, proxyPort, proxyUsername, proxyPassword}) {
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -62,19 +64,20 @@ class Connection extends BaseConnection {
       option.passphrase = this.auth.getPassWordCert();
     }
     const httpsAgent = tunnel.httpsOverHttp(option);
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    this.addRequestOption({key: CONNECTION_CONST.BASE.HTTPS_AGENT, value: httpsAgent});
     return this;
   }
 
   /**
    * Set https proxy for request
-   * @param {String} proxyHost
-   * @param {String} proxyPort
-   * @param {String} proxyUsername
-   * @param {String} proxyPassword
+   * @param {Object} proxyData
+   * @param {String} proxyData.proxyHost
+   * @param {String} proxyData.proxyPort
+   * @param {String} proxyData.proxyUsername
+   * @param {String} proxyData.proxyPassword
    * @return {this}
    */
-  setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword) {
+  setHttpsProxy({proxyHost, proxyPort, proxyUsername, proxyPassword}) {
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -86,7 +89,7 @@ class Connection extends BaseConnection {
       option.passphrase = this.auth.getPassWordCert();
     }
     const httpsAgent = tunnel.httpsOverHttps(option);
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    this.addRequestOption({key: CONNECTION_CONST.BASE.HTTPS_AGENT, value: httpsAgent});
     return this;
   }
 

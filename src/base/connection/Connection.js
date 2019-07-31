@@ -13,11 +13,12 @@ const FILE_RESPONSE_TYPE_VALUE = 'blob';
  */
 class Connection {
   /**
-   * @param {String} domain
-   * @param {Auth} auth
-   * @param {Number} guestSpaceID
+   * @param {Object} connectionData
+   * @param {String} connectionData.domain
+   * @param {Auth} connectionData.auth
+   * @param {Number} connectionData.guestSpaceID
    */
-  constructor(domain, auth, guestSpaceID) {
+  constructor({domain, auth, guestSpaceID}) {
     this.domain = domain;
     this.guestSpaceID = parseInt(guestSpaceID, 10);
 
@@ -25,16 +26,16 @@ class Connection {
     this.options = {};
 
     this.setAuth(auth);
-    this.addRequestOption(CONNECTION_CONST.BASE.PROXY, false);
+    this.addRequestOption({key: CONNECTION_CONST.BASE.PROXY, value: false});
     this.USER_AGENT = '';
 
     this.setHeader(
-      CONNECTION_CONST.BASE.USER_AGENT,
-      CONNECTION_CONST.BASE.USER_AGENT_BASE_VALUE
-        .replace('{name}',
-          packageFile.name || 'kintone-js-sdk')
-        .replace('{version}', packageFile.version || '(none)')
-    );
+      {key: CONNECTION_CONST.BASE.USER_AGENT,
+        value: CONNECTION_CONST.BASE.USER_AGENT_BASE_VALUE
+          .replace('{name}',
+            packageFile.name || 'kintone-js-sdk')
+          .replace('{version}', packageFile.version || '(none)')
+      });
   }
 
   /**
@@ -260,11 +261,12 @@ class Connection {
   }
   /**
    * Add option for request
-   * @param {String} key
-   * @param {*} value refer: https://www.npmjs.com/package/axios
+   * @param {Object} requestData
+   * @param {String} requestData.key
+   * @param {*} requestData.value refer: https://www.npmjs.com/package/axios
    * @return {this}
    */
-  addRequestOption(key, value) {
+  addRequestOption({key, value}) {
     this.options[key] = value;
     return this;
   }
@@ -274,11 +276,12 @@ class Connection {
   }
   /**
    * set header for request
-   * @param {String} key
-   * @param {String} value
+   * @param {Object} headerData
+   * @param {String} headerData.key
+   * @param {String} headerData.value
    * @return {this}
    */
-  setHeader(key, value) {
+  setHeader({key, value}) {
     this.headers.push(new HTTPHeader(key, value));
     return this;
   }
