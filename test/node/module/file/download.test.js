@@ -12,11 +12,11 @@ const fs = require('fs');
 const {Auth, File, Connection, KintoneAPIException} = require(common.MAIN_PATH_NODE);
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const fileModule = new File(conn);
+const fileModule = new File({connection: conn});
 
 describe('dowload function', () => {
   describe('success case', () => {
@@ -27,7 +27,7 @@ describe('dowload function', () => {
         nock('https://' + common.DOMAIN)
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
           .reply(200, Buffer.from('hello buffer'));
-        return fileModule.download(fileKey, filePath)
+        return fileModule.download({fileKey: fileKey, filePath: filePath})
           .then(() => {
             // eslint-disable-next-line max-nested-callbacks
             fs.readdir('./test/node/module/file/mock/', (err, list) => {
@@ -55,7 +55,7 @@ describe('dowload function', () => {
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
           .reply(404, expectErr);
 
-        fileModule.download(fileKey, filePath)
+        fileModule.download({fileKey: fileKey, filePath: filePath})
           .catch(err => {
             expect(err.get()).toMatchObject(expectErr);
           });
@@ -68,7 +68,7 @@ describe('dowload function', () => {
         nock('https://' + common.DOMAIN)
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
           .reply(403, undefined);
-        const downloadFile = fileModule.download(fileKey, filePath);
+        const downloadFile = fileModule.download({fileKey: fileKey, filePath: filePath});
         downloadFile.catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);
         });
