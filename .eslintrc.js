@@ -1,3 +1,8 @@
 module.exports = {
-    "extends": "@cybozu"
+    "extends": "@cybozu",
+    "rules": {
+        "no-invalid-this": "off",
+        "no-async-promise-executor": "off",
+        "require-atomic-updates": "off"
+    }
 };
