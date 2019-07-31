@@ -9,7 +9,7 @@ const {URI} = require('../../../utils/constant');
 const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection(common.DOMAIN, auth);
 
@@ -53,9 +53,6 @@ describe('createCursor function', ()=>{
           expect(response).toHaveProperty('totalCount');
           expect(response.id).toEqual(EXPECTED_RESPONSE.id);
           expect(response.totalCount).toEqual(EXPECTED_RESPONSE.totalCount);
-        })
-        .catch((err)=>{
-          expect(false);
         });
     });
   });

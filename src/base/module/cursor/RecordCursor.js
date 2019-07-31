@@ -50,11 +50,11 @@ class RecordCursor {
   }
   /**
    * Get 1 block of records
-   * @param {String} cursorID
+   * @param {String} id cursor id
    * @return {Promise}
    */
-  getRecords(cursorID) {
-    const getRecordCursorRequest = new CursorModel.GetRecordCursorRequest(cursorID);
+  getRecords({id}) {
+    const getRecordCursorRequest = new CursorModel.GetRecordCursorRequest(id);
     return this.sendRequest({
       method: 'GET',
       url: 'RECORD_CURSOR',
@@ -63,15 +63,15 @@ class RecordCursor {
   }
   /**
    * Get all records
-   * @param {String} cursorID
+   * @param {String} id cursor id
    * @return {Promise}
    */
-  async getAllRecords(cursorID) {
+  async getAllRecords({id}) {
     let next = true;
     let allRecords = [];
     while (next) {
       try {
-        const recordBlockResponse = await this.getRecords(cursorID);
+        const recordBlockResponse = await this.getRecords({id});
         if (!(recordBlockResponse instanceof KintoneAPIException)) {
           allRecords = allRecords.concat(recordBlockResponse.records);
           next = recordBlockResponse.next;
@@ -90,11 +90,11 @@ class RecordCursor {
   }
   /**
    * Delete cursor
-   * @param {String} cursorID
+   * @param {String} id
    * @return {Promise}
    */
-  deleteCursor(cursorID) {
-    const deleteRecordCursorRequest = new CursorModel.DeleteRecordCursorRequest(cursorID);
+  deleteCursor({id}) {
+    const deleteRecordCursorRequest = new CursorModel.DeleteRecordCursorRequest(id);
     return this.sendRequest({
       method: 'DELETE',
       url: 'RECORD_CURSOR',
