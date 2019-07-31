@@ -18,7 +18,7 @@ class Auth extends BaseAuth {
    * @param {String} password
    * @return {this}
    */
-  setClientCert(cert, password) {
+  setClientCert({cert, password}) {
     this.cert = cert;
     this.passwordCert = password;
     return this;
@@ -30,7 +30,7 @@ class Auth extends BaseAuth {
    * @param {String} password
    * @return {this}
    */
-  setClientCertByPath(filePath, password) {
+  setClientCertByPath({filePath, password}) {
     try {
       const fileContent = fs.readFileSync(filePath);
       this.cert = fileContent;
