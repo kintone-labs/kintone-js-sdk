@@ -10,9 +10,10 @@ const RESPONSE_TYPE_VALUE = 'arraybuffer';
 class File {
   /**
    * The constructor for this module
-   * @param {Connection} connection
+   * @param {Object} fileData
+   * @param {Connection} fileData.connection
    */
-  constructor(connection) {
+  constructor({connection}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
@@ -31,11 +32,12 @@ class File {
   }
   /**
    * upload file to kintone
-   * @param {String} fileName
-   * @param {String} fileContent
+   * @param {Object} fileData
+   * @param {String} fileData.fileName
+   * @param {String} fileData.fileContent
    * @return {Promise}
    */
-  upload(fileName, fileContent) {
+  upload({fileName, fileContent}) {
     return this.connection.upload(fileName, fileContent);
   }
 }
