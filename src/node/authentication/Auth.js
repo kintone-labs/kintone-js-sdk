@@ -18,9 +18,9 @@ class Auth extends BaseAuth {
    * @param {String} password
    * @return {this}
    */
-  setClientCert(cert, password) {
-    this.cert = cert;
-    this.passwordCert = password;
+  setClientCert(options) {
+    this.cert = options.cert;
+    this.passwordCert = options.password;
     return this;
   }
 
@@ -30,11 +30,11 @@ class Auth extends BaseAuth {
    * @param {String} password
    * @return {this}
    */
-  setClientCertByPath(filePath, password) {
+  setClientCertByPath(options) {
     try {
-      const fileContent = fs.readFileSync(filePath);
+      const fileContent = fs.readFileSync(options.filePath);
       this.cert = fileContent;
-      this.passwordCert = password;
+      this.passwordCert = options.password;
       return this;
     } catch (err) {
       throw new Error(`File path is not valid`);
