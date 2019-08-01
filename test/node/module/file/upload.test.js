@@ -58,7 +58,6 @@ describe('upload function', () => {
 
   describe('error case', () => {
     describe('Required filepath', () => {
-
       it('[File-4] should throw an error when file path is invalid', () => {
         const errors = `File path is not valid`;
         nock('https://' + common.DOMAIN)

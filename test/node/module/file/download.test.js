@@ -23,7 +23,7 @@ describe('dowload function', () => {
     describe('valid params are specificed', () => {
       it('[File-5]should download successfully file', () => {
         const fileKey = '201809040332204A3B5797BC804153AFF1BBB78C86CAE9207';
-        const filePath = './test/node/module/file/mock/test.txt';
+        const filePath = './test/node/module/file/mock/test.png';
         nock('https://' + common.DOMAIN)
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
           .reply(200, Buffer.from('hello buffer'));
@@ -31,7 +31,7 @@ describe('dowload function', () => {
           .then(() => {
             // eslint-disable-next-line max-nested-callbacks
             fs.readdir('./test/node/module/file/mock/', (err, list) => {
-              const existFile = list.includes('test.txt');
+              const existFile = list.includes('test.png');
               expect(existFile).toBe(true);
             });
             // remove file
