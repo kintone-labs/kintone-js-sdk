@@ -14,9 +14,9 @@ class Auth {
 
   /**
      * setBasicAuth
-     * @param {Object} basicAuthData
-     * @param {String} basicAuthData.username
-     * @param {String} basicAuthData.password
+     * @param {Object} params
+     * @param {String} params.username
+     * @param {String} params.password
      * @return {this}
      */
   setBasicAuth({username, password}) {
@@ -34,9 +34,9 @@ class Auth {
 
   /**
      * setPasswordAuth
-     * @param {Object} passwordAuthData
-     * @param {String} passwordAuthData.username
-     * @param {String} passwordAuthData.password
+     * @param {Object} params
+     * @param {String} params.username
+     * @param {String} params.password
      * @return {this}
      */
   setPasswordAuth({username, password}) {
@@ -54,8 +54,8 @@ class Auth {
 
   /**
      * setApiToken
-     * @param {Object} apiTokenData
-     * @param {String} apiTokenData.apiToken
+     * @param {Object} params
+     * @param {String} params.apiToken
      * @return {this}
      */
   setApiToken({apiToken}) {
