@@ -40,7 +40,7 @@ class RecordCursor {
    * @param {Integer} size
    * @return {Promise}
    */
-  createCursor({app, fields, query, size}) {
+  createCursor({app, fields, query, size} = {}) {
     const createCursorRequest = new CursorModel.CreateRecordCursorRequest({app, fields, query, size});
     return this.sendRequest({
       method: 'POST',
@@ -66,7 +66,7 @@ class RecordCursor {
    * @param {String} id cursor id
    * @return {Promise}
    */
-  async getAllRecords({id}) {
+  async getAllRecords({id} = {}) {
     let next = true;
     let allRecords = [];
     while (next) {
@@ -93,7 +93,7 @@ class RecordCursor {
    * @param {String} id
    * @return {Promise}
    */
-  deleteCursor({id}) {
+  deleteCursor({id} = {}) {
     const deleteRecordCursorRequest = new CursorModel.DeleteRecordCursorRequest(id);
     return this.sendRequest({
       method: 'DELETE',
