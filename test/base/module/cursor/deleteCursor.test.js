@@ -8,9 +8,9 @@ const common = require('../../../utils/common');
 const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
@@ -36,7 +36,7 @@ describe('deleteCursor function', ()=>{
         .reply(200, {});
 
       const rc = new RecordCursor(conn);
-      return rc.deleteCursor(cursorID)
+      return rc.deleteCursor({id: cursorID})
         .then((rsp)=>{
           expect(rsp).toEqual({});
         })
@@ -65,7 +65,7 @@ describe('deleteCursor function', ()=>{
         .reply(400, ILLEGAL_REQUEST);
 
       const rc = new RecordCursor(conn);
-      return rc.deleteCursor(wrongID)
+      return rc.deleteCursor({id: wrongID})
         .catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(ILLEGAL_REQUEST);
