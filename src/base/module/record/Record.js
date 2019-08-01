@@ -41,8 +41,9 @@ class Record {
   /**
    * Get record by specific ID
    * TODO: Parse to response model
-   * @param {Number} app
-   * @param {Number} id
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
    * @return {Promise} Promise
    */
   getRecord({app, id}) {
@@ -52,8 +53,9 @@ class Record {
   /**
    * Get multi record with options
    * TODO: Parse to response model
-   * @param {Number} app
-   * @param {String} query
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.query
    * @param {Array<String>} fields
    * @param {Boolean} totalCount
    * @return {Promise} Promise
@@ -86,10 +88,11 @@ class Record {
   /**
    * Get multi records more than default limitation number by query
    * TODO: Parse to response model
-   * @param {Number} app
-   * @param {String} query
-   * @param {Array<String>} fields
-   * @param {Boolean} totalCount
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.query
+   * @param {Array<String>} params.fields
+   * @param {Boolean} params.totalCount
    * @return {Promise} Promise
    */
   getAllRecordsByQuery({app, query, fields, totalCount} = {}) {
@@ -116,8 +119,9 @@ class Record {
 
   /**
    * Add the record
-   * @param {Number} app
-   * @param {Record} record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Record} params.record
    * @return {Promise} Promise
    */
   addRecord({app, record} = {}) {
@@ -127,8 +131,9 @@ class Record {
 
   /**
    * Add multi records
-   * @param {Number} app
-   * @param {Array<record>} records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array<record>} params.records
    * @return {Promise} Promise
    */
   addRecords({app, records} = {}) {
@@ -166,6 +171,13 @@ class Record {
     });
 
   }
+  /**
+   * Add all records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Record} params.records
+   * @return {Promise} Promise
+   */
   addAllRecords({app, records}) {
     return this.addAllRecordsRecursive(app, records).then((response) => {
       return {
@@ -196,10 +208,11 @@ class Record {
 
   /**
    * Update the specific record by ID
-   * @param {Number} app
-   * @param {Number} id
-   * @param {Record} record
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
+   * @param {Record} params.record
+   * @param {Number} params.revision
    * @return {Promise} Promise
    */
   updateRecordByID({app, id, record, revision} = {}) {
@@ -216,10 +229,11 @@ class Record {
 
   /**
    * Update the specific record by updateKey
-   * @param {Number} app
-   * @param {RecordUpdateKey} updateKey
-   * @param {Record} record
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {RecordUpdateKey} params.updateKey
+   * @param {Record} params.record
+   * @param {Number} params.revision
    * @return {Promise} Promise
    */
   updateRecordByUpdateKey({app, updateKey, record, revision}) {
@@ -262,8 +276,9 @@ class Record {
   }
   /**
    * Update multi records
-   * @param {Number} app
-   * @param {Array<RecordUpdateItem>} records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array<RecordUpdateItem>} params.records
    * @return {Promise} Promise
    */
   updateRecords({app, records} = {}) {
@@ -274,8 +289,9 @@ class Record {
 
   /**
    * Delete multi records
-   * @param {Number} app
-   * @param {Array<Number>} ids
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array<Number>} params.ids
    * @return {Promise} Promise
    */
   deleteRecords({app, ids}) {
@@ -286,8 +302,9 @@ class Record {
 
   /**
      * Delete records at the specific revision
-     * @param {Number} app
-     * @param {Object} idsWithRevision
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Object} params.idsWithRevision
      * @return {Promise}
      */
   deleteRecordsWithRevision({app, idsWithRevision} = {}) {
@@ -335,8 +352,9 @@ class Record {
 
   /**
      * deleteAllRecordsByQuery for use with update all records
-     * @param {Number} app
-     * @param {String} query
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {String} params.query
      * @return {}
   **/
   deleteAllRecordsByQuery({app, query} = {}) {
@@ -365,10 +383,11 @@ class Record {
 
   /**
      * Update assignees of the specific record
-     * @param {Number} app
-     * @param {Number} id
-     * @param {Array<String>} assignees
-     * @param {Number} revision
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.id
+     * @param {Array<String>} params.assignees
+     * @param {Number} params.revision
      * @return {Promise}
      */
   updateRecordAssignees({app, id, assignees, revision} = {}) {
@@ -379,11 +398,12 @@ class Record {
 
   /**
      * Update status of the specific record
-     * @param {Number} app
-     * @param {Number} id
-     * @param {String} action
-     * @param {String} assignee
-     * @param {Number} revision
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.id
+     * @param {String} params.action
+     * @param {String} params.assignee
+     * @param {Number} params.revision
      * @return {Promise}
      */
   updateRecordStatus({app, id, action, assignee, revision} = {}) {
@@ -394,7 +414,8 @@ class Record {
 
   /**
      * Update status of the multi records
-     * @param {Number} app
+     * @param {Object} params
+     * @param {Number} params.app
      * @param {Array <{RecordStatusUpdate}>} records
      * @return {Promise}
      */
@@ -418,8 +439,9 @@ class Record {
   }
   /**
      * updateAllRecords for use with update all records
-     * @param {Number} app
-     * @param {Object} records
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Object} params.records
      * @return {UpdateRecordsResponse}
   **/
   updateAllRecordsRecursive(app, records, offset, results) {
@@ -458,10 +480,11 @@ class Record {
 
   /**
    * Upsert record by update-key
-   * @param {Number} app
-   * @param {Object} updateKey
-   * @param {Object} record
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.updateKey
+   * @param {Object} params.record
+   * @param {Number} params.revision
    * @return {Promise}
    */
   upsertRecord({app, updateKey, record, revision} = {}) {
@@ -484,8 +507,9 @@ class Record {
 
   /**
    * Upsert records by update-key
-   * @param {Number} app
-   * @param {Object} recordsWithUpdatekey
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.recordsWithUpdatekey
    * @return {Promise}
    */
   upsertRecords({app, records} = {}) {
@@ -563,10 +587,11 @@ class Record {
 
   /**
      * createRecordStatusItem for use with update multi record status
-     * @param {Number} recordIDInput
-     * @param {String} actionNameInput
-     * @param {String} assigneeIDInput
-     * @param {String} revisionIDInput
+     * @param {Object} params
+     * @param {Number} params.recordIDInput
+     * @param {String} params.actionNameInput
+     * @param {String} params.assigneeIDInput
+     * @param {String} params.revisionIDInput
      * @return {RecordsUpdateStatusItem}
      */
   createRecordStatusItem(recordIDInput, actionNameInput,
@@ -575,11 +600,12 @@ class Record {
   }
   /**
      * Get comments of the specific record
-     * @param {Number} app
-     * @param {Number} record
-     * @param {string} order  {asc|desc}
-     * @param {Number} offset
-     * @param {Number} limit
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
+     * @param {string} params.order  {asc|desc}
+     * @param {Number} params.offset
+     * @param {Number} params.limit
      * @return {Promise}
      */
   getComments({app, record, order, offset, limit}) {
@@ -589,8 +615,9 @@ class Record {
 
   /**
      * Add new comment to the specific record
-     * @param {Number} app
-     * @param {Number} record
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
      * @param {CommentContent} comment
      * @return {Promise}
      */
@@ -600,10 +627,11 @@ class Record {
   }
 
   /**
-     *
-     * @param {Number} app
-     * @param {Number} record
-     * @param {Number} comment
+     * Delete a comment
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
+     * @param {Number} params.comment
      * @return {Promise}
      */
   deleteComment({app, record, comment} = {}) {
