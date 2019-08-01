@@ -23,9 +23,10 @@ class RecordCursor {
   }
 
   /**
-   * @param {String} method
-   * @param {String} url
-   * @param {RecordModel} model
+   * @param {Object} params
+   * @param {String} params.method
+   * @param {String} params.url
+   * @param {RecordModel} params.model
    * @return {Promise} Promise
    */
   sendRequest({method, url, model}) {
@@ -34,10 +35,11 @@ class RecordCursor {
 
   /**
    * Create a new record cursor
-   * @param {Integer} app
+   * @param {Object} params
+   * @param {Integer} params.app
    * @param {Array<String>} fields
-   * @param {String} query
-   * @param {Integer} size
+   * @param {String} params.query
+   * @param {Integer} params.size
    * @return {Promise}
    */
   createCursor({app, fields, query, size} = {}) {
@@ -50,7 +52,8 @@ class RecordCursor {
   }
   /**
    * Get 1 block of records
-   * @param {String} id cursor id
+   * @param {Object} params
+   * @param {String} params.id cursor id
    * @return {Promise}
    */
   getRecords({id}) {
@@ -63,7 +66,8 @@ class RecordCursor {
   }
   /**
    * Get all records
-   * @param {String} id cursor id
+   * @param {Object} params
+   * @param {String} params.id cursor id
    * @return {Promise}
    */
   async getAllRecords({id} = {}) {
@@ -90,7 +94,8 @@ class RecordCursor {
   }
   /**
    * Delete cursor
-   * @param {String} id
+   * @param {Object} params
+   * @param {String} params.id
    * @return {Promise}
    */
   deleteCursor({id} = {}) {
