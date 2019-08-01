@@ -51,7 +51,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
     const formData = new FormData();
     if (window.kintone !== undefined) {
       formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
-      this.setHeader('X-Requested-With', 'XMLHttpRequest');
+      this.setHeader({key: 'X-Requested-With', value: 'XMLHttpRequest'});
     }
     formData.append('file', fileBlob, fileName);
     return super.requestFile('POST', 'FILE', formData);

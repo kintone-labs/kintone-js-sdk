@@ -40,7 +40,7 @@ class Connection extends BaseConnection {
       pfx: this.auth.getClientCertData(),
       passphrase: this.auth.getPassWordCert()
     });
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    this.addRequestOption({key: CONNECTION_CONST.BASE.HTTPS_AGENT, value: httpsAgent});
   }
 
   /**
@@ -102,8 +102,7 @@ class Connection extends BaseConnection {
   upload(fileName, fileContent) {
     const formData = new FormData();
     formData.append('file', fileContent, fileName);
-
-    this.setHeader(CONTENT_TYPE_KEY, formData.getHeaders()['content-type']);
+    this.setHeader({key: CONTENT_TYPE_KEY, value: formData.getHeaders()['content-type']});
     return this.requestFile('POST', 'FILE', formData);
   }
 
