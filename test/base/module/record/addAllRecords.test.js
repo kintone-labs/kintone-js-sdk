@@ -6,13 +6,13 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD).setApiToken(common.API_TOKEN_VALUE);
-const conn = new Connection(common.DOMAIN, auth);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD}).setApiToken({apiToken: common.API_TOKEN_VALUE});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const recordModule = new Record(conn);
 const BULK_REQUEST_API_ROUTE = '/k/v1/bulkRequest.json';
 const BULK_REQUEST_API_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/bulkRequest.json`;
 
-const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
 const recordModuleGuestSpace = new Record(connGuestSpace);
 describe('addAllRecords function', () => {
   describe('common case', () => {
@@ -76,7 +76,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -143,7 +143,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -208,7 +208,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -274,7 +274,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModuleGuestSpace.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModuleGuestSpace.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -338,7 +338,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -402,7 +402,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -410,8 +410,6 @@ describe('addAllRecords function', () => {
         expect(rsp.results[0].revisions.length).toEqual(expectResults.results[0].revisions.length);
       });
     });
-    
-
   });
 
   describe('error case', () => {
@@ -442,7 +440,7 @@ describe('addAllRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const addRecordResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResult);
@@ -485,7 +483,7 @@ describe('addAllRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const addRecordResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResult);
@@ -535,7 +533,7 @@ describe('addAllRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const addRecordResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResult);
@@ -582,7 +580,7 @@ describe('addAllRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const addRecordResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResult);
@@ -631,7 +629,7 @@ describe('addAllRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const addRecordResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResult);
@@ -716,7 +714,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -771,7 +769,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(400, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -826,7 +824,7 @@ describe('addAllRecords function', () => {
           return true;
         })
         .reply(200, expectResults);
-      const addRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -900,7 +898,7 @@ describe('addAllRecords function', () => {
         })
         .reply(404, expectResultsBulk2);
 
-      const addAllRecordsResult = recordModule.addAllRecords(appID, recordsData);
+      const addAllRecordsResult = recordModule.addAllRecords({app: appID, records: recordsData});
       return addAllRecordsResult.catch((error) => {
         const kintoneException = {response: {
           data: ERROR_MESSAGE.UPDATE_RECORD_CREATED_AT_ERROR

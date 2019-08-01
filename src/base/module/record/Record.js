@@ -45,7 +45,7 @@ class Record {
    * @param {Number} id
    * @return {Promise} Promise
    */
-  getRecord(app, id) {
+  getRecord({app, id}) {
     const getRecordRequest = new RecordModel.GetRecordRequest(app, id);
     return this.sendRequest('GET', 'record', getRecordRequest);
   }
@@ -58,27 +58,27 @@ class Record {
    * @param {Boolean} totalCount
    * @return {Promise} Promise
    */
-  getRecords(app, query, fields, totalCount) {
+  getRecords({app, query, fields, totalCount} = {}) {
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, query, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest);
   }
 
-  getAllRecordsByCursor({app, query, fields}) {
+  getAllRecordsByCursor({app, query, fields} = {}) {
     const kintoneRC = new RecordCursor(this.connection);
     let myCursor;
     return kintoneRC.createCursor({app, fields, query, DEFAULT_CURSOR_SIZE})
       .then((creatCursorResponse)=>{
         myCursor = creatCursorResponse;
-        return kintoneRC.getAllRecords(myCursor.id);
+        return kintoneRC.getAllRecords({id: myCursor.id});
       })
       .then((allRecords)=>{
         if (allRecords.totalCount < myCursor.totalCount) {
-          kintoneRC.deleteCursor(myCursor.id);
+          kintoneRC.deleteCursor({id: myCursor.id});
         }
         return allRecords;
       })
       .catch((err)=>{
-        kintoneRC.deleteCursor(myCursor.id);
+        kintoneRC.deleteCursor({id: myCursor.id});
         throw err;
       });
   }
@@ -92,7 +92,7 @@ class Record {
    * @param {Boolean} totalCount
    * @return {Promise} Promise
    */
-  getAllRecordsByQuery(app, query, fields, totalCount) {
+  getAllRecordsByQuery({app, query, fields, totalCount} = {}) {
     return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null);
   }
 
@@ -120,7 +120,7 @@ class Record {
    * @param {Record} record
    * @return {Promise} Promise
    */
-  addRecord(app, record) {
+  addRecord({app, record} = {}) {
     const addRecordRequest = new RecordModel.AddRecordRequest(app, record);
     return this.sendRequest('POST', 'record', addRecordRequest);
   }
@@ -131,7 +131,7 @@ class Record {
    * @param {Array<record>} records
    * @return {Promise} Promise
    */
-  addRecords(app, records) {
+  addRecords({app, records} = {}) {
     const addRecordsRequest = new RecordModel.AddRecordsRequest(app);
     addRecordsRequest.setRecords(records);
     return this.sendRequest('POST', 'records', addRecordsRequest);
@@ -166,7 +166,7 @@ class Record {
     });
 
   }
-  addAllRecords(app, records) {
+  addAllRecords({app, records}) {
     return this.addAllRecordsRecursive(app, records).then((response) => {
       return {
         results: response
@@ -202,7 +202,7 @@ class Record {
    * @param {Number} revision
    * @return {Promise} Promise
    */
-  updateRecordByID(app, id, record, revision) {
+  updateRecordByID({app, id, record, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordRequest(app);
 
     updateRecordRequest
@@ -222,7 +222,7 @@ class Record {
    * @param {Number} revision
    * @return {Promise} Promise
    */
-  updateRecordByUpdateKey(app, updateKey, record, revision) {
+  updateRecordByUpdateKey({app, updateKey, record, revision}) {
     const fieldKey = updateKey ? updateKey.field : undefined;
     const fieldValue = updateKey ? updateKey.value : undefined;
 
@@ -266,7 +266,7 @@ class Record {
    * @param {Array<RecordUpdateItem>} records
    * @return {Promise} Promise
    */
-  updateRecords(app, records) {
+  updateRecords({app, records} = {}) {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
 
     return this.sendRequest('PUT', 'records', updateRecordsRequest);
@@ -278,7 +278,7 @@ class Record {
    * @param {Array<Number>} ids
    * @return {Promise} Promise
    */
-  deleteRecords(app, ids) {
+  deleteRecords({app, ids}) {
     const deleteRecordsRequest = new RecordModel.DeleteRecordsRequest(app);
     deleteRecordsRequest.setIDs(ids);
     return this.sendRequest('DELETE', 'records', deleteRecordsRequest);
@@ -290,7 +290,7 @@ class Record {
      * @param {Object} idsWithRevision
      * @return {Promise}
      */
-  deleteRecordsWithRevision(app, idsWithRevision) {
+  deleteRecordsWithRevision({app, idsWithRevision} = {}) {
     const deleteRecordsRequest = new RecordModel.DeleteRecordsRequest(app);
     deleteRecordsRequest.setIDsWithRevision(idsWithRevision);
 
@@ -339,8 +339,8 @@ class Record {
      * @param {String} query
      * @return {}
   **/
-  deleteAllRecordsByQuery(app, query) {
-    return this.getAllRecordsByQuery(app, query).then((resp) => {
+  deleteAllRecordsByQuery({app, query} = {}) {
+    return this.getAllRecordsByQuery({app, query}).then((resp) => {
       const ids = [];
       const records = resp.records;
       if (!records || !records.length) {
@@ -371,7 +371,7 @@ class Record {
      * @param {Number} revision
      * @return {Promise}
      */
-  updateRecordAssignees(app, id, assignees, revision) {
+  updateRecordAssignees({app, id, assignees, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordAssigneesRequest(app, id, assignees, revision);
 
     return this.sendRequest('PUT', 'RECORD_ASSIGNEES', updateRecordRequest);
@@ -386,7 +386,7 @@ class Record {
      * @param {Number} revision
      * @return {Promise}
      */
-  updateRecordStatus(app, id, action, assignee, revision) {
+  updateRecordStatus({app, id, action, assignee, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordStatusRequest(app, id, action, assignee, revision);
 
     return this.sendRequest('PUT', 'RECORD_STATUS', updateRecordRequest);
@@ -398,7 +398,7 @@ class Record {
      * @param {Array <{RecordStatusUpdate}>} records
      * @return {Promise}
      */
-  updateRecordsStatus(app, records) {
+  updateRecordsStatus({app, records} = {}) {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
 
     return this.sendRequest('PUT', 'RECORDS_STATUS', updateRecordsRequest);
@@ -445,7 +445,7 @@ class Record {
       throw error;
     });
   }
-  updateAllRecords(app, records) {
+  updateAllRecords({app, records} = {}) {
     return this.updateAllRecordsRecursive(app, records).then(rsp => {
       return {
         'results': rsp
@@ -464,14 +464,19 @@ class Record {
    * @param {Number} revision
    * @return {Promise}
    */
-  upsertRecord(app, updateKey, record, revision) {
-    const query = `${updateKey.field} = "${updateKey.value}"`;
-    return this.getRecords(app, query, [updateKey.field], false).then((resp) => {
+  upsertRecord({app, updateKey, record, revision} = {}) {
+    const getRecordsParam = {
+      app: app,
+      query: `${updateKey.field} = "${updateKey.value}"`,
+      fields: [updateKey.field],
+      totalCount: false,
+    };
+    return this.getRecords(getRecordsParam).then((resp) => {
       if (updateKey.value === '' || resp.records.length < 1) {
         record[updateKey.field] = {value: updateKey.value};
-        return this.addRecord(app, record);
+        return this.addRecord({app, record});
       } else if (resp.records.length === 1) {
-        return this.updateRecordByUpdateKey(app, updateKey, record, revision);
+        return this.updateRecordByUpdateKey({app, updateKey, record, revision});
       }
       throw new Error(`${updateKey.field} is not unique field`);
     });
@@ -483,7 +488,7 @@ class Record {
    * @param {Object} recordsWithUpdatekey
    * @return {Promise}
    */
-  upsertRecords(app, records) {
+  upsertRecords({app, records} = {}) {
     const validRecords = Array.isArray(records) ? records : [];
     if (validRecords.length > LIMIT_UPSERT_RECORD) {
       throw new Error(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
@@ -511,7 +516,7 @@ class Record {
       return bulkRequest.execute();
     };
 
-    return this.getAllRecordsByQuery(app).then((resp) => {
+    return this.getAllRecordsByQuery({app}).then((resp) => {
       const allRecords = resp.records;
       const recordsForPut = [];
       const recordsForPost = [];
@@ -577,7 +582,7 @@ class Record {
      * @param {Number} limit
      * @return {Promise}
      */
-  getComments(app, record, order, offset, limit) {
+  getComments({app, record, order, offset, limit}) {
     const getCommentsRequest = new RecordModel.GetCommentsRequest(app, record, order, offset, limit);
     return this.sendRequest('GET', 'RECORD_COMMENTS', getCommentsRequest);
   }
@@ -589,7 +594,7 @@ class Record {
      * @param {CommentContent} comment
      * @return {Promise}
      */
-  addComment(app, record, comment) {
+  addComment({app, record, comment} = {}) {
     const addCommentRequest = new RecordModel.AddCommentRequest(app, record, comment);
     return this.sendRequest('POST', 'RECORD_COMMENT', addCommentRequest);
   }
@@ -601,7 +606,7 @@ class Record {
      * @param {Number} comment
      * @return {Promise}
      */
-  deleteComment(app, record, comment) {
+  deleteComment({app, record, comment} = {}) {
     const deleteCommentRequest = new RecordModel.DeleteCommentRequest(app, record, comment);
     return this.sendRequest('DELETE', 'RECORD_COMMENT', deleteCommentRequest);
   }

@@ -9,9 +9,9 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
 const URI = 'https://' + common.DOMAIN;
 const RECORD_API_ROUTE = '/k/v1/record.json';
@@ -67,7 +67,7 @@ describe('addRecord function', () => {
         })
         .reply(200, {'id': '100', 'revision': '1'});
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
           expect(rsp).toHaveProperty('revision');
@@ -83,7 +83,7 @@ describe('addRecord function', () => {
         })
         .reply(200, {'id': '100', 'revision': '1'});
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
           expect(rsp).toHaveProperty('revision');
@@ -97,9 +97,9 @@ describe('addRecord function', () => {
           return rqBody.app === body.app;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      const conn1 = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+      const conn1 = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
       const recordModule = new Record(conn1);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
           expect(rsp).toHaveProperty('revision');
@@ -120,7 +120,7 @@ describe('addRecord function', () => {
         })
         .reply(200, {'id': '100', 'revision': '1'});
       const recordModule = new Record(conn);
-      return recordModule.addRecord(bodyWithoutFields.app, bodyWithoutFields.record)
+      return recordModule.addRecord(bodyWithoutFields)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
           expect(rsp).toHaveProperty('revision');
@@ -142,7 +142,7 @@ describe('addRecord function', () => {
         })
         .reply(200, {'id': '100', 'revision': '1'});
       const recordModule = new Record(conn);
-      return recordModule.addRecord(bodyStringID.app, bodyStringID.record)
+      return recordModule.addRecord(bodyStringID)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
           expect(rsp).toHaveProperty('revision');
@@ -161,7 +161,7 @@ describe('addRecord function', () => {
         })
         .reply(200, {'id': '100', 'revision': '1'});
       const recordModule = new Record(conn);
-      return recordModule.addRecord(bodyBlank.app, bodyBlank.record)
+      return recordModule.addRecord(bodyBlank)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
           expect(rsp).toHaveProperty('revision');
@@ -185,7 +185,7 @@ describe('addRecord function', () => {
         .reply(404, expectResult);
 
       const recordModule = new Record(conn);
-      return recordModule.addRecord(unexistedapp)
+      return recordModule.addRecord({app: unexistedapp})
         .catch(err => {
           expect(err.get()).toHaveProperty('id');
           expect(err.get().code).toEqual(expectResult.code);
@@ -210,7 +210,7 @@ describe('addRecord function', () => {
         .reply(400, expectResult);
 
       const recordModule = new Record(conn);
-      return recordModule.addRecord(negativeapp)
+      return recordModule.addRecord({app: negativeapp})
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -234,7 +234,7 @@ describe('addRecord function', () => {
         .reply(400, expectResult);
 
       const recordModule = new Record(conn);
-      return recordModule.addRecord(app)
+      return recordModule.addRecord({app: app})
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -276,7 +276,7 @@ describe('addRecord function', () => {
         })
         .reply(400, expectResult);
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -310,7 +310,7 @@ describe('addRecord function', () => {
         })
         .reply(400, expectResult);
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -344,7 +344,7 @@ describe('addRecord function', () => {
         })
         .reply(400, expectResult);
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -371,7 +371,7 @@ describe('addRecord function', () => {
         })
         .reply(400, expectResult);
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -380,7 +380,6 @@ describe('addRecord function', () => {
 
     it('[Record-34] should return error when using method without app ID', () => {
       const body = {
-        app: 1,
         record: {
           Text: {value: 'test'}
         }
@@ -405,7 +404,7 @@ describe('addRecord function', () => {
         .reply(400, expectResult);
 
       const recordModule = new Record(conn);
-      return recordModule.addRecord(undefined, body.record)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -414,8 +413,7 @@ describe('addRecord function', () => {
 
     it('[Record-35] should return error when using method without data for required field', () => {
       const body = {
-        app: 1,
-        record: {}
+        app: 1
       };
       const expectResult = {
         'code': 'GAIA_AP01',
@@ -435,7 +433,7 @@ describe('addRecord function', () => {
         .reply(400, expectResult);
 
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, undefined)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -469,7 +467,7 @@ describe('addRecord function', () => {
         .reply(400, expectResult);
 
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -496,7 +494,7 @@ describe('addRecord function', () => {
         })
         .reply(400, expectResult);
       const recordModule = new Record(conn);
-      return recordModule.addRecord(body.app, body.record)
+      return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
