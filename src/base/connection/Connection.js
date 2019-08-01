@@ -13,10 +13,10 @@ const FILE_RESPONSE_TYPE_VALUE = 'blob';
  */
 class Connection {
   /**
-   * @param {Object} connectionData
-   * @param {String} connectionData.domain
-   * @param {Auth} connectionData.auth
-   * @param {Number} connectionData.guestSpaceID
+   * @param {Object} params
+   * @param {String} params.domain
+   * @param {Auth} params.auth
+   * @param {Number} params.guestSpaceID
    */
   constructor({domain, auth, guestSpaceID}) {
     this.domain = domain;
@@ -261,9 +261,9 @@ class Connection {
   }
   /**
    * Add option for request
-   * @param {Object} requestData
-   * @param {String} requestData.key
-   * @param {*} requestData.value refer: https://www.npmjs.com/package/axios
+   * @param {Object} params
+   * @param {String} params.key
+   * @param {*} params.value refer: https://www.npmjs.com/package/axios
    * @return {this}
    */
   addRequestOption({key, value}) {
@@ -276,9 +276,9 @@ class Connection {
   }
   /**
    * set header for request
-   * @param {Object} headerData
-   * @param {String} headerData.key
-   * @param {String} headerData.value
+   * @param {Object} params
+   * @param {String} params.key
+   * @param {String} params.value
    * @return {this}
    */
   setHeader({key, value}) {

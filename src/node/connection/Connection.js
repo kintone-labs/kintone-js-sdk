@@ -15,10 +15,10 @@ const FILE_RESPONSE_TYPE_VALUE = 'arraybuffer';
 
 class Connection extends BaseConnection {
   /**
-     * @param {Object} connectionData
-     * @param {String} connectionData.domain
-     * @param {Auth} connectionData.auth
-     * @param {Number} connectionData.guestSpaceID
+     * @param {Object} params
+     * @param {String} params.domain
+     * @param {Auth} params.auth
+     * @param {Number} params.guestSpaceID
      */
 
   constructor({domain, auth, guestSpaceID}) {
@@ -45,11 +45,11 @@ class Connection extends BaseConnection {
 
   /**
    * Set http proxy for request
-   * @param {Object} proxyData
-   * @param {String} proxyData.proxyHost
-   * @param {String} proxyData.proxyPort
-   * @param {String} proxyData.proxyUsername
-   * @param {String} proxyData.proxyPassword
+   * @param {Object} params
+   * @param {String} params.proxyHost
+   * @param {String} params.proxyPort
+   * @param {String} params.proxyUsername
+   * @param {String} params.proxyPassword
    * @return {this}
    */
   setProxy({proxyHost, proxyPort, proxyUsername, proxyPassword}) {
@@ -70,11 +70,11 @@ class Connection extends BaseConnection {
 
   /**
    * Set https proxy for request
-   * @param {Object} proxyData
-   * @param {String} proxyData.proxyHost
-   * @param {String} proxyData.proxyPort
-   * @param {String} proxyData.proxyUsername
-   * @param {String} proxyData.proxyPassword
+   * @param {Object} params
+   * @param {String} params.proxyHost
+   * @param {String} params.proxyPort
+   * @param {String} params.proxyUsername
+   * @param {String} params.proxyPassword
    * @return {this}
    */
   setHttpsProxy({proxyHost, proxyPort, proxyUsername, proxyPassword}) {
