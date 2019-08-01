@@ -6,7 +6,8 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
-const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD}).setApiToken({apiToken: common.API_TOKEN_VALUE});
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD})
+  .setApiToken({apiToken: common.API_TOKEN_VALUE});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const recordModule = new Record(conn);
 const BULK_REQUEST_API_ROUTE = '/k/v1/bulkRequest.json';
