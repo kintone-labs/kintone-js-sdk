@@ -17,16 +17,16 @@ const URI = 'https://' + common.DOMAIN;
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
 const appModule = new App(conn);
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
 const guestViewModule = new App(connGuest);
 
 const authToken = new Auth();
-authToken.setApiToken('a2386gf84gd663a12s32s');
-const connUsingToken = new Connection(common.DOMAIN, authToken);
+authToken.setApiToken({apiToken: common.API_TOKEN_VALUE});
+const connUsingToken = new Connection({domain: common.DOMAIN, auth: authToken});
 const appUsingToken = new App(connUsingToken);
 
 describe('getViews function', () => {
@@ -36,7 +36,7 @@ describe('getViews function', () => {
         .get(`${APP_VIEW_ROUTE}?app=1`)
         .reply(200, {});
 
-      const getViewsResult = appModule.getViews(1);
+      const getViewsResult = appModule.getViews({app: 1});
       expect(getViewsResult).toHaveProperty('then');
       expect(getViewsResult).toHaveProperty('catch');
     });
@@ -46,9 +46,9 @@ describe('getViews function', () => {
     it('[View-3] Valid request', () => {
       const data = {
         'app': 1,
-        'lang': 'en'
+        'lang': 'en',
+        isPreview: true
       };
-      const isPreview = true;
 
       const expectResult = {
         'views': {
@@ -70,7 +70,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -102,7 +102,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -110,9 +110,9 @@ describe('getViews function', () => {
     it('[View-7] Verify the app views with a pre-live settings is returned when setting isPreview true', () => {
       const data = {
         'app': 1,
-        'lang': 'en'
+        'lang': 'en',
+        isPreview: true
       };
-      const isPreview = true;
 
       const expectResult = {
         'views': {
@@ -135,7 +135,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -143,9 +143,9 @@ describe('getViews function', () => {
     it('[View-8] Verify the app views with a pre-live settings is not returned when setting isPreview false', () => {
       const data = {
         'app': 1,
-        'lang': 'en'
+        'lang': 'en',
+        isPreview: false
       };
-      const isPreview = false;
 
       const expectResult = {
         'views': {
@@ -168,7 +168,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -178,7 +178,6 @@ describe('getViews function', () => {
         'app': '1',
         'lang': 'en'
       };
-      const isPreview = false;
 
       const expectResult = {
         'views': {
@@ -201,7 +200,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -209,9 +208,9 @@ describe('getViews function', () => {
     it('[View-5] localized language - JA', () => {
       const data = {
         'app': '1',
-        'lang': 'ja'
+        'lang': 'ja',
+        isPreview: false
       };
-      const isPreview = false;
 
       const expectResult = {
         'views': {
@@ -234,7 +233,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -242,9 +241,9 @@ describe('getViews function', () => {
     it('[View-5] localized language - EN', () => {
       const data = {
         'app': '1',
-        'lang': 'en'
+        'lang': 'en',
+        isPreview: false
       };
-      const isPreview = false;
 
       const expectResult = {
         'views': {
@@ -267,7 +266,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -275,9 +274,9 @@ describe('getViews function', () => {
     it('[View-5] localized language - ZH', () => {
       const data = {
         'app': '1',
-        'lang': 'zh'
+        'lang': 'zh',
+        isPreview: false
       };
-      const isPreview = false;
 
       const expectResult = {
         'views': {
@@ -300,7 +299,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -308,9 +307,9 @@ describe('getViews function', () => {
     it('[View-5] localized language - USER BROWSER LANGUAGE', () => {
       const data = {
         'app': '1',
-        'lang': 'user'
+        'lang': 'user',
+        isPreview: false
       };
-      const isPreview = false;
 
       const expectResult = {
         'views': {
@@ -333,7 +332,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -341,9 +340,9 @@ describe('getViews function', () => {
     it('[View-13] Verify using this method with guest space successfully', () => {
       const data = {
         'app': 1,
-        'lang': 'en'
+        'lang': 'en',
+        isPreview: false
       };
-      const isPreview = false;
 
       const expectResult = {
         'views': {
@@ -365,7 +364,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getViewsResult = guestViewModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = guestViewModule.getViews(data);
       return getViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -375,8 +374,7 @@ describe('getViews function', () => {
   describe('error case', () => {
     it('[View-2] should return error when using API token authentication ', () => {
       const data = {
-        'app': 1,
-        'lang': 'EN'
+        'app': 1
       };
       const expectResult = {
         'code': 'GAIA_NO01',
@@ -386,7 +384,7 @@ describe('getViews function', () => {
       nock(URI)
         .get(`${APP_VIEW_ROUTE}?app=${data.app}`)
         .reply(520, expectResult);
-      const addFormFieldsResult = appUsingToken.getViews(data.app);
+      const addFormFieldsResult = appUsingToken.getViews(data);
       return addFormFieldsResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -402,7 +400,7 @@ describe('getViews function', () => {
       nock(URI)
         .get(`${APP_VIEW_ROUTE}?app=${appID}`)
         .reply(404, expectResult);
-      const getViewsResult = appModule.getViews(appID);
+      const getViewsResult = appModule.getViews({app: appID});
       return getViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -410,9 +408,9 @@ describe('getViews function', () => {
     });
     it('[View-10] The error will be displayed when using method without app ID', () => {
       const data = {
-        'lang': 'en'
+        'lang': 'en',
+        isPreview: false
       };
-      const isPreview = false;
       const expectResult = {
         'code': 'CB_VA01',
         'id': 'jtAmebldtGKc5ZR3RSx6',
@@ -433,7 +431,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getViewsResult = appModule.getViews(undefined, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -442,9 +440,9 @@ describe('getViews function', () => {
     it('[View-11] The error will be displayed when input invalid language', () => {
       const data = {
         'app': 1,
-        'lang': 'error'
+        'lang': 'error',
+        isPreview: false
       };
-      const isPreview = false;
       const expectResult = {
         'code': 'CB_VA01',
         'id': 'EBwYU4Qof2OeUBzXMG9a',
@@ -465,7 +463,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -474,9 +472,9 @@ describe('getViews function', () => {
     it('[View-14] Error will be displayed when using this method with live app with user who does not have Permission to view Records', () => {
       const data = {
         'app': 1,
-        'lang': 'error'
+        'lang': 'error',
+        isPreview: false
       };
-      const isPreview = false;
       const expectResult = {
         'code': 'CB_NO02',
         'id': 'znxMA8JNWGXAtWvC5HEc',
@@ -490,7 +488,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -499,9 +497,9 @@ describe('getViews function', () => {
     it('[View-15] Error will be displayed when using this method with pre-live settings with user not have App Management Permissions', () => {
       const data = {
         'app': 1,
-        'lang': 'error'
+        'lang': 'error',
+        isPreview: true
       };
-      const isPreview = true;
       const expectResult = {
         'code': 'CB_NO02',
         'id': 'znxMA8JNWGXAtWvC5HEc',
@@ -515,7 +513,7 @@ describe('getViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getViewsResult = appModule.getViews(data.app, data.lang, isPreview);
+      const getViewsResult = appModule.getViews(data);
       return getViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

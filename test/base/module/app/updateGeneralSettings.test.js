@@ -15,21 +15,21 @@ const GUEST_APP_PREVIEW_SETTINGS_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/pr
 // Init Connection
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const appModule = new App(conn);
 
 // Init API Connection
 const authAPI = new Auth();
-authAPI.setApiToken('testAPIToken');
-const connAPI = new Connection(common.DOMAIN, authAPI);
+authAPI.setApiToken({apiToken: common.API_TOKEN_VALUE});
+const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
 const appModuleAPI = new App(connAPI);
 
 // Init Connection Guest Space
-const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
 const appModuleGuestSpace = new App(connGuestSpace);
 
 // Init API Connection Guest Space
-const connAPIGuestSpace = new Connection(common.DOMAIN, authAPI, common.GUEST_SPACEID);
+const connAPIGuestSpace = new Connection({domain: common.DOMAIN, auth: authAPI, guestSpaceID: common.GUEST_SPACEID});
 const appModuleAPIGuestSpace = new App(connAPIGuestSpace);
 
 describe('updateGeneralSettings function', () => {
@@ -56,17 +56,6 @@ describe('updateGeneralSettings function', () => {
 
   describe('success case', () => {
     it('[General Setting-44]should update successfully the general settings', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = 1;
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -95,16 +84,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings, revision);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-45]should update successfully the name', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-      };
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -126,16 +111,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-46]should update successfully the description', () => {
-      const appId = 1;
-      const generalSetings = {
-        'description': 'Here is app description.'
-      };
       const expectBody = {
         'app': 1,
         'description': 'Here is app description.'
@@ -157,19 +138,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-47]should update successfully the icon', () => {
-      const appId = 1;
-      const generalSetings = {
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        }
-      };
       const expectBody = {
         'app': 1,
         'icon': {
@@ -194,16 +168,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-48]should update successfully the theme = WHITE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'WHITE'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'WHITE'
@@ -225,16 +195,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-49]should update successfully the theme = RED', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'RED'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'RED'
@@ -256,16 +222,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-50]should update successfully the theme = BLUE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'BLUE'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'BLUE'
@@ -287,16 +249,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-51]should update successfully the theme = GREEN', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'GREEN'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'GREEN'
@@ -318,16 +276,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-52]should update successfully the theme = YELLOW', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'YELLOW'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'YELLOW'
@@ -349,16 +303,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-53]should update successfully the theme = BLACK', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'BLACK'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'BLACK'
@@ -380,22 +330,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-54]should update successfully without revision', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -423,23 +363,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings, undefined);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-55]should update successfully when input revision = -1', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = -1;
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -468,14 +397,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings, revision);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-56]should update successfully without general settings', () => {
-      const appId = 1;
-      const revision = 2;
       const expectBody = {
         'app': 1,
         'revision': 2
@@ -497,23 +424,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, undefined, revision);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-57]should update successfully the general settings in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSettings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = 1;
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -542,16 +458,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSettings, revision);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-58]should update successfully the name in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-      };
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -573,16 +485,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-59]should update successfully the description in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'description': 'Here is app description.'
-      };
       const expectBody = {
         'app': 1,
         'description': 'Here is app description.'
@@ -604,19 +512,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-60]should update successfully the icon in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        }
-      };
       const expectBody = {
         'app': 1,
         'icon': {
@@ -641,16 +542,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-61]should update successfully the theme = WHITE in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'WHITE'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'WHITE'
@@ -672,16 +569,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-62]should update successfully the theme = RED in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'RED'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'RED'
@@ -703,16 +596,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-63]should update successfully the theme = BLUE in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'BLUE'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'BLUE'
@@ -734,16 +623,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-64]should update successfully the theme = GREEN in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'GREEN'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'GREEN'
@@ -765,16 +650,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-65]should update successfully the theme = YELLOW in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'YELLOW'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'YELLOW'
@@ -796,16 +677,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-66]should update successfully the theme = BLACK in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'BLACK'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'BLACK'
@@ -827,22 +704,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-67]should update successfully without revision in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -870,23 +737,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings, undefined);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-68]should update successfully when input revision = -1 in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = -1;
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -915,14 +771,12 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings, revision);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[General Setting-69]should update successfully without general settings in GUEST SPACE', () => {
-      const appId = 1;
-      const revision = 1;
       const expectBody = {
         'app': 1,
         'revision': 1
@@ -944,7 +798,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, undefined, revision);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -952,7 +806,6 @@ describe('updateGeneralSettings function', () => {
   });
   describe('error case', () => {
     it('[General Setting-70]should return error when use API token', () => {
-      const appId = 1;
       const expectBody = {
         'app': 1,
       };
@@ -975,14 +828,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const updateGeneralSettingsResult = appModuleAPI.updateGeneralSettings(appId);
+      const updateGeneralSettingsResult = appModuleAPI.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-71]should return error when use API token in GUEST SPACE', () => {
-      const appId = 1;
       const expectBody = {
         'app': 1,
       };
@@ -1005,24 +857,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const updateGeneralSettingsResult = appModuleAPIGuestSpace.updateGeneralSettings(appId);
+      const updateGeneralSettingsResult = appModuleAPIGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-72]should return error when input revision is incorrectly', () => {
-      const appId = 1;
-      const generalSettings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = '9999999999';
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -1053,24 +894,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(409, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSettings, revision);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-73]should return error when input revision is invalid', () => {
-      const appId = 1;
-      const generalSettings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = 'testInvalidRevision';
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -1101,7 +931,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSettings, revision);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1151,7 +981,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(404, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appID);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings({app: appID});
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1177,7 +1007,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appID);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings({app: appID});
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1203,17 +1033,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appID);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings({app: appID});
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-78]should return error when input invalid theme', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'testInvalidTheme'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'testInvalidTheme'
@@ -1244,19 +1070,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-79]should return error when input no icon.type', () => {
-      const appId = 1;
-      const generalSetings = {
-        'icon': {
-          'key': 'APP72'
-        }
-      };
       const expectBody = {
         'app': 1,
         'icon': {
@@ -1289,19 +1109,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-80]should return error when input no icon.key', () => {
-      const appId = 1;
-      const generalSetings = {
-        'icon': {
-          'type': 'PRESET',
-        }
-      };
       const expectBody = {
         'app': 1,
         'icon': {
@@ -1334,24 +1148,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-81]should return error when input revision is incorrectly in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSettings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = '9999999999';
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -1382,24 +1185,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(409, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSettings, revision);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-82]should return error when input revision is invalid in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSettings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = 'testInvalidRevision';
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -1430,7 +1222,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSettings, revision);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1480,7 +1272,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(404, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appID);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings({app: appID});
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1506,7 +1298,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appID);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings({app: appID});
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1532,17 +1324,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appID);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings({app: appID});
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-87]should return error when input invalid theme in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'theme': 'testInvalidTheme'
-      };
       const expectBody = {
         'app': 1,
         'theme': 'testInvalidTheme'
@@ -1573,19 +1361,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-88]should return error when input no icon.type in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'icon': {
-          'key': 'APP72'
-        }
-      };
       const expectBody = {
         'app': 1,
         'icon': {
@@ -1618,19 +1400,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-89]should return error when input no icon.key in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'icon': {
-          'type': 'PRESET'
-        }
-      };
       const expectBody = {
         'app': 1,
         'icon': {
@@ -1663,24 +1439,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-90]should return error permission deny', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = 1;
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -1711,24 +1476,13 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const updateGeneralSettingsResult = appModule.updateGeneralSettings(appId, generalSetings, revision);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
     });
     it('[General Setting-91]should return error permission deny in GUEST SPACE', () => {
-      const appId = 1;
-      const generalSetings = {
-        'name': 'APP_NAME',
-        'description': 'Here is app description.',
-        'icon': {
-          'type': 'PRESET',
-          'key': 'APP72'
-        },
-        'theme': 'WHITE'
-      };
-      const revision = 1;
       const expectBody = {
         'app': 1,
         'name': 'APP_NAME',
@@ -1759,7 +1513,7 @@ describe('updateGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(appId, generalSetings, revision);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
       return updateGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

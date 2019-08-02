@@ -31,7 +31,7 @@ class App {
    * @param {Number} params.id
    * @return {Promise} Promise
    */
-  getApp({id}) {
+  getApp({id} = {}) {
     const dataRequest =
             new AppModel.GetAppRequest(id);
     return this.sendRequest('GET', 'app', dataRequest);
@@ -43,7 +43,7 @@ class App {
    * @param {Number} params.limit
    * @return {Promise} Promise
    */
-  getApps({offset, limit}) {
+  getApps({offset, limit} = {}) {
     const dataRequest = new AppModel.GetAppsRequest(offset, limit);
     return this.sendRequest('GET', 'apps', dataRequest);
   }
@@ -55,7 +55,7 @@ class App {
    * @param {Number} params.limit
    * @return {Promise} Promise
    */
-  getAppsByCodes({codes, offset, limit}) {
+  getAppsByCodes({codes, offset, limit} = {}) {
     const dataRequest = new AppModel.GetAppsRequest(offset, limit);
     dataRequest.setAppCodes(codes);
     return this.sendRequest('GET', 'apps', dataRequest);
@@ -68,7 +68,7 @@ class App {
    * @param {Number} params.limit
    * @return {Promise} Promise
    */
-  getAppsByName({name, offset, limit}) {
+  getAppsByName({name, offset, limit} = {}) {
     const dataRequest = new AppModel.GetAppsRequest(offset, limit);
     dataRequest.setAppName(name);
     return this.sendRequest('GET', 'apps', dataRequest);
@@ -81,7 +81,7 @@ class App {
    * @param {Number} params.limit
    * @return {Promise} Promise
    */
-  getAppsByIDs({ids, offset, limit}) {
+  getAppsByIDs({ids, offset, limit} = {}) {
     const dataRequest =
             new AppModel.GetAppsRequest(offset, limit);
     dataRequest.setAppIDs(ids);
@@ -95,7 +95,7 @@ class App {
    * @param {Number} params.limit
    * @return {Promise} Promise
    */
-  getAppsBySpaceIDs({spaceIds, offset, limit}) {
+  getAppsBySpaceIDs({spaceIds, offset, limit} = {}) {
     const dataRequest = new AppModel.GetAppsRequest(offset, limit);
     dataRequest.setAppSpaceIDs(spaceIds);
     return this.sendRequest('GET', 'apps', dataRequest);
@@ -107,7 +107,7 @@ class App {
    * @param {Boolean} params.isPreview
    * @return {Promise} Promise
    */
-  getFormLayout({app, isPreview}) {
+  getFormLayout({app, isPreview} = {}) {
     const dataRequest = new AppModel.GetFormLayoutsRequest(app);
     const apiName = isPreview === true ? 'APP_LAYOUT_PREVIEW' : 'APP_LAYOUT';
     return this.sendRequest('GET', apiName, dataRequest);
@@ -132,7 +132,7 @@ class App {
    * @param {Boolean} params.isPreview
    * @return {Promise} Promise
    */
-  getFormFields({app, lang, isPreview}) {
+  getFormFields({app, lang, isPreview} = {}) {
     const dataRequest = new AppModel.GetFormFieldsRequest(app, lang);
     const apiName = isPreview === true ? 'APP_FIELDS_PREVIEW' : 'APP_FIELDS';
     return this.sendRequest('GET', apiName, dataRequest);
@@ -141,12 +141,12 @@ class App {
    * Add form fields
    * @param {Object} params
    * @param {Number} params.app
-   * @param {Object} params.fields
+   * @param {Object} params.properties
    * @param {Number} params.revision
    * @returns {Promise} Promise
    */
-  addFormFields({app, fields, revision}) {
-    const dataRequest = new AppModel.AddFormFieldsRequest(app, fields, revision);
+  addFormFields({app, properties, revision} = {}) {
+    const dataRequest = new AppModel.AddFormFieldsRequest(app, properties, revision);
     return this.sendRequest('POST', 'APP_FIELDS_PREVIEW', dataRequest);
   }
 
@@ -154,12 +154,12 @@ class App {
    * Update form fields
    * @param {Object} params
    * @param {Number} params.app
-   * @param {Object} params.fields
+   * @param {Object} params.properties
    * @param {Number} params.revision
    * @returns {Promise} Promise
    */
-  updateFormFields({app, fields, revision}) {
-    const dataRequest = new AppModel.UpdateFormFieldsRequest(app, fields, revision);
+  updateFormFields({app, properties, revision}) {
+    const dataRequest = new AppModel.UpdateFormFieldsRequest(app, properties, revision);
     return this.sendRequest('PUT', 'APP_FIELDS_PREVIEW', dataRequest);
   }
 
@@ -171,7 +171,7 @@ class App {
    * @param {Number} params.revision
    * @returns {Promise} Promise
    */
-  deleteFormFields({app, fields, revision}) {
+  deleteFormFields({app, fields, revision} = {}) {
     const dataRequest = new AppModel.DeleteFormFieldsRequest(app, fields, revision);
     return this.sendRequest('DELETE', 'APP_FIELDS_PREVIEW', dataRequest);
   }
@@ -184,7 +184,7 @@ class App {
    * @param {Number} params.thread
    * @returns {Promise} Promise
    */
-  addPreviewApp({name, space, thread}) {
+  addPreviewApp({name, space, thread} = {}) {
     const dataRequest = new AppModel.AddPreviewAppRequest(name, space, thread);
     return this.sendRequest('POST', 'APP_PREVIEW', dataRequest);
   }
@@ -196,7 +196,7 @@ class App {
    * @param {Boolean} params.revert
    * @returns {Promise} Promise
    */
-  deployAppSettings({apps, revert}) {
+  deployAppSettings({apps, revert} = {}) {
     const dataRequest = new AppModel.DeployAppSettingsRequest(apps, revert);
     return this.sendRequest('POST', 'APP_DEPLOY_PREVIEW', dataRequest);
   }
@@ -207,7 +207,7 @@ class App {
    * @param {Array} params.apps
    * @returns {Promise} Promise
    */
-  getAppDeployStatus({apps}) {
+  getAppDeployStatus({apps} = {}) {
     const dataRequest = new AppModel.GetAppDeployStatusRequest(apps);
     return this.sendRequest('GET', 'APP_DEPLOY_PREVIEW', dataRequest);
   }
@@ -220,7 +220,7 @@ class App {
    * @param {Boolean} params.isPreview
    * @returns {Promise} Promise
    */
-  getViews({app, lang, isPreview}) {
+  getViews({app, lang, isPreview} = {}) {
     const dataRequest = new AppModel.GetViewsRequest(app, lang);
     const apiName = isPreview ? 'APP_VIEWS_PREVIEW' : 'APP_VIEWS';
     return this.sendRequest('GET', apiName, dataRequest);
@@ -234,7 +234,7 @@ class App {
    * @param {Number} params.revision
    * @returns {Promise} Promise
    */
-  updateViews({app, views, revision}) {
+  updateViews({app, views, revision} = {}) {
     const dataRequest = new AppModel.UpdateViewsRequest(app, views, revision);
     return this.sendRequest('PUT', 'APP_VIEWS_PREVIEW', dataRequest);
   }
@@ -247,7 +247,7 @@ class App {
    * @param {Boolean} params.isPreview
    * @returns {Promise} Promise
    */
-  getGeneralSettings({app, lang, isPreview}) {
+  getGeneralSettings({app, lang, isPreview} = {}) {
     const dataRequest = new AppModel.GetGeneralSettingsRequest(app, lang);
     const apiName = isPreview ? 'APP_SETTINGS_PREVIEW' : 'APP_SETTINGS';
     return this.sendRequest('GET', apiName, dataRequest);
