@@ -14,7 +14,7 @@ const GUEST_APP_PREVIEW_SETTINGS_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/pr
 
 // Init Connection
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection(common.DOMAIN, auth);
 const appModule = new App(conn);
 
