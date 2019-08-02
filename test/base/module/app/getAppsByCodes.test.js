@@ -9,7 +9,7 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, App} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
 const conn = new Connection(common.DOMAIN, auth);
 const AppModule = new App(conn);
