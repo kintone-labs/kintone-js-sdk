@@ -16,7 +16,7 @@ const URI = 'https://' + common.DOMAIN;
 const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({username: common.USERNAME, password: common.PASSWORD});
 
 const appModule = new App(conn);
 
