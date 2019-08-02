@@ -11,9 +11,10 @@ import FileModel from '../../../base/model/file/FileModels';
 export class File {
   /**
      * The constructor for this module
-     * @param {Connection} connection
+     * @param {Object} params
+     * @param {Connection} params.connection
      */
-  constructor(conn) {
+  constructor({conn}) {
     let connection = conn;
     if (!connection) {
       connection = new Connection();
@@ -39,11 +40,12 @@ export class File {
   }
   /**
      * Upload file from local to kintone environment
-     * @param {String} fileName
-     * @param {Blob} fileBlob
+     * @param {Object} params
+     * @param {String} params.fileName
+     * @param {Blob} params.fileBlob
      * @return {Promise}
      */
-  upload(fileName, fileBlob) {
+  upload({fileName, fileBlob}) {
     return this.connection.upload(fileName, fileBlob);
   }
 }
