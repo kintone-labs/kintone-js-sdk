@@ -8,7 +8,7 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const { KintoneAPIException, Connection, Auth, App } = require(common.MAIN_PATH_BASE);
-const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
 const conn = new Connection(common.DOMAIN, auth);
 const appModule = new App(conn);
 

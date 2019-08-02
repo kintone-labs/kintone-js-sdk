@@ -13,7 +13,7 @@ const APP_FORM_LAYOUT_PREVIEW = '/k/v1/preview/app/form/layout.json';
 
 const URI = 'https://' + common.DOMAIN;
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
 const conn = new Connection(common.DOMAIN, auth);
 
