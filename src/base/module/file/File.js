@@ -1,18 +1,16 @@
 const Connection = require('../../connection/Connection');
 const FileModel = require('../../model/file/FileModels');
 
-const RESPONSE_TYPE_KEY = 'responseType';
-const RESPONSE_TYPE_VALUE = 'arraybuffer';
-
 /**
  * File module
  */
 class File {
   /**
    * The constructor for this module
-   * @param {Connection} connection
+   * @param {Object} params
+   * @param {Connection} params.connection
    */
-  constructor(connection) {
+  constructor({connection}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
@@ -24,18 +22,18 @@ class File {
    * @return {Promise}
    */
   download(fileKey) {
-
     const dataRequest =
               new FileModel.GetFileRequest(fileKey);
     return this.connection.download(dataRequest.toJSON());
   }
   /**
    * upload file to kintone
-   * @param {String} fileName
-   * @param {String} fileContent
+   * @param {Object} params
+   * @param {String} params.fileName
+   * @param {String} params.fileContent
    * @return {Promise}
    */
-  upload(fileName, fileContent) {
+  upload({fileName, fileContent} = {}) {
     return this.connection.upload(fileName, fileContent);
   }
 }
