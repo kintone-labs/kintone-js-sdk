@@ -5,15 +5,19 @@ import * as kintoneBaseJSSDK from '../../../base/main';
 export class Connection extends kintoneBaseJSSDK.Connection {
 
   /**
-     * @param {kintoneBaseJSSDK.Auth} auth
-     * @param {Integer} guestSpaceID
+     * @param {Object} params
+     * @param {kintoneBaseJSSDK.Auth} params.auth
+     * @param {Integer} params.guestSpaceID
      */
-  constructor(auth, guestSpaceID) {
+  constructor({auth, guestSpaceID}) {
     if (auth instanceof kintoneBaseJSSDK.Auth) {
-      super(window.location.host, auth, guestSpaceID);
+      const host = window.location.host;
+      super({host, auth, guestSpaceID});
       this.kintoneAuth = auth;
     } else {
-      super(window.location.host, new kintoneBaseJSSDK.Auth(), guestSpaceID);
+      const host = window.location.host;
+      const basicAuth = new kintoneBaseJSSDK.Auth();
+      super({host, basicAuth, guestSpaceID});
       this.kintoneAuth = undefined;
     }
     this.headers = [];
@@ -51,7 +55,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
     const formData = new FormData();
     if (window.kintone !== undefined) {
       formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
-      this.setHeader('X-Requested-With', 'XMLHttpRequest');
+      this.setHeader({key: 'X-Requested-With', value: 'XMLHttpRequest'});
     }
     formData.append('file', fileBlob, fileName);
     return super.requestFile('POST', 'FILE', formData);
