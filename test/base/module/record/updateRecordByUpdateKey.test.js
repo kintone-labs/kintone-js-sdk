@@ -7,9 +7,9 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const recordModule = new Record(conn);
 
 describe('updateRecordByUpdateKey function', () => {
@@ -66,7 +66,7 @@ describe('updateRecordByUpdateKey function', () => {
         })
         .reply(200, {'revision': '3'});
 
-      const updateRecordByUpdateKeyResult = recordModule.updateRecordByUpdateKey(data.app, data.updateKey, data.record, data.revision);
+      const updateRecordByUpdateKeyResult = recordModule.updateRecordByUpdateKey(data);
       return updateRecordByUpdateKeyResult.then((rsp) => {
         expect(rsp.revision).toEqual('3');
       });
@@ -108,7 +108,7 @@ describe('updateRecordByUpdateKey function', () => {
         })
         .reply(200, {'revision': '3'});
 
-      const updateRecordByUpdateKeyResult = recordModule.updateRecordByUpdateKey(data.app, data.updateKey, data.record, data.revision);
+      const updateRecordByUpdateKeyResult = recordModule.updateRecordByUpdateKey(data);
       return updateRecordByUpdateKeyResult.then((rsp) => {
         expect(rsp.revision).toEqual('3');
       });
@@ -164,7 +164,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(200, {'revision': '2'});
-      const updateRecordByIdResult = recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record);
+      const updateRecordByIdResult = recordModule.updateRecordByUpdateKey(recordUpdate);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('2');
       });
@@ -175,7 +175,7 @@ describe('updateRecordByUpdateKey function', () => {
      * The record is updated successfully for app in guest space
      */
     it('[Record-105] - The record is updated successfully for app in guest space', () => {
-      const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+      const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
       const recordUpdate = {
         'app': '777',
         'updateKey': {
@@ -222,7 +222,7 @@ describe('updateRecordByUpdateKey function', () => {
         })
         .reply(200, {'revision': '3'});
       const recordModule_Guest = new Record(connGuestSpace);
-      const updateRecordByIdResult = recordModule_Guest.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record);
+      const updateRecordByIdResult = recordModule_Guest.updateRecordByUpdateKey(recordUpdate);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('3');
       });
@@ -280,7 +280,7 @@ describe('updateRecordByUpdateKey function', () => {
             return true;
           })
           .reply(200, {'revision': '4'});
-        const updateRecordByIdResult = recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record);
+        const updateRecordByIdResult = recordModule.updateRecordByUpdateKey(recordUpdate);
         return updateRecordByIdResult.then((rsp) => {
           expect(rsp.revision).toEqual('4');
         });
@@ -314,7 +314,7 @@ describe('updateRecordByUpdateKey function', () => {
         })
         .reply(409, expectResult);
 
-      return recordModule.updateRecordByUpdateKey(data.app, data.updateKey, data.record, data.revision).catch((err) => {
+      return recordModule.updateRecordByUpdateKey(data).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -360,7 +360,7 @@ describe('updateRecordByUpdateKey function', () => {
         })
         .reply(400, expectResult);
 
-      return recordModule.updateRecordByUpdateKey(data.app, data.updateKey, data.record, data.revision).catch((err) => {
+      return recordModule.updateRecordByUpdateKey(data).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -395,7 +395,7 @@ describe('updateRecordByUpdateKey function', () => {
         })
         .reply(400, expectResult);
 
-      return recordModule.updateRecordByUpdateKey(data.app, data.updateKey, data.record, data.revision).catch((err) => {
+      return recordModule.updateRecordByUpdateKey(data).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -446,7 +446,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(400, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -491,7 +491,7 @@ describe('updateRecordByUpdateKey function', () => {
         })
         .reply(400, expectResult);
 
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -535,7 +535,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(400, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -578,7 +578,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(403, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -621,7 +621,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(403, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -671,7 +671,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(400, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -706,7 +706,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(200, {'revision': '7'});
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .then((rsp) => {
           expect(rsp.revision).toEqual('7');
         });
@@ -740,7 +740,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(200, {'revision': '7'});
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .then((rsp) => {
           expect(rsp.revision).toEqual('7');
         });
@@ -780,7 +780,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(200, {'revision': '9'});
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .then((rsp) => {
           expect(rsp.revision).toEqual('9');
         });
@@ -832,7 +832,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(400, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -885,7 +885,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(400, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -939,55 +939,11 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(400, expectResult);
-      return recordModule.updateRecordByUpdateKey(recordUpdate.app, recordUpdate.updateKey, recordUpdate.record, recordUpdate.revision)
+      return recordModule.updateRecordByUpdateKey(recordUpdate)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
         });
     });
   });
-  /**
-  * DEPRECATED ERROR CASES: DUE TO THE UNREALITY, DEPRECATE THIS CASE
-  * multiple update keys - Setting 2 updatekey fields, verify the data is updated successfully
-  */
-  /*
-      describe('multiple update keys', () => {
-        it('[Record-90] - should return error when multiple update keys', () => {
-          const data = {
-            'app': 777,
-            'updateKey': {
-              'field': 'unique_key',
-              'value': 'CODE123'
-            },
-            'updateKey': {
-              'field': 'unique_key',
-              'value': 'CODE123'
-            },
-            'revision': 655,
-            'record': {
-              'string_multi': {
-                'value': 'this value has been updated'
-              }
-            }
-          };
-          const expectResult = {
-            'code': 'GAIA_IQ27',
-            'id': 'Yux7BxLRhcxIrcDLkCB5',
-            'message': 'Failed to update record. The field (code: Number) set as "updateKey" must be set to "Prohibit duplicate values".'
-          };
-          nock(URI)
-            .put(API_ROUTE.RECORD, (rqBody) => {
-              expect(rqBody).toEqual(data);
-              return true;
-            })
-            .reply(400, expectResult);
-
-          return recordModule.updateRecordByUpdateKey(data.app, data.updateKey, data.record, data.revision).catch((err) => {
-            expect(err).toBeInstanceOf(KintoneAPIException);
-            expect(err.get()).toMatchObject(expectResult);
-          });
-        });
-      });
-      });
-   */
 });

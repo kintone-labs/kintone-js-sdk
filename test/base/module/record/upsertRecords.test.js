@@ -9,8 +9,8 @@ const common = require('../../../utils/common');
 
 const {Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const recordModule = new Record(conn);
 
 const appID = 84;
@@ -150,7 +150,7 @@ describe('upsertRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const upsertRecordsResult = recordModule.upsertRecords(appID, recordsWithUpd8Key).then((resp) => {
+      const upsertRecordsResult = recordModule.upsertRecords({app: appID, records: recordsWithUpd8Key}).then((resp) => {
         expect(resp).toEqual(expectResults);
       }).catch((err) => {
         throw new Error(err.results[0].errorRaw.message);
@@ -181,7 +181,7 @@ describe('upsertRecords function', () => {
       }
       const message = `upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`;
       try {
-        recordModule.upsertRecords(appID, recordsWithUpd8Key);
+        recordModule.upsertRecords({app: appID, records: recordsWithUpd8Key});
       } catch (e) {
         expect(e.message).toEqual(message);
       }
