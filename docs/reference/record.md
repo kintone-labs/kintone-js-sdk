@@ -39,7 +39,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 ## Methods
 
-### getRecord(app, id)
+### getRecord(params)
 
 > Retrieves details of 1 record from an app.
 
@@ -47,8 +47,9 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| id | Integer | yes | The record ID in kintone app
+| params | Object | yes | Get record params
+| params.app | Integer | yes | The kintone app ID
+| params.id | Integer | yes | The record ID in kintone app
 
 
 **Return**
@@ -66,7 +67,7 @@ Promise
 
   var app = {your_app_id};
   var id = {your_record_id};
-  kintoneRecord.getRecord(app, id).then((rsp) => {
+  kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -81,7 +82,7 @@ Promise
 
   const app = /*{your_app_id}*/;
   const id = {your_record_id};
-  kintoneRecord.getRecord(app, id).then((rsp) => {
+  kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -92,7 +93,7 @@ Promise
 
 </details>
 
-### getRecords(app, query, fields, totalCount)
+### getRecords(params)
 
 > Retrieves details of multiple records from an app using a query string.
 
@@ -100,10 +101,11 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
-| fields | Array<String\> | (optional) | List of field codes you want in the response.
-| totalCount | Boolean | (optional) | If "true", the request will retrieve total count of records match with query conditions.
+| params | Object | yes | Get records params
+| params.app | Integer | yes | The kintone app ID
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params.fields | Array<String\> | (optional) | List of field codes you want in the response.
+| params.totalCount | Boolean | (optional) | If "true", the request will retrieve total count of records match with query conditions.
 
 **Return**
 
@@ -125,7 +127,7 @@ Promise
       // another fieldCode
   ]
   var totalCount = {your_decide_true_or_false};
-  kintoneRecord.getRecords(app, query, fields, totalCount).then((rsp) => {
+  kintoneRecord.getRecords({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -145,7 +147,7 @@ Promise
       // another fieldCode
   ]
   const totalCount = /*{your_decide_true_or_false}*/;
-  kintoneRecord.getRecords(app, query, fields, totalCount).then((rsp) => {
+  kintoneRecord.getRecords({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -156,7 +158,7 @@ Promise
 
 </details>
 
-### getAllRecordsByQuery(app, query, fields, totalCount)
+### getAllRecordsByQuery(params)
 
 >* Retrieves details of all records from an app using a query string.
 >* Can't indicate limit and offset of query.
@@ -166,10 +168,11 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
-| fields | Array<String\> | (optional) | List of field codes you want in the response.
-| totalCount | Boolean | (optional) | If "true", the request will retrieve total count of records match with query conditions.
+| params | Object | yes | Get records by query params
+| params.app | Integer | yes | The kintone app ID
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params.fields | Array<String\> | (optional) | List of field codes you want in the response.
+| params.totalCount | Boolean | (optional) | If "true", the request will retrieve total count of records match with query conditions.
 
 **Return**
 
@@ -191,7 +194,7 @@ Promise
       // another fieldCode
   ]
   var totalCount = '{your_decide_true_or_false}';
-  kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
+  kintoneRecord.getAllRecordsByQuery({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
@@ -211,7 +214,7 @@ Promise
       // another fieldCode
   ]
   const totalCount = '{your_decide_true_or_false}';
-  kintoneRecord.getAllRecordsByQuery(app, query, fields, totalCount).then((rsp) => {
+  kintoneRecord.getAllRecordsByQuery({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
@@ -222,7 +225,7 @@ Promise
 
 </details>
 
-### getAllRecordsByCursor(option)
+### getAllRecordsByCursor(params)
 
 >* Retrieves details of all records from an app using a query string.
 >* Can't indicate limit and offset of query.
@@ -232,9 +235,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| option | Object | yes | Option to create cursor
-| option.app | Integer | yes | The kintone app ID
-| option.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params | Object | yes | Params to create cursor
+| params.app | Integer | yes | The kintone app ID
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
 | option.fields | Array<String\> | (optional) | List of field codes you want in the response.
 
 **Return**
@@ -291,7 +294,7 @@ Promise
 
 </details>
 
-### addRecord(app, record)
+### addRecord(params)
 
 >Add one record to an app.
 
@@ -299,8 +302,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| record | JSONObject | (optional) | The record data to be add to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page
+| params | Object | yes | Params to add record
+| params.app | Integer | yes | The kintone app ID
+| params.record | JSONObject | (optional) | The record data to be add to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page
 
 **Return**
 
@@ -322,7 +326,7 @@ Promise
     },
     // Another fieldcode here
   };
-  kintoneRecord.addRecord(app, record).then((rsp) => {
+  kintoneRecord.addRecord({app, record}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -342,7 +346,7 @@ Promise
       },
       // Another fieldcode here
   };
-  kintoneRecord.addRecord(app, record).then((rsp) => {
+  kintoneRecord.addRecord({app, record}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -353,7 +357,7 @@ Promise
 
 </details>
 
-### addRecords(app, records)
+### addRecords(params)
 
 >Add multiple records to an app.
 
@@ -361,8 +365,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| records | Array<JSONObject\> | yes | List of records data to be add to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params | Object | yes | Params to add records
+| params.app | Integer | yes | The kintone app ID
+| params.records | Array<JSONObject\> | yes | List of records data to be add to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
 
 **Return**
 
@@ -388,7 +393,7 @@ Promise
       record,
       // another record
   ];
-  kintoneRecord.addRecords(app, records).then((rsp) => {
+  kintoneRecord.addRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -412,7 +417,7 @@ Promise
     record
     // another record
   ];
-  kintoneRecord.addRecords(app, records).then((rsp) => {
+  kintoneRecord.addRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -424,7 +429,7 @@ Promise
 </details>
 
 
-### addAllRecords(app, records)
+### addAllRecords(params)
 
 >* Add multiple records to an app.
 >* Can insert over 2000 records to kintone app, but can't do rollback.
@@ -433,8 +438,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| records | Array<JSONObject\> | yes | List of records data to be add to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params | Object | yes | Params to add all record
+| params.app | Integer | yes | The kintone app ID
+| params.records | Array<JSONObject\> | yes | List of records data to be add to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
 
 **Return**
 
@@ -460,7 +466,7 @@ Promise
       record,
       // another record
   ];
-  kintoneRecord.addAllRecords(app, records).then((rsp) => {
+  kintoneRecord.addAllRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // Ex: User update 6000 records: 
@@ -535,7 +541,7 @@ Promise
     record
     // another record
   ];
-  kintoneRecord.addAllRecords(app, records).then((rsp) => {
+  kintoneRecord.addAllRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // Ex: User update 6000 records: 
@@ -598,7 +604,7 @@ Promise
 </details>
 
 
-### updateRecordByID(app, id, record, revision)
+### updateRecordByID(params)
 
 > Updates details of 1 record in an app by specifying its record number.
 
@@ -606,10 +612,11 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| id | Integer | yes | The record ID on kintone app
-| record | JSONObject | yes | The record data to be update in  kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
-| revision | Integer | (optional) | The revision number of record
+| params | Object | yes | Params to update record by id
+| params.app | Integer | yes | The kintone app ID
+| params.id | Integer | yes | The record ID on kintone app
+| params.record | JSONObject | yes | The record data to be update in  kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params.revision | Integer | (optional) | The revision number of record
 
 **Return**
 
@@ -633,7 +640,7 @@ Promise
       // Another fieldcode here
   };
   var revision = 'revision_of_record';
-  kintoneRecord.updateRecordByID(app, id, record, revision).then((rsp) => {
+  kintoneRecord.updateRecordByID({app, id, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -666,7 +673,7 @@ Promise
 
 </details>
 
-### updateRecordByUpdateKey(app, updateKey, record, revision)
+### updateRecordByUpdateKey(params)
 
 Updates details of 1 record in an app by unique key.
 
@@ -674,10 +681,11 @@ Updates details of 1 record in an app by unique key.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| updateKey | JSONObject | yes | The unique key of the record to be updated. About the format, please look the sample below or [reference](#reference) at the end of this page.
-| record | JSONObject | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
-| revision | Integer | (optional) | The revision number of record
+| params | Object | yes | Params to update record by update key
+| params.app | Integer | yes | The kintone app ID
+| params.updateKey | JSONObject | yes | The unique key of the record to be updated. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params.record | JSONObject | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params.revision | Integer | (optional) | The revision number of record
 
 **Return**
 
@@ -704,7 +712,7 @@ Promise
     // Another fieldcode here
   };
   var revision = 'revision_of_record';
-  kintoneRecord.updateRecordByUpdateKey(app, updateKey, record, revision).then((rsp) => {
+  kintoneRecord.updateRecordByUpdateKey({app, updateKey, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -740,7 +748,7 @@ Promise
 
 </details>
 
-### updateRecords(app, records)
+### updateRecords(params)
 
 > Updates details of multiple records in an app, by specifying their record number, or a different unique key.
 
@@ -748,8 +756,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| records | Array<JSONObject\> | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params | Object | yes | Params to update records
+| params.app | Integer | yes | The kintone app ID
+| params.records | Array<JSONObject\> | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
 
 **Return**
 
@@ -780,11 +789,11 @@ Promise
     record: record,
     revision: 'record_revision_number' // Optional
   };
-  var recordsUpdate = [
+  var records= [
     recordUpdate,
     // Another recordUpdate
   ]
-  kintoneRecord.updateRecords(app, recordsUpdate).then((rsp) => {
+  kintoneRecord.updateRecords({app, records}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
       // This SDK return err with KintoneAPIExeption
@@ -813,11 +822,11 @@ Promise
       record: record,
       revision: /*{record_revision_number}*/ // Optional
   };
-  const recordsUpdate = [
+  const records = [
       recordUpdate,
       // Another recordUpdate
   ]
-  kintoneRecord.updateRecords(app, recordsUpdate).then((rsp) => {
+  kintoneRecord.updateRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -828,7 +837,7 @@ Promise
 
 </details>
 
-### updateAllRecords(app, records)
+### updateAllRecords(params)
 
 >* Updates details of multiple records in an app, by specifying their record number, or a different unique key.
 >* Can update over 2000 records to kintone app, but can't do rollback.
@@ -837,8 +846,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| records | Array<JSONObject\> | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params | Object | yes | Params to update all records
+| params.app | Integer | yes | The kintone app ID
+| params.records | Array<JSONObject\> | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
 
 **Return**
 
@@ -869,11 +879,11 @@ Promise
     record: record,
     revision: 'record_revision_number' // Optional
   };
-  var recordsUpdate = [
+  var records = [
     recordUpdate,
     // Another recordUpdate
   ]
-  kintoneRecord.updateAllRecords(app, recordsUpdate).then((rsp) => {
+  kintoneRecord.updateAllRecords({app, records}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
       // Ex: User update 6000 records: 
@@ -953,11 +963,11 @@ Promise
       record: record,
       revision: /*{record_revision_number}*/ // Optional
   };
-  const recordsUpdate = [
+  const records = [
       recordUpdate,
       // Another recordUpdate
   ]
-  kintoneRecord.updateAllRecords(app, recordsUpdate).then((rsp) => {
+  kintoneRecord.updateAllRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // Ex: User update 6000 records: 
@@ -1018,7 +1028,7 @@ Promise
 </pre>
 </details>
 
-### deleteRecords(app, ids)
+### deleteRecords(params)
 
 > Deletes multiple records in an app.
 
@@ -1026,8 +1036,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| ids | Array<Integer\> | yes | The list ids of record will be delete.
+| params | Object | yes | Params to delete records
+| params.app | Integer | yes | The kintone app ID
+| params.ids | Array<Integer\> | yes | The list ids of record will be delete.
 
 **Return**
 
@@ -1044,7 +1055,7 @@ Promise
 
   var app = 'your_app_id';
   var ids = [/*your_record_id*/]
-  kintoneRecord.deleteRecords(app, ids).then((rsp) => {
+  kintoneRecord.deleteRecords({app, ids}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
       // This SDK return err with KintoneAPIExeption
@@ -1059,7 +1070,7 @@ Promise
 
   const app = /*{your_app_id}*/;
   const ids = [/*your_record_id*/]
-  kintoneRecord.deleteRecords(app, ids).then((rsp) => {
+  kintoneRecord.deleteRecords({app, ids}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1070,7 +1081,7 @@ Promise
 
 </details>
 
-### deleteRecordsWithRevision(app, idsWithRevision)
+### deleteRecordsWithRevision(params)
 
 > Deletes multiple records in an app with revision.
 
@@ -1078,8 +1089,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| idsWithRevision | JSONObject | yes | JSONObject format by HashTable<`Integer`, `Integer`\> (**key**: `The Id of record`, **value**: `The Revision of record.`)
+| params | Object | yes | Params to delete record with revision
+| params.app | Integer | yes | The kintone app ID
+| params.idsWithRevision | JSONObject | yes | JSONObject format by HashTable<`Integer`, `Integer`\> (**key**: `The Id of record`, **value**: `The Revision of record.`)
 
 **Return**
 
@@ -1098,7 +1110,7 @@ Promise
   var idsWithRevision = {
     /*your_record_id: revision_of_record*/
   }
-  kintoneRecord.deleteRecordsWithRevision(app, idsWithRevision).then((rsp) => {
+  kintoneRecord.deleteRecordsWithRevision({app, idsWithRevision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1115,7 +1127,7 @@ Promise
   const idsWithRevision = {
       /*your_record_id: revision_of_record*/
   }
-  kintoneRecord.deleteRecordsWithRevision(app, idsWithRevision).then((rsp) => {
+  kintoneRecord.deleteRecordsWithRevision({app, idsWithRevision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1126,7 +1138,7 @@ Promise
 
 </details>
 
-### deleteAllRecordsByQuery(app, query)
+### deleteAllRecordsByQuery(params)
 
 >* Deletes all records in an app by query string
 >* Can delete over 2000 records, but can't do rollback.
@@ -1135,8 +1147,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params | Object | yes | Delete all records by query
+| params.app | Integer | yes | The kintone app ID
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
 
 **Return**
 
@@ -1153,7 +1166,7 @@ Promise
 
   var app = 'your_app_id';
   var query = 'your_query_string';
-  kintoneRecord.deleteAllRecordsByQuery(app, query).then((rsp) => {
+  kintoneRecord.deleteAllRecordsByQuery({app, query}).then((rsp) => {
       console.log(rsp);
   })
   .catch((err) => {
@@ -1220,7 +1233,7 @@ Promise
 
   const app = 'your_app_id';
   const query = 'your_query_string';
-  kintoneRecord.deleteAllRecordsByQuery(app, query).then((rsp) => {
+  kintoneRecord.deleteAllRecordsByQuery({app, query}).then((rsp) => {
       console.log(rsp);
   })
   .catch((err) => {
@@ -1283,7 +1296,7 @@ Promise
 
 </details>
 
-### upsertRecord(app, updateKey, record, revision)
+### upsertRecord(params)
 
 Insert or update a record to kintone app.
 Insert the record if the updateKey doesn't exists and update the record if the updateKey exists.
@@ -1292,10 +1305,11 @@ Insert the record if the updateKey doesn't exists and update the record if the u
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| updateKey | JSONObject | yes | The unique key of the record to be updated. About the format, please look the sample below or [reference](#reference) at the end of this page.
-| record | JSONObject | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
-| revision | Integer | (optional) | The revision number of record
+| params | Object | yes | Params to upsert record
+| params.app | Integer | yes | The kintone app ID
+| params.updateKey | JSONObject | yes | The unique key of the record to be updated. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params.record | JSONObject | yes | The record data will be added to kintone app. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params.revision | Integer | (optional) | The revision number of record
 
 **Return**
 
@@ -1322,7 +1336,7 @@ Promise
     // Another fieldcode here
   };
   var revision = 'revision_of_record';
-  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
+  kintoneRecord.upsertRecord({app, updateKey, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1347,7 +1361,7 @@ Promise
     // Another fieldcode here
   };
   const revision = 'revision_of_record';
-  kintoneRecord.upsertRecord(app, updateKey, record, revision).then((rsp) => {
+  kintoneRecord.upsertRecord({app, updateKey, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1358,7 +1372,7 @@ Promise
 
 </details>
 
-### upsertRecords(app, records)
+### upsertRecords(params)
 
 Insert or update up to 1500 records to kintone app.
 If the records are over 1500, It is thrown Error.
@@ -1368,8 +1382,9 @@ Insert the records if the updateKey doesn't exists and update the records if the
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| records | Array<JSONObject> | yes | The record data Array which has updateKey and record. About the format, please look the sample below or [reference](#reference) at the end of this page.
+| params | Object | yes | Params to upsert records
+| params.app | Integer | yes | The kintone app ID
+| params.records | Array<JSONObject> | yes | The record data Array which has updateKey and record. About the format, please look the sample below or [reference](#reference) at the end of this page.
 
 **Return**
 
@@ -1420,7 +1435,7 @@ Promise
       }
     }
   ];
-  recordModule.upsertRecords(app, records).then((resp) => {
+  recordModule.upsertRecords({app, records}).then((resp) => {
     console.log(resp);
   }).catch((e) => {
     /// Ex: User upsert over 100 records: 
@@ -1479,7 +1494,7 @@ Promise
       }
     }
   ];
-  recordModule.upsertRecords(app, records).then((resp) => {
+  recordModule.upsertRecords({app, records}).then((resp) => {
     console.log(resp);
   }).catch((e) => {
     /// Ex: User upsert over 100 records: 
@@ -1500,7 +1515,7 @@ Promise
 
 </details>
 
-### updateRecordAssignees(app, id, assignees, revision)
+### updateRecordAssignees(params)
 
 > Update assignees of a record.
 
@@ -1508,10 +1523,11 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| id | Integer | yes | The record ID of kintone app
-| assignees | Array<String\> | yes | The user code(s) of the assignee(s)
-| revision | Integer | (option) | The revision number of record
+| params | Object | yes | Params to update record assignees
+| params.app | Integer | yes | The kintone app ID
+| params.id | Integer | yes | The record ID of kintone app
+| params.assignees | Array<String\> | yes | The user code(s) of the assignee(s)
+| params.revision | Integer | (option) | The revision number of record
 
 **Return**
 
@@ -1531,7 +1547,7 @@ Promise
   var assignees = [/*your_assignee(s)*/];
   var revision = 'revision_of_record';
 
-  kintoneRecord.updateRecordAssignees(app, id, assignees, revision).then((rsp) => {
+  kintoneRecord.updateRecordAssignees({app, id, assignees, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1549,7 +1565,7 @@ Promise
   const assignees = [/*your_assignee(s)*/];
   const revision = /*{revision_of_record}*/;
 
-  kintoneRecord.updateRecordAssignees(app, id, assignees, revision).then((rsp) => {
+  kintoneRecord.updateRecordAssignees({app, id, assignees, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1560,7 +1576,7 @@ Promise
 
 </details>
 
-### updateRecordStatus(app, id, action, assignee, revision)
+### updateRecordStatus(params)
 
 > Updates the Status of a record of an app.
 
@@ -1568,11 +1584,12 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID.
-| id | Integer | yes | The record ID on kintone app.
-| action | String | yes | The Action name will be run.
-| assignee | String | (Conditionally required) | The next Assignee. Specify the Assignee's log in name.</br>Required, if the "Assignee List" of the current status is set to "User chooses one assignee from the list to take action", and a selectable assignee exists.
-| revision | Integer | (optional) | The revision of record
+| params | Object | yes | Params to update record status
+| params.app | Integer | yes | The kintone app ID.
+| params.id | Integer | yes | The record ID on kintone app.
+| params.action | String | yes | The Action name will be run.
+| params.assignee | String | (Conditionally required) | The next Assignee. Specify the Assignee's log in name.<br>Required, if the "Assignee List" of the current status is set to "User chooses one assignee from the list to take action", and a selectable assignee exists.
+| params.revision | Integer | (optional) | The revision of record
 
 **Return**
 
@@ -1593,7 +1610,7 @@ Promise
   var assignee = '/*your_assignee(s)*/';
   var revision = 'revision_of_record';
 
-  kintoneRecord.updateRecordStatus(app, id, action, assignee, revision).then((rsp) => {
+  kintoneRecord.updateRecordStatus({app, id, action, assignee, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1612,7 +1629,7 @@ Promise
   const assignee = '/*your_assignee(s)*/';
   const revision = /*{revision_of_record}*/;
 
-  kintoneRecord.updateRecordStatus(app, id, action, assignee, revision).then((rsp) => {
+  kintoneRecord.updateRecordStatus({app, id, action, assignee, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1623,7 +1640,7 @@ Promise
 
 </details>
 
-### updateRecordsStatus(app, records)
+### updateRecordsStatus(params)
 
 > Updates the Status of multiple records of an app.
 
@@ -1631,8 +1648,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| records | Array<JSONObject\> | yes | The recod status data. See belowsample codee or [reference](#reference) at the end of this page to know format.
+| params | Object | yes | Params to update records status
+| params.app | Integer | yes | The kintone app ID
+| params.records | Array<JSONObject\> | yes | The recod status data. See belowsample codee or [reference](#reference) at the end of this page to know format.
 
 **Return**
 
@@ -1658,7 +1676,7 @@ Promise
     recordStatusUpdateItem,
     'another data like recordStatusUpdateItem'
   ];
-  kintoneRecord.updateRecordsStatus(app, records).then((rsp) => {
+  kintoneRecord.updateRecordsStatus({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1682,7 +1700,7 @@ Promise
       recordStatusUpdateItem,
       /*another data like recordStatusUpdateItem*/
   ];
-  kintoneRecord.updateRecordsStatus(app, records).then((rsp) => {
+  kintoneRecord.updateRecordsStatus({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1693,17 +1711,18 @@ Promise
 
 </details>
 
-### getComments(app, record, order, offset, limit)
+### getComments(params)
 
 **Parameter**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| record | Integer | yes | The ID of record
-| order | String | (optional) | The sort order of the Comment ID. Please select **asc** or **desc**
-| offset | Integer | (optional) | The number of first comments will be ignored.
-| limit | Integer | (optional) | The number of records to retrieve.
+| params | Object | yes | Params to get comments
+| params.app | Integer | yes | The kintone app ID
+| params.record | Integer | yes | The ID of record
+| params.order | String | (optional) | The sort order of the Comment ID. Please select **asc** or **desc**
+| params.offset | Integer | (optional) | The number of first comments will be ignored.
+| params.limit | Integer | (optional) | The number of records to retrieve.
 
 **Return**
 
@@ -1723,7 +1742,7 @@ Promise
   var order = 'your_order_type'; // asc or desc
   var offset = 'your_offset_number';
   var limit = 'your_limit number';
-  kintoneRecord.getComments(app, id, order, offset, limit).then((rsp) => {
+  kintoneRecord.getComments({app, id, order, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1741,7 +1760,7 @@ Promise
   const order = /*{your_order_type}*/; // asc or desc
   const offset = /*{your_offset_number}*/;
   const limit = /*{your_limit number}*/;
-  kintoneRecord.getComments(app, id, order, offset, limit).then((rsp) => {
+  kintoneRecord.getComments({app, id, order, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1752,15 +1771,15 @@ Promise
 
 </details>
 
-### addComment(app, record, comment)
+### addComment(params)
 
 **Parameter**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID |
-| record | Integer | yes | The ID of record |
-| comment | JSONObject | yes | About the format, please look the sample below or [reference](#reference) at the end of this page.|
+| params.app | Integer | yes | The kintone app ID |
+| params.record | Integer | yes | The ID of record |
+| params.comment | JSONObject | yes | About the format, please look the sample below or [reference](#reference) at the end of this page.|
 
 **Return**
 
@@ -1787,7 +1806,7 @@ Promise
       // another mention here
     ]
   };
-  kintoneRecord.addComment(app, record, comment).then((rsp) => {
+  kintoneRecord.addComment({app, record, comment}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1812,7 +1831,7 @@ Promise
       // another mention here
     ]
   };
-  kintoneRecord.addComment(app, record, comment).then((rsp) => {
+  kintoneRecord.addComment({app, record, comment}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
       // This SDK return err with KintoneAPIExeption
@@ -1823,15 +1842,16 @@ Promise
 
 </details>
 
-### deleteComment(app, record, comment)
+### deleteComment(params)
 
 **Parameter**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| record | Integer | yes | The record ID on kintone app
-| comment | Integer | yes | The comment ID on kintone record
+| params | Object | yes | Params to delete comment
+| params.app | Integer | yes | The kintone app ID
+| params.record | Integer | yes | The record ID on kintone app
+| params.comment | Integer | yes | The comment ID on kintone record
 
 **Return**
 
@@ -1849,7 +1869,7 @@ Promise
   var app = 'your_app_id';
   var record = 'your_record_id';
   var comment = 'your_comment_id';
-  kintoneRecord.deleteComment(app, record, comment).then((rsp) => {
+  kintoneRecord.deleteComment({app, record, comment}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -1865,7 +1885,7 @@ Promise
   const app = /*{your_app_id}*/;
   const record = /*{your_record_id}*/;
   const comment = /*{your_comment_id}*/;
-  kintoneRecord.deleteComment(app, record, comment).then((rsp) => {
+  kintoneRecord.deleteComment({app, record, comment}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
       // This SDK return err with KintoneAPIExeption
