@@ -9,12 +9,12 @@ const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD})
   .setApiToken({apiToken: common.API_TOKEN_VALUE});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 const BULK_REQUEST_API_ROUTE = '/k/v1/bulkRequest.json';
 const BULK_REQUEST_API_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/bulkRequest.json`;
 
 const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const recordModuleGuestSpace = new Record(connGuestSpace);
+const recordModuleGuestSpace = new Record({connection: connGuestSpace});
 describe('addAllRecords function', () => {
   describe('common case', () => {
 
@@ -845,7 +845,7 @@ describe('addAllRecords function', () => {
         recordsData.push({
           Text_0: {
             value: 'test'
-          } 
+          }
         });
         resultsIds.push(index);
         resultsRevisons.push(index);
@@ -862,7 +862,6 @@ describe('addAllRecords function', () => {
             'records': recordsData.slice(start, end)
           }
         });
-        
         if (index < API_ROUTE.BULK_REQUEST_LIMIT) {
           expectResultsBulk1.results.push({
             'ids': resultsIds.slice(start, end),

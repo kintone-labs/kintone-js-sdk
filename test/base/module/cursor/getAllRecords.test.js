@@ -40,7 +40,7 @@ describe('getAllRecords function', ()=>{
         })
         .reply(200, EXPECTED_RESPONSE);
 
-      const rc = new RecordCursor(conn);
+      const rc = new RecordCursor({connection: conn});
       return rc.getAllRecords({id: cursorID})
         .then((recordsResponse)=>{
           expect(recordsResponse).toHaveProperty('records');
@@ -71,9 +71,9 @@ describe('getAllRecords function', ()=>{
         })
         .reply(404, ILLEGAL_REQUEST);
 
-      const rc = new RecordCursor(conn);
+      const rc = new RecordCursor({connection: conn});
       return rc.getAllRecords({id: wrongID})
-        .catch((err)=>{
+        .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(ILLEGAL_REQUEST);
         });

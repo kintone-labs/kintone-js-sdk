@@ -46,7 +46,7 @@ describe('createCursor function', ()=>{
         })
         .reply(200, EXPECTED_RESPONSE);
 
-      const rc = new RecordCursor(conn);
+      const rc = new RecordCursor({connection: conn});
       return rc.createCursor({app, fields, query, size})
         .then((response)=>{
           expect(response).toHaveProperty('id');
@@ -79,7 +79,7 @@ describe('createCursor function', ()=>{
         .post(CURSOR_ROUTE)
         .reply(400, INVALID_INPUT_RETURN);
 
-      const rc = new RecordCursor(conn);
+      const rc = new RecordCursor({connection: conn});
       return rc.createCursor({app, fields, query, size})
         .catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);

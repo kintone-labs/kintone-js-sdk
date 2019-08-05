@@ -8,7 +8,7 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 describe('deleteRecords function', () => {
   describe('common case', () => {
@@ -126,7 +126,7 @@ describe('deleteRecords function', () => {
       };
 
       const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-      const recordInGuestSpace = new Record(connGuestSpace);
+      const recordInGuestSpace = new Record({connection: connGuestSpace});
       nock(URI)
         .delete(API_ROUTE.GUEST_RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);

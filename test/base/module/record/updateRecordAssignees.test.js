@@ -16,16 +16,16 @@ const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 const connGuestParam = {domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID};
 const connGuest = new Connection(connGuestParam);
-const recordAssignee = new Record(connGuest);
+const recordAssignee = new Record({connection: connGuest});
 
 const authAPI = new Auth();
 authAPI.setApiToken({apiToken: common.API_TOKEN});
 const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
-const recordAssigneeAPI = new Record(connAPI);
+const recordAssigneeAPI = new Record({connection: connAPI});
 
 describe('UpdateRecordAssignees function', () => {
   describe('common case', () => {

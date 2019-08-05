@@ -23,7 +23,7 @@ describe('addRecord function', () => {
       nock(URI)
         .post(RECORD_API_ROUTE)
         .reply(200, {'id': '100', 'revision': '1'});
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       const addRecordResult = recordModule.addRecord();
       expect(addRecordResult).toHaveProperty('then');
       expect(addRecordResult).toHaveProperty('catch');
@@ -66,7 +66,7 @@ describe('addRecord function', () => {
           return true;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
@@ -82,7 +82,7 @@ describe('addRecord function', () => {
           return rqBody.app === body.app;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
@@ -98,7 +98,7 @@ describe('addRecord function', () => {
         })
         .reply(200, {'id': '100', 'revision': '1'});
       const conn1 = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-      const recordModule = new Record(conn1);
+      const recordModule = new Record({connection: conn1});
       return recordModule.addRecord(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
@@ -119,7 +119,7 @@ describe('addRecord function', () => {
           return rqBody.app === bodyWithoutFields.app;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(bodyWithoutFields)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
@@ -141,7 +141,7 @@ describe('addRecord function', () => {
           return rqBody.app === bodyStringID.app;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(bodyStringID)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
@@ -160,7 +160,7 @@ describe('addRecord function', () => {
           return rqBody.app === bodyBlank.app;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(bodyBlank)
         .then(rsp => {
           expect(rsp).toHaveProperty('id');
@@ -184,7 +184,7 @@ describe('addRecord function', () => {
         .post(RECORD_API_ROUTE)
         .reply(404, expectResult);
 
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord({app: unexistedapp})
         .catch(err => {
           expect(err.get()).toHaveProperty('id');
@@ -209,7 +209,7 @@ describe('addRecord function', () => {
         .post(RECORD_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord({app: negativeapp})
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -233,7 +233,7 @@ describe('addRecord function', () => {
         .post(RECORD_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord({app: app})
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -275,7 +275,7 @@ describe('addRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -309,7 +309,7 @@ describe('addRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -343,7 +343,7 @@ describe('addRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -370,7 +370,7 @@ describe('addRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -403,7 +403,7 @@ describe('addRecord function', () => {
         .post(RECORD_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -432,7 +432,7 @@ describe('addRecord function', () => {
         .post(RECORD_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -466,7 +466,7 @@ describe('addRecord function', () => {
         .post(RECORD_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
@@ -493,7 +493,7 @@ describe('addRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordModule = new Record(conn);
+      const recordModule = new Record({connection: conn});
       return recordModule.addRecord(body)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);

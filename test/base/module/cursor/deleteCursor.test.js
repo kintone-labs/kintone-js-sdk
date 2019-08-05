@@ -35,7 +35,7 @@ describe('deleteCursor function', ()=>{
         })
         .reply(200, {});
 
-      const rc = new RecordCursor(conn);
+      const rc = new RecordCursor({connection: conn});
       return rc.deleteCursor({id: cursorID})
         .then((rsp)=>{
           expect(rsp).toEqual({});
@@ -64,7 +64,7 @@ describe('deleteCursor function', ()=>{
         })
         .reply(400, ILLEGAL_REQUEST);
 
-      const rc = new RecordCursor(conn);
+      const rc = new RecordCursor({connection: conn});
       return rc.deleteCursor({id: wrongID})
         .catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);

@@ -9,7 +9,7 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 describe('updateRecords function', () => {
   describe('common case', () => {
@@ -282,7 +282,7 @@ describe('updateRecords function', () => {
      */
     it('[Record-125] - should update record successfully for app in guest space', () => {
       const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-      const recordGuestModule = new Record(connGuestSpace);
+      const recordGuestModule = new Record({connection: connGuestSpace});
       const appID = 19;
       const recordDataUpdate = {
         'app': appID,

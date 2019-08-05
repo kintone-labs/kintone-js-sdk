@@ -19,8 +19,8 @@ if (common.hasOwnProperty('proxy') && common.proxy) {
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/record/comment.json';
 const ROUTE_GUEST = '/k/guest/1/v1/record/comment.json';
-const recordModule = new Record(conn);
-const recordModuleGuest = new Record(connGuest);
+const recordModule = new Record({connection: conn});
+const recordModuleGuest = new Record({connection: connGuest});
 
 describe('deleteComment function', () => {
   describe('common cases', () => {

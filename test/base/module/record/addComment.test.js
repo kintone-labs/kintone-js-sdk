@@ -8,9 +8,9 @@ const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH
 
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const recordModuleGuest = new Record(connGuest);
+const recordModuleGuest = new Record({connection: connGuest});
 
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/record/comment.json';

@@ -17,8 +17,8 @@ const conn_guest = new Connection({domain: common.DOMAIN, auth: auth, guestSpace
 if (common.hasOwnProperty('proxy') && common.proxy) {
   conn.addRequestOption('proxy', common.proxy);
 }
-const recordModule = new Record(conn);
-const recordModule_guest = new Record(conn_guest);
+const recordModule = new Record({connection: conn});
+const recordModule_guest = new Record({connection: conn_guest});
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/record/comments.json';
 const ROUTE_GUEST = '/k/guest/1/v1/record/comments.json';
