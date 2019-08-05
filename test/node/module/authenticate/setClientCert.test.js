@@ -18,6 +18,13 @@ const paramClientCert = {cert: pfxFile, password: certPass};
 describe('Connection module', () => {
   describe('success case', () => {
     it(`[setClientCert-1] Verify that connect succesfully by certificate data`, () => {
+      const auth = new Auth();
+      auth.setPasswordAuth(paramPasswordAuth);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
+      console.log(conn);
+    });
+
+    it(`[setClientCert-1] Verify that connect succesfully by certificate data`, () => {
       const auth = new Auth()
         .setPasswordAuth(paramPasswordAuth)
         .setClientCert(paramClientCert);
@@ -211,7 +218,7 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      return file.download('file_key').catch((err) => {
+      return file.download({fileKey: 'file_key', outPutFilePath: './test/module/file/mock/testInvalidFilePath/test.png'}).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
     });
