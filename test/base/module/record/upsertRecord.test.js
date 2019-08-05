@@ -10,8 +10,8 @@ const common = require('../../../utils/common');
 const {Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const recordModule = new Record(conn);
 describe('upsertRecord function', () => {
   describe('success case', () => {
@@ -61,7 +61,7 @@ describe('upsertRecord function', () => {
           return true;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      return recordModule.upsertRecord(body.app, updateKey, recordData)
+      return recordModule.upsertRecord({app: body.app, updateKey: updateKey, record: recordData})
         .then(rsp => {
           expect(rsp).toHaveProperty('revision');
         });
@@ -120,7 +120,7 @@ describe('upsertRecord function', () => {
           return true;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      return recordModule.upsertRecord(body.app, updateKey, recordData)
+      return recordModule.upsertRecord({app: body.app, updateKey: updateKey, record: recordData})
         .then(rsp => {
           expect(rsp.revision).toBe('1');
           expect(rsp.id).toBe('100');
@@ -172,7 +172,7 @@ describe('upsertRecord function', () => {
           return true;
         })
         .reply(200, {'id': '100', 'revision': '1'});
-      return recordModule.upsertRecord(body.app, updateKey, recordData)
+      return recordModule.upsertRecord({app: body.app, updateKey: updateKey, record: recordData})
         .then(rsp => {
           expect(rsp).toHaveProperty('revision');
         });
@@ -206,7 +206,7 @@ describe('upsertRecord function', () => {
         .reply(200, {
           'records': [recordData, recordData]
         });
-      return recordModule.upsertRecord(body.app, updateKey, recordData)
+      return recordModule.upsertRecord({app: body.app, updateKey: updateKey, record: recordData})
         .catch((err) => {
           expect(err.message).toEqual(message);
         });

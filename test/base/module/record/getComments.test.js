@@ -10,9 +10,9 @@ const {
   Record
 } = require(common.MAIN_PATH_BASE);
 
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const conn_guest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const conn_guest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
 
 if (common.hasOwnProperty('proxy') && common.proxy) {
   conn.addRequestOption('proxy', common.proxy);
@@ -48,7 +48,7 @@ describe('getComments function', () => {
           older: false,
           newer: false
         });
-      const actualResult = recordModule.getComments(data.app, data.record);
+      const actualResult = recordModule.getComments(data);
       expect(actualResult).toHaveProperty('then');
       expect(actualResult).toHaveProperty('catch');
     });
@@ -85,14 +85,14 @@ describe('getComments function', () => {
           older: false,
           newer: false
         });
-      const actualResult = recordModule.getComments(data.app, data.record);
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
       });
     });
 
     it('[Record-216] should return the comments of record by the order of `asc`', () => {
-      const data = {app: 1, record: 2};
+      const data = {app: 1, record: 2, order: 'asc'};
       const expectedResult = {
         comments: [
           {
@@ -143,13 +143,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}&order=asc`)
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        'asc',
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -157,7 +151,7 @@ describe('getComments function', () => {
     });
 
     it('[Record-217] should return the comments of record by the order of `desc`', () => {
-      const data = {app: 1, record: 2};
+      const data = {app: 1, record: 2, order: 'desc'};
       const expectedResult = {
         comments: [
           {
@@ -208,13 +202,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}&order=desc`)
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        'desc',
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -222,7 +210,7 @@ describe('getComments function', () => {
     });
 
     it('[Record-219] should return the comments of record according to the offset value', () => {
-      const data = {app: 1, record: 2};
+      const data = {app: 1, record: 2, order: 'asc', offset: 2};
       const expectedResult = {
         comments: [
           {
@@ -249,24 +237,16 @@ describe('getComments function', () => {
         older: true,
         newer: false
       };
-      const OFFSET = 2;
-
       nock(URI)
         .get(
           ROUTE +
               `?app=${data.app}&record=${
                 data.record
-              }&order=asc&offset=${OFFSET}`
+              }&order=asc&offset=${data.offset}`
         )
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        'asc',
-        OFFSET,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -274,7 +254,7 @@ describe('getComments function', () => {
     });
 
     it('[Record-220] should return the comments of record without skipping when the offset value is 0', () => {
-      const data = {app: 1, record: 2};
+      const data = {app: 1, record: 2, order: 'desc', offset: 0};
       const expectedResult = {
         comments: [
           {
@@ -321,24 +301,17 @@ describe('getComments function', () => {
         older: false,
         newer: false
       };
-      const OFFSET = 0;
 
       nock(URI)
         .get(
           ROUTE +
               `?app=${data.app}&record=${
                 data.record
-              }&order=desc&offset=${OFFSET}`
+              }&order=desc&offset=${data.offset}`
         )
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        'desc',
-        OFFSET,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -346,7 +319,7 @@ describe('getComments function', () => {
     });
 
     it('[Record-222] should return the comments of record according to the limit value', () => {
-      const data = {app: 1, record: 2};
+      const data = {app: 1, record: 2, limit: 2};
       const expectedResult = {
         comments: [
           {
@@ -373,19 +346,12 @@ describe('getComments function', () => {
         older: true,
         newer: false
       };
-      const LIMIT = 2;
 
       nock(URI)
-        .get(ROUTE + `?app=${data.app}&record=${data.record}&limit=${LIMIT}`)
+        .get(ROUTE + `?app=${data.app}&record=${data.record}&limit=${data.limit}`)
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        LIMIT
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -393,24 +359,17 @@ describe('getComments function', () => {
     });
 
     it('[Record-223] should NOT return the comments of record when the limit value is 0', () => {
-      const data = {app: 1, record: 2};
+      const data = {app: 1, record: 2, limit: 0};
       const expectedResult = {
         comments: [],
         older: true,
         newer: false
       };
-      const LIMIT = 0;
       nock(URI)
-        .get(ROUTE + `?app=${data.app}&record=${data.record}&limit=${LIMIT}`)
+        .get(ROUTE + `?app=${data.app}&record=${data.record}&limit=${data.limit}`)
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        LIMIT
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -444,13 +403,7 @@ describe('getComments function', () => {
               }&offset=${data.offset}&limit=${data.limit}`
         )
         .reply(200, expectedResult);
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        data.order,
-        data.offset,
-        data.limit
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -509,13 +462,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}`)
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -549,13 +496,7 @@ describe('getComments function', () => {
               }&offset=${data.offset}&limit=${data.limit}`
         )
         .reply(200, expectedResult);
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        data.order,
-        data.offset,
-        data.limit
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -614,13 +555,7 @@ describe('getComments function', () => {
         .get(ROUTE_GUEST + `?app=${data.app}&record=${data.record}`)
         .reply(200, expectedResult);
 
-      const actualResult = recordModule_guest.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule_guest.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -679,13 +614,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}`)
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.then(response => {
         expect(response).toHaveProperty('comments');
         expect(response).toMatchObject(expectedResult);
@@ -714,19 +643,14 @@ describe('getComments function', () => {
           ROUTE + `?app=${data.app}&record=${data.record}&order=${data.order}`
         )
         .reply(400, expectedResult);
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        data.order
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
     });
 
     it('[Record-221] should return an error when the value of offset is invalid', () => {
-      const data = {app: 1, record: 2};
-      const OFFSET = -1;
+      const data = {app: 1, record: 2, offset: -1};
       const expectedResult = {
         code: 'CB_VA01',
         id: 'N0t3WAWaUpYycmdwqdDK',
@@ -738,24 +662,17 @@ describe('getComments function', () => {
         }
       };
       nock(URI)
-        .get(ROUTE + `?app=${data.app}&record=${data.record}&offset=${OFFSET}`)
+        .get(ROUTE + `?app=${data.app}&record=${data.record}&offset=${data.offset}`)
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        OFFSET,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
     });
 
     it('[Record-224] should return an error when the value of limit is greater than 10', () => {
-      const data = {app: 1, record: 2};
-      const LIMIT = 11;
+      const data = {app: 1, record: 2, limit: 11};
       const expectedResult = {
         code: 'CB_VA01',
         id: 'GK7azPfLL3wV1Jq2GvUH',
@@ -767,16 +684,10 @@ describe('getComments function', () => {
         }
       };
       nock(URI)
-        .get(ROUTE + `?app=${data.app}&record=${data.record}&limit=${LIMIT}`)
+        .get(ROUTE + `?app=${data.app}&record=${data.record}&limit=${data.limit}`)
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        LIMIT
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -798,13 +709,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}`)
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -826,20 +731,14 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}`)
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
     });
 
     it('[Record-232] should return an error when missing appId', () => {
-      const data = {app: 1, record: 2};
+      const data = {record: 2};
       const expectedResult = {
         code: 'CB_VA01',
         id: 'fPvGX7iqoF0DxeCI04Pk',
@@ -854,20 +753,14 @@ describe('getComments function', () => {
         .get(ROUTE + `?record=${data.record}`)
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        undefined,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
     });
 
     it('[Record-233] should return an error when missing recordId', () => {
-      const data = {app: 1, record: 2};
+      const data = {app: 1};
       const expectedResult = {
         code: 'CB_VA01',
         id: 'DUB0DXXSrnORvhKeC4mz',
@@ -882,13 +775,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}`)
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        undefined,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -905,13 +792,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}`)
         .reply(520, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -928,13 +809,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}`)
         .reply(403, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -951,13 +826,7 @@ describe('getComments function', () => {
         .get(ROUTE + `?app=${data.app}&record=${data.record}`)
         .reply(403, expectedResult);
 
-      const actualResult = recordModule.getComments(
-        data.app,
-        data.record,
-        undefined,
-        undefined,
-        undefined
-      );
+      const actualResult = recordModule.getComments(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });

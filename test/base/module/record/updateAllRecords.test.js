@@ -4,12 +4,13 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
 
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const recordModule = new Record(conn);
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const guestConnParam = {domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID};
+const connGuest = new Connection(guestConnParam);
 const recordModuleGuest = new Record(connGuest);
 
 const appID = 1;
@@ -68,7 +69,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -126,7 +127,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -174,7 +175,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -223,7 +224,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -272,7 +273,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -331,7 +332,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -393,7 +394,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -451,7 +452,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModuleGuest.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModuleGuest.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -510,7 +511,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(200, expectResults);
 
-      const updateAllRecordsResult = recordModuleGuest.updateAllRecords(stringAppID, recordsData);
+      const updateAllRecordsResult = recordModuleGuest.updateAllRecords({app: stringAppID, records: recordsData});
       return updateAllRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('results');
         expect(rsp).toMatchObject(expectResults);
@@ -559,7 +560,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(404, expectResult);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.catch((err) => {
         expect(err).toHaveProperty('results');
         expect(err.results[0].get()).toMatchObject(error);
@@ -1041,7 +1042,7 @@ describe('updateAllRecords function', () => {
         })
         .reply(404, expectResultsBulk2);
 
-      const updateAllRecordsResult = recordModule.updateAllRecords(appID, recordsData);
+      const updateAllRecordsResult = recordModule.updateAllRecords({app: appID, records: recordsData});
       return updateAllRecordsResult.catch((error) => {
         const kintoneException = {response: {
           data: ERROR_MESSAGE.UPDATE_RECORD_CREATED_AT_ERROR

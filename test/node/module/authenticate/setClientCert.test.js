@@ -21,7 +21,7 @@ describe('Connection module', () => {
       const auth = new Auth()
         .setPasswordAuth(paramPasswordAuth)
         .setClientCert(paramClientCert);
-      const conn = new Connection(common.DOMAIN, auth);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -69,8 +69,8 @@ describe('Connection module', () => {
       const auth = new Auth()
         .setPasswordAuth(paramPasswordAuth)
         .setClientCert(paramClientCert);
-      const conn = new Connection(common.DOMAIN, auth);
-      conn.setProxy(common.PROXY_HOST, common.PROXY_PORT);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
+      conn.setProxy({host: common.PROXY_HOST, port: common.PROXY_PORT});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -121,7 +121,7 @@ describe('Connection module', () => {
       const auth = new Auth()
         .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
         .setClientCert(paramClientCert);
-      const conn = new Connection(common.DOMAIN, auth);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -142,7 +142,7 @@ describe('Connection module', () => {
       const auth = new Auth()
         .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
         .setClientCert({cert: pfxFile, password: 'wrong_password'});
-      const conn = new Connection(common.DOMAIN, auth);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -162,7 +162,7 @@ describe('Connection module', () => {
       const auth = new Auth()
         .setPasswordAuth(paramPasswordAuth)
         .setClientCert(paramClientCert);
-      const conn = new Connection(common.DOMAIN, auth);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -182,7 +182,7 @@ describe('Connection module', () => {
       const auth = new Auth()
         .setPasswordAuth(paramPasswordAuth)
         .setClientCert({cert: undefined, password: certPass});
-      const conn = new Connection(common.DOMAIN, auth);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -202,10 +202,8 @@ describe('Connection module', () => {
       const auth = new Auth()
         .setPasswordAuth(paramPasswordAuth)
         .setClientCert({cert: pfxFile});
-      const conn = new Connection(common.DOMAIN, auth);
-      const file = new File(conn);
-
-
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
+      const file = new File({connection: conn});
       nock(URI)
         .get(API_ROUTE.FILE + `?fileKey=file_key`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {

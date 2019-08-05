@@ -259,7 +259,6 @@ describe('request function of connection', () => {
     const body = {
       app: 1
     };
-
     nock('https://' + common.DOMAIN)
       .get(`/k/v1/records.json?app=${body.app}`)
       .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -275,7 +274,7 @@ describe('request function of connection', () => {
       });
 
     const connn = new Connection({domain: common.DOMAIN, auth: auth});
-    connn.setHeader('test', 'test');
+    connn.setHeader({key: 'test', value: 'test'});
     const request = connn.request('GET', 'RECORDS', body);
     request.then((rsp) => {
       expect(rsp).toHaveProperty('records');

@@ -6,20 +6,20 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const {API_ROUTE, URI} = require('../../../utils/constant');
 
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD).setApiToken(common.API_TOKEN_VALUE);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD}).setApiToken({apiToken: common.API_TOKEN_VALUE});
 const BULK_REQUEST_API_ROUTE = '/k/v1/bulkRequest.json';
 const BULK_REQUEST_API_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/bulkRequest.json`;
 
 const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 const recordModule = new Record(conn);
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
 const recordModuleGuest = new Record(connGuest);
 
 describe('deleteAllRecordsByQuery function', () => {
-   describe('Successful case', () => {
+  describe('Successful case', () => {
     it('[Record-320] Verify the records are deleted correctly with query', () => {
       const appID = 4;
       const data = {
@@ -76,7 +76,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(200, expectedDeleteResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(data.app, data.query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(data);
       return deleteRecordsResult.then((rsp) => {
         expect(rsp).toEqual(expectedDeleteResults);
       });
@@ -138,7 +138,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(200, expectedDeleteResults);
 
-      const deleteRecordsResult = recordModuleGuest.deleteAllRecordsByQuery(data.app, data.query);
+      const deleteRecordsResult = recordModuleGuest.deleteAllRecordsByQuery(data);
       return deleteRecordsResult.then((rsp) => {
         expect(rsp).toEqual(expectedDeleteResults);
       });
@@ -208,7 +208,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(200, expectedDeleteResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.then((rsp) => {
         expect(rsp).toEqual(expectedDeleteResults);
       });
@@ -228,7 +228,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(404, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -245,7 +245,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(404, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -262,7 +262,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(404, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -279,7 +279,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(520, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -297,7 +297,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(400, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -314,7 +314,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(400, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -332,7 +332,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(520, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -350,7 +350,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         }).reply(520, expectResults);
 
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((err) => {
         expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
         expect(err.results[0].get()).toMatchObject(expectResults);
@@ -475,7 +475,7 @@ describe('deleteAllRecordsByQuery function', () => {
           return true;
         })
         .reply(404, expectResultsBulk2);
-      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery(appID, query);
+      const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
       return deleteRecordsResult.catch((error) => {
         const kintoneException = {response: {
           data: ERROR_MESSAGE.UPDATE_RECORD_CREATED_AT_ERROR

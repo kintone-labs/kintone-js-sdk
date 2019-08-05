@@ -14,9 +14,9 @@ class Auth extends BaseAuth {
 
   /**
    * Set certificate for request by data
-   * @param {Object} cilentCertData
-   * @param {fileContent} cilentCertData.cert
-   * @param {String} cilentCertData.password
+   * @param {Object} params
+   * @param {fileContent} params.cert
+   * @param {String} params.password
    * @return {this}
    */
   setClientCert({cert, password}) {
@@ -27,9 +27,9 @@ class Auth extends BaseAuth {
 
   /**
    * Set certificate for request by path
-   * @param {Object} cilentCertByPathData
-   * @param {String} cilentCertByPathData.filePath
-   * @param {String} cilentCertByPathData.password
+   * @param {Object} params
+   * @param {String} params.filePath
+   * @param {String} params.password
    * @return {this}
    */
   setClientCertByPath({filePath, password}) {

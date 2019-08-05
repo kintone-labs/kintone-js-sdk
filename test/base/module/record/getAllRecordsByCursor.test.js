@@ -8,9 +8,9 @@ const {URI} = require('../../../utils/constant');
 const {Record, Connection, Auth} = require('../../../../src/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
@@ -61,7 +61,7 @@ describe('getAllRecords function', ()=>{
           expect(recordsResponse).toHaveProperty('totalCount');
           expect(recordsResponse.records.length).toEqual(recordsResponse.totalCount);
         })
-        .catch(()=>{
+        .catch((err)=>{
           expect(false).toEqual(true);
         });
     });
