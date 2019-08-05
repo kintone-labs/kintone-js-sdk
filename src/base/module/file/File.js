@@ -10,7 +10,7 @@ class File {
    * @param {Object} params
    * @param {Connection} params.connection
    */
-  constructor({connection}) {
+  constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
@@ -33,7 +33,7 @@ class File {
    * @param {String} params.fileContent
    * @return {Promise}
    */
-  upload({fileName, fileContent} = {}) {
+  upload({fileName, fileContent}) {
     return this.connection.upload(fileName, fileContent);
   }
 }

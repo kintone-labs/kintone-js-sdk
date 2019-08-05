@@ -9,7 +9,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
      * @param {kintoneBaseJSSDK.Auth} params.auth
      * @param {Integer} params.guestSpaceID
      */
-  constructor({auth, guestSpaceID}) {
+  constructor({auth, guestSpaceID} = {}) {
     if (auth instanceof kintoneBaseJSSDK.Auth) {
       const host = window.location.host;
       super({host, auth, guestSpaceID});

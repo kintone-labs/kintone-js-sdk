@@ -18,7 +18,7 @@ class Connection {
    * @param {Auth} params.auth
    * @param {Number} params.guestSpaceID
    */
-  constructor({domain, auth, guestSpaceID}) {
+  constructor({domain, auth, guestSpaceID} = {}) {
     this.domain = domain;
     this.guestSpaceID = parseInt(guestSpaceID, 10);
 

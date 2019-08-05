@@ -14,7 +14,7 @@ export class File {
      * @param {Object} params
      * @param {Connection} params.connection
      */
-  constructor({conn}) {
+  constructor({conn} = {}) {
     let connection = conn;
     if (!connection) {
       connection = new Connection();
