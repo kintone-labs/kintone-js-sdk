@@ -13,7 +13,7 @@ const URI = 'https://' + common.DOMAIN;
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 describe('getRecords function', () => {
   describe('common case', () => {
     it('should return a promise', () => {
