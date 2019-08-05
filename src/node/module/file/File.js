@@ -34,7 +34,8 @@ class File extends FileModule {
      * @param {String} params.outPutFilePath
      * @return {Promise}
      */
-  download({fileKey, outPutFilePath}) {
+  download({fileKey, outPutFilePath} = {}) {
+    if (!fileKey || !outPutFilePath) throw new Error(`fileKey or outPutFilePath is not valid`);
     return super.download(fileKey).then((fileContent) => {
       try {
         const options = {
@@ -52,15 +53,11 @@ class File extends FileModule {
      * @param {String} params.filePath
      * @return {Promise}
      */
-  upload({filePath}) {
-    try {
-      const fileContent = fs.createReadStream(filePath);
-      const fileName = path.basename(filePath);
-
-      return super.upload({fileName: fileName, fileContent: fileContent});
-    } catch (err) {
-      throw new Error(`File path is not valid`);
-    }
+  upload({filePath} = {}) {
+    if (!filePath) throw new Error(`File path is not valid`);
+    const fileContent = fs.createReadStream(filePath);
+    const fileName = path.basename(filePath);
+    return super.upload({fileName: fileName, fileContent: fileContent});
   }
 }
 module.exports = File;
