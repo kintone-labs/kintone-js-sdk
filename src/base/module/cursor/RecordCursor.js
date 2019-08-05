@@ -12,9 +12,10 @@ const KintoneAPIException = require('../../model/exception/KintoneAPIException')
 class RecordCursor {
   /**
    * The constructor for RecordCursor module
-   * @param {Connection} connection
+   * @param {Object} params
+   * @param {Connection} params.connection
    */
-  constructor(connection) {
+  constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
