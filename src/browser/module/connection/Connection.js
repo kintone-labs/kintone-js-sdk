@@ -9,15 +9,15 @@ export class Connection extends kintoneBaseJSSDK.Connection {
      * @param {kintoneBaseJSSDK.Auth} params.auth
      * @param {Integer} params.guestSpaceID
      */
-  constructor({auth, guestSpaceID}) {
+  constructor({auth, guestSpaceID} = {}) {
     if (auth instanceof kintoneBaseJSSDK.Auth) {
-      const host = window.location.host;
-      super({host, auth, guestSpaceID});
+      const domain = window.location.host;
+      super({domain, auth, guestSpaceID});
       this.kintoneAuth = auth;
     } else {
-      const host = window.location.host;
+      const domain = window.location.host;
       const basicAuth = new kintoneBaseJSSDK.Auth();
-      super({host, basicAuth, guestSpaceID});
+      super({domain, auth: basicAuth, guestSpaceID});
       this.kintoneAuth = undefined;
     }
     this.headers = [];

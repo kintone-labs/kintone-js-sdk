@@ -27,7 +27,7 @@ describe('dowload function', () => {
         nock('https://' + common.DOMAIN)
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
           .reply(200, Buffer.from('hello buffer'));
-        return fileModule.download({fileKey: fileKey, filePath: filePath})
+        return fileModule.download({fileKey: fileKey, outPutFilePath: filePath})
           .then(() => {
             // eslint-disable-next-line max-nested-callbacks
             fs.readdir('./test/node/module/file/mock/', (err, list) => {
@@ -55,7 +55,7 @@ describe('dowload function', () => {
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
           .reply(404, expectErr);
 
-        fileModule.download({fileKey: fileKey, filePath: filePath})
+        fileModule.download({fileKey: fileKey, outPutFilePath: filePath})
           .catch(err => {
             expect(err.get()).toMatchObject(expectErr);
           });
@@ -68,7 +68,7 @@ describe('dowload function', () => {
         nock('https://' + common.DOMAIN)
           .get(`/k/v1/file.json?fileKey=${fileKey}`)
           .reply(403, undefined);
-        const downloadFile = fileModule.download({fileKey: fileKey, filePath: filePath});
+        const downloadFile = fileModule.download({fileKey: fileKey, outPutFilePath: filePath});
         downloadFile.catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);
         });

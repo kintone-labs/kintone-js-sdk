@@ -21,7 +21,7 @@ class Connection extends BaseConnection {
      * @param {Number} params.guestSpaceID
      */
 
-  constructor({domain, auth, guestSpaceID}) {
+  constructor({domain, auth, guestSpaceID} = {}) {
     super({domain, auth, guestSpaceID});
     this.setClientCert();
   }
@@ -52,7 +52,7 @@ class Connection extends BaseConnection {
    * @param {String} params.proxyPassword
    * @return {this}
    */
-  setProxy({proxyHost, proxyPort, proxyUsername, proxyPassword}) {
+  setProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -77,7 +77,7 @@ class Connection extends BaseConnection {
    * @param {String} params.proxyPassword
    * @return {this}
    */
-  setHttpsProxy({proxyHost, proxyPort, proxyUsername, proxyPassword}) {
+  setHttpsProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };

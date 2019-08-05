@@ -20,7 +20,7 @@ class File extends FileModule {
      * @param {Object} params
      * @param {Connection} params.connection
      */
-  constructor({connection}) {
+  constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection}` +
                   `not an instance of kintoneConnection`);
@@ -34,7 +34,7 @@ class File extends FileModule {
      * @param {String} params.outPutFilePath
      * @return {Promise}
      */
-  download({fileKey, outPutFilePath} = {}) {
+  download({fileKey, outPutFilePath}) {
     return super.download(fileKey).then((fileContent) => {
       try {
         const options = {
@@ -52,15 +52,10 @@ class File extends FileModule {
      * @param {String} params.filePath
      * @return {Promise}
      */
-  upload({filePath} = {}) {
-    try {
-      const fileContent = fs.createReadStream(filePath);
-      const fileName = path.basename(filePath);
-
-      return super.upload({fileName: fileName, fileContent: fileContent});
-    } catch (err) {
-      throw new Error(`File path is not valid`);
-    }
+  upload({filePath}) {
+    const fileContent = fs.createReadStream(filePath);
+    const fileName = path.basename(filePath);
+    return super.upload({fileName: fileName, fileContent: fileContent});
   }
 }
 module.exports = File;
