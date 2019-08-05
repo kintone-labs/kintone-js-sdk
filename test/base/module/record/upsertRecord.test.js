@@ -12,7 +12,7 @@ const {Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 describe('upsertRecord function', () => {
   describe('success case', () => {
     it('[case 1] can update record', () => {

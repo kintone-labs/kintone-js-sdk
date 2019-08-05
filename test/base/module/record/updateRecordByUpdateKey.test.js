@@ -10,7 +10,7 @@ const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 describe('updateRecordByUpdateKey function', () => {
   describe('common case', () => {
@@ -221,7 +221,7 @@ describe('updateRecordByUpdateKey function', () => {
           return true;
         })
         .reply(200, {'revision': '3'});
-      const recordModule_Guest = new Record(connGuestSpace);
+      const recordModule_Guest = new Record({connection: connGuestSpace});
       const updateRecordByIdResult = recordModule_Guest.updateRecordByUpdateKey(recordUpdate);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('3');

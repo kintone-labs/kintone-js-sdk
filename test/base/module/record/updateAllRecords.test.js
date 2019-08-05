@@ -7,11 +7,11 @@ const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 const guestConnParam = {domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID};
 const connGuest = new Connection(guestConnParam);
-const recordModuleGuest = new Record(connGuest);
+const recordModuleGuest = new Record({connection: connGuest});
 
 const appID = 1;
 

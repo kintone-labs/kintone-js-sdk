@@ -6,13 +6,14 @@ import {Connection} from '../connection/Connection';
 export class RecordCursor extends kintoneBaseJSSDK.RecordCursor {
 
   /**
-     * @param {conn} Connection
+     * @param {Object} params
+     * @param {Connection} params.connection
      */
-  constructor(conn) {
+  constructor({connection: conn} = {}) {
     let connection = conn;
     if (!connection) {
       connection = new Connection();
     }
-    super(connection);
+    super({connection});
   }
 }

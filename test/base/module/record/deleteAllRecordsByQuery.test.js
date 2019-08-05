@@ -13,10 +13,10 @@ const BULK_REQUEST_API_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/bulkRe
 const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const recordModuleGuest = new Record(connGuest);
+const recordModuleGuest = new Record({connection: connGuest});
 
 describe('deleteAllRecordsByQuery function', () => {
   describe('Successful case', () => {

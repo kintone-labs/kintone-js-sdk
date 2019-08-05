@@ -16,10 +16,10 @@ auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const recordModuleGuest = new Record(connGuest);
+const recordModuleGuest = new Record({connection: connGuest});
 
 describe('getAllRecordsByQuery function', () => {
   describe('success case', () => {

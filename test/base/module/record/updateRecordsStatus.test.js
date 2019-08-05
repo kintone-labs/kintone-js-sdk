@@ -16,10 +16,10 @@ const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const recordsStatus = new Record(connGuest);
+const recordsStatus = new Record({connection: connGuest});
 
 describe('updateRecordsStatus function', () => {
   describe('common case', () => {

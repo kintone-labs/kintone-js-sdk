@@ -53,7 +53,7 @@ describe('getAllRecords function', ()=>{
         })
         .reply(200, EXPECTED_GET_RECORDS_RESPONSE);
 
-      const record = new Record(conn);
+      const record = new Record({connection: conn});
       return record.getAllRecordsByCursor({app, query, fields})
         .then((recordsResponse)=>{
           expect(recordsResponse).toHaveProperty('records');
