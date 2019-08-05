@@ -20,9 +20,10 @@ const DEFAULT_CURSOR_SIZE = 500;
 class Record {
   /**
    * The constructor for Record module
-   * @param {Connection} connection
+   * @param {Object} params
+   * @param {Connection} params.connection
    */
-  constructor(connection) {
+  constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
