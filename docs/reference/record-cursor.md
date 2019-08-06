@@ -30,7 +30,7 @@ Currently there's only cursor for records.
         const conn = new kintoneConnection();
         
         // Init RecordCursor module
-        const kintoneRC = new kintoneRecordCursorModule(conn)
+        const kintoneRC = new kintoneRecordCursorModule({connection: conn})
             
         //...
     }(window.kintoneJSSDK));
@@ -56,7 +56,7 @@ Currently there's only cursor for records.
     };
     const kintoneConn = new kintone.Connection(connParam);
     
-    const kintoneRC = new kintone.RecordCursor(kintoneConn);
+    const kintoneRC = new kintone.RecordCursor({connection: kintoneConn});
 
 </pre>
 
