@@ -19,7 +19,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 <pre class="inline-code">
   // with connection
-  var kintoneRecord = new kintoneJSSDK.Record(connection);
+  var kintoneRecord = new kintoneJSSDK.Record({connection});
 
   // without connection, module will use session authentication of kintone
   var kintoneRecord = new kintoneJSSDK.Record();
@@ -31,7 +31,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 <pre class="inline-code">
 
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneRecord = new kintone.Record(connection);
+  let kintoneRecord = new kintone.Record({connection});
 
 </pre>
 
