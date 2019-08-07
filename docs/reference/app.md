@@ -23,7 +23,7 @@ Gets general information of an App, including the name, description, related Spa
 
 <pre class="inline-code">
   // with connection
-  var kintoneApp = new kintoneJSSDK.App(connection);
+  var kintoneApp = new kintoneJSSDK.App({connection});
 
   // without connection, module will use session authentication of kintone
   var kintoneApp = new kintoneJSSDK.App();
@@ -35,7 +35,7 @@ Gets general information of an App, including the name, description, related Spa
 <pre class="inline-code">
 
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneApp = new kintone.App(connection);
+  let kintoneApp = new kintone.App({connection});
 
 </pre>
 
