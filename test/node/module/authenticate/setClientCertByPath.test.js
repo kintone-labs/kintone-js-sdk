@@ -22,7 +22,7 @@ describe('Connection module', () => {
         .setPasswordAuth(paramPasswordAuth)
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App(conn);
+      const appModule = new App({conn});
 
       const appID = 1;
       const expectResult = {
@@ -56,10 +56,10 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      const getAppResult = appModule.getApp(appID);
+      const getAppResult = appModule.getApp({id: appID});
       return getAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
-        return appModule.getApp(appID);
+        return appModule.getApp({id: appID});
       }).catch(err => {
         const expectCertFile = {passphrase: certPass, pfx: pfxFile};
         expect(err.errorRaw.response.config.httpsAgent.options).toMatchObject(expectCertFile);
@@ -71,7 +71,7 @@ describe('Connection module', () => {
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
       conn.setProxy(common.PROXY_HOST, common.PROXY_PORT);
-      const appModule = new App(conn);
+      const appModule = new App({conn});
 
       const appID = 1;
       const expectResult = {
@@ -105,10 +105,10 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      const getAppResult = appModule.getApp(appID);
+      const getAppResult = appModule.getApp({id: appID});
       return getAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
-        return appModule.getApp(appID);
+        return appModule.getApp({id: appID});
       }).catch(err => {
         const expectCertFile = {passphrase: certPass, pfx: pfxFile};
         expect(err.errorRaw.response.config.httpsAgent.options).toMatchObject(expectCertFile);
@@ -122,7 +122,7 @@ describe('Connection module', () => {
         .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App(conn);
+      const appModule = new App({conn});
 
       const appID = 1;
       nock(URI)
@@ -132,7 +132,7 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      const getAppResult = appModule.getApp(appID);
+      const getAppResult = appModule.getApp({id: appID});
       return getAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
@@ -143,7 +143,7 @@ describe('Connection module', () => {
         .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
         .setClientCertByPath({filePath: filePath, password: 'wrong_password'});
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App(conn);
+      const appModule = new App({conn});
 
       const appID = 1;
       nock(URI)
@@ -153,7 +153,7 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      return appModule.getApp(appID).catch((err) => {
+      return appModule.getApp({id: appID}).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
     });
@@ -163,7 +163,7 @@ describe('Connection module', () => {
         .setPasswordAuth(paramPasswordAuth)
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App(conn);
+      const appModule = new App({conn});
 
       const appID = 1;
       nock(URI)
@@ -173,7 +173,7 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      return appModule.getApp(appID).catch((err) => {
+      return appModule.getApp({id: appID}).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
     });
