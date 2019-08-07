@@ -12,7 +12,8 @@ Gets general information of an App, including the name, description, related Spa
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params | Object | (optional) | Constructor params.
+| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
 **Sample code**
 
@@ -101,7 +102,7 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | Get apps params.
+| params | Object | (optional) | Get apps params.
 | params.offset | Integer | (optional) | The offset off data result
 | params.limit | Integer | (optional) | The limit number of result
 
