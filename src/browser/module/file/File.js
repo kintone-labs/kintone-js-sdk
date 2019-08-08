@@ -27,10 +27,11 @@ export class File {
   }
   /**
      * Download file from kintone
-     * @param {String} fileKey
+     * @param {Object} params
+     * @param {String} params.fileKey
      * @return {Promise}
      */
-  download(fileKey) {
+  download({fileKey}) {
     if (window.kintone !== undefined) {
       this.connection.setHeader({key: 'X-Requested-With', value: 'XMLHttpRequest'});
     }
