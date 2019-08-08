@@ -113,7 +113,7 @@ class Record {
           totalCount: totalCount ? allRecords.length : null
         };
       }
-      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, offsetNum + limit, allRecords);
+      return this.getAllRecordsByOffsetMethodRecursive(app, query, fields, totalCount, offsetNum + limit, allRecords);
     });
   }
 
@@ -133,7 +133,7 @@ class Record {
           totalCount: totalCount ? allRecords.length : null
         };
       }
-      return this.getAllRecordsInOrderByIdRecursive(app, query, fields, totalCount, response.records[limit - 1].$id.value, allRecords);
+      return this.getAllRecordsBySeekMethodRecursive(app, query, fields, totalCount, response.records[limit - 1].$id.value, allRecords);
     });
   }
 
