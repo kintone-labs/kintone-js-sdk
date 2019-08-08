@@ -18,10 +18,11 @@ class File {
   }
   /**
    * Download file from kintone
-   * @param {String} fileKey
+   * @param {Object} params
+   * @param {String} params.fileKey
    * @return {Promise}
    */
-  download(fileKey) {
+  download({fileKey}) {
     const dataRequest =
               new FileModel.GetFileRequest(fileKey);
     return this.connection.download(dataRequest.toJSON());

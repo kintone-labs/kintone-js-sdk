@@ -35,7 +35,7 @@ class File extends FileModule {
      * @return {Promise}
      */
   download({fileKey, outPutFilePath}) {
-    return super.download(fileKey).then((fileContent) => {
+    return super.download({fileKey}).then((fileContent) => {
       try {
         const options = {
           encoding: 'utf16le'
