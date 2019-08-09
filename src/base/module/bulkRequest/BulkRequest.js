@@ -28,7 +28,7 @@ class BulkRequest {
    * @param {Record} params.record
    * @return {this}
    */
-  addRecord({app, record}) {
+  addRecord({app, record} = {}) {
     const addRecordRequest = new RecordModel.AddRecordRequest(app, record);
     const bulkRequestItem = new BulkRequestItemModel('POST', this.connection.getPathURI('RECORD'), addRecordRequest);
     this.bulkRequests.addRequest(bulkRequestItem);
@@ -42,7 +42,7 @@ class BulkRequest {
    * @param {Array<record>} params.records
    * @return {this}
    */
-  addRecords({app, records}) {
+  addRecords({app, records} = {}) {
     const addRecordsRequest = new RecordModel.AddRecordsRequest(app);
     addRecordsRequest.setRecords(records);
 
@@ -60,7 +60,7 @@ class BulkRequest {
    * @param {Number} params.revision
    * @return {this}
    */
-  updateRecordByID({app, id, record, revision}) {
+  updateRecordByID({app, id, record, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordRequest(app);
     updateRecordRequest.setID(id).setRecord(record).setRevision(revision || 0);
 
@@ -78,7 +78,7 @@ class BulkRequest {
    * @param {Number} params.revision
    * @return {this}
    */
-  updateRecordByUpdateKey({app, updateKey, record, revision}) {
+  updateRecordByUpdateKey({app, updateKey, record, revision} = {}) {
     const fieldKey = updateKey ? updateKey.field : undefined;
     const fieldValue = updateKey ? updateKey.value : undefined;
 
@@ -97,7 +97,7 @@ class BulkRequest {
    * @param {Array<RecordUpdateItem>} params.records
    * @return {this}
    */
-  updateRecords({app, records}) {
+  updateRecords({app, records} = {}) {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
     const bulkRequestItem = new BulkRequestItemModel('PUT', this.connection.getPathURI('RECORDS'), updateRecordsRequest);
     this.bulkRequests.addRequest(bulkRequestItem);
@@ -111,7 +111,7 @@ class BulkRequest {
    * @param {Array<Number>} params.ids
    * @return {this}
    */
-  deleteRecords({app, ids}) {
+  deleteRecords({app, ids} = {}) {
     const deleteRecordsRequest = new RecordModel.DeleteRecordsRequest(app);
     deleteRecordsRequest.setIDs(ids);
 
@@ -127,7 +127,7 @@ class BulkRequest {
    * @param {Object} params.idsWithRevision
    * @return {this}
    */
-  deleteRecordsWithRevision({app, idsWithRevision}) {
+  deleteRecordsWithRevision({app, idsWithRevision} = {}) {
     const deleteRecordsRequest = new RecordModel.DeleteRecordsRequest(app);
     deleteRecordsRequest.setIDsWithRevision(idsWithRevision);
 
@@ -145,7 +145,7 @@ class BulkRequest {
    * @param {Number} params.revision
    * @return {this}
    */
-  updateRecordAssignees({app, record, assignees, revision}) {
+  updateRecordAssignees({app, record, assignees, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordAssigneesRequest(app, record, assignees, revision);
     const bulkRequestItem = new BulkRequestItemModel('PUT', this.connection.getPathURI('RECORD_ASSIGNEES'), updateRecordRequest);
     this.bulkRequests.addRequest(bulkRequestItem);
@@ -162,7 +162,7 @@ class BulkRequest {
    * @param {Number} params.evision
    * @return {this}
    */
-  updateRecordStatus({app, id, action, assignee, revision}) {
+  updateRecordStatus({app, id, action, assignee, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordStatusRequest(app, id, action, assignee, revision);
     const bulkRequestItem = new BulkRequestItemModel('PUT', this.connection.getPathURI('RECORD_STATUS'), updateRecordRequest);
     this.bulkRequests.addRequest(bulkRequestItem);
@@ -176,7 +176,7 @@ class BulkRequest {
    * @param {Array<{RecordStatusUpdate}>} params.records
    * @return {this}
    */
-  updateRecordsStatus({app, records}) {
+  updateRecordsStatus({app, records} = {}) {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
     const bulkRequestItem = new BulkRequestItemModel('PUT', this.connection.getPathURI('RECORDS_STATUS'), updateRecordsRequest);
     this.bulkRequests.addRequest(bulkRequestItem);
