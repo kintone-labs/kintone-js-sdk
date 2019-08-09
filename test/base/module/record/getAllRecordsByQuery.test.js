@@ -12,14 +12,14 @@ const ERROR_MESSAGE = require(common.ERROR_MESSAGE);
 const {API_ROUTE, URI} = require('../../../utils/constant');
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 
-const conn = new Connection(common.DOMAIN, auth);
-const recordModule = new Record(conn);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const recordModule = new Record({connection: conn});
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const recordModuleGuest = new Record(connGuest);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const recordModuleGuest = new Record({connection: connGuest});
 
 describe('getAllRecordsByQuery function', () => {
   describe('success case', () => {
@@ -71,7 +71,7 @@ describe('getAllRecordsByQuery function', () => {
         .reply(200, expectResponsePerRequest[0])
         .get(expectURL2)
         .reply(200, expectResponsePerRequest[1]);
-      return recordModule.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+      return recordModule.getAllRecordsByQuery(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('records');
           expect(rsp).toMatchObject(expectResponse);
@@ -112,7 +112,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(200, expectResponse);
-      return recordModule.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+      return recordModule.getAllRecordsByQuery(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('records');
           expect(rsp).toMatchObject(expectResponse);
@@ -148,7 +148,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(200, expectResponse);
-      return recordModule.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+      return recordModule.getAllRecordsByQuery(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('records');
           expect(rsp).toMatchObject(expectResponse);
@@ -183,7 +183,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(200, expectResponse);
-      return recordModuleGuest.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+      return recordModuleGuest.getAllRecordsByQuery(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('records');
           expect(rsp).toMatchObject(expectResponse);
@@ -224,7 +224,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(200, expectResponse);
-      return recordModule.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+      return recordModule.getAllRecordsByQuery(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('records');
           expect(rsp).toMatchObject(expectResponse);
@@ -286,7 +286,7 @@ describe('getAllRecordsByQuery function', () => {
         .reply(200, expectResponsePerRequest[2])
         .get(expectURL4)
         .reply(200, expectResponsePerRequest[3]);
-      return recordModule.getAllRecordsByQuery(body.app, body.query, body.fields, body.totalCount)
+      return recordModule.getAllRecordsByQuery(body)
         .then(rsp => {
           expect(rsp).toHaveProperty('records');
           expect(rsp).toMatchObject(expectResponse);
@@ -311,7 +311,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(520, expectResult);
-      return recordModule.getAllRecordsByQuery(body.app, body.query)
+      return recordModule.getAllRecordsByQuery(body)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -332,7 +332,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(520, expectResult);
-      return recordModule.getAllRecordsByQuery(body.app, body.query)
+      return recordModule.getAllRecordsByQuery(body)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -353,7 +353,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(520, expectResult);
-      return recordModule.getAllRecordsByQuery(body.app, body.query)
+      return recordModule.getAllRecordsByQuery(body)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -372,7 +372,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(520, expectResult);
-      return recordModule.getAllRecordsByQuery(undefined, body.query)
+      return recordModule.getAllRecordsByQuery(body)
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -388,7 +388,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(520, expectResult);
-      return recordModule.getAllRecordsByQuery(appId)
+      return recordModule.getAllRecordsByQuery({app: appId})
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -404,7 +404,7 @@ describe('getAllRecordsByQuery function', () => {
           return true;
         })
         .reply(520, expectResult);
-      return recordModule.getAllRecordsByQuery(appID)
+      return recordModule.getAllRecordsByQuery({app: appID})
         .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);

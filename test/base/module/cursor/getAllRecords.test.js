@@ -9,16 +9,16 @@ const {URI} = require('../../../utils/constant');
 const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
 describe('getAllRecords function', ()=>{
   describe('Successful case', () => {
     it('All records are get successfully', ()=>{
-      const cursorID = 'CURSOR-ID';
+      const cursorID = 'sadasda';
 
       const EXPECTED_RESPONSE = {
         records: [
@@ -40,17 +40,14 @@ describe('getAllRecords function', ()=>{
         })
         .reply(200, EXPECTED_RESPONSE);
 
-      const rc = new RecordCursor(conn);
-      return rc.getAllRecords(cursorID)
+      const rc = new RecordCursor({connection: conn});
+      return rc.getAllRecords({id: cursorID})
         .then((recordsResponse)=>{
           expect(recordsResponse).toHaveProperty('records');
           expect(Array.isArray(recordsResponse.records)).toBe(true);
           expect(recordsResponse.records.length).toEqual(EXPECTED_RESPONSE.totalCount);
           expect(recordsResponse).toHaveProperty('totalCount');
           expect(recordsResponse.totalCount).toEqual(EXPECTED_RESPONSE.totalCount);
-        })
-        .catch((err)=>{
-          expect(false);
         });
     });
   });
@@ -74,9 +71,9 @@ describe('getAllRecords function', ()=>{
         })
         .reply(404, ILLEGAL_REQUEST);
 
-      const rc = new RecordCursor(conn);
-      return rc.getAllRecords(wrongID)
-        .catch((err)=>{
+      const rc = new RecordCursor({connection: conn});
+      return rc.getAllRecords({id: wrongID})
+        .catch((err) => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(ILLEGAL_REQUEST);
         });

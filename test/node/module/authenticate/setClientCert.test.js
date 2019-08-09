@@ -12,14 +12,23 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 const filePath = './test/node/module/authenticate/mock/test.pfx';
 const pfxFile = fs.readFileSync(filePath);
 const certPass = 'test';
+const paramPasswordAuth = {username: common.USERNAME, password: common.PASSWORD};
+const paramClientCert = {cert: pfxFile, password: certPass};
 
 describe('Connection module', () => {
   describe('success case', () => {
     it(`[setClientCert-1] Verify that connect succesfully by certificate data`, () => {
+      const auth = new Auth();
+      auth.setPasswordAuth(paramPasswordAuth);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
+      console.log(conn);
+    });
+
+    it(`[setClientCert-1] Verify that connect succesfully by certificate data`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCert(pfxFile, certPass);
-      const conn = new Connection(common.DOMAIN, auth);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCert(paramClientCert);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -65,10 +74,10 @@ describe('Connection module', () => {
     });
     it(`[setClientCert-2] Verify that connect succesfully by certificate data with proxy http`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCert(pfxFile, certPass);
-      const conn = new Connection(common.DOMAIN, auth);
-      conn.setProxy(common.PROXY_HOST, common.PROXY_PORT);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCert(paramClientCert);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
+      conn.setProxy({host: common.PROXY_HOST, port: common.PROXY_PORT});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -117,9 +126,9 @@ describe('Connection module', () => {
   describe('error case', () => {
     it(`[setClientCert-4] Verify that the error will be displayed when use certificate data for wrong user`, () => {
       const auth = new Auth()
-        .setPasswordAuth('wrong_user', common.PASSWORD)
-        .setClientCert(pfxFile, certPass);
-      const conn = new Connection(common.DOMAIN, auth);
+        .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
+        .setClientCert(paramClientCert);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -138,9 +147,9 @@ describe('Connection module', () => {
 
     it(`[setClientCert-5] Verify that the error will be displayed when use wrong password`, () => {
       const auth = new Auth()
-        .setPasswordAuth('wrong_user', common.PASSWORD)
-        .setClientCert(pfxFile, 'wrong_password');
-      const conn = new Connection(common.DOMAIN, auth);
+        .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
+        .setClientCert({cert: pfxFile, password: 'wrong_password'});
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -158,9 +167,9 @@ describe('Connection module', () => {
 
     it(`[setClientCert-6] Verify that the error will be displayed when use invalid certificate data`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCert(pfxFile, certPass);
-      const conn = new Connection(common.DOMAIN, auth);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCert(paramClientCert);
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -178,9 +187,9 @@ describe('Connection module', () => {
 
     it(`[setClientCert-7] Verify that the error will be displayed when using method without cert`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCert(undefined, certPass);
-      const conn = new Connection(common.DOMAIN, auth);
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCert({cert: undefined, password: certPass});
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
       const appModule = new App(conn);
 
       const appID = 1;
@@ -198,12 +207,10 @@ describe('Connection module', () => {
 
     it(`[setClientCert-8] Verify that the error will be displayed when using method without cert`, () => {
       const auth = new Auth()
-        .setPasswordAuth(common.USERNAME, common.PASSWORD)
-        .setClientCert(pfxFile);
-      const conn = new Connection(common.DOMAIN, auth);
-      const file = new File(conn);
-
-
+        .setPasswordAuth(paramPasswordAuth)
+        .setClientCert({cert: pfxFile});
+      const conn = new Connection({domain: common.DOMAIN, auth: auth});
+      const file = new File({connection: conn});
       nock(URI)
         .get(API_ROUTE.FILE + `?fileKey=file_key`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -211,7 +218,7 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      return file.download('file_key').catch((err) => {
+      return file.download({fileKey: 'file_key', outPutFilePath: './test/module/file/mock/testInvalidFilePath/test.png'}).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
     });

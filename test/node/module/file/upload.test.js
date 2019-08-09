@@ -11,10 +11,10 @@ const common = require('../../../utils/common');
 const {Auth, File, Connection} = require(common.MAIN_PATH_NODE);
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const fileModule = new File(conn);
+const fileModule = new File({connection: conn});
 const filePath = './test/node/module/file/mock/test.png';
 
 describe('upload function', () => {
@@ -23,7 +23,7 @@ describe('upload function', () => {
       nock('https://' + common.DOMAIN)
         .post('/k/v1/file.json')
         .reply(200, undefined);
-      const fileupload = fileModule.upload(filePath);
+      const fileupload = fileModule.upload({filePath: filePath});
       expect(fileupload).toHaveProperty('then');
       expect(fileupload).toHaveProperty('catch');
     });
@@ -48,7 +48,7 @@ describe('upload function', () => {
             return true;
           })
           .reply(200, expectResult);
-        return fileModule.upload(filePath)
+        return fileModule.upload({filePath: filePath})
           .then((rsp) => {
             expect(rsp).toMatchObject(expectResult);
           });
@@ -58,7 +58,6 @@ describe('upload function', () => {
 
   describe('error case', () => {
     describe('Required filepath', () => {
-
       it('[File-4] should throw an error when file path is invalid', () => {
         const errors = `File path is not valid`;
         nock('https://' + common.DOMAIN)
