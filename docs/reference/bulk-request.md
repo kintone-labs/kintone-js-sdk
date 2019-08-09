@@ -51,7 +51,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 > All below methods (excluded `execute()` method) will add request to queue, you must execute the `execute()` function to get result of BulkRequest.
 
-### addRecord(params)
+### addRecord({app, record})
 
 **Parameter**
 
