@@ -65,8 +65,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
-  var id = {your_record_id};
+  var app = 'your_app_id';
+  var id = 'your_record_id';
   kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -80,8 +80,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const id = {your_record_id};
+  const app = 'your_app_id';
+  const id = 'your_record_id';
   kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -120,13 +120,13 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
-  var query = '{your_query_string}';
+  var app = 'your_app_id';
+  var query = 'your_query_string';
   var fields = [
-      '{your_field_code}',
+      'your_field_code',
       // another fieldCode
   ]
-  var totalCount = {your_decide_true_or_false};
+  var totalCount = 'your_decide_true_or_false';
   kintoneRecord.getRecords({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -140,13 +140,13 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const query = '{your_query_string}';
+  const app = 'your_app_id';
+  const query = 'your_query_string';
   const fields = [
-      '{your_field_code}',
+      'your_field_code',
       // another fieldCode
   ]
-  const totalCount = /*{your_decide_true_or_false}*/;
+  const totalCount = /*'your_decide_true_or_false'*/;
   kintoneRecord.getRecords({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -187,13 +187,13 @@ Promise
 
 <pre class="inline-code">
 
-  var app = '{your_app_id}';
-  var query = '{your_query_string}';
+  var app = 'your_app_id';
+  var query = 'your_query_string';
   var fields = [
-      '{your_field_code}',
+      'your_field_code',
       // another fieldCode
   ]
-  var totalCount = '{your_decide_true_or_false}';
+  var totalCount = 'your_decide_true_or_false';
   kintoneRecord.getAllRecordsByQuery({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -207,13 +207,13 @@ Promise
 
 <pre class="inline-code">
 
-  const app = '{your_app_id}';
-  const query = '{your_query_string}';
+  const app = 'your_app_id';
+  const query = 'your_query_string';
   const fields = [
-      '{your_field_code}',
+      'your_field_code',
       // another fieldCode
   ]
-  const totalCount = '{your_decide_true_or_false}';
+  const totalCount = 'your_decide_true_or_false';
   kintoneRecord.getAllRecordsByQuery({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -253,12 +253,12 @@ Promise
 
 <pre class="inline-code">
   var rcOption = {
-    app: {your_app_id},
+    app: 'your_app_id',
     fields: [
-      '{your_field_code}',
+      'your_field_code',
       // another fieldCode
     ],
-    query: '{your_query_string}'
+    query: 'your_query_string'
   };
   
   kintoneRecord.getAllRecordsByCursor(rcOption).then((rsp) => {
@@ -275,12 +275,12 @@ Promise
 <pre class="inline-code">
 
   const rcOption = {
-    app: {your_app_id},
+    app: 'your_app_id',
     fields: [
-      '{your_field_code}',
+      'your_field_code',
       // another fieldCode
     ],
-    query: '{your_query_string}'
+    query: 'your_query_string'
   };
   
   kintoneRecord.getAllRecordsByCursor(rcOption).then((rsp) => {
@@ -339,7 +339,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -382,7 +382,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = 'your_app_id';
   var record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -406,7 +406,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -455,7 +455,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = '{your_app_id}';
+  var app = 'your_app_id';
   var record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -530,7 +530,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = '{your_app_id}';
+  const app = 'your_app_id';
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -653,8 +653,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const id = /*{your_record_id}*/;
+  const app = 'your_app_id';
+  const id = 'your_record_id';
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -662,7 +662,7 @@ Promise
     // Another fieldcode here
   };
   const revision = /*{revision_of_record}*/;
-  kintoneRecord.updateRecordByID(app, id, record, revision).then((rsp) => {
+  kintoneRecord.updateRecordByID({app, id, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -702,8 +702,8 @@ Promise
 
   var app = 'your_app_id';
   var updateKey = {
-    field: '{your_fieldcode}',
-    value: '{your_fieldcode_value}'
+    field: 'your_fieldcode',
+    value: 'your_fieldcode_value'
   };
   var record = {
     YourFieldCode: {
@@ -725,10 +725,10 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const updateKey = {
-    field: '{your_fieldcode}',
-    value: '{your_fieldcode_value}'
+    field: 'your_fieldcode',
+    value: 'your_fieldcode_value'
   };
   const record = {
     YourFieldCode: {
@@ -783,8 +783,8 @@ Promise
   var recordUpdate = {
     id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
     updateKey: { // Optional. Required, if id will not be specified.
-      field: '{your_field_code}',
-      value: '{your_field_code_value}'
+      field: 'your_field_code',
+      value: 'your_field_code_value'
     },
     record: record,
     revision: 'record_revision_number' // Optional
@@ -806,7 +806,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -814,10 +814,10 @@ Promise
       // Another fieldcode here
   };
   const recordUpdate = {
-      id: /*{your_record_id}*/, // Optional. Required, if updateKey will not be specified.
+      id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
       updateKey: { // Optional. Required, if id will not be specified.
-          field: '{your_field_code}',
-          value: '{your_field_code_value}'
+          field: 'your_field_code',
+          value: 'your_field_code_value'
       },
       record: record,
       revision: /*{record_revision_number}*/ // Optional
@@ -873,8 +873,8 @@ Promise
   var recordUpdate = {
     id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
     updateKey: { // Optional. Required, if id will not be specified.
-      field: '{your_field_code}',
-      value: '{your_field_code_value}'
+      field: 'your_field_code',
+      value: 'your_field_code_value'
     },
     record: record,
     revision: 'record_revision_number' // Optional
@@ -947,7 +947,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -955,10 +955,10 @@ Promise
       // Another fieldcode here
   };
   const recordUpdate = {
-      id: /*{your_record_id}*/, // Optional. Required, if updateKey will not be specified.
+      id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
       updateKey: { // Optional. Required, if id will not be specified.
-          field: '{your_field_code}',
-          value: '{your_field_code_value}'
+          field: 'your_field_code',
+          value: 'your_field_code_value'
       },
       record: record,
       revision: /*{record_revision_number}*/ // Optional
@@ -1068,7 +1068,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const ids = [/*your_record_id*/]
   kintoneRecord.deleteRecords({app, ids}).then((rsp) => {
     console.log(rsp);
@@ -1123,7 +1123,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const idsWithRevision = {
       /*your_record_id: revision_of_record*/
   }
@@ -1349,10 +1349,10 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const updateKey = {
-    field: '{your_fieldcode}',
-    value: '{your_fieldcode_value}'
+    field: 'your_fieldcode',
+    value: 'your_fieldcode_value'
   };
   const record = {
     YourFieldCode: {
@@ -1560,8 +1560,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const id = /*{your_record_id}*/;
+  const app = 'your_app_id';
+  const id = 'your_record_id';
   const assignees = [/*your_assignee(s)*/];
   const revision = /*{revision_of_record}*/;
 
@@ -1623,8 +1623,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const id = /*{your_record_id}*/;
+  const app = 'your_app_id';
+  const id = 'your_record_id';
   const action = /*{your_action_name}*/;
   const assignee = '/*your_assignee(s)*/';
   const revision = /*{revision_of_record}*/;
@@ -1689,7 +1689,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
+  const app = 'your_app_id';
   const recordStatusUpdateItem = {
       id: /*your_record_id*/,
       action: '/*your_action_name*/',
@@ -1755,8 +1755,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const id = /*{your_record_id}*/;
+  const app = 'your_app_id';
+  const id = 'your_record_id';
   const order = /*{your_order_type}*/; // asc or desc
   const offset = /*{your_offset_number}*/;
   const limit = /*{your_limit number}*/;
@@ -1797,11 +1797,11 @@ Promise
   var app = 'your_app_id';
   var record = 'your_record_id';
   var comment = {
-    text: '/*your_comment_content*/',
+    text: 'your_comment_content',
     mentions: [
       {
-        code: '/*your_member_code*/',
-        type: '/*your_member_type*/' // either `USER` or `GROUP` or `ORGANIZATION`
+        code: 'your_member_code',
+        type: 'your_member_type' // either `USER` or `GROUP` or `ORGANIZATION`
       },
       // another mention here
     ]
@@ -1819,14 +1819,14 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const record = /*{your_record_id}*/;
+  const app = 'your_app_id';
+  const record = 'your_record_id';
   const comment = {
-    text: '/*your_comment_content*/',
+    text: 'your_comment_content',
     mentions: [
       {
-        code: '/*your_member_code*/',
-        type: '/*your_member_type*/' // either `USER` or `GROUP` or `ORGANIZATION`
+        code: 'your_member_code',
+        type: 'your_member_type' // either `USER` or `GROUP` or `ORGANIZATION`
       },
       // another mention here
     ]
@@ -1882,9 +1882,9 @@ Promise
 
 <pre class="inline-code">
 
-  const app = /*{your_app_id}*/;
-  const record = /*{your_record_id}*/;
-  const comment = /*{your_comment_id}*/;
+  const app = 'your_app_id';
+  const record = 'your_record_id';
+  const comment = 'your_comment_id';
   kintoneRecord.deleteComment({app, record, comment}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
