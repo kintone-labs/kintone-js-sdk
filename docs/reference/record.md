@@ -65,8 +65,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
-  var id = 'your_record_id';
+  var app = YOUR_APP_ID;
+  var id = YOUR_RECORD_ID;
   kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -80,8 +80,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
-  const id = 'your_record_id';
+  const app = YOUR_APP_ID;
+  const id = YOUR_RECORD_ID;
   kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -120,7 +120,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var query = 'your_query_string';
   var fields = [
       'your_field_code',
@@ -140,7 +140,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const query = 'your_query_string';
   const fields = [
       'your_field_code',
@@ -187,7 +187,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var query = 'your_query_string';
   var fields = [
       'your_field_code',
@@ -207,7 +207,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const query = 'your_query_string';
   const fields = [
       'your_field_code',
@@ -253,7 +253,7 @@ Promise
 
 <pre class="inline-code">
   var rcOption = {
-    app: 'your_app_id',
+    app: YOUR_APP_ID,
     fields: [
       'your_field_code',
       // another fieldCode
@@ -275,7 +275,7 @@ Promise
 <pre class="inline-code">
 
   const rcOption = {
-    app: 'your_app_id',
+    app: YOUR_APP_ID,
     fields: [
       'your_field_code',
       // another fieldCode
@@ -319,7 +319,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -339,7 +339,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -382,7 +382,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -406,7 +406,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -455,7 +455,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -530,7 +530,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -631,8 +631,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
-  var id = 'your_record_id';
+  var app = YOUR_APP_ID;
+  var id = YOUR_RECORD_ID;
   var record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -653,8 +653,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
-  const id = 'your_record_id';
+  const app = YOUR_APP_ID;
+  const id = YOUR_RECORD_ID;
   const record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -700,7 +700,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var updateKey = {
     field: 'your_fieldcode',
     value: 'your_fieldcode_value'
@@ -725,7 +725,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const updateKey = {
     field: 'your_fieldcode',
     value: 'your_fieldcode_value'
@@ -773,7 +773,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -781,7 +781,7 @@ Promise
     // Another fieldcode here
   };
   var recordUpdate = {
-    id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
+    id: YOUR_RECORD_ID, // Optional. Required, if updateKey will not be specified.
     updateKey: { // Optional. Required, if id will not be specified.
       field: 'your_field_code',
       value: 'your_field_code_value'
@@ -806,7 +806,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -814,7 +814,7 @@ Promise
       // Another fieldcode here
   };
   const recordUpdate = {
-      id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
+      id: YOUR_RECORD_ID, // Optional. Required, if updateKey will not be specified.
       updateKey: { // Optional. Required, if id will not be specified.
           field: 'your_field_code',
           value: 'your_field_code_value'
@@ -863,7 +863,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var record = {
     YourFieldCode: {
       value: 'Value Of YourFieldCode'
@@ -871,7 +871,7 @@ Promise
     // Another fieldcode here
   };
   var recordUpdate = {
-    id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
+    id: YOUR_RECORD_ID, // Optional. Required, if updateKey will not be specified.
     updateKey: { // Optional. Required, if id will not be specified.
       field: 'your_field_code',
       value: 'your_field_code_value'
@@ -947,7 +947,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const record = {
       YourFieldCode: {
           value: 'Value Of YourFieldCode'
@@ -955,7 +955,7 @@ Promise
       // Another fieldcode here
   };
   const recordUpdate = {
-      id: 'your_record_id', // Optional. Required, if updateKey will not be specified.
+      id: YOUR_RECORD_ID, // Optional. Required, if updateKey will not be specified.
       updateKey: { // Optional. Required, if id will not be specified.
           field: 'your_field_code',
           value: 'your_field_code_value'
@@ -1053,7 +1053,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var ids = [/*your_record_id*/]
   kintoneRecord.deleteRecords({app, ids}).then((rsp) => {
       console.log(rsp);
@@ -1068,7 +1068,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const ids = [/*your_record_id*/]
   kintoneRecord.deleteRecords({app, ids}).then((rsp) => {
     console.log(rsp);
@@ -1106,7 +1106,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var idsWithRevision = {
     /*your_record_id: revision_of_record*/
   }
@@ -1123,7 +1123,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const idsWithRevision = {
       /*your_record_id: revision_of_record*/
   }
@@ -1164,7 +1164,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var query = 'your_query_string';
   kintoneRecord.deleteAllRecordsByQuery({app, query}).then((rsp) => {
       console.log(rsp);
@@ -1231,7 +1231,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const query = 'your_query_string';
   kintoneRecord.deleteAllRecordsByQuery({app, query}).then((rsp) => {
       console.log(rsp);
@@ -1324,7 +1324,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var updateKey = {
     field: 'your_fieldcode',
     value: 'your_fieldcode_value'
@@ -1349,7 +1349,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const updateKey = {
     field: 'your_fieldcode',
     value: 'your_fieldcode_value'
@@ -1399,7 +1399,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var records = [
     {
       updateKey: {
@@ -1458,7 +1458,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const records = [
     {
       updateKey: {
@@ -1542,8 +1542,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
-  var id = 'your_record_id';
+  var app = YOUR_APP_ID;
+  var id = YOUR_RECORD_ID;
   var assignees = [/*your_assignee(s)*/];
   var revision = 'revision_of_record';
 
@@ -1560,8 +1560,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
-  const id = 'your_record_id';
+  const app = YOUR_APP_ID;
+  const id = YOUR_RECORD_ID;
   const assignees = [/*your_assignee(s)*/];
   const revision = /*{revision_of_record}*/;
 
@@ -1604,8 +1604,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
-  var id = 'your_record_id';
+  var app = YOUR_APP_ID;
+  var id = YOUR_RECORD_ID;
   var action = 'your_action_name';
   var assignee = '/*your_assignee(s)*/';
   var revision = 'revision_of_record';
@@ -1623,8 +1623,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
-  const id = 'your_record_id';
+  const app = YOUR_APP_ID;
+  const id = YOUR_RECORD_ID;
   const action = /*{your_action_name}*/;
   const assignee = '/*your_assignee(s)*/';
   const revision = /*{revision_of_record}*/;
@@ -1665,9 +1665,9 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
+  var app = YOUR_APP_ID;
   var recordStatusUpdateItem = {
-    id: 'your_record_id',
+    id: YOUR_RECORD_ID,
     action: 'your_action_name',
     assignee: 'your_assignee',
     revision: 'your_record_revision'
@@ -1689,7 +1689,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
+  const app = YOUR_APP_ID;
   const recordStatusUpdateItem = {
       id: /*your_record_id*/,
       action: '/*your_action_name*/',
@@ -1737,8 +1737,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
-  var id = 'your_record_id';
+  var app = YOUR_APP_ID;
+  var id = YOUR_RECORD_ID;
   var order = 'your_order_type'; // asc or desc
   var offset = 'your_offset_number';
   var limit = 'your_limit number';
@@ -1755,8 +1755,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
-  const id = 'your_record_id';
+  const app = YOUR_APP_ID;
+  const id = YOUR_RECORD_ID;
   const order = /*{your_order_type}*/; // asc or desc
   const offset = /*{your_offset_number}*/;
   const limit = /*{your_limit number}*/;
@@ -1794,8 +1794,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
-  var record = 'your_record_id';
+  var app = YOUR_APP_ID;
+  var record = YOUR_RECORD_ID;
   var comment = {
     text: 'your_comment_content',
     mentions: [
@@ -1819,8 +1819,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
-  const record = 'your_record_id';
+  const app = YOUR_APP_ID;
+  const record = YOUR_RECORD_ID;
   const comment = {
     text: 'your_comment_content',
     mentions: [
@@ -1866,9 +1866,9 @@ Promise
 
 <pre class="inline-code">
 
-  var app = 'your_app_id';
-  var record = 'your_record_id';
-  var comment = 'your_comment_id';
+  var app = YOUR_APP_ID;
+  var record = YOUR_RECORD_ID;
+  var comment = YOUR_COMMENT_ID;
   kintoneRecord.deleteComment({app, record, comment}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -1882,9 +1882,9 @@ Promise
 
 <pre class="inline-code">
 
-  const app = 'your_app_id';
-  const record = 'your_record_id';
-  const comment = 'your_comment_id';
+  const app = YOUR_APP_ID;
+  const record = YOUR_RECORD_ID;
+  const comment = YOUR_COMMENT_ID;
   kintoneRecord.deleteComment({app, record, comment}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
