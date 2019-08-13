@@ -136,7 +136,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.4.1</a>
+            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.4.2</a>
         </div>
       </div>
  
@@ -390,29 +390,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setheaderkey-value" title="setHeader(key, value)" class="md-nav__link">
-    setHeader(key, value)
+  <a href="#setheaderparams" title="setHeader(params)" class="md-nav__link">
+    setHeader(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#addrequestoptionkey-value" title="addRequestOption(key, value)" class="md-nav__link">
-    addRequestOption(key, value)
+  <a href="#addrequestoptionparams" title="addRequestOption(params)" class="md-nav__link">
+    addRequestOption(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setproxyproxyhost-proxyport-proxyusername-proxypassword" title="setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
-    setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
+  <a href="#setproxyparams" title="setProxy(params)" class="md-nav__link">
+    setProxy(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sethttpsproxyproxyhost-proxyport-proxyusername-proxypassword" title="setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
-    setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
+  <a href="#sethttpsproxyparams" title="setHttpsProxy(params)" class="md-nav__link">
+    setHttpsProxy(params)
   </a>
   
 </li>
@@ -546,29 +546,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setheaderkey-value" title="setHeader(key, value)" class="md-nav__link">
-    setHeader(key, value)
+  <a href="#setheaderparams" title="setHeader(params)" class="md-nav__link">
+    setHeader(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#addrequestoptionkey-value" title="addRequestOption(key, value)" class="md-nav__link">
-    addRequestOption(key, value)
+  <a href="#addrequestoptionparams" title="addRequestOption(params)" class="md-nav__link">
+    addRequestOption(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setproxyproxyhost-proxyport-proxyusername-proxypassword" title="setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
-    setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
+  <a href="#setproxyparams" title="setProxy(params)" class="md-nav__link">
+    setProxy(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sethttpsproxyproxyhost-proxyport-proxyusername-proxypassword" title="setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)" class="md-nav__link">
-    setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)
+  <a href="#sethttpsproxyparams" title="setHttpsProxy(params)" class="md-nav__link">
+    setHttpsProxy(params)
   </a>
   
 </li>
@@ -615,19 +615,25 @@
 </thead>
 <tbody>
 <tr>
-<td>domain</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>domain, auth, guestSpaceID</strong> properties</td>
+</tr>
+<tr>
+<td>params.domain</td>
 <td>String</td>
 <td>(condition)</td>
 <td><code>Required for nodejs</code> <br> The domain that is able to authenticate on kintone app</td>
 </tr>
 <tr>
-<td>auth</td>
+<td>params.auth</td>
 <td><a href="../authentication">Auth</a></td>
 <td>(condition)</td>
 <td><code>Required for nodejs</code> <br> The authentication object.</td>
 </tr>
 <tr>
-<td>guestSpaceID</td>
+<td>params.guestSpaceID</td>
 <td>Integer</td>
 <td>(optional)</td>
 <td>The guest space id. Use this parameter to connect to kintone guest space.</td>
@@ -639,26 +645,32 @@
 <Summary>Init Connection module</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
     // Define Authentication object
+    var paramsAuth = {
+        username: '{your_user_name}',
+        password: '{your_password}'
+    };
     var kintoneAuth = new kintoneJSSDK.Auth();
-    var username = '{your_user_name}';
-    var password = '{your_password}';
-    kintoneAuth.setPasswordAuth(username, password);
+    kintoneAuth.setPasswordAuth(paramsAuth);
 
     // Define connection that included auth
-    var kintoneConnection = new kintoneJSSDK.Connection( kintoneAuth);
+    var paramsConnection = {
+        auth: kintoneAuth
+    };
+    var kintoneConnectionWithAuthDemo = new kintoneJSSDK.Connection(paramsConnection);
 
-    // Define connection that included guest space 
-    var guestSpaceID = '{guest_Space_ID}';
-    var kintoneConnectionWithGuestSpaceDemo =
-        new kintoneJSSDK.Connection(kintoneAuth, guestSpaceID);
+    // Define connection that included guest space and auth
+    var paramsConnection = {
+        auth: kintoneAuth,
+        guestSpaceID: {guest_Space_ID}
+    };
+    var kintoneConnectionWithGuestSpaceAndAuthDemo = new kintoneJSSDK.Connection(paramsConnection);
 
-    // Define connection without  auth
-    var guestSpaceID = '{guest_Space_ID}';
-    var kintoneConnectionWithGuestSpaceDemo =
-        new kintoneJSSDK.Connection(null, guestSpaceID);
-
+    // Define connection without auth included guest space 
+    var paramsConnection = {
+        guestSpaceID: {guest_Space_ID}
+    };
+    var kintoneConnectionWithGuestSpaceDemo = new kintoneJSSDK.Connection(paramsConnection);
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong>
@@ -667,23 +679,31 @@
 
 // Define Authentication object
 let kintoneAuth = new kintone.Auth();
-let username = '{your_user_name}';
-let password = '{your_password}';
-kintoneAuth.setPasswordAuth(username, password);
+let paramsAuth = {
+    username: '{your_user_name}';
+    password: '{your_password}'
+};
+kintoneAuth.setPasswordAuth(paramsAuth);
 
-let myDomainName = 'my.domain.tld';
-let kintoneConnection = new kintone.Connection(myDomainName, kintoneAuth);
+let paramsConnection = {
+    domain: 'my.domain.tld',
+    auth: kintoneAuth
+};
+let kintoneConnection = new kintone.Connection(paramsConnection);
 
 // Define connection that included guest space
-let guestSpaceID = /*{guestSpaceID}*/;
-let kintoneConnectionWithGuestSpaceDemo =
-    new kintone.Connection(myDomainName, kintoneAuth, guestSpaceID);
+let paramsConnection = {
+    domain: 'my.domain.tld',
+    auth: kintoneAuth,
+    guestSpaceID: {guest_Space_ID}
+};
+let kintoneConnectionWithGuestSpaceDemo = new kintone.Connection(paramsConnection);
 </code></pre>
 </pre>
 
 <p></details></p>
 <h2 id="methods">Methods</h2>
-<h3 id="setheaderkey-value">setHeader(key, value)</h3>
+<h3 id="setheaderparams">setHeader(params)</h3>
 <blockquote>
 <p>Set new header of the <a href="./#">Connection</a></p>
 </blockquote>
@@ -699,13 +719,19 @@ let kintoneConnectionWithGuestSpaceDemo =
 </thead>
 <tbody>
 <tr>
-<td>key</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>key, value</strong> properties</td>
+</tr>
+<tr>
+<td>params.key</td>
 <td>String</td>
 <td>yes</td>
 <td>The header's <code>key</code> name</td>
 </tr>
 <tr>
-<td>value</td>
+<td>params.value</td>
 <td>String</td>
 <td>yes</td>
 <td>The header's value of <code>key</code></td>
@@ -719,24 +745,25 @@ let kintoneConnectionWithGuestSpaceDemo =
 <Summary>Set header of the Connection</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
-    var key = '{your_header_key}';
-    var value = '{your_header_value}';
-    kintoneConnection.setHeader(key, value);
-
+    var params = {
+        key: '{your_header_key}',
+        value: '{your_header_value}'
+    };
+    kintoneConnection.setHeader(params);
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    let key = '{your_header_key}';
-    let value = '{your_header_value}';
-    kintoneConnection.setHeader(key, value);
+    let params = {
+        key: '{your_header_key}',
+        value: '{your_header_value}'
+    };
+    kintoneConnection.setHeader(params);
 
 </pre>
 
 <p></details></p>
-<h3 id="addrequestoptionkey-value">addRequestOption(key, value)</h3>
+<h3 id="addrequestoptionparams">addRequestOption(params)</h3>
 <blockquote>
 <p>Add option that supported by <a href="https://www.npmjs.com/package/axios">axios</a> option</p>
 </blockquote>
@@ -752,13 +779,19 @@ let kintoneConnectionWithGuestSpaceDemo =
 </thead>
 <tbody>
 <tr>
-<td>key</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>key, value</strong> properties</td>
+</tr>
+<tr>
+<td>params.key</td>
 <td>String</td>
 <td>yes</td>
 <td>The option's <code>key</code> name</td>
 </tr>
 <tr>
-<td>value</td>
+<td>params.value</td>
 <td>String</td>
 <td>yes</td>
 <td>The option's value of <code>key</code></td>
@@ -772,24 +805,25 @@ let kintoneConnectionWithGuestSpaceDemo =
 <Summary>Set header of the Connection</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
-    var key = '{your_option_key}';
-    var value = '{your_option_value}';
-    kintoneConnection.addRequestOption(key, value);
+    var params = {
+        key: '{your_option_key}',
+        value: '{your_option_value}'
+    };
+    kintoneConnection.addRequestOption(params);
 
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    let key = '{your_option_key}';
-    let value = '{your_option_value}';
-    kintoneConnection.addRequestOption(key, value);
-
+    let params = {
+        key: '{your_option_key}',
+        value: '{your_option_value}'
+    };
+    kintoneConnection.addRequestOption(params);
 </pre>
 
 <p></details></p>
-<h3 id="setproxyproxyhost-proxyport-proxyusername-proxypassword">setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)</h3>
+<h3 id="setproxyparams">setProxy(params)</h3>
 <blockquote>
 <p>Set proxy for the connection module. <br>
 This function is available on node.js environment only. <br>
@@ -807,25 +841,31 @@ On Browser environment, proxy settings are controlled by the Browser.</p>
 </thead>
 <tbody>
 <tr>
-<td>proxyHost</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>proxyHost, proxyPort, proxyUsername, proxyPassword</strong> properties</td>
+</tr>
+<tr>
+<td>params.proxyHost</td>
 <td>String</td>
 <td>yes</td>
 <td>The proxy host name</td>
 </tr>
 <tr>
-<td>proxyPort</td>
+<td>params.proxyPort</td>
 <td>String</td>
 <td>yes</td>
 <td>The proxy port number</td>
 </tr>
 <tr>
-<td>proxyUsername</td>
+<td>params.proxyUsername</td>
 <td>String</td>
 <td>optional</td>
 <td>The username for proxy authentication. This parameter is required when proxy has authentication.</td>
 </tr>
 <tr>
-<td>proxyPassword</td>
+<td>params.proxyPassword</td>
 <td>String</td>
 <td>optional</td>
 <td>The proxy port number. This parameter is required when proxy has authentication.</td>
@@ -839,17 +879,17 @@ On Browser environment, proxy settings are controlled by the Browser.</p>
 <Summary>Set proxy for the Connection</Summary></p>
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    const proxyHost = '{your_proxy_host}';
-    const proxyPort = '{your_proxy_post}';
-    const proxyUsername = '{your_proxy_user}';
-    const proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
-
+    const params = {
+        proxyHost: '{your_proxy_host}',
+        proxyPort: '{your_proxy_post}',
+        proxyUsername: '{your_proxy_user}',
+        proxyPassword: '{your_proxy_password}'
+    };
+    kintoneConnection.setProxy(params);
 </pre>
 
 <p></details></p>
-<h3 id="sethttpsproxyproxyhost-proxyport-proxyusername-proxypassword">setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword)</h3>
+<h3 id="sethttpsproxyparams">setHttpsProxy(params)</h3>
 <blockquote>
 <p>Set SSL-secured proxy for the connection module. <br> 
 This function is available on node.js environment only. <br>
@@ -867,25 +907,31 @@ On Browser environment, proxy settings are controlled by the Browser.</p>
 </thead>
 <tbody>
 <tr>
-<td>proxyHost</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>proxyHost, proxyPort, proxyUsername, proxyPassword</strong> properties</td>
+</tr>
+<tr>
+<td>params.proxyHost</td>
 <td>String</td>
 <td>yes</td>
 <td>The proxy host name</td>
 </tr>
 <tr>
-<td>proxyPort</td>
+<td>params.proxyPort</td>
 <td>String</td>
 <td>yes</td>
 <td>The proxy port number</td>
 </tr>
 <tr>
-<td>proxyUsername</td>
+<td>params.proxyUsername</td>
 <td>String</td>
 <td>optional</td>
 <td>The username for proxy authentication. This parameter is required when proxy has authentication.</td>
 </tr>
 <tr>
-<td>proxyPassword</td>
+<td>params.proxyPassword</td>
 <td>String</td>
 <td>optional</td>
 <td>The proxy port number. This parameter is required when proxy has authentication.</td>
@@ -899,13 +945,13 @@ On Browser environment, proxy settings are controlled by the Browser.</p>
 <Summary>Set proxy for the Connection</Summary></p>
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    const proxyHost = '{your_proxy_host}';
-    const proxyPort = '{your_proxy_post}';
-    const proxyUsername = '{your_proxy_user}';
-    const proxyPassword = '{your_proxy_password}';
-    kintoneConnection.setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword);
-
+    const params = {
+        proxyHost: '{your_proxy_host}',
+        proxyPort: '{your_proxy_post}',
+        proxyUsername: '{your_proxy_user}',
+        proxyPassword: '{your_proxy_password}'
+    };
+    kintoneConnection.setHttpsProxy(params);
 </pre>
 
 <p></details></p>

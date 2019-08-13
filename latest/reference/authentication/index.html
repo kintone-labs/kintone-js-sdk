@@ -136,7 +136,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.4.1</a>
+            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.4.2</a>
         </div>
       </div>
  
@@ -378,36 +378,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setpasswordauthusername-password" title="setPasswordAuth(username, password)" class="md-nav__link">
-    setPasswordAuth(username, password)
+  <a href="#setpasswordauthparams" title="setPasswordAuth(params)" class="md-nav__link">
+    setPasswordAuth(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setapitokenapitoken" title="setApiToken(apiToken)" class="md-nav__link">
-    setApiToken(apiToken)
+  <a href="#setapitokenparams" title="setApiToken(params)" class="md-nav__link">
+    setApiToken(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setbasicauthusername-password" title="setBasicAuth(username, password)" class="md-nav__link">
-    setBasicAuth(username, password)
+  <a href="#setbasicauthparams" title="setBasicAuth(params)" class="md-nav__link">
+    setBasicAuth(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setclientcertbinarydata-cert-string-password" title="setClientCert(BinaryData cert, String password)" class="md-nav__link">
-    setClientCert(BinaryData cert, String password)
+  <a href="#setclientcertparams" title="setClientCert(params)" class="md-nav__link">
+    setClientCert(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setclientcertbypathstring-filepath-string-password" title="setClientCertByPath(String filePath, String password)" class="md-nav__link">
-    setClientCertByPath(String filePath, String password)
+  <a href="#setclientcertbypathparams" title="setClientCertByPath(params)" class="md-nav__link">
+    setClientCertByPath(params)
   </a>
   
 </li>
@@ -553,36 +553,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setpasswordauthusername-password" title="setPasswordAuth(username, password)" class="md-nav__link">
-    setPasswordAuth(username, password)
+  <a href="#setpasswordauthparams" title="setPasswordAuth(params)" class="md-nav__link">
+    setPasswordAuth(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setapitokenapitoken" title="setApiToken(apiToken)" class="md-nav__link">
-    setApiToken(apiToken)
+  <a href="#setapitokenparams" title="setApiToken(params)" class="md-nav__link">
+    setApiToken(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setbasicauthusername-password" title="setBasicAuth(username, password)" class="md-nav__link">
-    setBasicAuth(username, password)
+  <a href="#setbasicauthparams" title="setBasicAuth(params)" class="md-nav__link">
+    setBasicAuth(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setclientcertbinarydata-cert-string-password" title="setClientCert(BinaryData cert, String password)" class="md-nav__link">
-    setClientCert(BinaryData cert, String password)
+  <a href="#setclientcertparams" title="setClientCert(params)" class="md-nav__link">
+    setClientCert(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setclientcertbypathstring-filepath-string-password" title="setClientCertByPath(String filePath, String password)" class="md-nav__link">
-    setClientCertByPath(String filePath, String password)
+  <a href="#setclientcertbypathparams" title="setClientCertByPath(params)" class="md-nav__link">
+    setClientCertByPath(params)
   </a>
   
 </li>
@@ -643,7 +643,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 <p></details></p>
 <h2 id="methods">Methods</h2>
-<h3 id="setpasswordauthusername-password">setPasswordAuth(username, password)</h3>
+<h3 id="setpasswordauthparams">setPasswordAuth(params)</h3>
 <blockquote>
 <p>Set password authentication for Authentication module.</p>
 </blockquote>
@@ -659,13 +659,19 @@ This module allows authenticating with the Kintone app by password authenticator
 </thead>
 <tbody>
 <tr>
-<td>username</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>username, password</strong> properties</td>
+</tr>
+<tr>
+<td>params.username</td>
 <td>String</td>
 <td>yes</td>
 <td>The username that is able to authenticate on kintone app</td>
 </tr>
 <tr>
-<td>password</td>
+<td>params.password</td>
 <td>String</td>
 <td>yes</td>
 <td>The password that is able to authenticate on kintone app</td>
@@ -679,24 +685,26 @@ This module allows authenticating with the Kintone app by password authenticator
 <Summary>Set password authentication</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
-    var username = '{your_user_name}';
-    var password = '{your_password}';
-    kintoneAuth.setPasswordAuth(username, password);
+    var basicAuth = {
+        username: '{your_user_name}',
+        password: '{your_password}'
+    };
+    kintoneAuth.setPasswordAuth(basicAuth);
 
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    let username = '{your_user_name}';
-    let password = '{your_password}';
-    kintoneAuth.setPasswordAuth(username, password);
+    let basicAuth = {
+        username: '{your_user_name}',
+        password: '{your_password}'
+    };
+    kintoneAuth.setPasswordAuth(basicAuth);
 
 </pre>
 
 <p></details></p>
-<h3 id="setapitokenapitoken">setApiToken(apiToken)</h3>
+<h3 id="setapitokenparams">setApiToken(params)</h3>
 <blockquote>
 <p>Set Api Token for Authentication module.</p>
 </blockquote>
@@ -712,7 +720,13 @@ This module allows authenticating with the Kintone app by password authenticator
 </thead>
 <tbody>
 <tr>
-<td>apiToken</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that includes <strong>apiToken</strong> property</td>
+</tr>
+<tr>
+<td>params.apiToken</td>
 <td>String</td>
 <td>yes</td>
 <td>The apiToken that is able to authenticate on kintone app</td>
@@ -725,22 +739,24 @@ This module allows authenticating with the Kintone app by password authenticator
 <Summary>Set APIToken authentication</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
-    var apiToken = '{your_token}';
-    kintoneAuth.setApiToken(apiToken);
+    var params = {
+        apiToken: '{your_token}'
+    };
+    kintoneAuth.setApiToken(params);
 
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    let apiTokenString = '{your_token}';
-    kintoneAuth.setApiToken(apiTokenString);
+    let params = {
+        apiToken: '{your_token}'
+    };
+    kintoneAuth.setApiToken(params);
 
 </pre>
 
 <p></details></p>
-<h3 id="setbasicauthusername-password">setBasicAuth(username, password)</h3>
+<h3 id="setbasicauthparams">setBasicAuth(params)</h3>
 <blockquote>
 <p>Set Basic authentication for Authentication module.</p>
 </blockquote>
@@ -756,13 +772,19 @@ This module allows authenticating with the Kintone app by password authenticator
 </thead>
 <tbody>
 <tr>
-<td>username</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that includes <strong>username, password</strong> properties</td>
+</tr>
+<tr>
+<td>params.username</td>
 <td>String</td>
 <td>yes</td>
 <td>The username that is able to authenticate on kintone app</td>
 </tr>
 <tr>
-<td>password</td>
+<td>params.password</td>
 <td>String</td>
 <td>yes</td>
 <td>The password that is able to authenticate on kintone app</td>
@@ -776,24 +798,26 @@ This module allows authenticating with the Kintone app by password authenticator
 <Summary>Set basic authentication</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
-    var username = '{your_user_name}';
-    var password = '{your_password}';
-    kintoneAuth.setBasicAuth(username, password);
+    var basicAuth = {
+        username: '{your_user_name}',
+        password: '{your_password}'
+    };
+    kintoneAuth.setBasicAuth(basicAuth);
 
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    let username = '{your_user_name}';
-    let password = '{your_password}';
-    kintoneAuth.setBasicAuth(username, password);
+    let basicAuth = {
+        username: '{your_user_name}',
+        password: '{your_password}'
+    };
+    kintoneAuth.setBasicAuth(basicAuth);
 
 </pre>
 
 <p></details></p>
-<h3 id="setclientcertbinarydata-cert-string-password">setClientCert(BinaryData cert, String password)</h3>
+<h3 id="setclientcertparams">setClientCert(params)</h3>
 <blockquote>
 <p>Setting Authentication with the client certificate &amp; password set.</p>
 </blockquote>
@@ -809,13 +833,19 @@ This module allows authenticating with the Kintone app by password authenticator
 </thead>
 <tbody>
 <tr>
-<td>cert</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that includes <strong>cert, password</strong> properties</td>
+</tr>
+<tr>
+<td>params.cert</td>
 <td>BinaryData</td>
 <td>yes</td>
 <td>Binary data of client certificate</td>
 </tr>
 <tr>
-<td>password</td>
+<td>params.password</td>
 <td>String</td>
 <td>yes</td>
 <td>Password of client certificate</td>
@@ -829,18 +859,18 @@ This module allows authenticating with the Kintone app by password authenticator
 <Summary>Set client certificate by binary data</Summary></p>
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    const filePath = "your_cert_path_file"
-    const fileContent = fs.readFileSync(filePath);
-    const certPassword = "your_cert_file_password"
-
+    const filePath = "your_cert_path_file";
+    const params = {
+        fileContent: fs.readFileSync(filePath),
+        certPassword: "your_cert_file_password"
+    };
     //set client cert by file content and password
-    kintoneAuth.setClientCert(fileContent, certPassword);
+    kintoneAuth.setClientCert(params);
 
 </pre>
 
 <p></details></p>
-<h3 id="setclientcertbypathstring-filepath-string-password">setClientCertByPath(String filePath, String password)</h3>
+<h3 id="setclientcertbypathparams">setClientCertByPath(params)</h3>
 <blockquote>
 <p>Setting Authentication with the client certificate &amp; password set by file path</p>
 </blockquote>
@@ -856,13 +886,19 @@ This module allows authenticating with the Kintone app by password authenticator
 </thead>
 <tbody>
 <tr>
-<td>filePath</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that includes <strong>filePath, password</strong> properties</td>
+</tr>
+<tr>
+<td>params.filePath</td>
 <td>String</td>
 <td>yes</td>
 <td>File path to client certificate</td>
 </tr>
 <tr>
-<td>password</td>
+<td>params.password</td>
 <td>String</td>
 <td>yes</td>
 <td>Password of client certificate</td>
@@ -876,12 +912,12 @@ This module allows authenticating with the Kintone app by password authenticator
 <Summary>Set client certificate by path</Summary></p>
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-    const filePath = "your_cert_path_file"
-    const certPassword = "your_cert_file_password"
-
+    const params = {
+        filePath: "your_cert_path_file",
+        certPassword: "your_cert_file_password"
+    };
     //set client cert by file path and password
-    kintoneAuth.setClientCertByPath(filePath, certPassword);
+    kintoneAuth.setClientCertByPath(params);
 
 </pre>
 
