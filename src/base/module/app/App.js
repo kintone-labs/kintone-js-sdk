@@ -30,7 +30,6 @@ class App {
    * Get single app details
    * @param {Object} params
    * @param {Number} params.id
-   * @param {Number} appId
    * @return {Promise} Promise
    */
   getApp({id} = {}) {
@@ -41,7 +40,8 @@ class App {
   /**
    * Get multiple apps details
    * @param {Object} params
-   * @param {Number} params.id
+   * @param {Number} params.offset
+   * @param {Number} params.limit
    * @return {Promise} Promise
    */
   getApps({offset, limit} = {}) {
