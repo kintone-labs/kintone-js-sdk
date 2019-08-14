@@ -115,6 +115,7 @@ class Connection extends BaseConnection {
    */
   request(methodName, restAPIName, body) {
     const method = String(methodName).toUpperCase();
+    const uri = this.getUri(restAPIName);
     // Set Header
     const headersRequest = {};
     // set header with credentials
@@ -133,7 +134,7 @@ class Connection extends BaseConnection {
     // Set request options
     const requestOptions = this.options;
     requestOptions.method = method;
-    requestOptions.url = this.getUri(restAPIName);
+    requestOptions.url = uri;
 
     if (requestOptions.hasOwnProperty('httpsAgent')) {
       try {
@@ -145,12 +146,18 @@ class Connection extends BaseConnection {
 
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
-      requestOptions.params = {_method: method};
+      requestOptions.params = body;
+      delete requestOptions.data;
+      if (this.isExceedLimitUri(uri, body)) {
+        requestOptions.params = {_method: method};
+        requestOptions.method = 'POST';
+        headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = String(methodName).toUpperCase();
+        requestOptions.data = body;
+      }
       requestOptions.paramsSerializer = this.serializeParams;
-      headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = String(methodName).toUpperCase();
-      requestOptions.method = 'POST';
+    } else {
+      requestOptions.data = body;
     }
-    requestOptions.data = body;
     requestOptions.headers = headersRequest;
     // Execute request
     const request = axios(requestOptions).then(response => {

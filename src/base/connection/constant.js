@@ -15,7 +15,8 @@ const constant = function() {
       USER_AGENT: 'User-Agent',
       USER_AGENT_BASE_VALUE: '{name}/{version}',
       HTTPS_AGENT: 'httpsAgent',
-      X_HTTP_METHOD_OVERRIDE: 'X-HTTP-Method-Override'
+      X_HTTP_METHOD_OVERRIDE: 'X-HTTP-Method-Override',
+      LIMIT_REQUEST_URI_CHARACTER: 4096
     },
     PATH: {
       APP_CUSTOMIZE: 'app/customize',
