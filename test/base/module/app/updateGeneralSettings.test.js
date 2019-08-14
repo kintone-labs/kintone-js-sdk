@@ -90,720 +90,720 @@ describe('updateGeneralSettings function', () => {
       }).catch(err => {console.log(err);
       });
     });
-    // it('[General Setting-45]should update successfully the name', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'name': 'APP_NAME',
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-46]should update successfully the description', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'description': 'Here is app description.'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-47]should update successfully the icon', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'icon': {
-    //       'type': 'PRESET',
-    //       'key': 'APP72'
-    //     }
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-48]should update successfully the theme = WHITE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'WHITE'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-49]should update successfully the theme = RED', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'RED'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-50]should update successfully the theme = BLUE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'BLUE'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-51]should update successfully the theme = GREEN', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'GREEN'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-52]should update successfully the theme = YELLOW', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'YELLOW'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-53]should update successfully the theme = BLACK', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'BLACK'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-54]should update successfully without revision', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'name': 'APP_NAME',
-    //     'description': 'Here is app description.',
-    //     'icon': {
-    //       'type': 'PRESET',
-    //       'key': 'APP72'
-    //     },
-    //     'theme': 'WHITE'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-55]should update successfully when input revision = -1', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'name': 'APP_NAME',
-    //     'description': 'Here is app description.',
-    //     'icon': {
-    //       'type': 'PRESET',
-    //       'key': 'APP72'
-    //     },
-    //     'theme': 'WHITE',
-    //     'revision': -1
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-56]should update successfully without general settings', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'revision': 2
-    //   };
-    //   const expectResult = {
-    //     'revision': '3'
-    //   };
-    //   nock(URI)
-    //     .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-57]should update successfully the general settings in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'name': 'APP_NAME',
-    //     'description': 'Here is app description.',
-    //     'icon': {
-    //       'type': 'PRESET',
-    //       'key': 'APP72'
-    //     },
-    //     'theme': 'WHITE',
-    //     'revision': 1
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-58]should update successfully the name in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'name': 'APP_NAME',
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-59]should update successfully the description in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'description': 'Here is app description.'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-60]should update successfully the icon in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'icon': {
-    //       'type': 'PRESET',
-    //       'key': 'APP72'
-    //     }
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-61]should update successfully the theme = WHITE in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'WHITE'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-62]should update successfully the theme = RED in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'RED'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-63]should update successfully the theme = BLUE in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'BLUE'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-64]should update successfully the theme = GREEN in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'GREEN'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-65]should update successfully the theme = YELLOW in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'YELLOW'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-66]should update successfully the theme = BLACK in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'theme': 'BLACK'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-67]should update successfully without revision in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'name': 'APP_NAME',
-    //     'description': 'Here is app description.',
-    //     'icon': {
-    //       'type': 'PRESET',
-    //       'key': 'APP72'
-    //     },
-    //     'theme': 'WHITE'
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-68]should update successfully when input revision = -1 in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'name': 'APP_NAME',
-    //     'description': 'Here is app description.',
-    //     'icon': {
-    //       'type': 'PRESET',
-    //       'key': 'APP72'
-    //     },
-    //     'theme': 'WHITE',
-    //     'revision': -1
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
-    // it('[General Setting-69]should update successfully without general settings in GUEST SPACE', () => {
-    //   const expectBody = {
-    //     'app': 1,
-    //     'revision': 1
-    //   };
-    //   const expectResult = {
-    //     'revision': '2'
-    //   };
-    //   nock(URI)
-    //     .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
-    //       expect(rqBody).toEqual(expectBody);
-    //       return true;
-    //     })
-    //     .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-    //       expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
-    //       return true;
-    //     })
-    //     .matchHeader('Content-Type', (type) => {
-    //       expect(type).toBe('application/json;charset=utf-8');
-    //       return true;
-    //     })
-    //     .reply(200, expectResult);
-    //   const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
-    //   return updateGeneralSettingsResult.then((rsp) => {
-    //     expect(rsp).toMatchObject(expectResult);
-    //   });
-    // });
+    it('[General Setting-45]should update successfully the name', () => {
+      const expectBody = {
+        'app': 1,
+        'name': 'APP_NAME',
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-46]should update successfully the description', () => {
+      const expectBody = {
+        'app': 1,
+        'description': 'Here is app description.'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-47]should update successfully the icon', () => {
+      const expectBody = {
+        'app': 1,
+        'icon': {
+          'type': 'PRESET',
+          'key': 'APP72'
+        }
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-48]should update successfully the theme = WHITE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'WHITE'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-49]should update successfully the theme = RED', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'RED'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-50]should update successfully the theme = BLUE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'BLUE'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-51]should update successfully the theme = GREEN', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'GREEN'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-52]should update successfully the theme = YELLOW', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'YELLOW'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-53]should update successfully the theme = BLACK', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'BLACK'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-54]should update successfully without revision', () => {
+      const expectBody = {
+        'app': 1,
+        'name': 'APP_NAME',
+        'description': 'Here is app description.',
+        'icon': {
+          'type': 'PRESET',
+          'key': 'APP72'
+        },
+        'theme': 'WHITE'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-55]should update successfully when input revision = -1', () => {
+      const expectBody = {
+        'app': 1,
+        'name': 'APP_NAME',
+        'description': 'Here is app description.',
+        'icon': {
+          'type': 'PRESET',
+          'key': 'APP72'
+        },
+        'theme': 'WHITE',
+        'revision': -1
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-56]should update successfully without general settings', () => {
+      const expectBody = {
+        'app': 1,
+        'revision': 2
+      };
+      const expectResult = {
+        'revision': '3'
+      };
+      nock(URI)
+        .put(APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-57]should update successfully the general settings in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'name': 'APP_NAME',
+        'description': 'Here is app description.',
+        'icon': {
+          'type': 'PRESET',
+          'key': 'APP72'
+        },
+        'theme': 'WHITE',
+        'revision': 1
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-58]should update successfully the name in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'name': 'APP_NAME',
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-59]should update successfully the description in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'description': 'Here is app description.'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-60]should update successfully the icon in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'icon': {
+          'type': 'PRESET',
+          'key': 'APP72'
+        }
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-61]should update successfully the theme = WHITE in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'WHITE'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-62]should update successfully the theme = RED in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'RED'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-63]should update successfully the theme = BLUE in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'BLUE'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-64]should update successfully the theme = GREEN in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'GREEN'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-65]should update successfully the theme = YELLOW in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'YELLOW'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-66]should update successfully the theme = BLACK in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'theme': 'BLACK'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-67]should update successfully without revision in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'name': 'APP_NAME',
+        'description': 'Here is app description.',
+        'icon': {
+          'type': 'PRESET',
+          'key': 'APP72'
+        },
+        'theme': 'WHITE'
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-68]should update successfully when input revision = -1 in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'name': 'APP_NAME',
+        'description': 'Here is app description.',
+        'icon': {
+          'type': 'PRESET',
+          'key': 'APP72'
+        },
+        'theme': 'WHITE',
+        'revision': -1
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
+    it('[General Setting-69]should update successfully without general settings in GUEST SPACE', () => {
+      const expectBody = {
+        'app': 1,
+        'revision': 1
+      };
+      const expectResult = {
+        'revision': '2'
+      };
+      nock(URI)
+        .put(GUEST_APP_PREVIEW_SETTINGS_ROUTE, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toBe('application/json;charset=utf-8');
+          return true;
+        })
+        .reply(200, expectResult);
+      const updateGeneralSettingsResult = appModuleGuestSpace.updateGeneralSettings(expectBody);
+      return updateGeneralSettingsResult.then((rsp) => {
+        expect(rsp).toMatchObject(expectResult);
+      });
+    });
   });
   describe('error case', () => {
     it('[General Setting-70]should return error when use API token', () => {

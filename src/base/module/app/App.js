@@ -28,6 +28,8 @@ class App {
   }
   /**
    * Get single app details
+   * @param {Object} params
+   * @param {Number} params.id
    * @param {Number} appId
    * @return {Promise} Promise
    */
@@ -38,8 +40,8 @@ class App {
   }
   /**
    * Get multiple apps details
-   * @param {Number} offset
-   * @param {Number} limit
+   * @param {Object} params
+   * @param {Number} params.id
    * @return {Promise} Promise
    */
   getApps({offset, limit} = {}) {
@@ -48,9 +50,10 @@ class App {
   }
   /**
    * Get multiple apps details
-   * @param {Array<String>} codes
-   * @param {Number} offset
-   * @param {Number} limit
+   * @param {Object} params
+   * @param {Array<String>} params.codes
+   * @param {Number} params.offset
+   * @param {Number} params.limit
    * @return {Promise} Promise
    */
   getAppsByCodes({codes, offset, limit} = {}) {
@@ -60,9 +63,10 @@ class App {
   }
   /**
    * Get multiple apps details
-   * @param {String} name
-   * @param {Number} offset
-   * @param {Number} limit
+   * @param {Object} params
+   * @param {String} params.name
+   * @param {Number} params.offset
+   * @param {Number} params.limit
    * @return {Promise} Promise
    */
   getAppsByName({name, offset, limit} = {}) {
@@ -72,9 +76,11 @@ class App {
   }
   /**
    * Get multiple apps details
-   * @param {Array<Number>} ids
-   * @param {Number} offset
-   * @param {Number} limit
+   * @param {Object} params
+   * @param {Array<Number>} params.ids
+   * @param {Number} params.offset
+   * @param {Number} params.limit
+
    * @return {Promise} Promise
    */
   getAppsByIDs({ids, offset, limit} = {}) {
@@ -85,9 +91,10 @@ class App {
   }
   /**
    * Get multiple apps details
-   * @param {Array<String>} spaceIds
-   * @param {Number} offset
-   * @param {Number} limit
+   * @param {Object} params
+   * @param {Array<String>} params.spaceIds
+   * @param {Number} params.offset
+   * @param {Number} params.limit
    * @return {Promise} Promise
    */
   getAppsBySpaceIDs({spaceIds, offset, limit} = {}) {
@@ -97,8 +104,9 @@ class App {
   }
   /**
    * Get app's form fields details
-   * @param {Number} app
-   * @param {Boolean} isPreview
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Boolean} params.isPreview
    * @return {Promise} Promise
    */
   getFormLayout({app, isPreview} = {}) {
@@ -120,9 +128,10 @@ class App {
   }
   /**
    * Get app's form fields details
-   * @param {Number} app
-   * @param {String} lang
-   * @param {Boolean} isPreview
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.lang
+   * @param {Boolean} params.isPreview
    * @return {Promise} Promise
    */
   getFormFields({app, lang, isPreview} = {}) {
@@ -158,9 +167,10 @@ class App {
 
   /**
    * Delete form fields
-   * @param {Number} app
-   * @param {Object} fields
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.fields
+   * @param {Number} params.revision
    * @returns {Promise} Promise
    */
   deleteFormFields({app, fields, revision} = {}) {
@@ -170,9 +180,10 @@ class App {
 
   /**
    * Add form fields
-   * @param {String} name
-   * @param {Number} space
-   * @param {Number} thread
+   * @param {Object} params
+   * @param {String} params.name
+   * @param {Number} params.space
+   * @param {Number} params.thread
    * @returns {Promise} Promise
    */
   addPreviewApp({name, space, thread} = {}) {
@@ -182,8 +193,9 @@ class App {
 
   /**
    * Deploy App Settings
-   * @param {Array<{AddPreviewAppResponse}>} apps
-   * @param {Boolean} revert
+   * @param {Object} params
+   * @param {Array<{AddPreviewAppResponse}>} params.apps
+   * @param {Boolean} params.revert
    * @returns {Promise} Promise
    */
   deployAppSettings({apps, revert} = {}) {
@@ -193,7 +205,8 @@ class App {
 
   /**
    * Get App Deploy Status
-   * @param {Array} apps
+   * @param {Object} params
+   * @param {Array} params.apps
    * @returns {Promise} Promise
    */
   getAppDeployStatus({apps} = {}) {
@@ -203,9 +216,10 @@ class App {
 
   /**
    * Get Views
-   * @param {Number} app
-   * @param {String} lang
-   * @param {Boolean} isPreview
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.lang
+   * @param {Boolean} params.isPreview
    * @returns {Promise} Promise
    */
   getViews({app, lang, isPreview} = {}) {
@@ -216,9 +230,10 @@ class App {
 
   /**
    * Update Views
-   * @param {Number} app
-   * @param {Object} views
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.views
+   * @param {Number} params.revision
    * @returns {Promise} Promise
    */
   updateViews({app, views, revision} = {}) {
@@ -228,9 +243,10 @@ class App {
 
   /**
    * Get Views
-   * @param {Number} app
-   * @param {String} lang
-   * @param {Boolean} isPreview
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.lang
+   * @param {Boolean} params.isPreview
    * @returns {Promise} Promise
    */
   getGeneralSettings({app, lang, isPreview} = {}) {
