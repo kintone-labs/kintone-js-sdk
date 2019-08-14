@@ -16,6 +16,30 @@ const paramSetProxy = {proxyHost: common.PROXY_HOST,
 
 describe('Connection module', () => {
   describe('common function', () => {
+    it(`Should overide method when exeed uri lenght`, () => {
+      let query = 'Check_box not in (';
+      for (let i = 0; i < 5000; i++) {
+        query += '"sample1",';
+      }
+      query += '"sample1") and Created_by in (LOGINUSER()) order by $id asc limit 100 offset 0';
+
+      const expectBody = {
+        app: 1,
+        query
+      };
+      nock(URI)
+        .post(`${API_ROUTE.RECORD_GET}?_method=GET`, (rqBody) => {
+          expect(rqBody).toEqual(expectBody);
+          return true;
+        })
+        .reply(200, {});
+
+      conn.setProxy(paramSetProxy);
+      const response = conn.request('GET', API_ROUTE.RECORD_GET, expectBody);
+      return response.then((rsp) => {
+        expect(rsp).toEqual({});
+      });
+    });
     it('Should return a connection when "addRequestOption" function is called', () => {
       expect(conn.addRequestOption({key: 'proxy', value: false})).toBeInstanceOf(Connection);
     });
