@@ -67,7 +67,6 @@ class Connection {
     const requestOptions = this.options;
     requestOptions.method = method;
     requestOptions.url = uri;
-    requestOptions.headers = headersRequest;
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
@@ -75,7 +74,7 @@ class Connection {
       if (this.isExceedLimitUri(uri, body)) {
         requestOptions.params = {_method: method};
         requestOptions.method = 'POST';
-        headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = String(methodName).toUpperCase();
+        headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = method;
         requestOptions.data = body;
       }
       requestOptions.paramsSerializer = this.serializeParams;
