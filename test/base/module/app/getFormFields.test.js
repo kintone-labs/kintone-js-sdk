@@ -15,14 +15,14 @@ const APP_FORM_FIELD_PREVIEW_ROUTE = '/k/v1/preview/app/form/fields.json';
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const recordModule = new App(conn);
+const recordModule = new App({connection: conn});
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const guestFormModule = new App(connGuest);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const guestFormModule = new App({connection: connGuest});
 
 describe('getFormFields function', () => {
   describe('common function', () => {
@@ -32,7 +32,7 @@ describe('getFormFields function', () => {
         .get(`${APP_FORM_FIELD_ROUTE}?app=${app}`)
         .reply(200, {});
 
-      const getAppResult = recordModule.getFormFields(app);
+      const getAppResult = recordModule.getFormFields({app});
       expect(getAppResult).toHaveProperty('then');
       expect(getAppResult).toHaveProperty('catch');
     });
@@ -69,7 +69,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -104,7 +104,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -139,7 +139,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -174,7 +174,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -209,7 +209,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -243,7 +243,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, undefined);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -288,7 +288,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -323,7 +323,7 @@ describe('getFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -357,7 +357,7 @@ describe('getFormFields function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getFormFieldsResult = guestFormModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = guestFormModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -389,7 +389,7 @@ describe('getFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -418,7 +418,7 @@ describe('getFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(undefined, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({lang, isPreview});
       return getFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -448,7 +448,7 @@ describe('getFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -471,7 +471,7 @@ describe('getFormFields function', () => {
         })
         .reply(403, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -494,7 +494,7 @@ describe('getFormFields function', () => {
         })
         .reply(403, expectResult);
 
-      const getFormFieldsResult = recordModule.getFormFields(app, lang, isPreview);
+      const getFormFieldsResult = recordModule.getFormFields({app, lang, isPreview});
       return getFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -509,7 +509,7 @@ describe('getFormFields function', () => {
       nock(URI)
         .get(`${APP_FORM_FIELD_ROUTE}?app=10`)
         .reply(403, expectResult);
-      const getFormFieldsResult = recordModule.getFormFields(10);
+      const getFormFieldsResult = recordModule.getFormFields({app: 10});
       return getFormFieldsResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });

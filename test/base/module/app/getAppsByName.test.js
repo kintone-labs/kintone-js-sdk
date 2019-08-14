@@ -8,10 +8,10 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, App} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERAPP_NAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
-const AppModule = new App(conn);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const AppModule = new App({connection: conn});
 
 const MAX_VALUE = 2147483647;
 const URI = 'https://' + common.DOMAIN;
@@ -26,13 +26,13 @@ describe('getAppsByName function', () => {
         .get(`${APPS_API_ROUTE}?name=${APP_NAME}`)
         .reply(200, {});
 
-      const getAppResult = AppModule.getAppsByName(APP_NAME);
+      const getAppResult = AppModule.getAppsByName({name: APP_NAME});
       expect(getAppResult).toHaveProperty('then');
       expect(getAppResult).toHaveProperty('catch');
     });
   });
 
-  describe('success common', () => {
+  describe('success case', () => {
     it('[App-45] should return the app information based on the app APP_NAME (without limit, offset)', () => {
       const expectResult = {
         apps: [
@@ -59,11 +59,11 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?name=${APP_NAME}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-          expect(authHeader).toBe(common.getPasswordAuth(common.USERAPP_NAME, common.PASSWORD));
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME);
+      const getAppsResult = AppModule.getAppsByName({name: APP_NAME});
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -114,11 +114,11 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?limit=${limit}&name=${APP_NAME}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-          expect(authHeader).toBe(common.getPasswordAuth(common.USERAPP_NAME, common.PASSWORD));
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, undefined, limit);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, limit}));
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -169,11 +169,11 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?offset=${offset}&name=${APP_NAME}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-          expect(authHeader).toBe(common.getPasswordAuth(common.USERAPP_NAME, common.PASSWORD));
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, offset, undefined);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, offset}));
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -206,11 +206,11 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?limit=${limit}&name=${APP_NAME}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-          expect(authHeader).toBe(common.getPasswordAuth(common.USERAPP_NAME, common.PASSWORD));
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, undefined, limit);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, limit}));
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -242,13 +242,13 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_GUEST_ROUTE}?name=${APP_NAME}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-          expect(authHeader).toBe(common.getPasswordAuth(common.USERAPP_NAME, common.PASSWORD));
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const conn1 = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-      const AppModuleGuestSpace = new App(conn1);
-      const getAppsResult = AppModuleGuestSpace.getAppsByName(APP_NAME);
+      const conn1 = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+      const AppModuleGuestSpace = new App({connection: conn1});
+      const getAppsResult = AppModuleGuestSpace.getAppsByName({name: APP_NAME});
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -281,11 +281,11 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?name=${APP_NAME}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-          expect(authHeader).toBe(common.getPasswordAuth(common.USERAPP_NAME, common.PASSWORD));
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME);
+      const getAppsResult = AppModule.getAppsByName({name: APP_NAME});
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -317,11 +317,11 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?name=${APP_NAME}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
-          expect(authHeader).toBe(common.getPasswordAuth(common.USERAPP_NAME, common.PASSWORD));
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME);
+      const getAppsResult = AppModule.getAppsByName({name: APP_NAME});
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -338,7 +338,7 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?name=${APP_NAME}`)
         .reply(403, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME);
+      const getAppsResult = AppModule.getAppsByName({name: APP_NAME});
       return getAppsResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -359,7 +359,7 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?limit=${limit}&name=${APP_NAME}`)
         .reply(400, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, undefined, limit);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, limit}));
       return getAppsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -381,7 +381,7 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?limit=${limit}&name=${APP_NAME}`)
         .reply(400, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, undefined, limit);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, limit}));
       return getAppsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -403,7 +403,7 @@ describe('getAppsByName function', () => {
       nock(URI)
         .get(`${APPS_API_ROUTE}?offset=${offset}&name=${APP_NAME}`)
         .reply(400, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, offset, undefined);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, offset}));
       return getAppsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -422,9 +422,9 @@ describe('getAppsByName function', () => {
         }
       };
       nock(URI)
-        .get(`${APPS_API_ROUTE}?limit=${MAX_VALUE + 1}&name=${APP_NAME}`)
+        .get(`${APPS_API_ROUTE}?offset=${MAX_VALUE + 1}&name=${APP_NAME}`)
         .reply(400, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, undefined, MAX_VALUE + 1);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, offset: MAX_VALUE + 1}));
       return getAppsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -443,9 +443,9 @@ describe('getAppsByName function', () => {
         }
       };
       nock(URI)
-        .get(`${APPS_API_ROUTE}?offset=${MAX_VALUE + 1}&name=${APP_NAME}`)
+        .get(`${APPS_API_ROUTE}?limit=${MAX_VALUE + 1}&name=${APP_NAME}`)
         .reply(400, expectResult);
-      const getAppsResult = AppModule.getAppsByName(APP_NAME, MAX_VALUE + 1, undefined);
+      const getAppsResult = AppModule.getAppsByName(({name: APP_NAME, limit: MAX_VALUE + 1}));
       return getAppsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

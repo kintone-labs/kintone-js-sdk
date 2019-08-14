@@ -6,9 +6,10 @@ import {Connection} from '../connection/Connection';
 export class App extends kintoneBaseJSSDK.App {
 
   /**
-     * @param {conn} Connection
+   * @param {Object} params
+   * @param {Connection} params.connection
      */
-  constructor(conn) {
+  constructor({connection: conn} = {}) {
     let connection = conn;
     if (!connection) {
       connection = new Connection();
