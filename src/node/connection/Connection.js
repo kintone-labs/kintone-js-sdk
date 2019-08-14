@@ -114,6 +114,7 @@ class Connection extends BaseConnection {
    * @return {Promise}
    */
   request(methodName, restAPIName, body) {
+    const method = String(methodName).toUpperCase();
     // Set Header
     const headersRequest = {};
     // set header with credentials
@@ -131,9 +132,8 @@ class Connection extends BaseConnection {
     });
     // Set request options
     const requestOptions = this.options;
-    requestOptions.method = String(methodName).toUpperCase();
+    requestOptions.method = method;
     requestOptions.url = this.getUri(restAPIName);
-    requestOptions.headers = headersRequest;
 
     if (requestOptions.hasOwnProperty('httpsAgent')) {
       try {
@@ -145,12 +145,13 @@ class Connection extends BaseConnection {
 
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
-      requestOptions.params = body;
+      requestOptions.params = {_method: method};
       requestOptions.paramsSerializer = this.serializeParams;
-      delete requestOptions.data;
-    } else {
-      requestOptions.data = body;
+      headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = String(methodName).toUpperCase();
+      requestOptions.method = 'POST';
     }
+    requestOptions.data = body;
+    requestOptions.headers = headersRequest;
     // Execute request
     const request = axios(requestOptions).then(response => {
       return response.data;
@@ -189,7 +190,7 @@ class Connection extends BaseConnection {
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
 
-    if (requestOptions.hasOwnProperty('httpsAgent')) {
+    if (requestOptions.hasOwnProperty(CONNECTION_CONST.BASE.HTTPS_AGENT)) {
       try {
         tls.createSecureContext(requestOptions.httpsAgent.options);
       } catch (err) {
