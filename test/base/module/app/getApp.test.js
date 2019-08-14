@@ -10,7 +10,7 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 const { KintoneAPIException, Connection, Auth, App } = require(common.MAIN_PATH_BASE);
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 
 describe('getApp function', () => {
   describe('common function', () => {
@@ -65,7 +65,7 @@ describe('getApp function', () => {
     it('[App-4] - should get successfully the app infomation in guest space', () => {
       const appID = 1;
       const connGuest = new Connection({domain: common.DOMAIN, auth, guestSpaceID: common.GUEST_SPACEID});
-      const appModuleGuest = new App(connGuest);
+      const appModuleGuest = new App({connection: connGuest});
       const expectResult = {
         'appId': appID,
         'code': '',

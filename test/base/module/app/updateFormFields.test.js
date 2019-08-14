@@ -18,15 +18,15 @@ auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const guestFormModule = new App(connGuest);
+const guestFormModule = new App({connection: connGuest});
 
 const authToken = new Auth();
 authToken.setApiToken({apiToken: common.API_TOKEN_VALUE});
 const connUsingToken = new Connection({domain: common.DOMAIN, auth: authToken});
-const appUsingToken = new App(connUsingToken);
+const appUsingToken = new App({connection: connUsingToken});
 
 
 describe('updateFormFields function', () => {

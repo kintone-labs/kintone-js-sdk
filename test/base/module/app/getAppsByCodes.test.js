@@ -12,7 +12,7 @@ const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const AppModule = new App(conn);
+const AppModule = new App({connection: conn});
 const MAX_VALUE = 2147483647;
 const APPS_API_ROUTE = '/k/v1/apps.json';
 const APPS_API_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/apps.json`;
@@ -209,7 +209,7 @@ describe('getAppsByCodes function', () => {
         })
         .reply(200, expectResult);
       const conn1 = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-      const AppModuleGuestSpace = new App(conn1);
+      const AppModuleGuestSpace = new App({connection: conn1});
       const getAppsResult = AppModuleGuestSpace.getAppsByCodes({codes: APP_CODES});
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);

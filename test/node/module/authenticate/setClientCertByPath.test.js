@@ -22,7 +22,7 @@ describe('Connection module', () => {
         .setPasswordAuth(paramPasswordAuth)
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App({conn});
+      const appModule = new App({connection: conn});
 
       const appID = 1;
       const expectResult = {
@@ -71,7 +71,7 @@ describe('Connection module', () => {
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
       conn.setProxy(common.PROXY_HOST, common.PROXY_PORT);
-      const appModule = new App({conn});
+      const appModule = new App({connection: conn});
 
       const appID = 1;
       const expectResult = {
@@ -122,7 +122,7 @@ describe('Connection module', () => {
         .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App({conn});
+      const appModule = new App({connection: conn});
 
       const appID = 1;
       nock(URI)
@@ -143,7 +143,7 @@ describe('Connection module', () => {
         .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
         .setClientCertByPath({filePath: filePath, password: 'wrong_password'});
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App({conn});
+      const appModule = new App({connection: conn});
 
       const appID = 1;
       nock(URI)
@@ -163,7 +163,7 @@ describe('Connection module', () => {
         .setPasswordAuth(paramPasswordAuth)
         .setClientCertByPath(paramClientCertByPath);
       const conn = new Connection(common.DOMAIN, auth);
-      const appModule = new App({conn});
+      const appModule = new App({connection: conn});
 
       const appID = 1;
       nock(URI)

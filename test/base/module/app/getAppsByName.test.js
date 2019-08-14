@@ -11,7 +11,7 @@ const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const AppModule = new App(conn);
+const AppModule = new App({connection: conn});
 
 const MAX_VALUE = 2147483647;
 const URI = 'https://' + common.DOMAIN;
@@ -247,7 +247,7 @@ describe('getAppsByName function', () => {
         })
         .reply(200, expectResult);
       const conn1 = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-      const AppModuleGuestSpace = new App(conn1);
+      const AppModuleGuestSpace = new App({connection: conn1});
       const getAppsResult = AppModuleGuestSpace.getAppsByName({name: APP_NAME});
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);

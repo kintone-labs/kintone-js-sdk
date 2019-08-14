@@ -19,10 +19,10 @@ auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const recordModule = new App(conn);
+const recordModule = new App({connection: conn});
 
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const guestFormModule = new App(connGuest);
+const guestFormModule = new App({connection: connGuest});
 
 describe('getFormFields function', () => {
   describe('common function', () => {

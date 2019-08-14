@@ -10,7 +10,7 @@ const {KintoneAPIException, Connection, Auth, App} = require(common.MAIN_PATH_BA
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 
 describe('getApps function', () => {
   describe('common function', () => {
@@ -220,7 +220,7 @@ describe('getApps function', () => {
       const limit = 3;
       const offset = 1;
       const connGuest = new Connection({domain: common.DOMAIN, auth, guestSpaceID: common.GUEST_SPACEID});
-      const appModuleGuest = new App(connGuest);
+      const appModuleGuest = new App({connection: connGuest});
       const expectResult = {
         'apps': [
           {

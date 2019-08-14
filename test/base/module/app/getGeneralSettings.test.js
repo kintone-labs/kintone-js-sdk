@@ -16,21 +16,21 @@ const GUEST_APP_SETTINGS_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/app/settin
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 
 // Init API Connection
 const authAPI = new Auth();
 authAPI.setApiToken({apiToken: common.API_TOKEN_VALUE});
 const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
-const appModuleAPI = new App(connAPI);
+const appModuleAPI = new App({connection: connAPI});
 
 // Init Connection Guest Space
 const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const appModuleGuestSpace = new App(connGuestSpace);
+const appModuleGuestSpace = new App({connection: connGuestSpace});
 
 // Init API Connection Guest Space
 const connAPIGuestSpace = new Connection({domain: common.DOMAIN, auth: authAPI, guestSpaceID: common.GUEST_SPACEID});
-const appModuleAPIGuestSpace = new App(connAPIGuestSpace);
+const appModuleAPIGuestSpace = new App({connection: connAPIGuestSpace});
 
 describe('getGeneralSettings function', () => {
   describe('common function', () => {

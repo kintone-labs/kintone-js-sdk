@@ -8,14 +8,14 @@ const {Connection, Auth, App} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/apps.json';
 const GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/apps.json`;
 
 const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const appModuleGuestSpace = new App(connGuestSpace);
+const appModuleGuestSpace = new App({connection: connGuestSpace});
 
 describe('[TestSuite] getAppsByIDs', () => {
   describe('Common functions', () => {

@@ -19,10 +19,10 @@ auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const recordModule = new App(conn);
+const recordModule = new App({connection: conn});
 
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const formLayout = new App(connGuest);
+const formLayout = new App({connection: connGuest});
 
 describe('getFormLayout function', () => {
   describe('common function', () => {

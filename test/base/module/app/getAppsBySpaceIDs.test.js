@@ -8,9 +8,9 @@ const {Connection, Auth, App} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const appModuleGuest = new App(connGuest);
+const appModuleGuest = new App({connection: connGuest});
 
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/apps.json';
