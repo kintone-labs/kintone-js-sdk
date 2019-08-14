@@ -14,6 +14,6 @@ export class App extends kintoneBaseJSSDK.App {
     if (!connection) {
       connection = new Connection();
     }
-    super(connection);
+    super({connection});
   }
 }
