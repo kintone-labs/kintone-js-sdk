@@ -159,7 +159,7 @@ class BulkRequest {
    * @param {Number} params.id
    * @param {String} params.action
    * @param {String} params.assignee
-   * @param {Number} params.evision
+   * @param {Number} params.revision
    * @return {this}
    */
   updateRecordStatus({app, id, action, assignee, revision} = {}) {
