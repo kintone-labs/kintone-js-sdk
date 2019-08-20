@@ -14,6 +14,6 @@ export class BulkRequest extends kintoneBaseJSSDK.BulkRequest {
     if (!connection) {
       connection = new Connection();
     }
-    super(connection);
+    super({connection});
   }
 }
