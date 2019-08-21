@@ -46,6 +46,8 @@ class Connection {
    * @return {Promise}
    */
   request(methodName, restAPIName, body) {
+    const method = String(methodName).toUpperCase();
+    const uri = this.getUri(restAPIName);
     // Set Header
     const headersRequest = {};
     // set header with credentials
@@ -63,17 +65,23 @@ class Connection {
     });
     // Set request options
     const requestOptions = this.options;
-    requestOptions.method = String(methodName).toUpperCase();
-    requestOptions.url = this.getUri(restAPIName);
-    requestOptions.headers = headersRequest;
+    requestOptions.method = method;
+    requestOptions.url = uri;
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
-      requestOptions.paramsSerializer = this.serializeParams;
       delete requestOptions.data;
+      if (this.isExceedLimitUri(uri, body)) {
+        requestOptions.params = {_method: method};
+        requestOptions.method = 'POST';
+        headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = method;
+        requestOptions.data = body;
+      }
+      requestOptions.paramsSerializer = this.serializeParams;
     } else {
       requestOptions.data = body;
     }
+    requestOptions.headers = headersRequest;
     // Execute request
     const request = axios(requestOptions).then(response => {
       return response.data;
@@ -226,6 +234,12 @@ class Connection {
     };
 
     return parseParams(object);
+  }
+
+  isExceedLimitUri(url, param) {
+    let numCharactor = `${url}?`.length;
+    numCharactor += this.serializeParams(param).length;
+    return numCharactor > CONNECTION_CONST.BASE.LIMIT_REQUEST_URI_CHARACTER;
   }
 
   /**
