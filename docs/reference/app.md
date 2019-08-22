@@ -694,7 +694,7 @@ Promise
       }
       // Another view here
   }; 
-  const revision: 'settings_revision';
+  const revision = 'settings_revision';
 
   kintoneApp.updateViews({app, views, revision}).then((rsp) => {
     console.log(rsp);
@@ -813,7 +813,7 @@ Promise
 <pre class="inline-code">
 
   var params= {
-    app: {your_app_id}
+    app: {your_app_id},
     name: 'APP_NAME',
     description: 'Here is app description.',
     icon: {
@@ -821,7 +821,7 @@ Promise
       key: 'icon_key'
     },
     theme: 'your_theme', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
-    revision: 'settings_revision';
+    revision: 'settings_revision'
   };
 
   kintoneApp.updateGeneralSettings(params).then((rsp) => {
@@ -838,7 +838,7 @@ Promise
 <pre class="inline-code">
 
   var params= {
-      app: {your_app_id}
+      app: {your_app_id},
       name: 'APP_NAME',
       description: 'Here is app description.',
       icon: {
@@ -846,7 +846,7 @@ Promise
         key: 'icon_key'
       },
       theme: 'your_theme', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
-      revision: 'settings_revision';
+      revision: 'settings_revision'
     };
 
   kintoneApp.updateGeneralSettings(params).then((rsp) => {
