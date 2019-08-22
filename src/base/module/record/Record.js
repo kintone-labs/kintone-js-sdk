@@ -197,14 +197,14 @@ class Record {
   }
 
   addBulkRecord(app, records) {
-    const bulkRequest = new BulkRequest(this.connection);
+    const bulkRequest = new BulkRequest({connection: this.connection});
     const length = records.length;
     const loopTimes = Math.ceil(length / LIMIT_POST_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_POST_RECORD;
       const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + LIMIT_POST_RECORD;
       const recordsPerRequest = records.slice(begin, end);
-      bulkRequest.addRecords(app, recordsPerRequest);
+      bulkRequest.addRecords({app: app,records: recordsPerRequest});
     }
     return bulkRequest.execute();
   }
@@ -318,14 +318,14 @@ class Record {
   }
 
   deleteBulkRecord(app, ids) {
-    const bulkRequest = new BulkRequest(this.connection);
+    const bulkRequest = new BulkRequest({connection: this.connection});
     const length = ids.length;
     const loopTimes = Math.ceil(length / LIMIT_DELETE_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_DELETE_RECORD;
       const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + LIMIT_DELETE_RECORD;
       const idsPerRequest = ids.slice(begin, end);
-      bulkRequest.deleteRecords(app, idsPerRequest);
+      bulkRequest.deleteRecords({app: app, ids: idsPerRequest});
     }
     return bulkRequest.execute();
   }
@@ -429,14 +429,14 @@ class Record {
   }
 
   updateBulkRecord(app, records) {
-    const bulkRequest = new BulkRequest(this.connection);
+    const bulkRequest = new BulkRequest({connection: this.connection});
     const length = records.length;
     const loopTimes = Math.ceil(length / LIMIT_UPDATE_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_UPDATE_RECORD;
       const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + LIMIT_UPDATE_RECORD;
       const recordsPerRequest = records.slice(begin, end);
-      bulkRequest.updateRecords(app, recordsPerRequest);
+      bulkRequest.updateRecords({app: app, records: recordsPerRequest});
     }
     return bulkRequest.execute();
   }
@@ -537,7 +537,7 @@ class Record {
     };
 
     const executeUpsertBulkRequest = (recordsForPost, recordsForPut) => {
-      let bulkRequest = new BulkRequest(this.connection);
+      let bulkRequest = new BulkRequest({connection: this.connection});
       bulkRequest = this.makeBulkReq(app, bulkRequest, recordsForPost, 'POST');
       bulkRequest = this.makeBulkReq(app, bulkRequest, recordsForPut, 'PUT');
       return bulkRequest.execute();
