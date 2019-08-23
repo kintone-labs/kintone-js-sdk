@@ -14,23 +14,23 @@ const GUEST_APP_PREVIEW_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/preview/app
 
 // Init Connection
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const appModule = new App(conn);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const appModule = new App({connection: conn});
 
 // Init API Connection
 const authAPI = new Auth();
-authAPI.setApiToken('testAPIToken');
-const connAPI = new Connection(common.DOMAIN, authAPI);
-const appModuleAPI = new App(connAPI);
+authAPI.setApiToken({apiToken: common.API_TOKEN_VALUE});
+const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
+const appModuleAPI = new App({connection: connAPI});
 
 // Init Connection Guest Space
-const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const appModuleGuestSpace = new App(connGuestSpace);
+const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const appModuleGuestSpace = new App({connection: connGuestSpace});
 
 // Init API Connection Guest Space
-const connAPIGuestSpace = new Connection(common.DOMAIN, authAPI, common.GUEST_SPACEID);
-const appModuleAPIGuestSpace = new App(connAPIGuestSpace);
+const connAPIGuestSpace = new Connection({domain: common.DOMAIN, auth: authAPI, guestSpaceID: common.GUEST_SPACEID});
+const appModuleAPIGuestSpace = new App({connection: connAPIGuestSpace});
 
 const generateCharacters = (quantity) => {
   let result = '';
@@ -87,7 +87,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -114,7 +114,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -143,7 +143,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -172,7 +172,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -199,7 +199,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -228,7 +228,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -261,7 +261,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const addPreviewAppResult = appModuleAPI.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleAPI.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -292,7 +292,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const addPreviewAppResult = appModuleAPIGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleAPIGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -356,7 +356,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -393,7 +393,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, undefined, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -424,7 +424,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -462,7 +462,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -499,7 +499,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -530,7 +530,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(520, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -568,7 +568,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -632,7 +632,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -669,7 +669,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, undefined, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -700,7 +700,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -738,7 +738,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -775,7 +775,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -806,7 +806,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(520, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -844,7 +844,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -875,7 +875,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const addPreviewAppResult = appModule.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModule.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -906,7 +906,7 @@ describe('addPreviewApp function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data.name, data.space, data.thread);
+      const addPreviewAppResult = appModuleGuestSpace.addPreviewApp(data);
       return addPreviewAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

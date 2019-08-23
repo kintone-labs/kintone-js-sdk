@@ -14,19 +14,19 @@ const APP_FORM_FIELD_PREVIEW_ROUTE = '/k/v1/preview/app/form/fields.json';
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const guestFormModule = new App(connGuest);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const guestFormModule = new App({connection: connGuest});
 
 const authToken = new Auth();
-authToken.setApiToken(common.API_TOKEN);
-const connUsingToken = new Connection(common.DOMAIN, authToken);
-const appUsingToken = new App(connUsingToken);
+authToken.setApiToken({apiToken: common.API_TOKEN_VALUE});
+const connUsingToken = new Connection({domain: common.DOMAIN, auth: authToken});
+const appUsingToken = new App({connection: connUsingToken});
 
 describe('deleteFormFields function', () => {
   describe('common function', () => {
@@ -70,7 +70,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -101,7 +101,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, undefined);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -133,7 +133,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -165,7 +165,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const deleteFormFieldsResult = guestFormModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = guestFormModule.deleteFormFields(data);
       return deleteFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -197,16 +197,17 @@ describe('deleteFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
     });
     it('[Form-50] Verify fields will deleted successfully when items in array fields = 100', () => {
       const number = 100;
+      const fields = 'Text__single_line_1'
       const data = {
         'app': '1',
-        'fields': 'Text__single_line_1',
+        'fields': common.generateRecord(number, fields),
         revision: -1,
       };
       const expectResult = {
@@ -215,7 +216,7 @@ describe('deleteFormFields function', () => {
       nock(URI)
         .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
-          expect(rqBody.fields).toEqual(common.generateRecord(number, data.fields));
+          expect(rqBody.fields).toEqual(common.generateRecord(number, fields));
           return true;
         })
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -227,7 +228,7 @@ describe('deleteFormFields function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, common.generateRecord(number, data.fields), data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -244,7 +245,7 @@ describe('deleteFormFields function', () => {
       nock(URI)
         .delete(APP_FORM_FIELD_PREVIEW_ROUTE)
         .matchHeader(common.API_TOKEN, (authHeader) => {
-          expect(authHeader).toBe(common.API_TOKEN);
+          expect(authHeader).toBe(common.API_TOKEN_VALUE);
           return true;
         })
         .reply(520, expectResult);
@@ -288,7 +289,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(undefined, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -296,8 +297,8 @@ describe('deleteFormFields function', () => {
     });
     it('[Form-46] Verify error will be displayed when using method without fields properties', () => {
       const data = {
-        'app': 1,
-        'fields': [],
+        app: 1,
+        fields: [],
         revision: -1,
       };
       const expectResult = {
@@ -328,7 +329,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, undefined, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -370,7 +371,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -405,7 +406,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(520, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -447,7 +448,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -455,9 +456,10 @@ describe('deleteFormFields function', () => {
     });
     it('[Form-51] Verify error will displayed when items in array fields > 100', () => {
       const number = 105;
+      const fields = 'Text__single_line_1';
       const data = {
         'app': 1,
-        'fields': 'Text__single_line_1',
+        'fields': common.generateRecord(number, fields),
         revision: -1,
       };
       const expectResult = {
@@ -475,7 +477,7 @@ describe('deleteFormFields function', () => {
       nock(URI)
         .delete(APP_FORM_FIELD_PREVIEW_ROUTE, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
-          expect(rqBody.fields).toMatchObject(common.generateRecord(number, data.fields));
+          expect(rqBody.fields).toMatchObject(common.generateRecord(number, fields));
           return true;
         })
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -488,7 +490,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, common.generateRecord(number, data.fields), data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -523,7 +525,7 @@ describe('deleteFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteFormFieldsResult = appModule.deleteFormFields(data.app, data.fields, data.revision);
+      const deleteFormFieldsResult = appModule.deleteFormFields(data);
       return deleteFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
