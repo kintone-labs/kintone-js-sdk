@@ -124,6 +124,13 @@ class Record {
     const validQuery = (query)
       ? `$id > ${lastRecordId} and (${query}) order by $id asc limit ${limit}`
       : `$id > ${lastRecordId} order by $id asc limit ${limit}`;
+
+    if (fields && fields.length > 0) {
+      if (fields.indexOf('$id') <= -1) {
+        fields.push('$id');
+      }
+    }
+
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
       allRecords = allRecords.concat(response.records);
