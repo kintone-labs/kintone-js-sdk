@@ -578,9 +578,9 @@ class Record {
       const end = (length - begin) < recordLimit ? length : begin + recordLimit;
       const recordsPerRequest = records.slice(begin, end);
       if (method === 'POST') {
-        bulkRequest.addRecords(app, recordsPerRequest);
+        bulkRequest.addRecords({app: app, records: recordsPerRequest});
       } else if (method === 'PUT') {
-        bulkRequest.updateRecords(app, recordsPerRequest);
+        bulkRequest.updateRecords({app: app, records: recordsPerRequest});
       }
     }
     return bulkRequest;
