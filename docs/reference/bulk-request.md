@@ -17,8 +17,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (optional) | Constructor params.
-| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
 ### **Sample code**
 
@@ -29,7 +28,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 <pre class="inline-code">
   // with connection
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest({connection});
+  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest(connection);
 
   // without connection, module will use session authentication of kintone
   var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
@@ -41,7 +40,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <pre class="inline-code">
 
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneBulkRequest = new kintone.BulkRequest({connection});
+  let kintoneBulkRequest = new kintone.BulkRequest(connection);
 
 </pre>
 
@@ -51,7 +50,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 > All below methods (excluded `execute()` method) will add request to queue, you must execute the `execute()` function to get result of BulkRequest.
 
-### addRecord({app, record})
+### addRecord(app, record)
 
 **Parameter**
 
@@ -61,7 +60,7 @@ See at [Record - addRecord](../record#addrecordapp-record)
 
 [BulkRequest](#bulkrequest)
 
-### addRecords({app, records})
+### addRecords(app, records)
 
 **Parameter**
 
@@ -71,7 +70,7 @@ See at [Record - addRecords](../record#addrecordsapp-records)
 
 [BulkRequest](#bulkrequest)
 
-### updateRecordByID({app, id, record, revision})
+### updateRecordByID(app, id, record, revision)
 
 **Parameter**
 
@@ -81,7 +80,7 @@ See at [Record - updateRecordByID](../record#updaterecordbyidapp-id-record-revis
 
 [BulkRequest](#bulkrequest)
 
-### updateRecordByUpdateKey({app, updateKey, record, revision})
+### updateRecordByUpdateKey(app, updateKey, record, revision)
 
 **Parameter**
 
@@ -91,7 +90,7 @@ See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyapp-u
 
 [BulkRequest](#bulkrequest)
 
-### updateRecords({app, records})
+### updateRecords(app, records)
 
 **Parameter**
 
@@ -101,7 +100,7 @@ See at [Record - updateRecords](../record#updaterecordsapp-records)
 
 [BulkRequest](#bulkrequest)
 
-### deleteRecords({app, ids})
+### deleteRecords(app, ids)
 
 **Parameter**
 
@@ -111,7 +110,7 @@ See at [Record - deleteRecords](../record#deleterecordsapp-ids)
 
 [BulkRequest](#bulkrequest)
 
-### deleteRecordsWithRevision({app, idsWithRevision})
+### deleteRecordsWithRevision(app, idsWithRevision)
 
 **Parameter**
 
@@ -121,7 +120,7 @@ See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisiona
 
 [BulkRequest](#bulkrequest)
 
-### updateRecordAssignees({app, record, assignees, revision})
+### updateRecordAssignees(app, record, assignees, revision)
 
 **Parameter**
 
@@ -131,7 +130,7 @@ See at [Record - updateRecordAssignees](../record#updaterecordassigneesapp-id-as
 
 [BulkRequest](#bulkrequest)
 
-### updateRecordStatus({app, id, action, assignee, revision})
+### updateRecordStatus(app, id, action, assignee, revision)
 
 **Parameter**
 
@@ -141,7 +140,7 @@ See at [Record - updateRecordStatus](../record#updaterecordstatusapp-id-action-a
 
 [BulkRequest](#bulkrequest)
 
-### updateRecordsStatus({app, records})
+### updateRecordsStatus(app, records)
 
 **Parameter**
 
@@ -173,9 +172,9 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
 <pre class="inline-code">
 
   var responseBulkRequest = kintoneBulkRequest
-    .addRecord({/*[Args]*/})
-    .addRecords({/*[Args]*/})
-    .updateRecords({/*[Args]*/})
+    .addRecord(/*[Args]*/)
+    .addRecords(/*[Args]*/)
+    .updateRecords(/*[Args]*/)
     .deleteRecords()
     .execute();
 
@@ -195,9 +194,9 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
 <pre class="inline-code">
 
   const responseBulkRequest = kintoneBulkRequest
-    .addRecord({/* [Args]*/})
-    .addRecords({/* [Args]*/})
-    .updateRecords({/* [Args]*/})
+    .addRecord(/* [Args]*/)
+    .addRecords(/* [Args]*/)
+    .updateRecords(/* [Args]*/)
     .deleteRecords()
     .execute();
 
