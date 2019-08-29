@@ -8,7 +8,8 @@ Download and upload file via kintone Rest API.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params | Object | yes | The parameters that include **connection** property
+| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
 **Sample code**
 
@@ -19,7 +20,7 @@ Download and upload file via kintone Rest API.
 
 <pre class="inline-code">
   // with connection
-  var kintoneFile = new kintoneJSSDK.File(connection);
+  var kintoneFile = new kintoneJSSDK.File({connection: connection});
 
   // without connection, module will use session authentication of kintone
   var kintoneFile = new kintoneJSSDK.File();
@@ -29,9 +30,8 @@ Download and upload file via kintone Rest API.
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneFile = new kintone.File(connection);
+  let kintoneFile = new kintone.File({connection: connection});
 
 </pre>
 
@@ -39,7 +39,7 @@ Download and upload file via kintone Rest API.
 
 ## Methods
 
-### upload(fileName, fileBlob)
+### upload(params)
 
 > Upload file into kintone
 
@@ -47,9 +47,10 @@ Download and upload file via kintone Rest API.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| fileName | String | yes | The name of file
-| fileBlob | Blob | yes | `This param only use for Javascript` <br> The content of file
-| fileContent | Stream | yes | `This param only use for Nodejs` <br> The content of file
+| params | Object | yes | The parameters that include **fileName, fileBlob, fileContent** properties
+| params.fileName | String | yes | The name of file
+| params.fileBlob | Blob | yes | `This param only use for Javascript` <br> The content of file
+| params.fileContent | Stream | yes | `This param only use for Nodejs` <br> The content of file
 
 **Return**
 
@@ -63,25 +64,26 @@ Promise
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-
-  var fileBlob = 'your_file_blob';
-  var fileName = 'your_file_name';
-  kintoneFile.upload(fileName, fileBlob).then((rsp) => {
+  var params = {
+    fileBlob: 'your_file_blob',
+    fileName: 'your_file_name'
+  };
+  kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
     console.log(err.get());
   });
-
 </pre>
 
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-
-  const fileContent = fs.createReadStream('./cd.png');
-  const fileName = path.basename('./cd.png');
-  kintoneFile.upload(fileName, fileContent).then((rsp) => {
+  const params = {
+    fileContent: fs.createReadStream('./cd.png'),
+    fileName: path.basename('./cd.png')
+  };
+  kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -92,7 +94,7 @@ Promise
 
 </details>
 
-### upload(filePath)
+### upload(params)
 
 > Upload file into kintone using <b>nodejs</b>
 
@@ -100,7 +102,8 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| filePath | String | yes | The path of file
+| params | Object | yes | The parameters that include **filePath** property
+| params.filePath | String | yes | The path of file
 
 **Return**
 
@@ -114,10 +117,10 @@ Promise
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-
-  const filePath = './cd.png';
-  
-  kintoneFile.upload(filePath).then((rsp) => {
+  const params = {
+    filePath: './cd.png'
+  };
+  kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -128,7 +131,7 @@ Promise
 
 </details>
 
-### download(fileKey, outPutFilePath)
+### download(params)
 
 > Download file from kintone
 
@@ -136,8 +139,9 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| fileKey | String | yes | The file key of the uploaded file on kintone.
-| outPutFilePath | String | yes | `This param only use for Nodejs` <br> The full path of output file on your environment
+| params | Object | yes | The parameters that include **fileKey, outPutFilePath** properties
+| params.fileKey | String | yes | The file key of the uploaded file on kintone.
+| params.outPutFilePath | String | yes | `This param only use for Nodejs` <br> The full path of output file on your environment
 
 **Return**
 
@@ -151,9 +155,11 @@ Promise
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-
-  var fileKey = 'your_file_Key';
-  kintoneFile.download(fileKey).then(rsp => {
+  var params = {
+    fileKey: 'your_file_Key',
+    outPutFilePath: 'your_output_directory'
+  };
+  kintoneFile.download(params).then(rsp => {
     //file blob
     console.log(rsp);
   }).catch((err) => {
@@ -166,10 +172,11 @@ Promise
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-
-  const fileKey = 'your_file_Key';
-  const outPutFilePath = 'your_output_directory';
-  kintoneFile.download(fileKey, outPutFilePath).catch((err) => {
+  const params = {
+    fileKey: 'your_file_Key',
+    outPutFilePath: 'your_output_directory'
+  };
+  kintoneFile.download(params).catch((err) => {
     // This SDK return err with KintoneAPIExeption
     console.log(err.get());
   });
@@ -180,5 +187,5 @@ Promise
 
 ## Reference
 
-- [Upload File](https://developer.kintone.io/hc/en-us/articles/212494448-Upload-File)`on developer network`
-- [Download File](https://developer.kintone.io/hc/en-us/articles/212494468-Download-File)`on developer network`
+- [Upload File ](https://developer.kintone.io/hc/en-us/articles/212494448-Upload-File)`on developer network`
+- [Download File ](https://developer.kintone.io/hc/en-us/articles/212494468-Download-File)`on developer network`
