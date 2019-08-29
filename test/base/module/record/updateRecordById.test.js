@@ -7,9 +7,9 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const recordModule = new Record(conn);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const recordModule = new Record({connection: conn});
 
 describe('updateRecordById function', () => {
   describe('common case', () => {
@@ -28,7 +28,7 @@ describe('updateRecordById function', () => {
         .put(API_ROUTE.RECORD)
         .reply(200, {'revisions': '1'});
 
-      const updateRecordByIdResult = recordModule.updateRecordByID(data.app, data.id, data.record, data.revision);
+      const updateRecordByIdResult = recordModule.updateRecordByID(data);
       expect(updateRecordByIdResult).toHaveProperty('then');
       expect(updateRecordByIdResult).toHaveProperty('catch');
     });
@@ -61,7 +61,7 @@ describe('updateRecordById function', () => {
         })
         .reply(200, {'revision': '3'});
 
-      const updateRecordByIdResult = recordModule.updateRecordByID(data.app, data.id, data.record, data.revision);
+      const updateRecordByIdResult = recordModule.updateRecordByID(data);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('3');
       });
@@ -85,7 +85,7 @@ describe('updateRecordById function', () => {
         })
         .reply(200, {'revision': '3'});
 
-      const updateRecordByIdResult = recordModule.updateRecordByID(data.app, data.id, data.record, data.revision);
+      const updateRecordByIdResult = recordModule.updateRecordByID(data);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp).toHaveProperty('revision');
       });
@@ -145,7 +145,7 @@ describe('updateRecordById function', () => {
         })
         .reply(200, {'revision': '2'});
 
-      const updateRecordByIdResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const updateRecordByIdResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('2');
       });
@@ -156,7 +156,7 @@ describe('updateRecordById function', () => {
      * The record is updated successfully for app in guest space
      */
     it('[Record-83] - should update record successfully for app in guest space', () => {
-      const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+      const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
       const recordID = 1;
       const appID = 19;
       const recordDataUpdate = {
@@ -203,8 +203,8 @@ describe('updateRecordById function', () => {
         })
         .reply(200, {'revision': '3'});
 
-      const recordGuestModule = new Record(connGuestSpace);
-      const updateRecordByIdResult = recordGuestModule.updateRecordByID(appID, recordID, recordsData);
+      const recordGuestModule = new Record({connection: connGuestSpace});
+      const updateRecordByIdResult = recordGuestModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('3');
       });
@@ -261,7 +261,7 @@ describe('updateRecordById function', () => {
         })
         .reply(200, {'revision': '4'});
 
-      const updateRecordByIdResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const updateRecordByIdResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('4');
       });
@@ -270,6 +270,7 @@ describe('updateRecordById function', () => {
 
   describe('error case', () => {
     it('[Record-67] - should return error when using wrong revison', () => {
+      const wrongRevison = 3;
       const data = {
         app: 1,
         id: 2,
@@ -277,9 +278,9 @@ describe('updateRecordById function', () => {
           Text_0: {
             value: 123
           }
-        }
+        },
+        revision: wrongRevison
       };
-      const wrongRevison = 3;
       const expectedResult = {
         'code': 'GAIA_CO02',
         'id': 'MJkW0PkiEJ3HhuPRkl3H',
@@ -292,7 +293,7 @@ describe('updateRecordById function', () => {
         })
         .reply(409, expectedResult);
 
-      return recordModule.updateRecordByID(data.app, data.id, data.record, wrongRevison).catch((err) => {
+      return recordModule.updateRecordByID(data).catch((err) => {
         expect(err.get()).toMatchObject(expectedResult);
       });
     });
@@ -347,7 +348,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -392,7 +393,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -438,7 +439,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -483,7 +484,7 @@ describe('updateRecordById function', () => {
         })
         .reply(403, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -527,7 +528,7 @@ describe('updateRecordById function', () => {
         })
         .reply(403, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -578,7 +579,7 @@ describe('updateRecordById function', () => {
         })
         .reply(403, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -629,7 +630,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -665,7 +666,7 @@ describe('updateRecordById function', () => {
         })
         .reply(200, {'revision': '7'});
 
-      const updateRecordByIdResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const updateRecordByIdResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('7');
       });
@@ -715,7 +716,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -758,7 +759,7 @@ describe('updateRecordById function', () => {
         })
         .reply(200, {'revision': '9'});
 
-      const updateRecordByIdResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const updateRecordByIdResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('9');
       });
@@ -811,7 +812,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -865,7 +866,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -920,7 +921,7 @@ describe('updateRecordById function', () => {
         })
         .reply(400, expectedResult);
 
-      const getRecordResult = recordModule.updateRecordByID(appID, recordID, recordsData);
+      const getRecordResult = recordModule.updateRecordByID({app: appID, id: recordID, record: recordsData});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);

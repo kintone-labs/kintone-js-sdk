@@ -6,9 +6,9 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const {API_ROUTE, URI} = require('../../../utils/constant');
 
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const recordModule = new Record(conn);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const recordModule = new Record({connection: conn});
 
 describe('deleteRecords function', () => {
   describe('common case', () => {
@@ -20,7 +20,7 @@ describe('deleteRecords function', () => {
       nock(URI)
         .delete(API_ROUTE.RECORDS)
         .reply(200, {});
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       expect(deleteRecordsResult).toHaveProperty('then');
       expect(deleteRecordsResult).toHaveProperty('catch');
     });
@@ -48,7 +48,7 @@ describe('deleteRecords function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.then((rsp) => {
         expect(rsp).toEqual({});
       });
@@ -75,7 +75,7 @@ describe('deleteRecords function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.then((rsp) => {
         expect(rsp).toEqual({});
       });
@@ -94,7 +94,7 @@ describe('deleteRecords function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
@@ -113,7 +113,7 @@ describe('deleteRecords function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
@@ -125,8 +125,8 @@ describe('deleteRecords function', () => {
         ids: [2]
       };
 
-      const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-      const recordInGuestSpace = new Record(connGuestSpace);
+      const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+      const recordInGuestSpace = new Record({connection: connGuestSpace});
       nock(URI)
         .delete(API_ROUTE.GUEST_RECORDS, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
@@ -135,7 +135,7 @@ describe('deleteRecords function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsResult =recordInGuestSpace.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult =recordInGuestSpace.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
@@ -159,7 +159,7 @@ describe('deleteRecords function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
@@ -186,7 +186,7 @@ describe('deleteRecords function', () => {
         })
         .reply(404, expectedResult);
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -207,7 +207,7 @@ describe('deleteRecords function', () => {
         })
         .reply(403, expectedResult);
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -239,7 +239,7 @@ describe('deleteRecords function', () => {
         })
         .reply(404, expectedResult);
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -269,7 +269,7 @@ describe('deleteRecords function', () => {
         })
         .reply(404, expectedResult);
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -300,7 +300,7 @@ describe('deleteRecords function', () => {
         })
         .reply(404, expectedResult);
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -331,7 +331,7 @@ describe('deleteRecords function', () => {
         })
         .reply(400, expectedResult);
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -368,7 +368,7 @@ describe('deleteRecords function', () => {
         })
         .reply(400, expectedResult);
 
-      const deleteRecordsResult = recordModule.deleteRecords(data.app, data.ids);
+      const deleteRecordsResult = recordModule.deleteRecords(data);
       return deleteRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);

@@ -6,11 +6,11 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {Connection, Auth, App} = require(common.MAIN_PATH_BASE);
 
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const appModule = new App(conn);
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const appModuleGuest = new App(connGuest);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const appModule = new App({connection: conn});
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const appModuleGuest = new App({connection: connGuest});
 
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/apps.json';
@@ -24,7 +24,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         .get(ROUTE + `?spaceIds[0]=${spaceIds[0]}`)
         .reply(200, {});
 
-      const actuaResult = appModule.getAppsBySpaceIDs(spaceIds);
+      const actuaResult = appModule.getAppsBySpaceIDs({spaceIds});
       expect(actuaResult).toHaveProperty('then');
       expect(actuaResult).toHaveProperty('catch');
     });
@@ -64,7 +64,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
           return true;
         })
         .reply(200, expectResult);
-      const actualResult = appModule.getAppsBySpaceIDs(spaceIds);
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds});
       return actualResult.then(rsp => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -123,11 +123,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        undefined,
-        limit
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -185,11 +181,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        undefined
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, offset});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -248,11 +240,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        undefined,
-        limit
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -310,11 +298,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        limit
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, offset, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -372,11 +356,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        limit
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, offset, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -434,11 +414,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModuleGuest.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        limit
-      );
+      const actualResult = appModuleGuest.getAppsBySpaceIDs({spaceIds, offset, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -496,11 +472,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModuleGuest.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        limit
-      );
+      const actualResult = appModuleGuest.getAppsBySpaceIDs({spaceIds, offset, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -558,11 +530,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModuleGuest.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        limit
-      );
+      const actualResult = appModuleGuest.getAppsBySpaceIDs({spaceIds, offset, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -620,11 +588,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModuleGuest.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        limit
-      );
+      const actualResult = appModuleGuest.getAppsBySpaceIDs({spaceIds, offset, limit});
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -642,7 +606,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
       nock(URI)
         .get(ROUTE + `?spaceIds[0]=${spaceIds[0]}`)
         .reply(403, expectResult);
-      const actualResult = appModule.getAppsBySpaceIDs(spaceIds);
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -670,11 +634,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        undefined,
-        limit
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, limit});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -702,11 +662,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        undefined,
-        limit
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, limit});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -734,11 +690,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        undefined
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, offset});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -766,11 +718,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        undefined
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, offset});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -799,11 +747,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsBySpaceIDs(
-        spaceIds,
-        undefined,
-        limit
-      );
+      const actualResult = appModule.getAppsBySpaceIDs({spaceIds, limit});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -831,11 +775,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModuleGuest.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        undefined
-      );
+      const actualResult = appModuleGuest.getAppsBySpaceIDs({spaceIds, offset});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -863,11 +803,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModuleGuest.getAppsBySpaceIDs(
-        spaceIds,
-        offset,
-        undefined
-      );
+      const actualResult = appModuleGuest.getAppsBySpaceIDs({spaceIds, offset});
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -895,11 +831,7 @@ describe('[TestSuite] getAppsBySpaceIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModuleGuest.getAppsBySpaceIDs(
-        spaceIds,
-        undefined,
-        limit
-      );
+      const actualResult = appModuleGuest.getAppsBySpaceIDs({spaceIds, limit} );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });

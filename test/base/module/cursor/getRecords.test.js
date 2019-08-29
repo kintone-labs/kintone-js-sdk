@@ -8,9 +8,9 @@ const {URI} = require('../../../utils/constant');
 const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
@@ -39,16 +39,13 @@ describe('getRecords function', ()=>{
         })
         .reply(200, EXPECTED_RESPONSE);
 
-      const rc = new RecordCursor(conn);
-      return rc.getRecords(cursorID)
+      const rc = new RecordCursor({connection: conn});
+      return rc.getRecords({id: cursorID})
         .then((recordsResponse)=>{
           expect(recordsResponse).toHaveProperty('records');
           expect(Array.isArray(recordsResponse.records)).toBe(true);
           expect(recordsResponse).toHaveProperty('next');
           expect(recordsResponse.next).toEqual(true);
-        })
-        .catch((err)=>{
-          expect(false);
         });
     });
   });
@@ -72,8 +69,8 @@ describe('getRecords function', ()=>{
         })
         .reply(404, ILLEGAL_REQUEST);
 
-      const rc = new RecordCursor(conn);
-      return rc.getAllRecords(wrongID)
+      const rc = new RecordCursor({connection: conn});
+      return rc.getRecords({id: wrongID})
         .catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(ILLEGAL_REQUEST);

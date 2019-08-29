@@ -14,19 +14,19 @@ const APP_VIEW_GUEST_SPACE_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/preview/
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const appModule = new App(conn);
+const appModule = new App({connection: conn});
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const guestViewModule = new App(connGuest);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const guestViewModule = new App({connection: connGuest});
 
 const authToken = new Auth();
-authToken.setApiToken(common.API_TOKEN);
-const connUsingToken = new Connection(common.DOMAIN, authToken);
-const appUsingToken = new App(connUsingToken);
+authToken.setApiToken({apiToken: common.API_TOKEN_VALUE});
+const connUsingToken = new Connection({domain: common.DOMAIN, auth: authToken});
+const appUsingToken = new App({connection: connUsingToken});
 
 describe('updateViews function', () => {
   describe('common function', () => {
@@ -82,7 +82,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -128,7 +128,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -174,7 +174,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -220,7 +220,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateViewsResult = guestViewModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = guestViewModule.updateViews(data);
       return updateViewsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -242,7 +242,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(520, expectResult);
-      const updateViewsResult = appUsingToken.updateViews(appID);
+      const updateViewsResult = appUsingToken.updateViews({app: appID});
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -262,7 +262,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(404, expectResult);
-      const updateViewsResult = appModule.updateViews(appID);
+      const updateViewsResult = appModule.updateViews({app: appID});
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -312,7 +312,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(undefined, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -350,7 +350,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, undefined, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -400,7 +400,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -450,7 +450,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -494,7 +494,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -545,7 +545,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -596,7 +596,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -647,7 +647,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -691,7 +691,7 @@ describe('updateViews function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateViewsResult = appModule.updateViews(data.app, data.views, data.revision);
+      const updateViewsResult = appModule.updateViews(data);
       return updateViewsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

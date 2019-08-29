@@ -15,13 +15,14 @@ const FILE_RESPONSE_TYPE_VALUE = 'arraybuffer';
 
 class Connection extends BaseConnection {
   /**
-     * @param {String} domain
-     * @param {Auth} auth
-     * @param {Number} guestSpaceID
+     * @param {Object} params
+     * @param {String} params.domain
+     * @param {Auth} params.auth
+     * @param {Number} params.guestSpaceID
      */
 
-  constructor(domain, auth, guestSpaceID) {
-    super(domain, auth, guestSpaceID);
+  constructor({domain, auth, guestSpaceID} = {}) {
+    super({domain, auth, guestSpaceID});
     this.setClientCert();
   }
 
@@ -39,18 +40,19 @@ class Connection extends BaseConnection {
       pfx: this.auth.getClientCertData(),
       passphrase: this.auth.getPassWordCert()
     });
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    this.addRequestOption({key: CONNECTION_CONST.BASE.HTTPS_AGENT, value: httpsAgent});
   }
 
   /**
    * Set http proxy for request
-   * @param {String} proxyHost
-   * @param {String} proxyPort
-   * @param {String} proxyUsername
-   * @param {String} proxyPassword
+   * @param {Object} params
+   * @param {String} params.proxyHost
+   * @param {String} params.proxyPort
+   * @param {String} params.proxyUsername
+   * @param {String} params.proxyPassword
    * @return {this}
    */
-  setProxy(proxyHost, proxyPort, proxyUsername, proxyPassword) {
+  setProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -62,19 +64,20 @@ class Connection extends BaseConnection {
       option.passphrase = this.auth.getPassWordCert();
     }
     const httpsAgent = tunnel.httpsOverHttp(option);
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    this.addRequestOption({key: CONNECTION_CONST.BASE.HTTPS_AGENT, value: httpsAgent});
     return this;
   }
 
   /**
    * Set https proxy for request
-   * @param {String} proxyHost
-   * @param {String} proxyPort
-   * @param {String} proxyUsername
-   * @param {String} proxyPassword
+   * @param {Object} params
+   * @param {String} params.proxyHost
+   * @param {String} params.proxyPort
+   * @param {String} params.proxyUsername
+   * @param {String} params.proxyPassword
    * @return {this}
    */
-  setHttpsProxy(proxyHost, proxyPort, proxyUsername, proxyPassword) {
+  setHttpsProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -86,7 +89,7 @@ class Connection extends BaseConnection {
       option.passphrase = this.auth.getPassWordCert();
     }
     const httpsAgent = tunnel.httpsOverHttps(option);
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
+    this.addRequestOption({key: CONNECTION_CONST.BASE.HTTPS_AGENT, value: httpsAgent});
     return this;
   }
 
@@ -99,8 +102,7 @@ class Connection extends BaseConnection {
   upload(fileName, fileContent) {
     const formData = new FormData();
     formData.append('file', fileContent, fileName);
-
-    this.setHeader(CONTENT_TYPE_KEY, formData.getHeaders()['content-type']);
+    this.setHeader({key: CONTENT_TYPE_KEY, value: formData.getHeaders()['content-type']});
     return this.requestFile('POST', 'FILE', formData);
   }
 
@@ -112,6 +114,8 @@ class Connection extends BaseConnection {
    * @return {Promise}
    */
   request(methodName, restAPIName, body) {
+    const method = String(methodName).toUpperCase();
+    const uri = this.getUri(restAPIName);
     // Set Header
     const headersRequest = {};
     // set header with credentials
@@ -129,9 +133,8 @@ class Connection extends BaseConnection {
     });
     // Set request options
     const requestOptions = this.options;
-    requestOptions.method = String(methodName).toUpperCase();
-    requestOptions.url = this.getUri(restAPIName);
-    requestOptions.headers = headersRequest;
+    requestOptions.method = method;
+    requestOptions.url = uri;
 
     if (requestOptions.hasOwnProperty('httpsAgent')) {
       try {
@@ -144,11 +147,18 @@ class Connection extends BaseConnection {
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
-      requestOptions.paramsSerializer = this.serializeParams;
       delete requestOptions.data;
+      if (this.isExceedLimitUri(uri, body)) {
+        requestOptions.params = {_method: method};
+        requestOptions.method = 'POST';
+        headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = String(methodName).toUpperCase();
+        requestOptions.data = body;
+      }
+      requestOptions.paramsSerializer = this.serializeParams;
     } else {
       requestOptions.data = body;
     }
+    requestOptions.headers = headersRequest;
     // Execute request
     const request = axios(requestOptions).then(response => {
       return response.data;
@@ -187,7 +197,7 @@ class Connection extends BaseConnection {
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
 
-    if (requestOptions.hasOwnProperty('httpsAgent')) {
+    if (requestOptions.hasOwnProperty(CONNECTION_CONST.BASE.HTTPS_AGENT)) {
       try {
         tls.createSecureContext(requestOptions.httpsAgent.options);
       } catch (err) {

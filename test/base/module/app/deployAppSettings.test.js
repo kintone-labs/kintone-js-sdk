@@ -14,23 +14,23 @@ const GUEST_APP_PREVIEW_DEPLOY_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/prev
 
 // Init Connection
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const appModule = new App(conn);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const appModule = new App({connection: conn});
 
 // Init API Connection
 const authAPI = new Auth();
-authAPI.setApiToken('testAPIToken');
-const connAPI = new Connection(common.DOMAIN, authAPI);
-const appModuleAPI = new App(connAPI);
+authAPI.setApiToken({apiToken: common.API_TOKEN_VALUE});
+const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
+const appModuleAPI = new App({connection: connAPI});
 
 // Init Connection Guest Space
-const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const appModuleGuestSpace = new App(connGuestSpace);
+const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const appModuleGuestSpace = new App({connection: connGuestSpace});
 
 // Init API Connection Guest Space
-const connAPIGuestSpace = new Connection(common.DOMAIN, authAPI, common.GUEST_SPACEID);
-const appModuleAPIGuestSpace = new App(connAPIGuestSpace);
+const connAPIGuestSpace = new Connection({domain: common.DOMAIN, auth: authAPI, guestSpaceID: common.GUEST_SPACEID});
+const appModuleAPIGuestSpace = new App({connection: connAPIGuestSpace});
 
 describe('deployAppSettings function', () => {
   describe('common function', () => {
@@ -83,7 +83,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -116,7 +116,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -148,7 +148,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -181,7 +181,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -212,7 +212,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -245,7 +245,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -278,7 +278,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -310,7 +310,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -343,7 +343,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -374,7 +374,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(200, {});
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject({});
       });
@@ -415,7 +415,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const deployAppSettingsResult = appModuleAPI.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleAPI.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -454,7 +454,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const deployAppSettingsResult = appModuleAPIGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleAPIGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -480,7 +480,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(404, expectResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -515,7 +515,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(409, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -557,7 +557,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -596,7 +596,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -629,7 +629,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -669,7 +669,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -709,7 +709,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -755,7 +755,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -781,7 +781,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(404, expectResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -816,7 +816,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(409, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -858,7 +858,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -897,7 +897,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -930,7 +930,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -970,7 +970,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -1010,7 +1010,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -1056,7 +1056,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -1095,7 +1095,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const deployAppSettingsResult = appModule.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModule.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -1134,7 +1134,7 @@ describe('deployAppSettings function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data.apps, data.revert);
+      const deployAppSettingsResult = appModuleGuestSpace.deployAppSettings(data);
       return deployAppSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
