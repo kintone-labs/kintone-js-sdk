@@ -462,22 +462,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#uploadfilename-fileblob" title="upload(fileName, fileBlob)" class="md-nav__link">
-    upload(fileName, fileBlob)
+  <a href="#uploadparams" title="upload(params)" class="md-nav__link">
+    upload(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#uploadfilepath" title="upload(filePath)" class="md-nav__link">
-    upload(filePath)
+  <a href="#uploadparams_1" title="upload(params)" class="md-nav__link">
+    upload(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#downloadfilekey-outputfilepath" title="download(fileKey, outPutFilePath)" class="md-nav__link">
-    download(fileKey, outPutFilePath)
+  <a href="#downloadparams" title="download(params)" class="md-nav__link">
+    download(params)
   </a>
   
 </li>
@@ -546,22 +546,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#uploadfilename-fileblob" title="upload(fileName, fileBlob)" class="md-nav__link">
-    upload(fileName, fileBlob)
+  <a href="#uploadparams" title="upload(params)" class="md-nav__link">
+    upload(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#uploadfilepath" title="upload(filePath)" class="md-nav__link">
-    upload(filePath)
+  <a href="#uploadparams_1" title="upload(params)" class="md-nav__link">
+    upload(params)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#downloadfilekey-outputfilepath" title="download(fileKey, outPutFilePath)" class="md-nav__link">
-    download(fileKey, outPutFilePath)
+  <a href="#downloadparams" title="download(params)" class="md-nav__link">
+    download(params)
   </a>
   
 </li>
@@ -612,7 +612,13 @@
 </thead>
 <tbody>
 <tr>
-<td>connection</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>connection</strong> property</td>
+</tr>
+<tr>
+<td>params.connection</td>
 <td><a href="../connection">Connection</a></td>
 <td>(optional)</td>
 <td>The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.</td>
@@ -625,7 +631,7 @@
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
   // with connection
-  var kintoneFile = new kintoneJSSDK.File(connection);
+  var kintoneFile = new kintoneJSSDK.File({connection: connection});
 
   // without connection, module will use session authentication of kintone
   var kintoneFile = new kintoneJSSDK.File();
@@ -634,15 +640,14 @@
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneFile = new kintone.File(connection);
+  let kintoneFile = new kintone.File({connection: connection});
 
 </pre>
 
 <p></details></p>
 <h2 id="methods">Methods</h2>
-<h3 id="uploadfilename-fileblob">upload(fileName, fileBlob)</h3>
+<h3 id="uploadparams">upload(params)</h3>
 <blockquote>
 <p>Upload file into kintone</p>
 </blockquote>
@@ -658,19 +663,25 @@
 </thead>
 <tbody>
 <tr>
-<td>fileName</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>fileName, fileBlob, fileContent</strong> properties</td>
+</tr>
+<tr>
+<td>params.fileName</td>
 <td>String</td>
 <td>yes</td>
 <td>The name of file</td>
 </tr>
 <tr>
-<td>fileBlob</td>
+<td>params.fileBlob</td>
 <td>Blob</td>
 <td>yes</td>
 <td><code>This param only use for Javascript</code> <br> The content of file</td>
 </tr>
 <tr>
-<td>fileContent</td>
+<td>params.fileContent</td>
 <td>Stream</td>
 <td>yes</td>
 <td><code>This param only use for Nodejs</code> <br> The content of file</td>
@@ -684,24 +695,25 @@
 <Summary>Upload file sample</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
-  var fileBlob = 'your_file_blob';
-  var fileName = 'your_file_name';
-  kintoneFile.upload(fileName, fileBlob).then((rsp) => {
+  var params = {
+    fileBlob: 'your_file_blob',
+    fileName: 'your_file_name'
+  };
+  kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
     console.log(err.get());
   });
-
 </pre>
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-  const fileContent = fs.createReadStream('./cd.png');
-  const fileName = path.basename('./cd.png');
-  kintoneFile.upload(fileName, fileContent).then((rsp) => {
+  const params = {
+    fileContent: fs.createReadStream('./cd.png'),
+    fileName: path.basename('./cd.png')
+  };
+  kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -711,7 +723,7 @@
 </pre>
 
 <p></details></p>
-<h3 id="uploadfilepath">upload(filePath)</h3>
+<h3 id="uploadparams_1">upload(params)</h3>
 <blockquote>
 <p>Upload file into kintone using <b>nodejs</b></p>
 </blockquote>
@@ -727,7 +739,13 @@
 </thead>
 <tbody>
 <tr>
-<td>filePath</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>filePath</strong> property</td>
+</tr>
+<tr>
+<td>params.filePath</td>
 <td>String</td>
 <td>yes</td>
 <td>The path of file</td>
@@ -741,10 +759,10 @@
 <Summary>Upload file sample</Summary></p>
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-  const filePath = './cd.png';
-
-  kintoneFile.upload(filePath).then((rsp) => {
+  const params = {
+    filePath: './cd.png'
+  };
+  kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIExeption
@@ -754,7 +772,7 @@
 </pre>
 
 <p></details></p>
-<h3 id="downloadfilekey-outputfilepath">download(fileKey, outPutFilePath)</h3>
+<h3 id="downloadparams">download(params)</h3>
 <blockquote>
 <p>Download file from kintone</p>
 </blockquote>
@@ -770,13 +788,19 @@
 </thead>
 <tbody>
 <tr>
-<td>fileKey</td>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>The parameters that include <strong>fileKey, outPutFilePath</strong> properties</td>
+</tr>
+<tr>
+<td>params.fileKey</td>
 <td>String</td>
 <td>yes</td>
 <td>The file key of the uploaded file on kintone.</td>
 </tr>
 <tr>
-<td>outPutFilePath</td>
+<td>params.outPutFilePath</td>
 <td>String</td>
 <td>yes</td>
 <td><code>This param only use for Nodejs</code> <br> The full path of output file on your environment</td>
@@ -790,9 +814,11 @@
 <Summary>Get apps sample</Summary></p>
 <p><strong class="tab-name">Javascript</strong></p>
 <pre class="inline-code">
-
-  var fileKey = 'your_file_Key';
-  kintoneFile.download(fileKey).then(rsp => {
+  var params = {
+    fileKey: 'your_file_Key',
+    outPutFilePath: 'your_output_directory'
+  };
+  kintoneFile.download(params).then(rsp => {
     //file blob
     console.log(rsp);
   }).catch((err) => {
@@ -804,10 +830,11 @@
 
 <p><strong class="tab-name">Nodejs</strong></p>
 <pre class="inline-code">
-
-  const fileKey = 'your_file_Key';
-  const outPutFilePath = 'your_output_directory';
-  kintoneFile.download(fileKey, outPutFilePath).catch((err) => {
+  const params = {
+    fileKey: 'your_file_Key',
+    outPutFilePath: 'your_output_directory'
+  };
+  kintoneFile.download(params).catch((err) => {
     // This SDK return err with KintoneAPIExeption
     console.log(err.get());
   });
@@ -817,8 +844,8 @@
 <p></details></p>
 <h2 id="reference">Reference</h2>
 <ul>
-<li><a href="https://developer.kintone.io/hc/en-us/articles/212494448-Upload-File">Upload File</a><code>on developer network</code></li>
-<li><a href="https://developer.kintone.io/hc/en-us/articles/212494468-Download-File">Download File</a><code>on developer network</code></li>
+<li><a href="https://developer.kintone.io/hc/en-us/articles/212494448-Upload-File">Upload File </a><code>on developer network</code></li>
+<li><a href="https://developer.kintone.io/hc/en-us/articles/212494468-Download-File">Download File </a><code>on developer network</code></li>
 </ul>
                 
                   
