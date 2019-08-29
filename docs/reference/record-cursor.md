@@ -30,7 +30,7 @@ Currently there's only cursor for records.
         const conn = new kintoneConnection();
         
         // Init RecordCursor module
-        const kintoneRC = new kintoneRecordCursorModule({connection: conn})
+        const kintoneRC = new kintoneRecordCursorModule(conn)
             
         //...
     }(window.kintoneJSSDK));
@@ -42,21 +42,16 @@ Currently there's only cursor for records.
 <pre class="inline-code">
 
     const kintone = require('@kintone/kintone-js-sdk');
-
-    const passwordAuthParam = {
-        username: 'YOUR_USERNAME',
-        password: 'YOUR_PASSWORD'
-    };
-    const auth = new kintone.Auth();
-    auth.setPasswordAuth(passwordAuthParam);
-
-    const connParam = {
-        domain: 'YOUR_DOMAIN',
-        auth: kintoneAuth
-    };
-    const kintoneConn = new kintone.Connection(connParam);
+ 
+    const username = 'YOUR_USERNAME';
+    const password = 'YOUR_PASSWORD';
+    const domain = 'YOUR_DOMAIN';
+    const appID = YOUR_APP_ID;
     
-    const kintoneRC = new kintone.RecordCursor({connection: kintoneConn});
+    const kintoneAuth = (new kintone.Auth()).setPasswordAuth(username, password);
+    const kintoneConn = new kintone.Connection(domain, kintoneAuth);
+    
+    const kintoneRC = new kintone.RecordCursor(kintoneConn);
 
 </pre>
 
@@ -64,7 +59,7 @@ Currently there's only cursor for records.
 
 ## Methods
 
-### createCursor(params)
+### createCursor(option)
 
 > Create a cursor.
 
@@ -72,11 +67,11 @@ Currently there's only cursor for records.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | Create cursor params
-| params.app | Integer | yes | The kintone app ID
-| params.fields | Array<String\> | (optional) | List of field codes you want in the response.
-| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
-| params.size | Integer | (optional) | Number of records to retrieve per request. <br> Default: 100. <br>Maximum: 500.
+| option | Object | yes | Cursor option
+| option.app | Integer | yes | The kintone app ID
+| option.fields | Array<String\> | (optional) | List of field codes you want in the response.
+| option.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| option.size | Integer | (optional) | Number of records to retrieve per request. <br> Default: 100. <br>Maximum: 500.
 
 **Return**
 
@@ -95,25 +90,51 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-    const rcOption = {
-        app: appID,
-        fields: [],
-        query: '',
-        size: 2
-    }
+
+    (function(kintoneJSSDK) {
+        'use strict';
+        const kintoneConnection = kintoneJSSDK.Connection;
+        const kintoneRecordCursorModule = kintoneJSSDK.RecordCursor;
         
-    kintoneRC.createCursor(rcOption)
-        .then(function(creatCursorResponse){
-            const myCursor = creatCursorResponse;
-            console.log('Cursor ID: ' + myCursor.id );
-            console.log('Total Count: ' + myCursor.totalCount );
+        // Init Connection
+        const conn = new kintoneConnection();
+        
+        // Init RecordCursor module
+        const kintoneRC = new kintoneRecordCursorModule(conn)
+
+        const rcOption = {
+            app: appID,
+            fields: [],
+            query: '',
+            size: 2
+        }
+            
+        kintoneRC.createCursor(rcOption)
+            .then(function(creatCursorResponse){
+                const myCursor = creatCursorResponse;
+                console.log('Cursor ID: ' + myCursor.id );
+                console.log('Total Count: ' + myCursor.totalCount );
             })
+    }(window.kintoneJSSDK));
 
 </pre>
 
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
+
+    const kintone = require('@kintone/kintone-js-sdk');
+ 
+    const username = 'YOUR_USERNAME';
+    const password = 'YOUR_PASSWORD';
+    const domain = 'YOUR_DOMAIN';
+    const appID = YOUR_APP_ID;
+    
+    const kintoneAuth = (new kintone.Auth()).setPasswordAuth(username, password);
+    const kintoneConn = new kintone.Connection(domain, kintoneAuth);
+    
+    const kintoneRC = new kintone.RecordCursor(kintoneConn);
+
     const rcOption = {
         app: appID,
         fields: [],
@@ -127,11 +148,12 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
             console.log('Cursor ID: ' + myCursor.id );
             console.log('Total Count: ' + myCursor.totalCount );
         })
+
 </pre>
 
 </details>
 
-### getRecords(params)
+### getRecords(cursorID)
 
 > Get one block of records.
 
@@ -139,8 +161,7 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | Get records create
-| params.id | String | yes | Cursor ID
+| cursorID | String | yes | Cursor ID
 
 **Return**
 
@@ -160,7 +181,7 @@ Promise&lt;GetRecordCursorResponse&gt;
 
 <pre class="inline-code">
 
-    kintoneRC.getRecords({id: myCursor.id})
+    kintoneRC.getRecords(myCursor.id)
         .then(function(getRecordsResponse){
             console.log('RecordCursor result: ');
             console.log(getRecordsResponse);
@@ -172,7 +193,7 @@ Promise&lt;GetRecordCursorResponse&gt;
 
 <pre class="inline-code">
 
-    kintoneRC.getRecords({id: myCursor.id})
+    kintoneRC.getRecords(myCursor.id)
         .then((getRecordsResponse) => {
             console.log('RecordCursor result: ');
             console.log(getRecordsResponse);
@@ -190,8 +211,7 @@ Promise&lt;GetRecordCursorResponse&gt;
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | Get all records param
-| params.id | String | yes | Cursor ID
+| cursorID | String | yes | Cursor ID
 
 **Return**
 
@@ -211,7 +231,7 @@ Promise&lt;GetRecordsResponse&gt;
 
 <pre class="inline-code">
 
-    kintoneRC.getAllRecords({id: myCursor.id})
+    kintoneRC.getAllRecords(myCursor.id)
         .then(function(getAllRecordsResponse){
             console.log('RecordCursor result: ');
             console.log(getAllRecordsResponse);
@@ -223,7 +243,7 @@ Promise&lt;GetRecordsResponse&gt;
 
 <pre class="inline-code">
 
-    kintoneRC.getAllRecords({id: myCursor.id})
+    kintoneRC.getAllRecords(myCursor.id)
         .then((getAllRecordsResponse) => {
             console.log('RecordCursor result: ');
             console.log(getAllRecordsResponse);
@@ -241,8 +261,7 @@ Promise&lt;GetRecordsResponse&gt;
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | Delete cursor param
-| params.id | String | yes | Cursor ID
+| cursorID | String | yes | Cursor ID
 
 **Return**
 
@@ -257,7 +276,7 @@ None
 
 <pre class="inline-code">
 
-    kintoneRC.deleteCursor({id: myCursor.id})
+    kintoneRC.deleteCursor(myCursor.id)
         .then(function(){
             console.log('Cursor Deleted');
         })
@@ -272,7 +291,7 @@ None
 
 <pre class="inline-code">
 
-    kintoneRC.deleteCursor({id: myCursor.id})
+    kintoneRC.deleteCursor(myCursor.id)
         .then(function(){
             console.log('Cursor Deleted');
         })
