@@ -14,6 +14,8 @@ class Credential {
      * Get username of Credential model
      * @return {String}
      */
+
+
   getUsername() {
     return this.username;
   }
@@ -21,8 +23,12 @@ class Credential {
      * Get password of Credential model
      * @return {String}
      */
+
+
   getPassword() {
     return this.password;
   }
+
 }
-module.exports = Credential;
+
+export default Credential;

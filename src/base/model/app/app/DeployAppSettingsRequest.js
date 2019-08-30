@@ -15,6 +15,8 @@ class DeployAppSettingsRequest {
      * Get apps
      * @return {Array}
      */
+
+
   getApps() {
     return this.apps;
   }
@@ -22,6 +24,8 @@ class DeployAppSettingsRequest {
      * @param {Array} apps
      * @return {this} DeployAppSettingsRequest
      */
+
+
   setApps(apps) {
     this.apps = apps;
     return this;
@@ -30,6 +34,8 @@ class DeployAppSettingsRequest {
      * Get reviert
      * @return {Boolean}
      */
+
+
   getRevert() {
     return this.revert;
   }
@@ -37,6 +43,8 @@ class DeployAppSettingsRequest {
      * @param {Boolean} revert
      * @return {this} DeployAppSettingsRequest
      */
+
+
   setRevert(revert) {
     this.revert = revert;
     return this;
@@ -45,6 +53,8 @@ class DeployAppSettingsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     return {
       apps: this.getApps(),
@@ -55,8 +65,12 @@ class DeployAppSettingsRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = DeployAppSettingsRequest;
+
+export default DeployAppSettingsRequest;

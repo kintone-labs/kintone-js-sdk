@@ -12,6 +12,8 @@ class GetFileRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     return {
       fileKey: this.fileKey
@@ -21,8 +23,12 @@ class GetFileRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetFileRequest;
+
+export default GetFileRequest;

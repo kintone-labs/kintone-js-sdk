@@ -1,8 +1,9 @@
-const UpdateRecordStatusItem = require('./UpdateRecordStatusItem');
-
+import _UpdateRecordStatusItem from "./UpdateRecordStatusItem";
+const UpdateRecordStatusItem = _UpdateRecordStatusItem;
 /**
  * UpdateRecordStatusRequest model
  */
+
 class UpdateRecordStatusRequest extends UpdateRecordStatusItem {
   /**
      * constructor
@@ -20,6 +21,8 @@ class UpdateRecordStatusRequest extends UpdateRecordStatusItem {
      * Get JSON struct of this model
      * @return {Object}
      */
+
+
   toJSON() {
     const data = super.toJSON();
     data.app = this.appID;
@@ -29,8 +32,12 @@ class UpdateRecordStatusRequest extends UpdateRecordStatusItem {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = UpdateRecordStatusRequest;
+
+export default UpdateRecordStatusRequest;

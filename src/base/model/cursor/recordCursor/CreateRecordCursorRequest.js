@@ -1,4 +1,5 @@
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
+
 /**
  * CreateRecordCursorRequest model
  */
@@ -10,7 +11,12 @@ class CreateRecordCursorRequest {
    * @param {String} query
    * @param {Integer} size
    */
-  constructor({app, fields, query, size}) {
+  constructor({
+    app,
+    fields,
+    query,
+    size
+  }) {
     this.app = app;
     this.fields = fields;
     this.query = query;
@@ -20,6 +26,8 @@ class CreateRecordCursorRequest {
    * Get app id
    * @return {Integer}
    */
+
+
   getAppID() {
     return this.app;
   }
@@ -27,6 +35,8 @@ class CreateRecordCursorRequest {
    * Get fields
    * @return {Array<String>}
    */
+
+
   getFields() {
     return this.fields;
   }
@@ -34,6 +44,8 @@ class CreateRecordCursorRequest {
    * Get query
    * @return {String}
    */
+
+
   getQuery() {
     return this.query;
   }
@@ -41,6 +53,8 @@ class CreateRecordCursorRequest {
    * Get size
    * @return {Integer}
    */
+
+
   getSize() {
     return this.size;
   }
@@ -48,29 +62,39 @@ class CreateRecordCursorRequest {
    * Get JSON struct of this model
    * @return {JSON}
    */
+
+
   toJSON() {
     const data = {};
 
     if (this.getAppID() !== undefined) {
       data.app = this.getAppID();
     }
+
     if (this.getFields() !== undefined) {
       data.fields = this.getFields();
     }
+
     if (this.getQuery() !== undefined) {
       data.query = this.getQuery();
     }
+
     if (this.getSize() !== undefined) {
       data.size = this.getSize();
     }
+
     return data;
   }
   /**
    * Convert this model to JSON string
    * @return {String}
    */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = CreateRecordCursorRequest;
+
+export default CreateRecordCursorRequest;

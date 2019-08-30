@@ -1,47 +1,89 @@
+import _AddCommentRequest from "./comment/AddCommentRequest";
+import _GetCommentsRequest from "./comments/GetCommentRequest";
+import _DeleteCommentRequest from "./comment/DeleteCommentRequest";
+import _RecordsUpdateKey from "./record/RecordUpdateKey";
+import _RecordsUpdateStatusItem from "./record/UpdateRecordStatusItem";
+import _RecordsUpdateItem from "./record/RecordUpdateItem";
+import _RecordUpdateStatusItem from "./record/UpdateRecordStatusItem";
+import _UpdateRecordAssigneesRequest from "./record/UpdateRecordAssigneesRequest";
+import _UpdateRecordStatusRequest from "./record/UpdateRecordStatusRequest";
+import _DeleteRecordsRequest from "./records/DeleteRecordsRequest";
+import _UpdateRecordsRequest from "./records/UpdateRecordsRequest";
+import _UpdateRecordRequest from "./record/UpdateRecordRequest";
+import _AddRecordsRequest from "./records/AddRecordsRequest";
+import _AddRecordRequest from "./record/AddRecordRequest";
+import _GetRecordsRequest from "./records/GetRecordsRequest";
+import _GetRecordRequest from "./record/GetRecordRequest";
 /**
  * kintone api - nodejs client
  * Record model
  */
+// TODO,
 
-module.exports = {
-  // TODO: Write unit test
-  GetRecordRequest: require('./record/GetRecordRequest'),
-  // TODO: Write unit test
-  GetRecordsRequest: require('./records/GetRecordsRequest'),
+const GetRecordRequest = _GetRecordRequest; // TODO= Write unit test
 
-  // TODO: Write unit test
-  AddRecordRequest: require('./record/AddRecordRequest'),
-  // TODO: Write unit test
-  AddRecordsRequest: require('./records/AddRecordsRequest'),
+const GetRecordsRequest = _GetRecordsRequest; // TODO= Write unit test
 
-  // TODO: Write unit test
-  UpdateRecordRequest: require('./record/UpdateRecordRequest'),
-  // TODO: Write unit test
-  UpdateRecordsRequest: require('./records/UpdateRecordsRequest'),
+const AddRecordRequest = _AddRecordRequest; // TODO= Write unit test
 
-  // TODO: Write unit test
-  DeleteRecordsRequest: require('./records/DeleteRecordsRequest'),
+const AddRecordsRequest = _AddRecordsRequest; // TODO= Write unit test
 
-  // TODO: Write unit test
-  UpdateRecordStatusRequest: require('./record/UpdateRecordStatusRequest'),
-  // TODO: Write unit test
+const UpdateRecordRequest = _UpdateRecordRequest; // TODO= Write unit test
 
-  // TODO: Write unit test
-  UpdateRecordAssigneesRequest: require('./record/UpdateRecordAssigneesRequest'),
+const UpdateRecordsRequest = _UpdateRecordsRequest; // TODO= Write unit test
 
-  // TODO: Write unit test
-  RecordUpdateStatusItem: require('./record/UpdateRecordStatusItem'),
-  // TODO: Write unit test
-  RecordsUpdateItem: require('./record/RecordUpdateItem'),
-  // TODO: Write unit test
-  RecordsUpdateStatusItem: require('./record/UpdateRecordStatusItem'),
-  // TODO: Write unit test
-  RecordsUpdateKey: require('./record/RecordUpdateKey'),
+const DeleteRecordsRequest = _DeleteRecordsRequest; // TODO= Write unit test
 
+const UpdateRecordStatusRequest = _UpdateRecordStatusRequest; // TODO= Write unit test
+// TODO= Write unit test
+
+const UpdateRecordAssigneesRequest = _UpdateRecordAssigneesRequest; // TODO= Write unit test
+
+const RecordUpdateStatusItem = _RecordUpdateStatusItem; // TODO= Write unit test
+
+const RecordsUpdateItem = _RecordsUpdateItem; // TODO= Write unit test
+
+const RecordsUpdateStatusItem = _RecordsUpdateStatusItem; // TODO= Write unit test
+
+const RecordsUpdateKey = _RecordsUpdateKey; // TODO= Write unit test
+
+const DeleteCommentRequest = _DeleteCommentRequest; // TODO= Write unit test
+
+const GetCommentsRequest = _GetCommentsRequest; // TODO= Write unit test
+
+const AddCommentRequest = _AddCommentRequest;
+export default {
   // TODO: Write unit test
-  DeleteCommentRequest: require('./comment/DeleteCommentRequest'),
+  GetRecordRequest,
   // TODO: Write unit test
-  GetCommentsRequest: require('./comments/GetCommentRequest'),
+  GetRecordsRequest,
   // TODO: Write unit test
-  AddCommentRequest: require('./comment/AddCommentRequest'),
+  AddRecordRequest,
+  // TODO: Write unit test
+  AddRecordsRequest,
+  // TODO: Write unit test
+  UpdateRecordRequest,
+  // TODO: Write unit test
+  UpdateRecordsRequest,
+  // TODO: Write unit test
+  DeleteRecordsRequest,
+  // TODO: Write unit test
+  UpdateRecordStatusRequest,
+  // TODO: Write unit test
+  // TODO: Write unit test
+  UpdateRecordAssigneesRequest,
+  // TODO: Write unit test
+  RecordUpdateStatusItem,
+  // TODO: Write unit test
+  RecordsUpdateItem,
+  // TODO: Write unit test
+  RecordsUpdateStatusItem,
+  // TODO: Write unit test
+  RecordsUpdateKey,
+  // TODO: Write unit test
+  DeleteCommentRequest,
+  // TODO: Write unit test
+  GetCommentsRequest,
+  // TODO: Write unit test
+  AddCommentRequest
 };

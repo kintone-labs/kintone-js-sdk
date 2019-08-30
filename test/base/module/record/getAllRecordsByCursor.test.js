@@ -5,12 +5,12 @@
 const nock = require('nock');
 const common = require('../../../utils/common');
 const {URI} = require('../../../utils/constant');
-const {Record, Connection, Auth} = require('../../../../src/base/main');
+const {Record, Connection, Auth} = require('../../../../dist/cjs/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const conn = new Connection(common.DOMAIN, auth);
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
@@ -53,7 +53,7 @@ describe('getAllRecords function', ()=>{
         })
         .reply(200, EXPECTED_GET_RECORDS_RESPONSE);
 
-      const record = new Record({connection: conn});
+      const record = new Record(conn);
       return record.getAllRecordsByCursor({app, query, fields})
         .then((recordsResponse)=>{
           expect(recordsResponse).toHaveProperty('records');
@@ -61,7 +61,7 @@ describe('getAllRecords function', ()=>{
           expect(recordsResponse).toHaveProperty('totalCount');
           expect(recordsResponse.records.length).toEqual(recordsResponse.totalCount);
         })
-        .catch((err)=>{
+        .catch(()=>{
           expect(false).toEqual(true);
         });
     });

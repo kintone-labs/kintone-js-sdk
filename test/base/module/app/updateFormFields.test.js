@@ -14,19 +14,19 @@ const APP_FORM_FIELD_PREVIEW_ROUTE = '/k/v1/preview/app/form/fields.json';
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const conn = new Connection(common.DOMAIN, auth);
 
-const appModule = new App({connection: conn});
+const appModule = new App(conn);
 
-const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const guestFormModule = new App({connection: connGuest});
+const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const guestFormModule = new App(connGuest);
 
 const authToken = new Auth();
-authToken.setApiToken({apiToken: common.API_TOKEN_VALUE});
-const connUsingToken = new Connection({domain: common.DOMAIN, auth: authToken});
-const appUsingToken = new App({connection: connUsingToken});
+authToken.setApiToken(common.API_TOKEN);
+const connUsingToken = new Connection(common.DOMAIN, authToken);
+const appUsingToken = new App(connUsingToken);
 
 
 describe('updateFormFields function', () => {
@@ -37,7 +37,7 @@ describe('updateFormFields function', () => {
         .put(APP_FORM_FIELD_PREVIEW_ROUTE)
         .reply(200, {});
 
-      const getAppResult = appModule.updateFormFields({app});
+      const getAppResult = appModule.updateFormFields(app);
       expect(getAppResult).toHaveProperty('then');
       expect(getAppResult).toHaveProperty('catch');
     });
@@ -76,7 +76,7 @@ describe('updateFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -112,7 +112,7 @@ describe('updateFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties);
       return updateFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -149,7 +149,7 @@ describe('updateFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -185,7 +185,7 @@ describe('updateFormFields function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateFormFieldsResult = guestFormModule.updateFormFields(data);
+      const updateFormFieldsResult = guestFormModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -222,7 +222,7 @@ describe('updateFormFields function', () => {
         })
         .reply(200, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -239,11 +239,11 @@ describe('updateFormFields function', () => {
       nock(URI)
         .put(APP_FORM_FIELD_PREVIEW_ROUTE)
         .matchHeader(common.API_TOKEN, (authHeader) => {
-          expect(authHeader).toBe(common.API_TOKEN_VALUE);
+          expect(authHeader).toBe(common.API_TOKEN);
           return true;
         })
         .reply(403, expectResult);
-      const updateFormFieldsResult = appUsingToken.updateFormFields({app: 10});
+      const updateFormFieldsResult = appUsingToken.updateFormFields(10);
       return updateFormFieldsResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -288,7 +288,7 @@ describe('updateFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(undefined, data.properties, data.revision);
       return updateFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -326,7 +326,7 @@ describe('updateFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, undefined, data.revision);
       return updateFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -373,7 +373,7 @@ describe('updateFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -420,7 +420,7 @@ describe('updateFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -467,7 +467,7 @@ describe('updateFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -507,7 +507,7 @@ describe('updateFormFields function', () => {
         })
         .reply(400, expectResult);
 
-      const updateFormFieldsResult = appModule.updateFormFields(data);
+      const updateFormFieldsResult = appModule.updateFormFields(data.app, data.properties, data.revision);
       return updateFormFieldsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

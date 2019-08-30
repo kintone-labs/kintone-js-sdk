@@ -8,9 +8,9 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const { KintoneAPIException, Connection, Auth, App } = require(common.MAIN_PATH_BASE);
-const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App({connection: conn});
+const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
+const conn = new Connection(common.DOMAIN, auth);
+const appModule = new App(conn);
 
 describe('getApp function', () => {
   describe('common function', () => {
@@ -20,7 +20,7 @@ describe('getApp function', () => {
         .get(API_ROUTE.APP + `?id=${id}`)
         .reply(200, {});
 
-      const getAppResult = appModule.getApp({id});
+      const getAppResult = appModule.getApp(id);
       expect(getAppResult).toHaveProperty('then');
       expect(getAppResult).toHaveProperty('catch');
     });
@@ -54,7 +54,7 @@ describe('getApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getAppResult = appModule.getApp({id: appID});
+      const getAppResult = appModule.getApp(appID);
       return getAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -64,8 +64,8 @@ describe('getApp function', () => {
    */
     it('[App-4] - should get successfully the app infomation in guest space', () => {
       const appID = 1;
-      const connGuest = new Connection({domain: common.DOMAIN, auth, guestSpaceID: common.GUEST_SPACEID});
-      const appModuleGuest = new App({connection: connGuest});
+      const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+      const appModuleGuest = new App(connGuest);
       const expectResult = {
         'appId': appID,
         'code': '',
@@ -91,7 +91,7 @@ describe('getApp function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getAppResult = appModuleGuest.getApp({id: appID});
+      const getAppResult = appModuleGuest.getApp(appID);
       return getAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -113,7 +113,7 @@ describe('getApp function', () => {
       nock(URI)
         .get(API_ROUTE.APP + `?id=${appID}`)
         .reply(403, expectResult);
-      const getAppResult = appModule.getApp({id: appID});
+      const getAppResult = appModule.getApp(appID);
       return getAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -134,7 +134,7 @@ describe('getApp function', () => {
       nock(URI)
         .get(API_ROUTE.APP + `?id=${appID}`)
         .reply(400, expectResult);
-      const getAppResult = appModule.getApp({id: appID});
+      const getAppResult = appModule.getApp(appID);
       return getAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -153,7 +153,7 @@ describe('getApp function', () => {
       nock(URI)
         .get(API_ROUTE.APP + `?id=${unexistAppID}`)
         .reply(404, expectResult);
-      const getAppResult = appModule.getApp({id: unexistAppID});
+      const getAppResult = appModule.getApp(unexistAppID);
       return getAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

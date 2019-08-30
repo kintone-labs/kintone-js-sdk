@@ -3,11 +3,14 @@ const path = require('path');
 module.exports = (env = {}) => {
   return {
     entry: {
-      'kintone-js-sdk.min': './src/browser/main.js'
+      'kintone-js-sdk.min':'./src/browser/main.js',
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
+      library: 'kintoneJSSDK',
+      libraryTarget: 'umd',
+      globalObject: `(typeof self !== 'undefined' ? self : this)`
     },
     module: {
       rules: [
@@ -15,9 +18,6 @@ module.exports = (env = {}) => {
           test: /\.js$/,
           use: {
             loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env']
-            }
           },
         }
       ]

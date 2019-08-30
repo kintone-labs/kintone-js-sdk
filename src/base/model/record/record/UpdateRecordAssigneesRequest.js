@@ -19,6 +19,8 @@ class UpdateRecordAssigneesRequest {
      * Get JSON struct of this model
      * @return {Object}
      */
+
+
   toJSON() {
     return {
       app: this.appID,
@@ -31,8 +33,12 @@ class UpdateRecordAssigneesRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = UpdateRecordAssigneesRequest;
+
+export default UpdateRecordAssigneesRequest;

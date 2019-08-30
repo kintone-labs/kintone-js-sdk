@@ -15,6 +15,8 @@ class AddRecordRequest {
      * Get app id
      * @return {integer}
      */
+
+
   getAppID() {
     return this.app;
   }
@@ -22,6 +24,8 @@ class AddRecordRequest {
      * Get record data
      * @return {HashTable<String, FieldValue>}
      */
+
+
   getRecordData() {
     return this.record;
   }
@@ -29,22 +33,29 @@ class AddRecordRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     const data = {
-      record: this.getRecordData(),
+      record: this.getRecordData()
     };
 
     if (this.getAppID() !== undefined) {
       data.app = this.getAppID();
     }
+
     return data;
   }
   /**
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = AddRecordRequest;
+
+export default AddRecordRequest;

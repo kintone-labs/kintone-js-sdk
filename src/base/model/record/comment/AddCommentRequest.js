@@ -17,6 +17,8 @@ class AddCommentRequest {
      * Get JSON struct of this model
      * @return {integer}
      */
+
+
   toJSON() {
     return {
       app: this.appID,
@@ -28,8 +30,12 @@ class AddCommentRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = AddCommentRequest;
+
+export default AddCommentRequest;

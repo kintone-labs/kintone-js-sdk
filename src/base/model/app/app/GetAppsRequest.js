@@ -15,6 +15,8 @@ class GetAppsRequest {
      * @param {Array} appIDs
      * @return {this}
      */
+
+
   setAppIDs(appIDs) {
     this.appIDs = appIDs;
     return this;
@@ -24,6 +26,8 @@ class GetAppsRequest {
      * @param {Array} appCodes
      * @return {this}
      */
+
+
   setAppCodes(appCodes) {
     this.appCodes = appCodes;
     return this;
@@ -33,6 +37,8 @@ class GetAppsRequest {
      * @param {Array} appName
      * @return {this}
      */
+
+
   setAppName(appName) {
     this.appName = appName;
     return this;
@@ -42,6 +48,8 @@ class GetAppsRequest {
      * @param {Array} appSpaceIDs
      * @return {this}
      */
+
+
   setAppSpaceIDs(appSpaceIDs) {
     this.appSpaceIDs = appSpaceIDs;
     return this;
@@ -50,31 +58,42 @@ class GetAppsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     const data = {
       offset: this.offset,
-      limit: this.limit,
+      limit: this.limit
     };
+
     if (this.appIDs) {
       data.ids = this.appIDs;
     }
+
     if (this.appCodes) {
       data.codes = this.appCodes;
     }
+
     if (this.appName) {
       data.name = this.appName;
     }
+
     if (this.appSpaceIDs) {
       data.spaceIds = this.appSpaceIDs;
     }
+
     return data;
   }
   /**
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetAppsRequest;
+
+export default GetAppsRequest;

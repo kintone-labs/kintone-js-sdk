@@ -13,6 +13,8 @@ class BulkRequest {
      * @param {BulkRequestItem} bulkRequestItem
      * @return {this}
      */
+
+
   addRequest(bulkRequestItem) {
     const dataRequest = bulkRequestItem.toJSON ? bulkRequestItem.toJSON() : bulkRequestItem;
     this.requests.push(dataRequest);
@@ -22,17 +24,23 @@ class BulkRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     return {
-      requests: this.requests,
+      requests: this.requests
     };
   }
   /**
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = BulkRequest;
+
+export default BulkRequest;

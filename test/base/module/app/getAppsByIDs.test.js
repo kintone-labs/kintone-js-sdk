@@ -6,16 +6,16 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {Connection, Auth, App} = require(common.MAIN_PATH_BASE);
 
-const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App({connection: conn});
+const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
+const conn = new Connection(common.DOMAIN, auth);
+const appModule = new App(conn);
 
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/apps.json';
 const GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/apps.json`;
 
-const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const appModuleGuestSpace = new App({connection: connGuestSpace});
+const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const appModuleGuestSpace = new App(connGuestSpace);
 
 describe('[TestSuite] getAppsByIDs', () => {
   describe('Common functions', () => {
@@ -25,7 +25,7 @@ describe('[TestSuite] getAppsByIDs', () => {
         .get(ROUTE + `?ids[0]=${ids[0]}`)
         .reply(200, {});
 
-      const actualResult = appModule.getAppsByIDs({ids});
+      const actualResult = appModule.getAppsByIDs(ids);
       expect(actualResult).toHaveProperty('then');
       expect(actualResult).toHaveProperty('catch');
     });
@@ -65,7 +65,7 @@ describe('[TestSuite] getAppsByIDs', () => {
           return true;
         })
         .reply(200, expectedResult);
-      const actualResult = appModule.getAppsByIDs({ids: appIds});
+      const actualResult = appModule.getAppsByIDs(appIds);
       return actualResult.then(rsp => {
         expect(rsp).toMatchObject(expectedResult);
       });
@@ -123,7 +123,7 @@ describe('[TestSuite] getAppsByIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModule.getAppsByIDs(({ids: appIDs, limit}));
+      const actualResult = appModule.getAppsByIDs(appIDs, undefined, limit);
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -181,7 +181,7 @@ describe('[TestSuite] getAppsByIDs', () => {
         )
         .reply(200, expectedResult);
 
-      const actualResult = appModule.getAppsByIDs(({ids: appIDs, offset}));
+      const actualResult = appModule.getAppsByIDs(appIDs, offset, undefined);
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -220,7 +220,7 @@ describe('[TestSuite] getAppsByIDs', () => {
           return true;
         })
         .reply(200, expectedResult);
-      const actualResult = appModuleGuestSpace.getAppsByIDs({ids: appIds});
+      const actualResult = appModuleGuestSpace.getAppsByIDs(appIds);
       return actualResult.then(rsp => {
         expect(rsp).toMatchObject(expectedResult);
       });
@@ -275,7 +275,7 @@ describe('[TestSuite] getAppsByIDs', () => {
           `?limit=${limit}&ids[0]=${appIDs[0]}&ids[1]=${appIDs[1]}&ids[2]=${appIDs[2]}&ids[3]=${appIDs[3]}&ids[4]=${appIDs[4]}`
         )
         .reply(200, expectedResult);
-      const actualResult = appModule.getAppsByIDs(({ids: appIDs, limit}));
+      const actualResult = appModule.getAppsByIDs(appIDs, undefined, limit);
       return actualResult.then((rsp) => {
         expect(rsp).toEqual(expectedResult);
       });
@@ -292,7 +292,7 @@ describe('[TestSuite] getAppsByIDs', () => {
       nock(URI)
         .get(ROUTE + `?ids[0]=1`)
         .reply(403, expectedResult);
-      const getAppsResult = appModule.getAppsByIDs({ids: [1]});
+      const getAppsResult = appModule.getAppsByIDs([1]);
       return getAppsResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -319,7 +319,7 @@ describe('[TestSuite] getAppsByIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsByIDs(({ids: appIDs, limit}));
+      const actualResult = appModule.getAppsByIDs(appIDs, undefined, limit);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -347,7 +347,7 @@ describe('[TestSuite] getAppsByIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsByIDs(({ids: appIDs, limit}));
+      const actualResult = appModule.getAppsByIDs(appIDs, undefined, limit);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -375,7 +375,7 @@ describe('[TestSuite] getAppsByIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsByIDs(({ids: appIDs, offset}));
+      const actualResult = appModule.getAppsByIDs(appIDs, offset, undefined);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -402,10 +402,11 @@ describe('[TestSuite] getAppsByIDs', () => {
         )
         .reply(400, expectedResult);
 
-      const actualResult = appModule.getAppsByIDs({
-        ids: appIDs,
-        offset: common.MAX_VALUE + 1
-      });
+      const actualResult = appModule.getAppsByIDs(
+        appIDs,
+        common.MAX_VALUE + 1,
+        undefined
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });

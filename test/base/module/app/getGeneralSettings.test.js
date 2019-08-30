@@ -14,23 +14,23 @@ const GUEST_APP_SETTINGS_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/app/settin
 
 // Init Connection
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App({connection: conn});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+const conn = new Connection(common.DOMAIN, auth);
+const appModule = new App(conn);
 
 // Init API Connection
 const authAPI = new Auth();
-authAPI.setApiToken({apiToken: common.API_TOKEN_VALUE});
-const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
-const appModuleAPI = new App({connection: connAPI});
+authAPI.setApiToken('testAPIToken');
+const connAPI = new Connection(common.DOMAIN, authAPI);
+const appModuleAPI = new App(connAPI);
 
 // Init Connection Guest Space
-const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const appModuleGuestSpace = new App({connection: connGuestSpace});
+const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const appModuleGuestSpace = new App(connGuestSpace);
 
 // Init API Connection Guest Space
-const connAPIGuestSpace = new Connection({domain: common.DOMAIN, auth: authAPI, guestSpaceID: common.GUEST_SPACEID});
-const appModuleAPIGuestSpace = new App({connection: connAPIGuestSpace});
+const connAPIGuestSpace = new Connection(common.DOMAIN, authAPI, common.GUEST_SPACEID);
+const appModuleAPIGuestSpace = new App(connAPIGuestSpace);
 
 describe('getGeneralSettings function', () => {
   describe('common function', () => {
@@ -47,7 +47,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(APP_PREVIEW_SETTINGS_ROUTE)
         .reply(200, {});
-      const getGeneralSettingsResult = appModule.getGeneralSettings({isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(undefined, undefined, isPreview);
       expect(getGeneralSettingsResult).toHaveProperty('then');
       expect(getGeneralSettingsResult).toHaveProperty('catch');
     });
@@ -56,7 +56,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(GUEST_APP_PREVIEW_SETTINGS_ROUTE)
         .reply(200, {});
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings({isPreview});
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(undefined, undefined, isPreview);
       expect(getGeneralSettingsResult).toHaveProperty('then');
       expect(getGeneralSettingsResult).toHaveProperty('catch');
     });
@@ -66,9 +66,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-2]should get successfully the PRE-LIVE app general settings information', () => {
       const data = {
         'app': 1,
-        'lang': 'en',
-        isPreview: true
+        'lang': 'en'
       };
+      const isPreview = true;
 
       const expectResult = {
         'name': 'San Francisco Lunch Map',
@@ -87,7 +87,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -95,9 +95,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-3]should get successfully the PRE-LIVE app general settings information in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'en',
-        isPreview: true
+        'lang': 'en'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -115,7 +115,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -123,9 +123,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-4]should get successfully the app general settings information', () => {
       const data = {
         'app': 1,
-        'lang': 'en',
-        isPreview: false
+        'lang': 'en'
       };
+      const isPreview = false;
 
       const expectResult = {
         'name': 'San Francisco Lunch Map',
@@ -144,7 +144,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -152,9 +152,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-5]should get successfully the app general settings information in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'en',
-        isPreview: false
+        'lang': 'en'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -172,7 +172,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -199,7 +199,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -226,7 +226,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -234,9 +234,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-8]should get successfully the PRE-LIVE app general settings information with DEFAULT language', () => {
       const data = {
         'app': 1,
-        'lang': 'default',
-        isPreview: true
+        'lang': 'default'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -254,7 +254,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -262,9 +262,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-9]should get successfully the PRE-LIVE app general settings information with ZH language', () => {
       const data = {
         'app': 1,
-        'lang': 'ZH',
-        isPreview: true
+        'lang': 'ZH'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -282,7 +282,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -290,9 +290,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-10]should get successfully the PRE-LIVE app general settings information with JA language', () => {
       const data = {
         'app': 1,
-        'lang': 'JA',
-        isPreview: true
+        'lang': 'JA'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -310,7 +310,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -318,9 +318,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-11]should get successfully the PRE-LIVE app general settings information with USER language', () => {
       const data = {
         'app': 1,
-        'lang': 'USER',
-        isPreview: true
+        'lang': 'USER'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -338,7 +338,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -346,9 +346,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-8]should get successfully the PRE-LIVE app general settings information with DEFAULT language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'default',
-        isPreview: true
+        'lang': 'default'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -366,7 +366,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -374,9 +374,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-9]should get successfully the PRE-LIVE app general settings information with ZH language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'ZH',
-        isPreview: true
+        'lang': 'ZH'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -394,7 +394,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -402,9 +402,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-10]should get successfully the PRE-LIVE app general settings information with JA language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'JA',
-        isPreview: true
+        'lang': 'JA'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -422,7 +422,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -430,9 +430,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-11]should get successfully the PRE-LIVE app general settings information with USER language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'USER',
-        isPreview: true
+        'lang': 'USER'
       };
+      const isPreview = true;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -450,7 +450,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -458,9 +458,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-12]should get successfully the app general settings information with DEFAULT language', () => {
       const data = {
         'app': 1,
-        'lang': 'default',
-        isPreview: false
+        'lang': 'default'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -478,7 +478,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -486,9 +486,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-13]should get successfully the app general settings information with ZH language', () => {
       const data = {
         'app': 1,
-        'lang': 'ZH',
-        isPreview: false
+        'lang': 'ZH'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -506,7 +506,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -514,9 +514,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-14]should get successfully the app general settings information with JA language', () => {
       const data = {
         'app': 1,
-        'lang': 'JA',
-        isPreview: false
+        'lang': 'JA'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -534,7 +534,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -542,9 +542,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-15]should get successfully the app general settings information with USER language', () => {
       const data = {
         'app': 1,
-        'lang': 'USER',
-        isPreview: false
+        'lang': 'USER'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -562,7 +562,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -570,9 +570,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-16]should get successfully the app general settings information with DEFAULT language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'default',
-        isPreview: false
+        'lang': 'default'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -590,7 +590,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -598,9 +598,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-17]should get successfully the app general settings information with ZH language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'ZH',
-        isPreview: false
+        'lang': 'ZH'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -618,7 +618,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -626,9 +626,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-18]should get successfully the app general settings information with JA language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'JA',
-        isPreview: false
+        'lang': 'JA'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -646,7 +646,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -654,9 +654,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-19]should get successfully the app general settings information with USER language in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'USER',
-        isPreview: false
+        'lang': 'USER'
       };
+      const isPreview = false;
       const expectResult = {
         'name': 'San Francisco Lunch Map',
         'description': 'A list of great places to go!',
@@ -674,7 +674,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -701,7 +701,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -729,7 +729,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang);
       return getGeneralSettingsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -740,9 +740,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-21]should return error when use API token PRE-LIVE', () => {
       const data = {
         app: 1,
-        lang: 'EN',
-        isPreview: true
+        lang: 'EN'
       };
+      const isPreview = true;
       const expectResult = {
         'code': 'GAIA_NO01',
         'id': 'RIQcWU4VAOSt0SXMlcMp',
@@ -755,7 +755,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const getGeneralSettingsResult = appModuleAPI.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleAPI.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -764,9 +764,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-22]should return error when use API token PRE-LIVE in GUEST SPACE', () => {
       const data = {
         app: 1,
-        lang: 'EN',
-        isPreview: true
+        lang: 'EN'
       };
+      const isPreview = true;
       const expectResult = {
         'code': 'GAIA_NO01',
         'id': 'RIQcWU4VAOSt0SXMlcMp',
@@ -779,7 +779,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const getGeneralSettingsResult = appModuleAPIGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleAPIGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -789,9 +789,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-23]should return error when use API token', () => {
       const data = {
         app: 1,
-        lang: 'EN',
-        isPreview: false
+        lang: 'EN'
       };
+      const isPreview = false;
       const expectResult = {
         'code': 'GAIA_NO01',
         'id': 'RIQcWU4VAOSt0SXMlcMp',
@@ -804,7 +804,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const getGeneralSettingsResult = appModuleAPI.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleAPI.getGeneralSettings(data.app, data.lang, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -828,7 +828,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const getGeneralSettingsResult = appModuleAPI.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleAPI.getGeneralSettings(data.app, data.lang);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -852,7 +852,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_PREVIEW_SETTINGS_ROUTE}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings({isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(undefined, undefined, isPreview);
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -870,7 +870,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_PREVIEW_SETTINGS_ROUTE}?app=${appID}`)
         .reply(404, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -895,7 +895,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_PREVIEW_SETTINGS_ROUTE}?app=${appID}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -920,7 +920,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_PREVIEW_SETTINGS_ROUTE}?app=${appID}`)
         .reply(404, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -930,9 +930,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-30]should return error when input the invalid PRE-LIVE language', () => {
       const data = {
         app: 1,
-        lang: 'invalid',
-        isPreview: true
+        lang: 'invalid'
       };
+      const isPreview = true;
       const expectResult = {
         'code': 'CB_VA01',
         'id': 'G5MOiPwnRgN4x7VsQBzC',
@@ -948,7 +948,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_PREVIEW_SETTINGS_ROUTE}?app=${data.app}&lang=${data.lang}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -972,7 +972,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${GUEST_APP_PREVIEW_SETTINGS_ROUTE}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings({isPreview});
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(undefined, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -990,7 +990,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${GUEST_APP_PREVIEW_SETTINGS_ROUTE}?app=${appID}`)
         .reply(404, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -1015,7 +1015,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${GUEST_APP_PREVIEW_SETTINGS_ROUTE}?app=${appID}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -1040,7 +1040,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${GUEST_APP_PREVIEW_SETTINGS_ROUTE}?app=${appID}`)
         .reply(404, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -1050,9 +1050,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-35]should return error when input the invalid PRE-LIVE language in GUEST SPACE', () => {
       const data = {
         app: 1,
-        lang: 'invalid',
-        isPreview: true
+        lang: 'invalid'
       };
+      const isPreview = true;
       const expectResult = {
         'code': 'CB_VA01',
         'id': 'G5MOiPwnRgN4x7VsQBzC',
@@ -1068,7 +1068,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${GUEST_APP_PREVIEW_SETTINGS_ROUTE}?app=${data.app}&lang=${data.lang}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -1116,7 +1116,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_SETTINGS_ROUTE}?app=${appID}`)
         .reply(404, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -1141,7 +1141,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_SETTINGS_ROUTE}?app=${appID}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -1166,7 +1166,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_SETTINGS_ROUTE}?app=${appID}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings({app: appID, isPreview});
+      const getGeneralSettingsResult = appModule.getGeneralSettings(appID, undefined, isPreview);
 
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
@@ -1176,9 +1176,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-41]should return error when input the invalid language', () => {
       const data = {
         app: 1,
-        lang: 'invalid',
-        isPreview: false
+        lang: 'invalid'
       };
+      const isPreview = false;
       const expectResult = {
         'code': 'CB_VA01',
         'id': 'G5MOiPwnRgN4x7VsQBzC',
@@ -1194,7 +1194,7 @@ describe('getGeneralSettings function', () => {
       nock(URI)
         .get(`${APP_SETTINGS_ROUTE}?app=${data.app}&lang=${data.lang}`)
         .reply(400, expectResult);
-      const getGeneralSettingsResult = appModule.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModule.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1203,9 +1203,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-42]should return error permission deny in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'en',
-        isPreview: false
+        'lang': 'en'
       };
+      const isPreview = false;
       const expectResult = {
         'code': 'CB_NO02',
         'id': 'FHQHE7Q3MtXFOIe2QslJ',
@@ -1218,7 +1218,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1227,9 +1227,9 @@ describe('getGeneralSettings function', () => {
     it('[General setting-43]should return error permission deny PRE-LIVE in GUEST SPACE', () => {
       const data = {
         'app': 1,
-        'lang': 'en',
-        isPreview: true
+        'lang': 'en'
       };
+      const isPreview = true;
 
       const expectResult = {
         'code': 'CB_NO02',
@@ -1244,7 +1244,7 @@ describe('getGeneralSettings function', () => {
           return true;
         })
         .reply(403, expectResult);
-      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data);
+      const getGeneralSettingsResult = appModuleGuestSpace.getGeneralSettings(data.app, data.lang, isPreview);
       return getGeneralSettingsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

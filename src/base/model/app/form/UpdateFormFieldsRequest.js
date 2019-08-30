@@ -16,6 +16,8 @@ class UpdateFormFieldsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     const data = {
       app: this.app,
@@ -28,8 +30,12 @@ class UpdateFormFieldsRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = UpdateFormFieldsRequest;
+
+export default UpdateFormFieldsRequest;

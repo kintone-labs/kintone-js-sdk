@@ -6,12 +6,12 @@
 const nock = require('nock');
 const common = require('../../../utils/common');
 const {URI} = require('../../../utils/constant');
-const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
+const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../dist/cjs/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const conn = new Connection(common.DOMAIN, auth);
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
@@ -46,13 +46,16 @@ describe('createCursor function', ()=>{
         })
         .reply(200, EXPECTED_RESPONSE);
 
-      const rc = new RecordCursor({connection: conn});
+      const rc = new RecordCursor(conn);
       return rc.createCursor({app, fields, query, size})
         .then((response)=>{
           expect(response).toHaveProperty('id');
           expect(response).toHaveProperty('totalCount');
           expect(response.id).toEqual(EXPECTED_RESPONSE.id);
           expect(response.totalCount).toEqual(EXPECTED_RESPONSE.totalCount);
+        })
+        .catch((err)=>{
+          expect(false);
         });
     });
   });
@@ -79,7 +82,7 @@ describe('createCursor function', ()=>{
         .post(CURSOR_ROUTE)
         .reply(400, INVALID_INPUT_RETURN);
 
-      const rc = new RecordCursor({connection: conn});
+      const rc = new RecordCursor(conn);
       return rc.createCursor({app, fields, query, size})
         .catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);

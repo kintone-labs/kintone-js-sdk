@@ -13,19 +13,18 @@ const RECORDS_ASSIGNEES_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/recor
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record({connection: conn});
+const conn = new Connection(common.DOMAIN, auth);
+const recordModule = new Record(conn);
 
-const connGuestParam = {domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID};
-const connGuest = new Connection(connGuestParam);
-const recordAssignee = new Record({connection: connGuest});
+const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const recordAssignee = new Record(connGuest);
 
 const authAPI = new Auth();
-authAPI.setApiToken({apiToken: common.API_TOKEN});
-const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
-const recordAssigneeAPI = new Record({connection: connAPI});
+authAPI.setApiToken(common.API_TOKEN);
+const connAPI = new Connection(common.DOMAIN, authAPI);
+const recordAssigneeAPI = new Record(connAPI);
 
 describe('UpdateRecordAssignees function', () => {
   describe('common case', () => {
@@ -40,7 +39,7 @@ describe('UpdateRecordAssignees function', () => {
       nock(URI)
         .put(`${RECORDS_ASSIGNEES_ROUTE}`)
         .reply(200, {'revision': '3'});
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.appID, data.assignees, data.revision);
       expect(updateRecordAssigneesResult).toHaveProperty('then');
       expect(updateRecordAssigneesResult).toHaveProperty('catch');
     });
@@ -71,7 +70,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -100,7 +99,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -129,7 +128,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -139,7 +138,7 @@ describe('UpdateRecordAssignees function', () => {
       const data = {
         app: 1,
         id: 1,
-        assignees: common.generateRecord(number, 'assignee'),
+        assignee: 'user6',
         revision: 2
       };
 
@@ -148,7 +147,7 @@ describe('UpdateRecordAssignees function', () => {
       nock(URI)
         .put(`${RECORDS_ASSIGNEES_ROUTE}`, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
-          expect(rqBody.assignees).toMatchObject(common.generateRecord(number, 'assignee'));
+          expect(rqBody.assignees).toMatchObject(common.generateRecord(number, data.assignee));
           return true;
         })
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -160,7 +159,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateAssignees = recordModule.updateRecordAssignees(data);
+      const updateAssignees = recordModule.updateRecordAssignees(data.app, data.id, common.generateRecord(number, data.assignee), data.revision);
       return updateAssignees.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -189,7 +188,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordAssigneesResult = recordAssignee.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordAssignee.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -218,7 +217,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -247,7 +246,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -284,7 +283,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(502, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -295,7 +294,7 @@ describe('UpdateRecordAssignees function', () => {
       const data = {
         app: 1,
         id: 1,
-        assignees: common.generateRecord(number, 'assignee'),
+        assignee: 'user1',
         revision: 2
       };
 
@@ -315,7 +314,7 @@ describe('UpdateRecordAssignees function', () => {
       nock(URI)
         .put(`${RECORDS_ASSIGNEES_ROUTE}`, (rqBody) => {
           expect(rqBody.app).toEqual(data.app);
-          expect(rqBody.assignees).toMatchObject(common.generateRecord(number, 'assignee'));
+          expect(rqBody.assignees).toMatchObject(common.generateRecord(number, data.assignee));
           return true;
         })
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
@@ -327,7 +326,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateAssignees = recordModule.updateRecordAssignees(data);
+      const updateAssignees = recordModule.updateRecordAssignees(data.app, data.id, common.generateRecord(number, data.assignee), data.revision);
       return updateAssignees.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -362,7 +361,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(400, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -397,7 +396,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(520, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -439,7 +438,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(400, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -480,7 +479,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(400, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(undefined, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -515,7 +514,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(400, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -542,7 +541,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(403, expectResult);
 
-      const updateRecordAssigneesResult = recordAssigneeAPI.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordAssigneeAPI.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -583,7 +582,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(400, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, undefined, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -624,7 +623,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(400, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, undefined, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -659,7 +658,7 @@ describe('UpdateRecordAssignees function', () => {
         })
         .reply(520, expectResult);
 
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -681,7 +680,7 @@ describe('UpdateRecordAssignees function', () => {
           return true;
         })
         .reply(404, expectResult);
-      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data);
+      const updateRecordAssigneesResult = recordModule.updateRecordAssignees(data.app, data.id, data.assignees, data.revision);
       return updateRecordAssigneesResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

@@ -1,8 +1,9 @@
-const RecordUpdateItem = require('./RecordUpdateItem');
-
+import _RecordUpdateItem from "./RecordUpdateItem";
+const RecordUpdateItem = _RecordUpdateItem;
 /**
  * UpdateRecordRequest model
  */
+
 class UpdateRecordRequest extends RecordUpdateItem {
   /**
      * @param {String} appID
@@ -15,19 +16,27 @@ class UpdateRecordRequest extends RecordUpdateItem {
      * Get JSON struct of this model
      * @return {Object}
      */
+
+
   toJSON() {
     const data = super.toJSON();
+
     if (this.app) {
       data.app = this.app;
     }
+
     return data;
   }
   /**
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = UpdateRecordRequest;
+
+export default UpdateRecordRequest;

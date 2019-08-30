@@ -2,13 +2,15 @@
  * kintone api - nodejs client
  * Member constants
  */
-
-const constant = function() {
+const constant = function () {
   return {
-    USER: 'USER', // user
-    GROUP: 'GROUP', // Group
-    DEPARTMENT: 'ORGANIZATION', // Department
+    USER: 'USER',
+    // user
+    GROUP: 'GROUP',
+    // Group
+    DEPARTMENT: 'ORGANIZATION' // Department
+
   };
 };
 
-module.exports = constant();
+export default constant();

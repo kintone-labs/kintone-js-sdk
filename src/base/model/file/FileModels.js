@@ -1,9 +1,11 @@
+import _GetFileRequest from "./GetFileRequest";
 /**
  * kintone api - nodejs client
  * File models
  */
 
-module.exports = {
+let GetFileRequest = _GetFileRequest;
+export default {
   // TODO: Write unit test
-  GetFileRequest: require('./GetFileRequest'),
+  GetFileRequest
 };

@@ -7,9 +7,9 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
-const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record({connection: conn});
+const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
+const conn = new Connection(common.DOMAIN, auth);
+const recordModule = new Record(conn);
 
 describe('updateRecords function', () => {
   describe('common case', () => {
@@ -32,7 +32,7 @@ describe('updateRecords function', () => {
           }]
         });
 
-      const updateRecordsResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordsResult = recordModule.updateRecords(appID, recordsData);
       expect(updateRecordsResult).toHaveProperty('then');
       expect(updateRecordsResult).toHaveProperty('catch');
     });
@@ -72,7 +72,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, expectResult);
 
-      const updateRecordsResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordsResult = recordModule.updateRecords(appID, recordsData);
       return updateRecordsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -140,7 +140,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, expectResult);
 
-      const updateRecordsResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordsResult = recordModule.updateRecords(appID, recordsData);
       return updateRecordsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -202,7 +202,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, expectResult);
 
-      const updateRecordsResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordsResult = recordModule.updateRecords(appID, recordsData);
       return updateRecordsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -270,7 +270,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, {'revision': '2'});
 
-      const updateRecordByIdResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordByIdResult = recordModule.updateRecords(appID, recordsData);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('2');
       });
@@ -281,8 +281,8 @@ describe('updateRecords function', () => {
      * The record is updated successfully for app in guest space
      */
     it('[Record-125] - should update record successfully for app in guest space', () => {
-      const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-      const recordGuestModule = new Record({connection: connGuestSpace});
+      const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+      const recordGuestModule = new Record(connGuestSpace);
       const appID = 19;
       const recordDataUpdate = {
         'app': appID,
@@ -323,7 +323,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, {'revision': '3'});
 
-      const updateRecordByIdResult = recordGuestModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordByIdResult = recordGuestModule.updateRecords(appID, recordsData);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('3');
       });
@@ -374,7 +374,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, {'revision': '4'});
 
-      const updateRecordByIdResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordByIdResult = recordModule.updateRecords(appID, recordsData);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('4');
       });
@@ -406,7 +406,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, {'revision': '7'});
 
-      const updateRecordByIdResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordByIdResult = recordModule.updateRecords(appID, recordsData);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('7');
       });
@@ -436,7 +436,7 @@ describe('updateRecords function', () => {
         })
         .reply(409, expectResult);
 
-      return recordModule.updateRecords({app: appID, records: recordsData}).catch((err) => {
+      return recordModule.updateRecords(appID, recordsData).catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
     });
@@ -503,7 +503,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -565,7 +565,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -628,7 +628,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -690,7 +690,7 @@ describe('updateRecords function', () => {
         })
         .reply(403, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -745,7 +745,7 @@ describe('updateRecords function', () => {
         })
         .reply(403, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -808,7 +808,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -872,7 +872,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -924,7 +924,7 @@ describe('updateRecords function', () => {
         })
         .reply(200, {'revision': '9'});
 
-      const updateRecordByIdResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const updateRecordByIdResult = recordModule.updateRecords(appID, recordsData);
       return updateRecordByIdResult.then((rsp) => {
         expect(rsp.revision).toEqual('9');
       });
@@ -986,7 +986,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1049,7 +1049,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -1113,7 +1113,7 @@ describe('updateRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const getRecordResult = recordModule.updateRecords({app: appID, records: recordsData});
+      const getRecordResult = recordModule.updateRecords(appID, recordsData);
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

@@ -12,17 +12,23 @@ class GetFormLayoutRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     return {
-      app: this.appID,
+      app: this.appID
     };
   }
   /**
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetFormLayoutRequest;
+
+export default GetFormLayoutRequest;

@@ -1,19 +1,21 @@
 import * as kintoneBaseJSSDK from '../../../base/main';
-import {Connection} from '../connection/Connection';
+import { Connection } from '../connection/Connection';
 /**
  * Connection module
  */
-export class App extends kintoneBaseJSSDK.App {
 
+export class App extends kintoneBaseJSSDK.App {
   /**
-   * @param {Object} params
-   * @param {Connection} params.connection
+     * @param {conn} Connection
      */
-  constructor({connection: conn} = {}) {
+  constructor(conn) {
     let connection = conn;
+
     if (!connection) {
       connection = new Connection();
     }
-    super({connection});
+
+    super(connection);
   }
+
 }

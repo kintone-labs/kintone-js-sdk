@@ -1,11 +1,18 @@
+import _DeleteRecordCursorRequest from "./recordCursor/DeleteCursorRequest";
+import _GetRecordCursorRequest from "./recordCursor/GetRecordCursorRequest";
+import _CreateRecordCursorRequest from "./recordCursor/CreateRecordCursorRequest";
 /**
  * kintone api - nodejs client
  * Cursor models
  */
 
-module.exports = {
+const CreateRecordCursorRequest = _CreateRecordCursorRequest;
+const GetRecordCursorRequest = _GetRecordCursorRequest;
+;
+const DeleteRecordCursorRequest = _DeleteRecordCursorRequest;
+export default {
   // TODO: Write unit test
-  CreateRecordCursorRequest: require('./recordCursor/CreateRecordCursorRequest'),
-  GetRecordCursorRequest: require('./recordCursor/GetRecordCursorRequest'),
-  DeleteRecordCursorRequest: require('./recordCursor/DeleteCursorRequest')
+  CreateRecordCursorRequest,
+  GetRecordCursorRequest,
+  DeleteRecordCursorRequest
 };

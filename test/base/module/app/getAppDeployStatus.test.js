@@ -14,23 +14,23 @@ const GUEST_APP_PREVIEW_DEPLOY_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/prev
 
 // Init Connection
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App({connection: conn});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+const conn = new Connection(common.DOMAIN, auth);
+const appModule = new App(conn);
 
 // Init API Connection
 const authAPI = new Auth();
 authAPI.setApiToken('testAPIToken');
-const connAPI = new Connection({domain: common.DOMAIN, auth: authAPI});
-const appModuleAPI = new App({connection: connAPI});
+const connAPI = new Connection(common.DOMAIN, authAPI);
+const appModuleAPI = new App(connAPI);
 
 // Init Connection Guest Space
-const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const appModuleGuestSpace = new App({connection: connGuestSpace});
+const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const appModuleGuestSpace = new App(connGuestSpace);
 
 // Init API Connection Guest Space
-const connAPIGuestSpace = new Connection({domain: common.DOMAIN, auth: authAPI, guestSpaceID: common.GUEST_SPACEID});
-const appModuleAPIGuestSpace = new App({connection: connAPIGuestSpace});
+const connAPIGuestSpace = new Connection(common.DOMAIN, authAPI, common.GUEST_SPACEID);
+const appModuleAPIGuestSpace = new App(connAPIGuestSpace);
 
 const generateItemsInArray = (array, quantity)=> {
   for (let i = 0; i < quantity; i++) {
@@ -84,7 +84,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(200, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectedResult);
       });
@@ -112,7 +112,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(200, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectedResult);
       });
@@ -141,7 +141,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(200, expectedResult);
-      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectedResult);
       });
@@ -169,7 +169,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(200, expectedResult);
-      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectedResult);
       });
@@ -193,7 +193,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModuleAPI.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleAPI.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -216,7 +216,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModuleAPIGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleAPIGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -260,7 +260,7 @@ describe('getAppDeployStatus function', () => {
       nock(URI)
         .get(`${APP_PREVIEW_DEPLOY_ROUTE}?apps[0]=${data.apps[0]}`)
         .reply(404, expectResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -290,7 +290,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -320,7 +320,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -350,7 +350,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -374,7 +374,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -418,7 +418,7 @@ describe('getAppDeployStatus function', () => {
       nock(URI)
         .get(`${GUEST_APP_PREVIEW_DEPLOY_ROUTE}?apps[0]=${data.apps[0]}`)
         .reply(404, expectResult);
-      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -448,7 +448,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -478,7 +478,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -508,7 +508,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -532,7 +532,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -555,7 +555,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const getAppDeployStatusResult = appModule.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModule.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -578,7 +578,7 @@ describe('getAppDeployStatus function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data);
+      const getAppDeployStatusResult = appModuleGuestSpace.getAppDeployStatus(data.apps);
       return getAppDeployStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);

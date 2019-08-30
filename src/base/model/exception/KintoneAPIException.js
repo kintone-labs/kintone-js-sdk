@@ -13,14 +13,20 @@ class KintoneAPIException {
   /**
      * @return {string}
      */
+
+
   getHttpErrorCode() {
     return this.httpErrorCode;
   }
   /**
      * @return {ErrorResponse}
      */
+
+
   getErrorResponse() {
     return this.errorResponse;
   }
+
 }
-module.exports = KintoneAPIException;
+
+export default KintoneAPIException;

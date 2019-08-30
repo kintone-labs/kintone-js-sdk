@@ -2,43 +2,43 @@
  * kintone api - nodejs client
  * File module
  */
+"use-strict";
 
-'use-strict';
-
-const fs = require('fs');
-const path = require('path');
-
-const {Connection, KintoneAPIException} = require('../../../base/main');
-
-const FileModule = require('../../../base/main').File;
+import { File as _FileModule } from "../../../base/main";
+import _path from "path";
+import _fs from "fs";
+import { Connection, KintoneAPIException } from "../../../base/main";
+const fs = _fs;
+const path = _path;
+const FileModule = _FileModule;
 /**
  * File module for NodeJS
  */
+
 class File extends FileModule {
   /**
-     * The constructor for this module
-     * @param {Object} params
-     * @param {Connection} params.connection
-     */
-  constructor({connection} = {}) {
+   * The constructor for this module
+   * @param {Connection} connection
+   */
+  constructor(connection) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection}` +
-                  `not an instance of kintoneConnection`);
+      throw new Error(`${connection}` + `not an instance of kintoneConnection`);
     }
-    super({connection});
+
+    super(connection);
   }
   /**
-     * Download file from kintone
-     * @param {Object} params
-     * @param {String} params.fileKey
-     * @param {String} params.outPutFilePath
-     * @return {Promise}
-     */
-  download({fileKey, outPutFilePath}) {
-    return super.download({fileKey}).then((fileContent) => {
+   * Download file from kintone
+   * @param {String} fileKey
+   * @return {Promise}
+   */
+
+
+  download(fileKey, outPutFilePath) {
+    return super.download(fileKey).then(fileContent => {
       try {
         const options = {
-          encoding: 'utf16le'
+          encoding: "utf16le"
         };
         fs.writeFileSync(outPutFilePath, fileContent, options);
       } catch (err) {
@@ -47,15 +47,22 @@ class File extends FileModule {
     });
   }
   /**
-     * Upload file from local to kintone environment
-     * @param {Object} params
-     * @param {String} params.filePath
-     * @return {Promise}
-     */
-  upload({filePath}) {
-    const fileContent = fs.createReadStream(filePath);
-    const fileName = path.basename(filePath);
-    return super.upload({fileName: fileName, fileContent: fileContent});
+   * Upload file from local to kintone environment
+   * @param {String} filePath
+   * @return {Promise}
+   */
+
+
+  upload(filePath) {
+    try {
+      const fileContent = fs.createReadStream(filePath);
+      const fileName = path.basename(filePath);
+      return super.upload(fileName, fileContent);
+    } catch (err) {
+      throw new Error(`File path is not valid`);
+    }
   }
+
 }
-module.exports = File;
+
+export default File;

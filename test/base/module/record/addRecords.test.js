@@ -9,11 +9,11 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 
 const auth = new Auth();
-auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const conn = new Connection(common.DOMAIN, auth);
 
-const recordModule = new Record({connection: conn});
+const recordModule = new Record(conn);
 const URI = 'https://' + common.DOMAIN;
 const RECORDS_API_ROUTE = '/k/v1/records.json';
 const RECORDS_API_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/records.json`;
@@ -59,7 +59,7 @@ describe('addRecords function', () => {
           'revisions': ['1', '1']
         });
 
-      const addRecordsResult = recordModule.addRecords(data);
+      const addRecordsResult = recordModule.addRecords(data.app, data.records);
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('ids');
         expect(rsp.revisions).toEqual(expect.arrayContaining(['1', '1']));
@@ -118,7 +118,7 @@ describe('addRecords function', () => {
           'revisions': ['1', '1']
         });
 
-      const addRecordsResult = recordModule.addRecords(data);
+      const addRecordsResult = recordModule.addRecords(data.app, data.records);
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('ids');
         expect(rsp.revisions).toEqual(expect.arrayContaining(['1', '1']));
@@ -140,9 +140,9 @@ describe('addRecords function', () => {
           'ids': ['1', '2'],
           'revisions': ['1', '1']
         });
-      const conn1 = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-      const recordsModule = new Record({connection: conn1});
-      const addRecordsResult = recordsModule.addRecords(data);
+      const conn1 = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+      const recordsModule = new Record(conn1);
+      const addRecordsResult = recordsModule.addRecords(data.app, data.records);
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('ids');
         expect(rsp.revisions).toEqual(expect.arrayContaining(['1', '1']));
@@ -175,8 +175,8 @@ describe('addRecords function', () => {
           'ids': records100,
           'revisions': revisions100
         });
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords({app: data.app, records: common.generateRecord(number, data.records)})
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, common.generateRecord(number, data.records))
         .then((rsp) => {
           expect(rsp.ids.length).toEqual(100);
           expect(rsp.revisions.length).toEqual(100);
@@ -199,7 +199,7 @@ describe('addRecords function', () => {
           'revisions': ['1', '1']
         });
 
-      const addRecordsResult = recordModule.addRecords(data);
+      const addRecordsResult = recordModule.addRecords(data.app, data.records);
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('ids');
         expect(rsp.revisions).toEqual(expect.arrayContaining(['1', '1']));
@@ -225,7 +225,7 @@ describe('addRecords function', () => {
           'revisions': ['1', '1']
         });
 
-      const addRecordsResult = recordModule.addRecords(data);
+      const addRecordsResult = recordModule.addRecords(data.app, data.records);
       return addRecordsResult.then((rsp) => {
         expect(rsp).toHaveProperty('ids');
         expect(rsp.revisions).toEqual(expect.arrayContaining(['1', '1']));
@@ -246,7 +246,7 @@ describe('addRecords function', () => {
         })
         .reply(404, {'code': 'GAIA_AP01', 'id': 'Jt2jVNMHlZxXPufVeZCz', 'message': 'The app (ID: 999) not found. The app may have been deleted.'});
 
-      const addRecordsResult = recordModule.addRecords({app: data.unexistedAppID, record: data.records});
+      const addRecordsResult = recordModule.addRecords(data.unexistedAppID, data.records);
       return addRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
@@ -270,7 +270,7 @@ describe('addRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const addRecordsResult = recordModule.addRecords({app: data.negativeAppID, records: data.records});
+      const addRecordsResult = recordModule.addRecords(data.negativeAppID, data.records);
       return addRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -279,7 +279,7 @@ describe('addRecords function', () => {
 
     it('[Record-47] should return error when appID is 0', () => {
       const data = {
-        app: 0,
+        appID: 0,
         records: [{Text_0: {value: 1}}, {Text_0: {value: 2}}]
       };
       const expectResult = {
@@ -295,7 +295,7 @@ describe('addRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const addRecordsResult = recordModule.addRecords(data);
+      const addRecordsResult = recordModule.addRecords(data.appID, data.records);
       return addRecordsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -334,8 +334,8 @@ describe('addRecords function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords(data)
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, data.records)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -366,8 +366,8 @@ describe('addRecords function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords(data)
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, data.records)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -398,8 +398,8 @@ describe('addRecords function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords(data)
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, data.records)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -427,8 +427,8 @@ describe('addRecords function', () => {
         .post(RECORDS_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords(data)
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(undefined, data.records)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -453,8 +453,8 @@ describe('addRecords function', () => {
         .post(RECORDS_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords({app: 1})
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(1, undefined)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -485,8 +485,8 @@ describe('addRecords function', () => {
         .post(RECORDS_API_ROUTE)
         .reply(400, expectResult);
 
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords(data)
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, data.records)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -510,8 +510,8 @@ describe('addRecords function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords(data)
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, data.records)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -544,8 +544,8 @@ describe('addRecords function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords({app: data.app, records: common.generateRecord(number, data.records)})
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, common.generateRecord(number, data.records))
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);
@@ -574,8 +574,8 @@ describe('addRecords function', () => {
         })
         .reply(400, expectResult);
 
-      const recordsModule = new Record({connection: conn});
-      return recordsModule.addRecords(data)
+      const recordsModule = new Record(conn);
+      return recordsModule.addRecords(data.app, data.records)
         .catch(err => {
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(expectResult);

@@ -2,8 +2,7 @@
  * kintone api - nodejs client
  * Connection constants
  */
-
-const constant = function() {
+const constant = function () {
   return {
     BASE: {
       SCHEMA: 'https',
@@ -14,9 +13,7 @@ const constant = function() {
       PREFIX_GUESTSPACEID: '{GUEST_SPACE_ID}',
       USER_AGENT: 'User-Agent',
       USER_AGENT_BASE_VALUE: '{name}/{version}',
-      HTTPS_AGENT: 'httpsAgent',
-      X_HTTP_METHOD_OVERRIDE: 'X-HTTP-Method-Override',
-      LIMIT_REQUEST_URI_CHARACTER: 4096
+      HTTPS_AGENT: 'httpsAgent'
     },
     PATH: {
       APP_CUSTOMIZE: 'app/customize',
@@ -58,8 +55,8 @@ const constant = function() {
       SPACE_THREAD: 'space/thread',
       SPACE_THREAD_COMMENT: 'space/thread/comment',
       RECORD_CURSOR: 'records/cursor'
-    },
+    }
   };
 };
 
-module.exports = constant();
+export default constant();

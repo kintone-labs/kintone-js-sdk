@@ -15,18 +15,24 @@ class CommentMention {
      * Get JSON struct of this model
      * @return {integer}
      */
+
+
   toJSON() {
     return {
       code: this.code,
-      type: this.type,
+      type: this.type
     };
   }
   /**
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = CommentMention;
+
+export default CommentMention;

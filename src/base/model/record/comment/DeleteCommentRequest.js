@@ -17,6 +17,8 @@ class DeleteCommentRequest {
      * Get JSON struct of this model
      * @return {integer}
      */
+
+
   toJSON() {
     return {
       app: this.appID,
@@ -28,8 +30,12 @@ class DeleteCommentRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = DeleteCommentRequest;
+
+export default DeleteCommentRequest;

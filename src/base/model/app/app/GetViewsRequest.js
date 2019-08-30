@@ -14,6 +14,8 @@ class GetViewsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     const data = {
       app: this.app,
@@ -25,8 +27,12 @@ class GetViewsRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetViewsRequest;
+
+export default GetViewsRequest;

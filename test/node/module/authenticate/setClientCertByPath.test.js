@@ -12,17 +12,15 @@ const {API_ROUTE, URI} = require('../../../utils/constant');
 const filePath = './test/node/module/authenticate/mock/test.pfx';
 const pfxFile = fs.readFileSync(filePath);
 const certPass = 'test';
-const paramPasswordAuth = {username: common.USERNAME, password: common.PASSWORD};
-const paramClientCertByPath = {filePath: filePath, password: certPass};
 
 describe('Connection module', () => {
   describe('success case', () => {
     it(`[setClientCertByPath-9] 'Verify that connect succesfully by certificate path`, () => {
       const auth = new Auth()
-        .setPasswordAuth(paramPasswordAuth)
-        .setClientCertByPath(paramClientCertByPath);
-      const conn = new Connection({domain: common.DOMAIN, auth: auth});
-      const appModule = new App({connection: conn});
+        .setPasswordAuth(common.USERNAME, common.PASSWORD)
+        .setClientCertByPath(filePath, certPass);
+      const conn = new Connection(common.DOMAIN, auth);
+      const appModule = new App(conn);
 
       const appID = 1;
       const expectResult = {
@@ -56,10 +54,10 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      const getAppResult = appModule.getApp({id: appID});
+      const getAppResult = appModule.getApp(appID);
       return getAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
-        return appModule.getApp({id: appID});
+        return appModule.getApp(appID);
       }).catch(err => {
         const expectCertFile = {passphrase: certPass, pfx: pfxFile};
         expect(err.errorRaw.response.config.httpsAgent.options).toMatchObject(expectCertFile);
@@ -67,11 +65,11 @@ describe('Connection module', () => {
     });
     it(`[setClientCertByPath-10] Verify that connect succesfully by certificate path with proxy http`, () => {
       const auth = new Auth()
-        .setPasswordAuth(paramPasswordAuth)
-        .setClientCertByPath(paramClientCertByPath);
-      const conn = new Connection({domain: common.DOMAIN, auth: auth});
-      conn.setProxy({host: common.PROXY_HOST, port: common.PROXY_PORT});
-      const appModule = new App({connection: conn});
+        .setPasswordAuth(common.USERNAME, common.PASSWORD)
+        .setClientCertByPath(filePath, certPass);
+      const conn = new Connection(common.DOMAIN, auth);
+      conn.setProxy(common.PROXY_HOST, common.PROXY_PORT);
+      const appModule = new App(conn);
 
       const appID = 1;
       const expectResult = {
@@ -105,10 +103,10 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      const getAppResult = appModule.getApp({id: appID});
+      const getAppResult = appModule.getApp(appID);
       return getAppResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
-        return appModule.getApp({id: appID});
+        return appModule.getApp(appID);
       }).catch(err => {
         const expectCertFile = {passphrase: certPass, pfx: pfxFile};
         expect(err.errorRaw.response.config.httpsAgent.options).toMatchObject(expectCertFile);
@@ -119,10 +117,10 @@ describe('Connection module', () => {
   describe('error case', () => {
     it(`[setClientCertByPath-12] Verify that the error will be displayed when use certificate data for wrong user`, () => {
       const auth = new Auth()
-        .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
-        .setClientCertByPath(paramClientCertByPath);
-      const conn = new Connection({domain: common.DOMAIN, auth: auth});
-      const appModule = new App({connection: conn});
+        .setPasswordAuth('wrong_user', common.PASSWORD)
+        .setClientCertByPath(filePath, certPass);
+      const conn = new Connection(common.DOMAIN, auth);
+      const appModule = new App(conn);
 
       const appID = 1;
       nock(URI)
@@ -132,7 +130,7 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      const getAppResult = appModule.getApp({id: appID});
+      const getAppResult = appModule.getApp(appID);
       return getAppResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
@@ -140,10 +138,10 @@ describe('Connection module', () => {
 
     it(`[setClientCertByPath-13] Verify that the error will be displayed when use wrong password`, () => {
       const auth = new Auth()
-        .setPasswordAuth({username: 'wrong_user', password: common.PASSWORD})
-        .setClientCertByPath({filePath: filePath, password: 'wrong_password'});
-      const conn = new Connection({domain: common.DOMAIN, auth: auth});
-      const appModule = new App({connection: conn});
+        .setPasswordAuth('wrong_user', common.PASSWORD)
+        .setClientCertByPath(filePath, 'wrong_password');
+      const conn = new Connection(common.DOMAIN, auth);
+      const appModule = new App(conn);
 
       const appID = 1;
       nock(URI)
@@ -153,17 +151,17 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      return appModule.getApp({id: appID}).catch((err) => {
+      return appModule.getApp(appID).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
     });
 
     it(`[setClientCertByPath-14] 'Verify that the error will be displayed when use invalid certificate path`, () => {
       const auth = new Auth()
-        .setPasswordAuth(paramPasswordAuth)
-        .setClientCertByPath(paramClientCertByPath);
-      const conn = new Connection({domain: common.DOMAIN, auth: auth});
-      const appModule = new App({connection: conn});
+        .setPasswordAuth(common.USERNAME, common.PASSWORD)
+        .setClientCertByPath(filePath, certPass);
+      const conn = new Connection(common.DOMAIN, auth);
+      const appModule = new App(conn);
 
       const appID = 1;
       nock(URI)
@@ -173,7 +171,7 @@ describe('Connection module', () => {
           return true;
         })
         .reply(400, {});
-      return appModule.getApp({id: appID}).catch((err) => {
+      return appModule.getApp(appID).catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
       });
     });
@@ -182,17 +180,19 @@ describe('Connection module', () => {
       const errors = `File path is not valid`;
       const authInfo = () => {
         const auth = new Auth();
-        auth.setClientCertByPath({filePath: undefined, password: certPass});
+        auth.setClientCertByPath(undefined, certPass);
       };
       expect(authInfo).toThrow(errors);
     });
 
     it(`[setClientCertByPath-16] 'Verify that the error will be displayed when using method without password`, () => {
       const auth = new Auth()
-        .setPasswordAuth(paramPasswordAuth)
-        .setClientCertByPath({filePath: filePath});
-      const conn = new Connection({domain: common.DOMAIN, auth: auth});
-      const file = new File({connection: conn});
+        .setPasswordAuth(common.USERNAME, common.PASSWORD)
+        .setClientCertByPath(filePath);
+      const conn = new Connection(common.DOMAIN, auth);
+      const file = new File(conn);
+
+
       nock(URI)
         .get(API_ROUTE.FILE + `?fileKey=file_key`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {

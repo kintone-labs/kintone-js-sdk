@@ -16,12 +16,13 @@ class DeleteFormFieldsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     const data = {
       app: this.app,
       fields: this.fields,
       revision: this.revision
-
     };
     return data;
   }
@@ -29,8 +30,12 @@ class DeleteFormFieldsRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = DeleteFormFieldsRequest;
+
+export default DeleteFormFieldsRequest;

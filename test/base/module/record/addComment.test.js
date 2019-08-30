@@ -6,11 +6,11 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 
-const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const recordModule = new Record({connection: conn});
-const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
-const recordModuleGuest = new Record({connection: connGuest});
+const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
+const conn = new Connection(common.DOMAIN, auth);
+const recordModule = new Record(conn);
+const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const recordModuleGuest = new Record(connGuest);
 
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/record/comment.json';
@@ -50,7 +50,11 @@ describe('addComment function', () => {
         })
         .reply(200, {id: '1'});
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(rsp => {
         expect(rsp).toHaveProperty('id');
       });
@@ -70,7 +74,11 @@ describe('addComment function', () => {
         })
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -98,7 +106,11 @@ describe('addComment function', () => {
         })
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -135,7 +147,11 @@ describe('addComment function', () => {
         })
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -161,7 +177,11 @@ describe('addComment function', () => {
         })
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -183,7 +203,11 @@ describe('addComment function', () => {
         })
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -211,7 +235,11 @@ describe('addComment function', () => {
         })
         .reply(200, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -239,7 +267,11 @@ describe('addComment function', () => {
         })
         .reply(200, expectedResult);
 
-      const actualResult = recordModuleGuest.addComment(data);
+      const actualResult = recordModuleGuest.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(response => {
         expect(response).toMatchObject(expectedResult);
       });
@@ -266,7 +298,11 @@ describe('addComment function', () => {
         })
         .reply(200, {id: '1'});
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(rsp => {
         expect(rsp).toHaveProperty('id');
       });
@@ -307,7 +343,11 @@ describe('addComment function', () => {
         })
         .reply(200, {id: '1'});
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.then(rsp => {
         expect(rsp).toHaveProperty('id');
       });
@@ -343,7 +383,11 @@ describe('addComment function', () => {
         })
         .reply(400, expectResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectResult);
       });
@@ -383,7 +427,11 @@ describe('addComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -416,7 +464,11 @@ describe('addComment function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -449,7 +501,11 @@ describe('addComment function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -478,7 +534,11 @@ describe('addComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -506,7 +566,11 @@ describe('addComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -535,7 +599,11 @@ describe('addComment function', () => {
         })
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -564,7 +632,11 @@ describe('addComment function', () => {
         })
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -593,7 +665,11 @@ describe('addComment function', () => {
         })
         .reply(400, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -602,7 +678,8 @@ describe('addComment function', () => {
     it('[Record-253] should return an error when the comment featured is disabled', () => {
       const data = {
         app: 1,
-        comment: ''
+        record: undefined,
+        comment: undefined
       };
       const expectedResult = {
         'code': 'GAIA_RE12',
@@ -611,12 +688,16 @@ describe('addComment function', () => {
       };
       nock(URI)
         .post(ROUTE, reqBody => {
-          expect(reqBody).toMatchObject(data);
+          expect(reqBody).not.toHaveProperty('comment');
           return true;
         })
         .reply(520, expectedResult);
 
-      const actualResult = recordModule.addComment(data);
+      const actualResult = recordModule.addComment(
+        data.app,
+        data.record,
+        data.comment
+      );
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });

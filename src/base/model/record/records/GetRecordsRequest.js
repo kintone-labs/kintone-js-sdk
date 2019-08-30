@@ -18,6 +18,8 @@ class GetRecordsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     return {
       app: this.app,
@@ -30,8 +32,12 @@ class GetRecordsRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetRecordsRequest;
+
+export default GetRecordsRequest;

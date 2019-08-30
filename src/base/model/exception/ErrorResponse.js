@@ -15,11 +15,12 @@ class ErrorResponse {
     this.setMessage(message);
     this.setErrors(errors);
   }
-
   /**
      * @param {Object} errors
      * @return {this}
      */
+
+
   setErrors(errors) {
     this.errors = errors;
     return this;
@@ -27,6 +28,8 @@ class ErrorResponse {
   /**
      * @return {Object}
      */
+
+
   getErrors() {
     return this.errors;
   }
@@ -34,59 +37,70 @@ class ErrorResponse {
      * @param {String} message
      * @return {this}
      */
+
+
   setMessage(message) {
     this.message = message;
     return this;
   }
-
   /**
      * @return {String}
      */
+
+
   getMessage() {
     return this.message;
   }
-
   /**
      * @param {String} id
      * @return {this}
      */
+
+
   setID(id) {
     this.id = id;
     return this;
   }
-
   /**
      * @return {String}
      */
+
+
   getID() {
     return this.id;
   }
-
   /**
      * @param {String} code
      * @return {this}
      */
+
+
   setCode(code) {
     this.code = code;
     return this;
   }
-
   /**
      * @return {String}
      */
+
+
   getCode() {
     return this.code;
   }
   /**
      * @return {Object}
      */
+
+
   toJSON() {
     return {
       id: this.getID(),
       code: this.getCode(),
       message: this.getMessage(),
-      errors: this.getErrors() || '{}',
+      errors: this.getErrors() || '{}'
     };
   }
+
 }
-module.exports = ErrorResponse;
+
+export default ErrorResponse;

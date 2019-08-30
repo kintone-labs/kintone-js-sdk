@@ -7,10 +7,10 @@ const nock = require('nock');
 const common = require('../../../utils/common');
 const {API_ROUTE, URI} = require('../../../utils/constant');
 const {KintoneAPIException, Connection, Auth, App} = require(common.MAIN_PATH_BASE);
-const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
 
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
-const appModule = new App({connection: conn});
+const conn = new Connection(common.DOMAIN, auth);
+const appModule = new App(conn);
 
 describe('getApps function', () => {
   describe('common function', () => {
@@ -19,7 +19,7 @@ describe('getApps function', () => {
         .get(API_ROUTE.APPS + '?offset=1&limit=10')
         .reply(200, {});
 
-      const getAppResult = appModule.getApps({offset: 1, limit: 10});
+      const getAppResult = appModule.getApps(1, 10);
       expect(getAppResult).toHaveProperty('then');
       expect(getAppResult).toHaveProperty('catch');
     });
@@ -87,14 +87,13 @@ describe('getApps function', () => {
         ]
       };
       nock(URI)
-        .get(API_ROUTE.APPS)
-        .query({limit, offset})
+        .get(API_ROUTE.APPS + `?offset=${offset}&limit=${limit}`)
         .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
           expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -168,7 +167,7 @@ describe('getApps function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -206,7 +205,7 @@ describe('getApps function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.then((rsp) => {
         expect(rsp).toEqual(expectResult);
       });
@@ -219,8 +218,8 @@ describe('getApps function', () => {
     it('[App-12] - should return the app information of guest space', () => {
       const limit = 3;
       const offset = 1;
-      const connGuest = new Connection({domain: common.DOMAIN, auth, guestSpaceID: common.GUEST_SPACEID});
-      const appModuleGuest = new App({connection: connGuest});
+      const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+      const appModuleGuest = new App(connGuest);
       const expectResult = {
         'apps': [
           {
@@ -250,7 +249,7 @@ describe('getApps function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = appModuleGuest.getApps({offset, limit});
+      const getAppsResult = appModuleGuest.getApps(offset, limit);
       return getAppsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -290,7 +289,7 @@ describe('getApps function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -330,7 +329,7 @@ describe('getApps function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -349,7 +348,7 @@ describe('getApps function', () => {
       nock(URI)
         .get(API_ROUTE.APPS + `?offset=${offset}&limit=${limit}`)
         .reply(403, expectResult);
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -375,7 +374,7 @@ describe('getApps function', () => {
         .get(API_ROUTE.APPS + `?offset=${offset}&limit=${limit}`)
         .reply(400, expectedResult);
 
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -401,7 +400,7 @@ describe('getApps function', () => {
         .get(API_ROUTE.APPS + `?offset=${offset}&limit=${limit}`)
         .reply(400, expectedResult);
 
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -429,7 +428,7 @@ describe('getApps function', () => {
         .get(API_ROUTE.APPS + `?offset=${offset}&limit=${limit}`)
         .reply(400, expectedResult);
 
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -455,7 +454,7 @@ describe('getApps function', () => {
         .get(API_ROUTE.APPS + `?offset=${offset}&limit=${limit}`)
         .reply(400, expectedResult);
 
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);
@@ -483,7 +482,7 @@ describe('getApps function', () => {
         .get(API_ROUTE.APPS + `?offset=${offset}&limit=${limit}`)
         .reply(400, expectedResult);
 
-      const getAppsResult = appModule.getApps({offset, limit});
+      const getAppsResult = appModule.getApps(offset, limit);
       return getAppsResult.catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectedResult);

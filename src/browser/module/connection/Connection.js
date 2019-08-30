@@ -2,24 +2,21 @@ import * as kintoneBaseJSSDK from '../../../base/main';
 /**
  * Connection module
  */
-export class Connection extends kintoneBaseJSSDK.Connection {
 
+export class Connection extends kintoneBaseJSSDK.Connection {
   /**
-     * @param {Object} params
-     * @param {kintoneBaseJSSDK.Auth} params.auth
-     * @param {Integer} params.guestSpaceID
+     * @param {kintoneBaseJSSDK.Auth} auth
+     * @param {Integer} guestSpaceID
      */
-  constructor({auth, guestSpaceID} = {}) {
+  constructor(auth, guestSpaceID) {
     if (auth instanceof kintoneBaseJSSDK.Auth) {
-      const domain = window.location.host;
-      super({domain, auth, guestSpaceID});
+      super(window.location.host, auth, guestSpaceID);
       this.kintoneAuth = auth;
     } else {
-      const domain = window.location.host;
-      const basicAuth = new kintoneBaseJSSDK.Auth();
-      super({domain, auth: basicAuth, guestSpaceID});
+      super(window.location.host, new kintoneBaseJSSDK.Auth(), guestSpaceID);
       this.kintoneAuth = undefined;
     }
+
     this.headers = [];
   }
   /**
@@ -29,10 +26,12 @@ export class Connection extends kintoneBaseJSSDK.Connection {
      * @param {String} body
      * @return {Promise}
      */
+
+
   request(methodName, restAPIName, body) {
     if (window && window.kintone && !this.kintoneAuth) {
       // use kintone.api
-      return kintone.api(super.getUri(restAPIName), String(methodName).toUpperCase(), body).then((response) => {
+      return kintone.api(super.getUri(restAPIName), String(methodName).toUpperCase(), body).then(response => {
         return response;
       }).catch(err => {
         const error = {
@@ -43,6 +42,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
         throw error;
       });
     }
+
     return super.request(methodName, restAPIName, body);
   }
   /**
@@ -51,13 +51,18 @@ export class Connection extends kintoneBaseJSSDK.Connection {
    * @param {Blob} fileBlob
    * @return {Promise}
    */
+
+
   upload(fileName, fileBlob) {
     const formData = new FormData();
+
     if (window.kintone !== undefined) {
       formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
-      this.setHeader({key: 'X-Requested-With', value: 'XMLHttpRequest'});
+      this.setHeader('X-Requested-With', 'XMLHttpRequest');
     }
+
     formData.append('file', fileBlob, fileName);
     return super.requestFile('POST', 'FILE', formData);
   }
+
 }

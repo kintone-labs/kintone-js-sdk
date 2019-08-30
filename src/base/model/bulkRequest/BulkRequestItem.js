@@ -16,19 +16,25 @@ class BulkRequestItem {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     return {
       method: this.method,
       api: this.api,
-      payload: this.payload,
+      payload: this.payload
     };
   }
   /**
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = BulkRequestItem;
+
+export default BulkRequestItem;

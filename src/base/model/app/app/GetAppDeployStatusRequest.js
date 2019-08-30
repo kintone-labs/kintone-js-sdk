@@ -12,6 +12,8 @@ class GetAppDeployStatusRequest {
    * Get apps
    * @return {Array}
    */
+
+
   getApps() {
     return this.apps;
   }
@@ -19,6 +21,8 @@ class GetAppDeployStatusRequest {
      * @param {Array} apps
      * @return {this}
      */
+
+
   setApps(apps) {
     this.apps = apps;
     return this;
@@ -27,6 +31,8 @@ class GetAppDeployStatusRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
+
+
   toJSON() {
     const data = {
       apps: this.apps
@@ -37,8 +43,12 @@ class GetAppDeployStatusRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetAppDeployStatusRequest;
+
+export default GetAppDeployStatusRequest;
