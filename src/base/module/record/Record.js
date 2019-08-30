@@ -144,10 +144,6 @@ class Record {
     addRecordsRequest.setRecords(records);
     return this.sendRequest('POST', 'records', addRecordsRequest);
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> create master
   /**
    * Add multi records
    * @param {Number} app

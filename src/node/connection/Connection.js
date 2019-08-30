@@ -86,19 +86,11 @@ class Connection extends BaseConnection {
       option.pfx = this.auth.getClientCertData();
       option.passphrase = this.auth.getPassWordCert();
     }
-<<<<<<< HEAD
     const httpsAgent = tunnel.httpsOverHttps(option);
     this.addRequestOption({key: CONNECTION_CONST.BASE.HTTPS_AGENT, value: httpsAgent});
     return this;
   }
 
-=======
-
-    const httpsAgent = tunnel.httpsOverHttps(option);
-    this.addRequestOption(CONNECTION_CONST.BASE.HTTPS_AGENT, httpsAgent);
-    return this;
-  }
->>>>>>> create master
   /**
    * upload file to kintone
    * @param {String} fileName

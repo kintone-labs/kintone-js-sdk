@@ -3,7 +3,7 @@
  * kintone-nodeks-SDK
  */
 import  Auth  from "./authentication/Auth";
-import { App, Record, BulkRequest, KintoneAPIException, RecordCursor } from "../base/main";
+import {Connection, App, Record, BulkRequest, KintoneAPIException, RecordCursor } from "../base/main";
 
 export {
   Auth,

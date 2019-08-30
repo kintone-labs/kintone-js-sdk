@@ -2,12 +2,8 @@
  * kintone api - nodejs client
  * Connection constants
  */
-<<<<<<< HEAD
 
 const constant = function() {
-=======
-const constant = function () {
->>>>>>> create master
   return {
     BASE: {
       SCHEMA: 'https',
@@ -18,13 +14,9 @@ const constant = function () {
       PREFIX_GUESTSPACEID: '{GUEST_SPACE_ID}',
       USER_AGENT: 'User-Agent',
       USER_AGENT_BASE_VALUE: '{name}/{version}',
-<<<<<<< HEAD
       HTTPS_AGENT: 'httpsAgent',
       X_HTTP_METHOD_OVERRIDE: 'X-HTTP-Method-Override',
       LIMIT_REQUEST_URI_CHARACTER: 4096
-=======
-      HTTPS_AGENT: 'httpsAgent'
->>>>>>> create master
     },
     PATH: {
       APP_CUSTOMIZE: 'app/customize',
@@ -66,16 +58,8 @@ const constant = function () {
       SPACE_THREAD: 'space/thread',
       SPACE_THREAD_COMMENT: 'space/thread/comment',
       RECORD_CURSOR: 'records/cursor'
-<<<<<<< HEAD
-    },
-  };
-};
-
-module.exports = constant();
-=======
     }
   };
 };
 
 export default constant();
->>>>>>> create master
