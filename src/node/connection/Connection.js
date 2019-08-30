@@ -63,7 +63,7 @@ class Connection extends BaseConnection {
     const option = {
       proxy: {
         host: proxyHost,
-        port: proxyPort
+        port: proxyPort  asdsadasdsad 
       }
     };
 
