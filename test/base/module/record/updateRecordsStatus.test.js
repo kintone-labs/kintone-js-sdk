@@ -13,13 +13,13 @@ const RECORDS_STATUS_GUEST_ROUTE = `/k/guest/${common.GUEST_SPACEID}/v1/records/
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
-const recordModule = new Record(conn);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const recordModule = new Record({connection: conn});
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const recordsStatus = new Record(connGuest);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const recordsStatus = new Record({connection: connGuest});
 
 describe('updateRecordsStatus function', () => {
   describe('common case', () => {
@@ -36,7 +36,7 @@ describe('updateRecordsStatus function', () => {
       nock(URI)
         .put(RECORDS_STATUS_ROUTE)
         .reply(200, {'revision': '3'});
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       expect(updateRecordsStatusResult).toHaveProperty('then');
       expect(updateRecordsStatusResult).toHaveProperty('catch');
     });
@@ -84,7 +84,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -131,7 +131,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -178,7 +178,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordsStatusResult = recordsStatus.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordsStatus.updateRecordsStatus(data);
       return updateRecordsStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -225,7 +225,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -256,7 +256,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(200, {'records': {}});
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, common.generateRecord(number, data.record));
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus({app: data.app, records: common.generateRecord(number, data.record)});
       return updateRecordsStatusResult.then((rsp) => {
         expect(rsp).toHaveProperty('records');
       });
@@ -300,7 +300,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -355,7 +355,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -410,7 +410,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -460,7 +460,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -509,7 +509,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(undefined, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -559,7 +559,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -600,7 +600,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(520, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -643,7 +643,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(520, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -689,7 +689,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, common.generateRecord(number, data.record));
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus({app: data.app, records: common.generateRecord(number, data.record)});
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -721,7 +721,7 @@ describe('updateRecordsStatus function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data.app, data.records);
+      const updateRecordsStatusResult = recordModule.updateRecordsStatus(data);
       return updateRecordsStatusResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

@@ -33,11 +33,11 @@ describe('BulkRequest module', () => {
       }
     };
 
-    const bulkRequest = new BulkRequest(conn);
-    const addRecord = bulkRequest.addRecord(data.appID);
-    const addRecords = bulkRequest.addRecords(data.appID, [data.recordData]);
-    const updateRecordById = bulkRequest.updateRecordByID(data.appID, '', data.recordData);
-    const updateRecordByUpdateKey = bulkRequest.updateRecordByUpdateKey(data.appID, data.updateKey, data.recordData);
+    const bulkRequest = new BulkRequest({connection: conn});
+    const addRecord = bulkRequest.addRecord({app: data.appID});
+    const addRecords = bulkRequest.addRecords({app: data.appID, records: [data.recordData]});
+    const updateRecordById = bulkRequest.updateRecordByID({app: data.appID, id: '', record: data.recordData});
+    const updateRecordByUpdateKey = bulkRequest.updateRecordByUpdateKey({app: data.appID, updateKey: data.updateKey, record: data.recordData});
     const updateRecords = bulkRequest.updateRecords();
     const deleteRecords = bulkRequest.deleteRecords();
     const deleteRecordsWithRevision = bulkRequest.deleteRecordsWithRevision();
@@ -211,15 +211,15 @@ describe('BulkRequest module', () => {
       })
       .reply(200, expectResult);
 
-    const bunkRequestResult = new BulkRequest(conn);
-    bunkRequestResult.addRecord(addRecordData.app, addRecordData.record)
-      .addRecords(addRecordsData.app, addRecordsData.records)
-      .updateRecordByID(updateRecordByIdData.app, updateRecordByIdData.id, updateRecordByIdData.record)
-      .updateRecordByUpdateKey(updateRecordByUpdateKeyData.app, updateRecordByUpdateKeyData.updateKey, updateRecordByUpdateKeyData.record)
-      .updateRecords(updateRecordsData.app, updateRecordsData.records)
-      .deleteRecords(deleteRecordsData.app, deleteRecordsData.ids)
-      .deleteRecordsWithRevision(deleteRecordsWithRevisionData.app, deleteRecordsWithRevisionData.idsWithRevision)
-      .updateRecordAssignees(updateRecordAssigneesData.app, updateRecordAssigneesData.id, updateRecordAssigneesData.assignees);
+    const bunkRequestResult = new BulkRequest({connection: conn});
+    bunkRequestResult.addRecord({app: addRecordData.app, record: addRecordData.record})
+      .addRecords({app: addRecordsData.app, records: addRecordsData.records})
+      .updateRecordByID({app: updateRecordByIdData.app, id: updateRecordByIdData.id, record: updateRecordByIdData.record})
+      .updateRecordByUpdateKey({app: updateRecordByUpdateKeyData.app, updateKey: updateRecordByUpdateKeyData.updateKey, record: updateRecordByUpdateKeyData.record})
+      .updateRecords({app: updateRecordsData.app, records: updateRecordsData.records})
+      .deleteRecords({app: deleteRecordsData.app, ids: deleteRecordsData.ids})
+      .deleteRecordsWithRevision({app: deleteRecordsWithRevisionData.app, idsWithRevision: deleteRecordsWithRevisionData.idsWithRevision})
+      .updateRecordAssignees({app: updateRecordAssigneesData.app, id: updateRecordAssigneesData.id, assignees: updateRecordAssigneesData.assignees});
 
     it('[BulkRequest-1] should execute correctly all methods', () => {
       return bunkRequestResult.execute().then((resp) => {
@@ -263,9 +263,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record);
-      bulkRequest.addRecord(addRecordData.app, addRecordInvalidData.record);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordInvalidData.record});
 
       return bulkRequest.execute()
         .catch(err => {
@@ -309,9 +309,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record);
-      bulkRequest.addRecords(addRecordData.app, addRecordsInvalidData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record});
+      bulkRequest.addRecords({app: addRecordData.app, records: addRecordsInvalidData.records});
 
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
@@ -354,9 +354,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record);
-      bulkRequest.updateRecordByID(updateRecordByIdData.app, updateRecordByIdData.id, updateRecordByIdData.record);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record});
+      bulkRequest.updateRecordByID({app: updateRecordByIdData.app, id: updateRecordByIdData.id, record: updateRecordByIdData.record});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -403,9 +403,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordByUpdateKey(updateRecordByUpdateKeyData.app, updateRecordByUpdateKeyData.updateKey, updateRecordByUpdateKeyData.record);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordByUpdateKey({app: updateRecordByUpdateKeyData.app, updateKey: updateRecordByUpdateKeyData.updateKey, record: updateRecordByUpdateKeyData.record});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -450,9 +450,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecords(updateRecordsData.app, updateRecordsData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecords({app: updateRecordsData.app, records: updateRecordsData.records});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -497,9 +497,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecords(updateRecordsData.app, updateRecordsData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecords({app: updateRecordsData.app, records: updateRecordsData.records});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -541,9 +541,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .deleteRecords(deleteRecordsData.app, deleteRecordsData.ids);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .deleteRecords({app: deleteRecordsData.app, ids: deleteRecordsData.ids});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -586,9 +586,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .deleteRecordsWithRevision(deleteRecordsWithRevisionData.app, deleteRecordsWithRevisionData.idsWithRevision);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .deleteRecordsWithRevision({app: deleteRecordsWithRevisionData.app, idsWithRevision: deleteRecordsWithRevisionData.idsWithRevision});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -633,9 +633,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecords(updateRecordsData.app, updateRecordsData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecords({app: updateRecordsData.app, records: updateRecordsData.records});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -677,9 +677,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordAssignees(updateRecordAssigneesData.app, updateRecordAssigneesData.id, updateRecordAssigneesData.assignees);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordAssignees({app: updateRecordAssigneesData.app, id: updateRecordAssigneesData.id, assignees: updateRecordAssigneesData.assignees});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -721,9 +721,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordAssignees(updateRecordAssigneesData.app, updateRecordAssigneesData.id, updateRecordAssigneesData.assignees);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordAssignees({app: updateRecordAssigneesData.app, id: updateRecordAssigneesData.id, assignees: updateRecordAssigneesData.assignees});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -765,10 +765,10 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordAssignees(updateRecordAssigneesData.app, updateRecordAssigneesData.id,
-          updateRecordAssigneesData.assignees, updateRecordAssigneesData.revision);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordAssignees({app: updateRecordAssigneesData.app, id: updateRecordAssigneesData.id,
+          assignees: updateRecordAssigneesData.assignees, revision: updateRecordAssigneesData.revision});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -810,10 +810,10 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordStatus(updateRecordStatusData.app, updateRecordStatusData.id,
-          updateRecordStatusData.action, updateRecordStatusData.assignee, updateRecordStatusData.revision);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordStatus({app: updateRecordStatusData.app, id: updateRecordStatusData.id,
+          action: updateRecordStatusData.action, assignee: updateRecordStatusData.assignee, revision: updateRecordStatusData.revision});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -855,10 +855,10 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordStatus(updateRecordStatusData.app, updateRecordStatusData.id,
-          updateRecordStatusData.action, updateRecordStatusData.assignee, updateRecordStatusData.revision);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordStatus({app: updateRecordStatusData.app, id: updateRecordStatusData.id,
+          action: updateRecordStatusData.action, assignee: updateRecordStatusData.assignee, revision: updateRecordStatusData.revision});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -900,10 +900,10 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordStatus(updateRecordStatusData.app, updateRecordStatusData.id,
-          updateRecordStatusData.action, updateRecordStatusData.assignee, updateRecordStatusData.revision);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordStatus({app: updateRecordStatusData.app, id: updateRecordStatusData.id,
+          action: updateRecordStatusData.action, assignee: updateRecordStatusData.assignee, revision: updateRecordStatusData.revision});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -945,10 +945,10 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordStatus(updateRecordStatusData.app, updateRecordStatusData.id,
-          updateRecordStatusData.action, updateRecordStatusData.assignee, updateRecordStatusData.revision);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordStatus({app: updateRecordStatusData.app, id: updateRecordStatusData.id,
+          action: updateRecordStatusData.action, assignee: updateRecordStatusData.assignee, revision: updateRecordStatusData.revision});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -1009,9 +1009,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordsStatus(updateRecordsStatusData.app, updateRecordsStatusData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordsStatus({app: updateRecordsStatusData.app, records: updateRecordsStatusData.records});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -1072,9 +1072,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordsStatus(updateRecordsStatusData.app, updateRecordsStatusData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordsStatus({app: updateRecordsStatusData.app, records: updateRecordsStatusData.records});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -1135,9 +1135,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordsStatus(updateRecordsStatusData.app, updateRecordsStatusData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordsStatus({app: updateRecordsStatusData.app, records: updateRecordsStatusData.records});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);
@@ -1198,9 +1198,9 @@ describe('BulkRequest module', () => {
         })
         .reply(400, expectResult);
 
-      const bulkRequest = new BulkRequest(conn);
-      bulkRequest.addRecord(addRecordData.app, addRecordData.record)
-        .updateRecordsStatus(updateRecordsStatusData.app, updateRecordsStatusData.records);
+      const bulkRequest = new BulkRequest({connection: conn});
+      bulkRequest.addRecord({app: addRecordData.app, record: addRecordData.record})
+        .updateRecordsStatus({app: updateRecordsStatusData.app, records: updateRecordsStatusData.records});
       return bulkRequest.execute().catch((err) => {
         expect(err[0]).toEqual(expectResult.results[0]);
         expect(err[1].get()).toMatchObject(expectResult.results[1]);

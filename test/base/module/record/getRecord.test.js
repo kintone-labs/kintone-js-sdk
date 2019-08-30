@@ -13,11 +13,11 @@ const RECORD_ROUTE = '/k/v1/record.json';
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const recordModule = new Record(conn);
+const recordModule = new Record({connection: conn});
 describe('getRecord function', () => {
   describe('common case', () => {
     it('should return a promise', () => {
@@ -29,7 +29,7 @@ describe('getRecord function', () => {
           'record': {}
         });
 
-      const getRecordResult = recordModule.getRecord(appID, recordID);
+      const getRecordResult = recordModule.getRecord({app: appID, id: recordID});
       expect(getRecordResult).toHaveProperty('then');
       expect(getRecordResult).toHaveProperty('catch');
     });
@@ -48,7 +48,7 @@ describe('getRecord function', () => {
         .reply(200, {
           'record': {}
         });
-      return recordModule.getRecord(appID, recordID)
+      return recordModule.getRecord({app: appID, id: recordID})
         .then((rsp) => {
           expect(rsp).toHaveProperty('record');
         });
@@ -71,7 +71,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getRecordResult = recordModule.getRecord(appID, recordID);
+      const getRecordResult = recordModule.getRecord({app: appID, id: recordID});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -98,7 +98,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getRecordResult = recordModule.getRecord(undefined, recordID);
+      const getRecordResult = recordModule.getRecord({id: recordID});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -125,7 +125,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getRecordResult = recordModule.getRecord(appID, undefined);
+      const getRecordResult = recordModule.getRecord({app: appID});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -146,7 +146,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getRecordResult = recordModule.getRecord(appID, recordID);
+      const getRecordResult = recordModule.getRecord({app: appID, id: recordID});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -167,7 +167,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getRecordResult = recordModule.getRecord(appID, recordID);
+      const getRecordResult = recordModule.getRecord({app: appID, id: recordID});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -205,7 +205,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getRecordResult = recordModule.getRecord(appID, recordID);
+      const getRecordResult = recordModule.getRecord({app: appID, id: recordID});
       return getRecordResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -225,7 +225,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getRecordResult = recordModule.getRecord(guestappID, recordID);
+      const getRecordResult = recordModule.getRecord({app: guestappID, id: recordID});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -279,7 +279,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getRecordResult = recordModule.getRecord(appID, recordID);
+      const getRecordResult = recordModule.getRecord({app: appID, id: recordID});
       return getRecordResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -296,7 +296,7 @@ describe('getRecord function', () => {
         .reply(200, {
           'record': {}
         });
-      return recordModule.getRecord(appID, recordID)
+      return recordModule.getRecord({app: appID, id: recordID})
         .then((rsp) => {
           expect(rsp).toHaveProperty('record');
         });
@@ -316,7 +316,7 @@ describe('getRecord function', () => {
           return true;
         })
         .reply(400, expectResult);
-      const getRecordResult = recordModule.getRecord(-2);
+      const getRecordResult = recordModule.getRecord({app: -2});
       return getRecordResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

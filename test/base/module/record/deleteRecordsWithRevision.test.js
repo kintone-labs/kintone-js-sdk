@@ -6,15 +6,15 @@ const common = require('../../../utils/common');
 const {KintoneAPIException, Connection, Auth, Record} = require(common.MAIN_PATH_BASE);
 const {API_ROUTE, URI} = require('../../../utils/constant');
 
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const recordModule = new Record(conn);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const recordModule = new Record({connection: conn});
 
 describe('deleteRecordsWithRevision function', () => {
   describe('common case', () => {
     it('should return the promise', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           1: 1,
           2: 1
@@ -23,7 +23,7 @@ describe('deleteRecordsWithRevision function', () => {
       nock(URI)
         .delete(API_ROUTE.RECORDS)
         .reply(200, {});
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       expect(deleteRecordsWithRevisionResult).toHaveProperty('then');
       expect(deleteRecordsWithRevisionResult).toHaveProperty('catch');
     });
@@ -32,7 +32,7 @@ describe('deleteRecordsWithRevision function', () => {
   describe('success case', () => {
     it('[Record-140] Record is deleted when specifying only 1 id+revision', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           '1': 1
         }
@@ -60,7 +60,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.then((rsp) => {
         expect(rsp).toEqual({});
       });
@@ -68,7 +68,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-151] Records are deleted successfully for app in guest space', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           '1': 1,
           '2': 4
@@ -81,8 +81,8 @@ describe('deleteRecordsWithRevision function', () => {
         'revisions': [1, 4]
       };
 
-      const connGuestSpace = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-      const recordInGuestSpace = new Record(connGuestSpace);
+      const connGuestSpace = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+      const recordInGuestSpace = new Record({connection: connGuestSpace});
       nock(URI)
         .delete(API_ROUTE.GUEST_RECORDS, (rqBody) => {
           expect(rqBody).toEqual(expectBody);
@@ -98,7 +98,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsWithRevisionResult = recordInGuestSpace.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordInGuestSpace.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.then((rsp) => {
         expect(rsp).toEqual({});
       });
@@ -106,7 +106,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-152] Records are deleted successfully when use with interger as string type (input string for interger and vice versa) ', () => {
       const data = {
-        appID: '1',
+        app: '1',
         idsWithRevision: {
           '1': 1,
           '2': 4
@@ -134,7 +134,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.then((rsp) => {
         expect(rsp).toEqual({});
       });
@@ -142,7 +142,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-141] Records are deleted when specifying array of ids+revisions', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           '1': 1,
           '2': 4
@@ -171,7 +171,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.then((rsp) => {
         expect(rsp).toEqual({});
       });
@@ -179,7 +179,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-153] The number of records that can be deleted at once is 100', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           '1': '1', '2': '1', '3': '1', '4': '1', '5': '1', '6': '1', '7': '1', '8': '1', '9': '1', '10': '1', '11': '1', '12': '1', '13': '1',
           '14': '1', '15': '1', '16': '1', '17': '1', '18': '1', '19': '1', '20': '1', '21': '1', '22': '1', '23': '1', '24': '1', '25': '1',
@@ -225,7 +225,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.then((rsp) => {
         expect(rsp).toEqual({});
       });
@@ -235,7 +235,7 @@ describe('deleteRecordsWithRevision function', () => {
   describe('error case', () => {
     it('[Record-142] Error is displayed when the id is not existed in the app', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           2: 4,
           4444: 1
@@ -256,7 +256,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(404, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -265,7 +265,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-143] Error is displayed when the revision is not correct', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           2: 11
         }
@@ -289,7 +289,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(409, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -298,7 +298,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-144] Error is displayed when the revision is not correct', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           2: -1
         }
@@ -322,7 +322,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(200, {});
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -331,7 +331,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-145] Error happens when user does not have Delete permission for app', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           2: 11
         }
@@ -351,7 +351,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(403, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -360,7 +360,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-146] Error happens when user does not have Delete permission for record', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           2: 11
         }
@@ -380,7 +380,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(403, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -389,7 +389,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-148] Error will be displayed when using invalid app ID (unexisted, negative number, 0)', () => {
       const data = {
-        appID: 99999,
+        app: 99999,
         idsWithRevision: {
           2: 11
         }
@@ -413,7 +413,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(403, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -422,7 +422,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-149] Error will be displayed when using method without app ID', () => {
       const data = {
-        appID: undefined,
+        app: undefined,
         idsWithRevision: {
           2: 11
         }
@@ -441,7 +441,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(undefined, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -450,7 +450,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-150] Error will be displayed when using method without ids/revisions', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
         }
       };
@@ -469,7 +469,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, undefined);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -478,7 +478,7 @@ describe('deleteRecordsWithRevision function', () => {
 
     it('[Record-154] Error displays when number of records is > 100', () => {
       const data = {
-        appID: 1,
+        app: 1,
         idsWithRevision: {
           '1': '1', '2': '1', '3': '1', '4': '1', '5': '1', '6': '1', '7': '1', '8': '1', '9': '1', '10': '1', '11': '1', '12': '1', '13': '1',
           '14': '1', '15': '1', '16': '1', '17': '1', '18': '1', '19': '1', '20': '1', '21': '1', '22': '1', '23': '1', '24': '1', '25': '1',
@@ -525,7 +525,7 @@ describe('deleteRecordsWithRevision function', () => {
         })
         .reply(400, expectResult);
 
-      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data.appID, data.idsWithRevision);
+      const deleteRecordsWithRevisionResult = recordModule.deleteRecordsWithRevision(data);
       return deleteRecordsWithRevisionResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);

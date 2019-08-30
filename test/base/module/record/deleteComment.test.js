@@ -9,9 +9,9 @@ const {
   Auth,
   Record
 } = require(common.MAIN_PATH_BASE);
-const auth = new Auth().setPasswordAuth(common.USERNAME, common.PASSWORD);
-const conn = new Connection(common.DOMAIN, auth);
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
+const auth = new Auth().setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
 if (common.hasOwnProperty('proxy') && common.proxy) {
   conn.addRequestOption('proxy', common.proxy);
 }
@@ -19,8 +19,8 @@ if (common.hasOwnProperty('proxy') && common.proxy) {
 const URI = 'https://' + common.DOMAIN;
 const ROUTE = '/k/v1/record/comment.json';
 const ROUTE_GUEST = '/k/guest/1/v1/record/comment.json';
-const recordModule = new Record(conn);
-const recordModuleGuest = new Record(connGuest);
+const recordModule = new Record({connection: conn});
+const recordModuleGuest = new Record({connection: connGuest});
 
 describe('deleteComment function', () => {
   describe('common cases', () => {
@@ -56,11 +56,7 @@ describe('deleteComment function', () => {
         })
         .reply(200, {});
 
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.then(response => {
         expect(response).toMatchObject({});
       });
@@ -86,11 +82,7 @@ describe('deleteComment function', () => {
         })
         .reply(200, {});
 
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.then(response => {
         expect(response).toMatchObject({});
       });
@@ -116,11 +108,7 @@ describe('deleteComment function', () => {
         })
         .reply(200, {});
 
-      const actualResult = recordModuleGuest.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModuleGuest.deleteComment(data);
       return actualResult.then(response => {
         expect(response).toMatchObject({});
       });
@@ -146,11 +134,7 @@ describe('deleteComment function', () => {
         })
         .reply(200, {});
 
-      const actualResult = recordModuleGuest.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModuleGuest.deleteComment(data);
       return actualResult.then(response => {
         expect(response).toMatchObject({});
       });
@@ -177,11 +161,7 @@ describe('deleteComment function', () => {
         })
         .reply(520, expectedResult);
 
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -197,11 +177,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -217,11 +193,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -245,11 +217,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -273,11 +241,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -301,11 +265,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(400, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -323,11 +283,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -345,11 +301,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -367,11 +319,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
@@ -389,11 +337,7 @@ describe('deleteComment function', () => {
           return true;
         })
         .reply(403, expectedResult);
-      const actualResult = recordModule.deleteComment(
-        data.app,
-        data.record,
-        data.comment
-      );
+      const actualResult = recordModule.deleteComment(data);
       return actualResult.catch(err => {
         expect(err.get()).toMatchObject(expectedResult);
       });
