@@ -17,22 +17,25 @@ const FileModule = require('../../../base/main').File;
 class File extends FileModule {
   /**
      * The constructor for this module
-     * @param {Connection} connection
+     * @param {Object} params
+     * @param {Connection} params.connection
      */
-  constructor(connection) {
+  constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection}` +
                   `not an instance of kintoneConnection`);
     }
-    super(connection);
+    super({connection});
   }
   /**
      * Download file from kintone
-     * @param {String} fileKey
+     * @param {Object} params
+     * @param {String} params.fileKey
+     * @param {String} params.outPutFilePath
      * @return {Promise}
      */
-  download(fileKey, outPutFilePath) {
-    return super.download(fileKey).then((fileContent) => {
+  download({fileKey, outPutFilePath}) {
+    return super.download({fileKey}).then((fileContent) => {
       try {
         const options = {
           encoding: 'utf16le'
@@ -45,18 +48,14 @@ class File extends FileModule {
   }
   /**
      * Upload file from local to kintone environment
-     * @param {String} filePath
+     * @param {Object} params
+     * @param {String} params.filePath
      * @return {Promise}
      */
-  upload(filePath) {
-    try {
-      const fileContent = fs.createReadStream(filePath);
-      const fileName = path.basename(filePath);
-
-      return super.upload(fileName, fileContent);
-    } catch (err) {
-      throw new Error(`File path is not valid`);
-    }
+  upload({filePath}) {
+    const fileContent = fs.createReadStream(filePath);
+    const fileName = path.basename(filePath);
+    return super.upload({fileName: fileName, fileContent: fileContent});
   }
 }
 module.exports = File;

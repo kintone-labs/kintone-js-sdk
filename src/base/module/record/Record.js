@@ -20,9 +20,10 @@ const DEFAULT_CURSOR_SIZE = 500;
 class Record {
   /**
    * The constructor for Record module
-   * @param {Connection} connection
+   * @param {Object} params
+   * @param {Connection} params.connection
    */
-  constructor(connection) {
+  constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
@@ -41,44 +42,48 @@ class Record {
   /**
    * Get record by specific ID
    * TODO: Parse to response model
-   * @param {Number} app
-   * @param {Number} id
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
    * @return {Promise} Promise
    */
-  getRecord(app, id) {
+  getRecord({app, id}) {
     const getRecordRequest = new RecordModel.GetRecordRequest(app, id);
     return this.sendRequest('GET', 'record', getRecordRequest);
   }
   /**
    * Get multi record with options
    * TODO: Parse to response model
-   * @param {Number} app
-   * @param {String} query
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.query
    * @param {Array<String>} fields
    * @param {Boolean} totalCount
    * @return {Promise} Promise
    */
-  getRecords(app, query, fields, totalCount) {
+  getRecords({app, query, fields, totalCount} = {}) {
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, query, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest);
   }
 
-  getAllRecordsByCursor({app, query, fields}) {
+  getAllRecordsByCursor({app, query, fields} = {}) {
     const kintoneRC = new RecordCursor(this.connection);
     let myCursor;
     return kintoneRC.createCursor({app, fields, query, DEFAULT_CURSOR_SIZE})
       .then((creatCursorResponse)=>{
         myCursor = creatCursorResponse;
-        return kintoneRC.getAllRecords(myCursor.id);
+        return kintoneRC.getAllRecords({id: myCursor.id});
       })
       .then((allRecords)=>{
         if (allRecords.totalCount < myCursor.totalCount) {
-          kintoneRC.deleteCursor(myCursor.id);
+          kintoneRC.deleteCursor({id: myCursor.id});
         }
         return allRecords;
       })
       .catch((err)=>{
-        kintoneRC.deleteCursor(myCursor.id);
+        if (myCursor) {
+          kintoneRC.deleteCursor({id: myCursor.id});
+        }
         throw err;
       });
   }
@@ -86,13 +91,14 @@ class Record {
   /**
    * Get multi records more than default limitation number by query
    * TODO: Parse to response model
-   * @param {Number} app
-   * @param {String} query
-   * @param {Array<String>} fields
-   * @param {Boolean} totalCount
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.query
+   * @param {Array<String>} params.fields
+   * @param {Boolean} params.totalCount
    * @return {Promise} Promise
    */
-  getAllRecordsByQuery(app, query, fields, totalCount, seek = false) {
+  getAllRecordsByQuery({app, query, fields, totalCount, seek} = {}) {
     if (seek) {
       return this.getAllRecordsBySeekMethodRecursive(app, query, fields, totalCount, null, null);
     }
@@ -146,22 +152,24 @@ class Record {
 
   /**
    * Add the record
-   * @param {Number} app
-   * @param {Record} record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Record} params.record
    * @return {Promise} Promise
    */
-  addRecord(app, record) {
+  addRecord({app, record} = {}) {
     const addRecordRequest = new RecordModel.AddRecordRequest(app, record);
     return this.sendRequest('POST', 'record', addRecordRequest);
   }
 
   /**
    * Add multi records
-   * @param {Number} app
-   * @param {Array<record>} records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array<record>} params.records
    * @return {Promise} Promise
    */
-  addRecords(app, records) {
+  addRecords({app, records} = {}) {
     const addRecordsRequest = new RecordModel.AddRecordsRequest(app);
     addRecordsRequest.setRecords(records);
     return this.sendRequest('POST', 'records', addRecordsRequest);
@@ -196,7 +204,14 @@ class Record {
     });
 
   }
-  addAllRecords(app, records) {
+  /**
+   * Add all records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Record} params.records
+   * @return {Promise} Promise
+   */
+  addAllRecords({app, records}) {
     return this.addAllRecordsRecursive(app, records).then((response) => {
       return {
         results: response
@@ -212,27 +227,28 @@ class Record {
   }
 
   addBulkRecord(app, records) {
-    const bulkRequest = new BulkRequest(this.connection);
+    const bulkRequest = new BulkRequest({connection: this.connection});
     const length = records.length;
     const loopTimes = Math.ceil(length / LIMIT_POST_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_POST_RECORD;
       const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + LIMIT_POST_RECORD;
       const recordsPerRequest = records.slice(begin, end);
-      bulkRequest.addRecords(app, recordsPerRequest);
+      bulkRequest.addRecords({app: app, records: recordsPerRequest});
     }
     return bulkRequest.execute();
   }
 
   /**
    * Update the specific record by ID
-   * @param {Number} app
-   * @param {Number} id
-   * @param {Record} record
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
+   * @param {Record} params.record
+   * @param {Number} params.revision
    * @return {Promise} Promise
    */
-  updateRecordByID(app, id, record, revision) {
+  updateRecordByID({app, id, record, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordRequest(app);
 
     updateRecordRequest
@@ -246,13 +262,14 @@ class Record {
 
   /**
    * Update the specific record by updateKey
-   * @param {Number} app
-   * @param {RecordUpdateKey} updateKey
-   * @param {Record} record
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {RecordUpdateKey} params.updateKey
+   * @param {Record} params.record
+   * @param {Number} params.revision
    * @return {Promise} Promise
    */
-  updateRecordByUpdateKey(app, updateKey, record, revision) {
+  updateRecordByUpdateKey({app, updateKey, record, revision}) {
     const fieldKey = updateKey ? updateKey.field : undefined;
     const fieldValue = updateKey ? updateKey.value : undefined;
 
@@ -292,11 +309,12 @@ class Record {
   }
   /**
    * Update multi records
-   * @param {Number} app
-   * @param {Array<RecordUpdateItem>} records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array<RecordUpdateItem>} params.records
    * @return {Promise} Promise
    */
-  updateRecords(app, records) {
+  updateRecords({app, records} = {}) {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
 
     return this.sendRequest('PUT', 'records', updateRecordsRequest);
@@ -304,11 +322,12 @@ class Record {
 
   /**
    * Delete multi records
-   * @param {Number} app
-   * @param {Array<Number>} ids
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array<Number>} params.ids
    * @return {Promise} Promise
    */
-  deleteRecords(app, ids) {
+  deleteRecords({app, ids}) {
     const deleteRecordsRequest = new RecordModel.DeleteRecordsRequest(app);
     deleteRecordsRequest.setIDs(ids);
     return this.sendRequest('DELETE', 'records', deleteRecordsRequest);
@@ -316,11 +335,12 @@ class Record {
 
   /**
      * Delete records at the specific revision
-     * @param {Number} app
-     * @param {Object} idsWithRevision
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Object} params.idsWithRevision
      * @return {Promise}
      */
-  deleteRecordsWithRevision(app, idsWithRevision) {
+  deleteRecordsWithRevision({app, idsWithRevision} = {}) {
     const deleteRecordsRequest = new RecordModel.DeleteRecordsRequest(app);
     deleteRecordsRequest.setIDsWithRevision(idsWithRevision);
 
@@ -328,14 +348,14 @@ class Record {
   }
 
   deleteBulkRecord(app, ids) {
-    const bulkRequest = new BulkRequest(this.connection);
+    const bulkRequest = new BulkRequest({connection: this.connection});
     const length = ids.length;
     const loopTimes = Math.ceil(length / LIMIT_DELETE_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_DELETE_RECORD;
       const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + LIMIT_DELETE_RECORD;
       const idsPerRequest = ids.slice(begin, end);
-      bulkRequest.deleteRecords(app, idsPerRequest);
+      bulkRequest.deleteRecords({app: app, ids: idsPerRequest});
     }
     return bulkRequest.execute();
   }
@@ -365,12 +385,13 @@ class Record {
 
   /**
      * deleteAllRecordsByQuery for use with update all records
-     * @param {Number} app
-     * @param {String} query
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {String} params.query
      * @return {}
   **/
-  deleteAllRecordsByQuery(app, query) {
-    return this.getAllRecordsByQuery(app, query).then((resp) => {
+  deleteAllRecordsByQuery({app, query} = {}) {
+    return this.getAllRecordsByQuery({app, query}).then((resp) => {
       const ids = [];
       const records = resp.records;
       if (!records || !records.length) {
@@ -395,13 +416,14 @@ class Record {
 
   /**
      * Update assignees of the specific record
-     * @param {Number} app
-     * @param {Number} id
-     * @param {Array<String>} assignees
-     * @param {Number} revision
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.id
+     * @param {Array<String>} params.assignees
+     * @param {Number} params.revision
      * @return {Promise}
      */
-  updateRecordAssignees(app, id, assignees, revision) {
+  updateRecordAssignees({app, id, assignees, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordAssigneesRequest(app, id, assignees, revision);
 
     return this.sendRequest('PUT', 'RECORD_ASSIGNEES', updateRecordRequest);
@@ -409,14 +431,15 @@ class Record {
 
   /**
      * Update status of the specific record
-     * @param {Number} app
-     * @param {Number} id
-     * @param {String} action
-     * @param {String} assignee
-     * @param {Number} revision
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.id
+     * @param {String} params.action
+     * @param {String} params.assignee
+     * @param {Number} params.revision
      * @return {Promise}
      */
-  updateRecordStatus(app, id, action, assignee, revision) {
+  updateRecordStatus({app, id, action, assignee, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordStatusRequest(app, id, action, assignee, revision);
 
     return this.sendRequest('PUT', 'RECORD_STATUS', updateRecordRequest);
@@ -424,32 +447,34 @@ class Record {
 
   /**
      * Update status of the multi records
-     * @param {Number} app
+     * @param {Object} params
+     * @param {Number} params.app
      * @param {Array <{RecordStatusUpdate}>} records
      * @return {Promise}
      */
-  updateRecordsStatus(app, records) {
+  updateRecordsStatus({app, records} = {}) {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
 
     return this.sendRequest('PUT', 'RECORDS_STATUS', updateRecordsRequest);
   }
 
   updateBulkRecord(app, records) {
-    const bulkRequest = new BulkRequest(this.connection);
+    const bulkRequest = new BulkRequest({connection: this.connection});
     const length = records.length;
     const loopTimes = Math.ceil(length / LIMIT_UPDATE_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_UPDATE_RECORD;
       const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + LIMIT_UPDATE_RECORD;
       const recordsPerRequest = records.slice(begin, end);
-      bulkRequest.updateRecords(app, recordsPerRequest);
+      bulkRequest.updateRecords({app: app, records: recordsPerRequest});
     }
     return bulkRequest.execute();
   }
   /**
      * updateAllRecords for use with update all records
-     * @param {Number} app
-     * @param {Object} records
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Object} params.records
      * @return {UpdateRecordsResponse}
   **/
   updateAllRecordsRecursive(app, records, offset, results) {
@@ -475,7 +500,7 @@ class Record {
       throw error;
     });
   }
-  updateAllRecords(app, records) {
+  updateAllRecords({app, records} = {}) {
     return this.updateAllRecordsRecursive(app, records).then(rsp => {
       return {
         'results': rsp
@@ -488,20 +513,26 @@ class Record {
 
   /**
    * Upsert record by update-key
-   * @param {Number} app
-   * @param {Object} updateKey
-   * @param {Object} record
-   * @param {Number} revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.updateKey
+   * @param {Object} params.record
+   * @param {Number} params.revision
    * @return {Promise}
    */
-  upsertRecord(app, updateKey, record, revision) {
-    const query = `${updateKey.field} = "${updateKey.value}"`;
-    return this.getRecords(app, query, [updateKey.field], false).then((resp) => {
+  upsertRecord({app, updateKey, record, revision} = {}) {
+    const getRecordsParam = {
+      app: app,
+      query: `${updateKey.field} = "${updateKey.value}"`,
+      fields: [updateKey.field],
+      totalCount: false,
+    };
+    return this.getRecords(getRecordsParam).then((resp) => {
       if (updateKey.value === '' || resp.records.length < 1) {
         record[updateKey.field] = {value: updateKey.value};
-        return this.addRecord(app, record);
+        return this.addRecord({app, record});
       } else if (resp.records.length === 1) {
-        return this.updateRecordByUpdateKey(app, updateKey, record, revision);
+        return this.updateRecordByUpdateKey({app, updateKey, record, revision});
       }
       throw new Error(`${updateKey.field} is not unique field`);
     });
@@ -509,11 +540,12 @@ class Record {
 
   /**
    * Upsert records by update-key
-   * @param {Number} app
-   * @param {Object} recordsWithUpdatekey
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.recordsWithUpdatekey
    * @return {Promise}
    */
-  upsertRecords(app, records) {
+  upsertRecords({app, records} = {}) {
     const validRecords = Array.isArray(records) ? records : [];
     if (validRecords.length > LIMIT_UPSERT_RECORD) {
       throw new Error(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
@@ -535,13 +567,13 @@ class Record {
     };
 
     const executeUpsertBulkRequest = (recordsForPost, recordsForPut) => {
-      let bulkRequest = new BulkRequest(this.connection);
+      let bulkRequest = new BulkRequest({connection: this.connection});
       bulkRequest = this.makeBulkReq(app, bulkRequest, recordsForPost, 'POST');
       bulkRequest = this.makeBulkReq(app, bulkRequest, recordsForPut, 'PUT');
       return bulkRequest.execute();
     };
 
-    return this.getAllRecordsByQuery(app).then((resp) => {
+    return this.getAllRecordsByQuery({app}).then((resp) => {
       const allRecords = resp.records;
       const recordsForPut = [];
       const recordsForPost = [];
@@ -578,9 +610,9 @@ class Record {
       const end = (length - begin) < recordLimit ? length : begin + recordLimit;
       const recordsPerRequest = records.slice(begin, end);
       if (method === 'POST') {
-        bulkRequest.addRecords(app, recordsPerRequest);
+        bulkRequest.addRecords({app: app, records: recordsPerRequest});
       } else if (method === 'PUT') {
-        bulkRequest.updateRecords(app, recordsPerRequest);
+        bulkRequest.updateRecords({app: app, records: recordsPerRequest});
       }
     }
     return bulkRequest;
@@ -588,10 +620,11 @@ class Record {
 
   /**
      * createRecordStatusItem for use with update multi record status
-     * @param {Number} recordIDInput
-     * @param {String} actionNameInput
-     * @param {String} assigneeIDInput
-     * @param {String} revisionIDInput
+     * @param {Object} params
+     * @param {Number} params.recordIDInput
+     * @param {String} params.actionNameInput
+     * @param {String} params.assigneeIDInput
+     * @param {String} params.revisionIDInput
      * @return {RecordsUpdateStatusItem}
      */
   createRecordStatusItem(recordIDInput, actionNameInput,
@@ -600,38 +633,41 @@ class Record {
   }
   /**
      * Get comments of the specific record
-     * @param {Number} app
-     * @param {Number} record
-     * @param {string} order  {asc|desc}
-     * @param {Number} offset
-     * @param {Number} limit
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
+     * @param {string} params.order  {asc|desc}
+     * @param {Number} params.offset
+     * @param {Number} params.limit
      * @return {Promise}
      */
-  getComments(app, record, order, offset, limit) {
+  getComments({app, record, order, offset, limit}) {
     const getCommentsRequest = new RecordModel.GetCommentsRequest(app, record, order, offset, limit);
     return this.sendRequest('GET', 'RECORD_COMMENTS', getCommentsRequest);
   }
 
   /**
      * Add new comment to the specific record
-     * @param {Number} app
-     * @param {Number} record
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
      * @param {CommentContent} comment
      * @return {Promise}
      */
-  addComment(app, record, comment) {
+  addComment({app, record, comment} = {}) {
     const addCommentRequest = new RecordModel.AddCommentRequest(app, record, comment);
     return this.sendRequest('POST', 'RECORD_COMMENT', addCommentRequest);
   }
 
   /**
-     *
-     * @param {Number} app
-     * @param {Number} record
-     * @param {Number} comment
+     * Delete a comment
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
+     * @param {Number} params.comment
      * @return {Promise}
      */
-  deleteComment(app, record, comment) {
+  deleteComment({app, record, comment} = {}) {
     const deleteCommentRequest = new RecordModel.DeleteCommentRequest(app, record, comment);
     return this.sendRequest('DELETE', 'RECORD_COMMENT', deleteCommentRequest);
   }

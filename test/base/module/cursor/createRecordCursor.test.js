@@ -3,13 +3,17 @@
  * test record cursor module
  */
 
+const nock = require('nock');
 const common = require('../../../utils/common');
+const {URI} = require('../../../utils/constant');
 const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../src/base/main');
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
+
+const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
 describe('createCursor function', ()=>{
   describe('Successful case', () => {
@@ -19,15 +23,36 @@ describe('createCursor function', ()=>{
       const query = '';
       const size = 2;
 
-      const rc = new RecordCursor(conn);
+      const EXPECTED_RESPONSE = {
+        id: '9a9716fe-1394-4677-a1c7-2199a5d28215',
+        totalCount: 123456
+      };
+
+      nock(URI)
+        .post(CURSOR_ROUTE, (rqBody) => {
+          expect(rqBody.app).toEqual(app);
+          expect(rqBody.fields).toEqual(fields);
+          expect(rqBody.query).toEqual(query);
+          expect(rqBody.size).toEqual(size);
+          return true;
+        })
+        .matchHeader(common.PASSWORD_AUTH, (authHeader) => {
+          expect(authHeader).toBe(common.getPasswordAuth(common.USERNAME, common.PASSWORD));
+          return true;
+        })
+        .matchHeader('Content-Type', (type) => {
+          expect(type).toEqual(expect.stringContaining('application/json'));
+          return true;
+        })
+        .reply(200, EXPECTED_RESPONSE);
+
+      const rc = new RecordCursor({connection: conn});
       return rc.createCursor({app, fields, query, size})
         .then((response)=>{
           expect(response).toHaveProperty('id');
           expect(response).toHaveProperty('totalCount');
-          rc.deleteCursor(response.id);
-        })
-        .catch((err)=>{
-          expect(false);
+          expect(response.id).toEqual(EXPECTED_RESPONSE.id);
+          expect(response.totalCount).toEqual(EXPECTED_RESPONSE.totalCount);
         });
     });
   });
@@ -40,6 +65,7 @@ describe('createCursor function', ()=>{
       const size = 2;
 
       const INVALID_INPUT_RETURN = {
+        id: 'RWt7OV6Pa40r1E3a2hgb',
         code: 'CB_VA01',
         message: 'Missing or invalid input.',
         errors: {
@@ -49,12 +75,12 @@ describe('createCursor function', ()=>{
         }
       };
 
-      const rc = new RecordCursor(conn);
+      nock(URI)
+        .post(CURSOR_ROUTE)
+        .reply(400, INVALID_INPUT_RETURN);
+
+      const rc = new RecordCursor({connection: conn});
       return rc.createCursor({app, fields, query, size})
-        .then((response)=>{
-          rc.deleteCursor(response.id);
-          expect(1).toEqual(0);
-        })
         .catch((err)=>{
           expect(err).toBeInstanceOf(KintoneAPIException);
           expect(err.get()).toMatchObject(INVALID_INPUT_RETURN);

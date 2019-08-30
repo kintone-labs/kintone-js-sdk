@@ -14,11 +14,12 @@ class Auth extends BaseAuth {
 
   /**
    * Set certificate for request by data
-   * @param {fileContent} cert
-   * @param {String} password
+   * @param {Object} params
+   * @param {fileContent} params.cert
+   * @param {String} params.password
    * @return {this}
    */
-  setClientCert(cert, password) {
+  setClientCert({cert, password}) {
     this.cert = cert;
     this.passwordCert = password;
     return this;
@@ -26,11 +27,12 @@ class Auth extends BaseAuth {
 
   /**
    * Set certificate for request by path
-   * @param {String} filePath
-   * @param {String} password
+   * @param {Object} params
+   * @param {String} params.filePath
+   * @param {String} params.password
    * @return {this}
    */
-  setClientCertByPath(filePath, password) {
+  setClientCertByPath({filePath, password}) {
     try {
       const fileContent = fs.readFileSync(filePath);
       this.cert = fileContent;

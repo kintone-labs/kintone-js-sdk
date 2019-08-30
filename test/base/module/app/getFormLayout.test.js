@@ -15,14 +15,14 @@ const APP_FORM_LAYOUT_PREVIEW = '/k/v1/preview/app/form/layout.json';
 const URI = 'https://' + common.DOMAIN;
 
 const auth = new Auth();
-auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
+auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection(common.DOMAIN, auth);
+const conn = new Connection({domain: common.DOMAIN, auth: auth});
 
-const recordModule = new App(conn);
+const recordModule = new App({connection: conn});
 
-const connGuest = new Connection(common.DOMAIN, auth, common.GUEST_SPACEID);
-const formLayout = new App(connGuest);
+const connGuest = new Connection({domain: common.DOMAIN, auth: auth, guestSpaceID: common.GUEST_SPACEID});
+const formLayout = new App({connection: connGuest});
 
 describe('getFormLayout function', () => {
   describe('common function', () => {
@@ -32,7 +32,7 @@ describe('getFormLayout function', () => {
         .get(`${APP_FORM_LAYOUT}?app=${app}`)
         .reply(200, {});
 
-      const getAppResult = recordModule.getFormLayout(app);
+      const getAppResult = recordModule.getFormLayout({app});
       expect(getAppResult).toHaveProperty('then');
       expect(getAppResult).toHaveProperty('catch');
     });
@@ -67,7 +67,7 @@ describe('getFormLayout function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({app, isPreview});
       return getFormLayoutResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -99,7 +99,7 @@ describe('getFormLayout function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app);
+      const getFormLayoutResult = recordModule.getFormLayout({app});
       return getFormLayoutResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -139,7 +139,7 @@ describe('getFormLayout function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({app, isPreview});
       return getFormLayoutResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -172,7 +172,7 @@ describe('getFormLayout function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({app, isPreview});
       return getFormLayoutResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -205,7 +205,7 @@ describe('getFormLayout function', () => {
         })
         .reply(200, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({app, isPreview});
       return getFormLayoutResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -237,7 +237,7 @@ describe('getFormLayout function', () => {
           return true;
         })
         .reply(200, expectResult);
-      const getFormLayoutResult = formLayout.getFormLayout(app, isPreview);
+      const getFormLayoutResult = formLayout.getFormLayout({app, isPreview});
       return getFormLayoutResult.then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
@@ -268,7 +268,7 @@ describe('getFormLayout function', () => {
         })
         .reply(400, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({app, isPreview});
       return getFormLayoutResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -299,7 +299,7 @@ describe('getFormLayout function', () => {
         })
         .reply(400, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(undefined, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({isPreview});
       return getFormLayoutResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -321,7 +321,7 @@ describe('getFormLayout function', () => {
         })
         .reply(400, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({app, isPreview});
       return getFormLayoutResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -343,7 +343,7 @@ describe('getFormLayout function', () => {
         })
         .reply(400, expectResult);
 
-      const getFormLayoutResult = recordModule.getFormLayout(app, isPreview);
+      const getFormLayoutResult = recordModule.getFormLayout({app, isPreview});
       return getFormLayoutResult.catch((err) => {
         expect(err).toBeInstanceOf(KintoneAPIException);
         expect(err.get()).toMatchObject(expectResult);
@@ -358,7 +358,7 @@ describe('getFormLayout function', () => {
       nock(URI)
         .get(`${APP_FORM_LAYOUT}?app=10`)
         .reply(403, expectResult);
-      const getFormLayoutResult = recordModule.getFormLayout(10);
+      const getFormLayoutResult = recordModule.getFormLayout({app: 10});
       return getFormLayoutResult.catch((err) => {
         expect(err.get()).toMatchObject(expectResult);
       });

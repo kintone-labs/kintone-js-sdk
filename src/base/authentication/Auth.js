@@ -14,11 +14,12 @@ class Auth {
 
   /**
      * setBasicAuth
-     * @param {String} username
-     * @param {String} password
+     * @param {Object} params
+     * @param {String} params.username
+     * @param {String} params.password
      * @return {this}
      */
-  setBasicAuth(username, password) {
+  setBasicAuth({username, password}) {
     this.basicAuth = new KintoneCredential(username, password);
     return this;
   }
@@ -33,11 +34,12 @@ class Auth {
 
   /**
      * setPasswordAuth
-     * @param {String} username
-     * @param {String} password
+     * @param {Object} params
+     * @param {String} params.username
+     * @param {String} params.password
      * @return {this}
      */
-  setPasswordAuth(username, password) {
+  setPasswordAuth({username, password}) {
     this.passwordAuth = new KintoneCredential(username, password);
     return this;
   }
@@ -52,10 +54,11 @@ class Auth {
 
   /**
      * setApiToken
-     * @param {String} apiToken
+     * @param {Object} params
+     * @param {String} params.apiToken
      * @return {this}
      */
-  setApiToken(apiToken) {
+  setApiToken({apiToken}) {
     this.apiToken = apiToken;
     return this;
   }
