@@ -1,6 +1,3 @@
-import File from "./module/file/File";
-import Connection from "./connection/Connection";
-
 /**
  * kintone api - nodejs client
  * kintone-nodeks-SDK

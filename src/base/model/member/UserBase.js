@@ -14,8 +14,6 @@ class UserBase {
      * Get the name of user
      * @return {String} The name of usee
      */
-
-
   getName() {
     return this.name;
   }
@@ -23,7 +21,6 @@ class UserBase {
      * Get the code of user
      * @return {String} the user ccode
      */
-
 
   getCode() {
     return this.code;

@@ -18,8 +18,6 @@ class GetRecordsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
-
-
   toJSON() {
     return {
       app: this.app,

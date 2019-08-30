@@ -14,8 +14,6 @@ class HTTPHeader {
      * get header key
      * @return {this}
      */
-
-
   getKey() {
     return this.key;
   }
@@ -23,7 +21,6 @@ class HTTPHeader {
      * get header value
      * @return {this}
      */
-
 
   getValue() {
     return this.value;

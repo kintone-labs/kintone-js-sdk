@@ -8,7 +8,6 @@ import _CreateRecordCursorRequest from "./recordCursor/CreateRecordCursorRequest
 
 const CreateRecordCursorRequest = _CreateRecordCursorRequest;
 const GetRecordCursorRequest = _GetRecordCursorRequest;
-;
 const DeleteRecordCursorRequest = _DeleteRecordCursorRequest;
 export default {
   // TODO: Write unit test

@@ -14,8 +14,6 @@ class GetGeneralSettingsRequest {
    * Get JSON struct of this model
    * @return {JSON}
    */
-
-
   toJSON() {
     const data = {
       app: this.app,

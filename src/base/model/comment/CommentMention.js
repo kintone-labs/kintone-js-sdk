@@ -15,12 +15,10 @@ class CommentMention {
      * Get JSON struct of this model
      * @return {integer}
      */
-
-
   toJSON() {
     return {
       code: this.code,
-      type: this.type
+      type: this.type,
     };
   }
   /**

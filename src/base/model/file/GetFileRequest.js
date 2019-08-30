@@ -12,8 +12,6 @@ class GetFileRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
-
-
   toJSON() {
     return {
       fileKey: this.fileKey

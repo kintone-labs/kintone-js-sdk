@@ -15,17 +15,13 @@ class UpdateRecordsRequest {
      * Get JSON struct of this model
      * @return {integer}
      */
-
-
   toJSON() {
     const data = {
       records: this.recordsItem || []
     };
-
     if (this.appID) {
       data.app = this.appID;
     }
-
     return data;
   }
   /**

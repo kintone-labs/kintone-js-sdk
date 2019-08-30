@@ -14,17 +14,13 @@ class GetFormFieldsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
-
-
   toJSON() {
     const data = {
       app: this.appID
     };
-
     if (this.lang) {
       data.lang = this.lang;
     }
-
     return data;
   }
   /**

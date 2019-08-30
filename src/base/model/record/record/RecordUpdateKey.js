@@ -15,8 +15,6 @@ class RecordUpdateKey {
      * Get JSON struct of this model
      * @return {Object}
      */
-
-
   toJSON() {
     return {
       field: this.field,

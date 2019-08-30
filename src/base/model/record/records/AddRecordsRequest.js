@@ -12,8 +12,6 @@ class AddRecordsRequest {
   /**
      * @return {Integer} appID
      */
-
-
   getAppID() {
     return this.app;
   }
@@ -22,8 +20,6 @@ class AddRecordsRequest {
      * @param {Record} record
      * @return {this} AddRecordsRequest
      */
-
-
   addRecord(record) {
     this.records.push(record);
     return this;
@@ -32,8 +28,6 @@ class AddRecordsRequest {
      * @param {Array<Record>} recordsData
      * @return {this} AddRecordsRequest
      */
-
-
   setRecords(recordsData) {
     this.records = recordsData;
     return this;
@@ -41,8 +35,6 @@ class AddRecordsRequest {
   /**
      * @return {Array<Record>} Records
      */
-
-
   getRecordsData() {
     return this.records;
   }
@@ -50,17 +42,13 @@ class AddRecordsRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
-
-
   toJSON() {
     const data = {
-      records: this.getRecordsData()
+      records: this.getRecordsData(),
     };
-
     if (this.app !== undefined) {
       data.app = this.app;
     }
-
     return data;
   }
   /**

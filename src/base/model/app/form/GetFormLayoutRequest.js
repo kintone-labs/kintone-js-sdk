@@ -12,11 +12,9 @@ class GetFormLayoutRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
-
-
   toJSON() {
     return {
-      app: this.appID
+      app: this.appID,
     };
   }
   /**

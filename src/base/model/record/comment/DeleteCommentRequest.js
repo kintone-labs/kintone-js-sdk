@@ -17,8 +17,6 @@ class DeleteCommentRequest {
      * Get JSON struct of this model
      * @return {integer}
      */
-
-
   toJSON() {
     return {
       app: this.appID,

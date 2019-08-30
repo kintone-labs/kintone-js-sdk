@@ -14,7 +14,6 @@ class KintoneAPIException {
   constructor(errors) {
     let errorResponse;
     this.errorRaw = errors;
-
     if (!errors.hasOwnProperty('response') || !errors.response) {
       errorResponse = new KintoneErrorResponseModel(0, null, errors.message, errors);
     } else {
@@ -29,28 +28,22 @@ class KintoneAPIException {
         errorResponse = this.getErrorResponse(stringError);
       }
     }
-
     if (!(errorResponse instanceof KintoneErrorResponseModel)) {
       errorResponse = new KintoneErrorResponseModel(0, null, errors.response.statusMessage, errorResponse);
     }
-
-    const statusCode = errors.response ? errors.response.statusCode || 0 : 0;
+    const statusCode = errors.response ? (errors.response.statusCode || 0) : 0;
     this.error = new KintoneAPIExceptionModel(statusCode, errorResponse);
   }
   /**
      * get origin errors
      * @return {Error}
      */
-
-
   getAll() {
     return this.errorRaw;
   }
   /**
      * Show origin error
      */
-
-
   throwAll() {
     throw this.getAll();
   }
@@ -58,23 +51,21 @@ class KintoneAPIException {
      * Show Error
      * @return {Error}
      */
-
-
   get() {
     return this.error.getErrorResponse().toJSON();
   }
   /**
      * Show Error
      */
-
-
   throw() {
-    const errorString = `HttpErrorCode: ${this.error.getHttpErrorCode()}
+    const errorString =
+`HttpErrorCode: ${this.error.getHttpErrorCode()}
 Details:
   + ID: ${this.error.getErrorResponse().getID() || '(none)'}
   + Code: ${this.error.getErrorResponse().getCode() || '(none)'}
   + Message: ${this.error.getErrorResponse().getMessage() || '(none)'}
-  + Errors:` + JSON.stringify(this.error.getErrorResponse().getErrors() || '(none)');
+  + Errors:` + (JSON.stringify(this.error.getErrorResponse().getErrors() || '(none)'));
+
     throw new Error(errorString);
   }
   /**
@@ -82,20 +73,19 @@ Details:
      * @param {String} bodyResponse
      * @return {KintoneErrorResponseModel}
      */
-
-
   getErrorResponse(bodyResponse) {
     let response = null;
-
     if (typeof bodyResponse === 'object') {
       response = bodyResponse;
     } else {
       // Validate isJSON
       try {
         response = JSON.parse(bodyResponse);
-      } catch (error) {// console.log(error)
+      } catch (error) {
+        // console.log(error)
       }
-    } // Detect the error response from bulkrequest.
+    }
+    // Detect the error response from bulkrequest.
     // if (response !== null && response.hasOwnProperty('results')) {
     //     for (let index = 0; index < response.results.length; index++) {
     //         if (response.results[index].hasOwnProperty('code')) {
@@ -104,11 +94,12 @@ Details:
     //         }
     //     }
     // }
-
-
-    return response && response.id ? new KintoneErrorResponseModel(response.id, response.code, response.message, response.errors) : response;
+    return response && response.id ? new KintoneErrorResponseModel(
+      response.id,
+      response.code,
+      response.message,
+      response.errors) : response;
   }
-
 }
 
 export default KintoneAPIException;

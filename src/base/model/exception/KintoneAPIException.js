@@ -13,8 +13,6 @@ class KintoneAPIException {
   /**
      * @return {string}
      */
-
-
   getHttpErrorCode() {
     return this.httpErrorCode;
   }

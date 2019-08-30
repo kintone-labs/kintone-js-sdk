@@ -17,8 +17,6 @@ class AddPreviewAppRequest {
      * Get app name
      * @return {String}
      */
-
-
   getAppName() {
     return this.name;
   }
@@ -27,8 +25,6 @@ class AddPreviewAppRequest {
      * @param {String} name
      * @return {this} AddPreviewAppRequest
      */
-
-
   setAppName(name) {
     this.name = name;
     return this;
@@ -37,8 +33,6 @@ class AddPreviewAppRequest {
      * Get space of app
      * @return {String}
      */
-
-
   getSpace() {
     return this.space;
   }
@@ -47,8 +41,6 @@ class AddPreviewAppRequest {
      * @param {Number} space
      * @return {this} AddPreviewAppRequest
      */
-
-
   setSpace(space) {
     this.space = space;
     return this;
@@ -57,8 +49,6 @@ class AddPreviewAppRequest {
      * Get thread
      * @return {String}
      */
-
-
   getThread() {
     return this.thread;
   }
@@ -67,8 +57,6 @@ class AddPreviewAppRequest {
      * @param {Number} thread
      * @return {this} AddPreviewAppRequest
      */
-
-
   setThread(thread) {
     this.thread = thread;
     return this;
@@ -77,13 +65,11 @@ class AddPreviewAppRequest {
      * Get JSON struct of this model
      * @return {JSON}
      */
-
-
   toJSON() {
     return {
       name: this.getAppName(),
       space: this.getSpace(),
-      thread: this.getThread()
+      thread: this.getThread(),
     };
   }
   /**

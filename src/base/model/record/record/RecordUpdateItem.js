@@ -19,8 +19,6 @@ class RecordUpdateItem {
      * @param {String} id
      * @return {this}
      */
-
-
   setID(id) {
     this.id = id;
     return this;
@@ -30,8 +28,6 @@ class RecordUpdateItem {
      * @param {String} revision
      * @return {this}
      */
-
-
   setRevision(revision) {
     this.revision = revision;
     return this;
@@ -42,8 +38,6 @@ class RecordUpdateItem {
      * @param {String} value
      * @return {this}
      */
-
-
   setUpdateKey(field, value) {
     this.updateKey = new RecordUpdateKey(field, value);
     return this;
@@ -53,8 +47,6 @@ class RecordUpdateItem {
      * @param {String} record
      * @return {this}
      */
-
-
   setRecord(record) {
     this.record = record;
     return this;
@@ -63,15 +55,12 @@ class RecordUpdateItem {
      * Get JSON struct of this model
      * @return {Object}
      */
-
-
   toJSON() {
     const updateKeyPriv = this.updateKey;
     const data = {
       revision: this.revision || null,
       record: this.record
     };
-
     if (updateKeyPriv) {
       data.updateKey = updateKeyPriv.toJSON();
     } else {
@@ -84,7 +73,6 @@ class RecordUpdateItem {
      * Convert this model to JSON string
      * @return {String}
      */
-
 
   toJSONString() {
     return JSON.stringify(this.toJSON());

@@ -19,8 +19,6 @@ class UpdateRecordAssigneesRequest {
      * Get JSON struct of this model
      * @return {Object}
      */
-
-
   toJSON() {
     return {
       app: this.appID,

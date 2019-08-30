@@ -19,8 +19,6 @@ class UpdateRecordStatusItem {
      * Get JSON struct of this model
      * @return {Object}
      */
-
-
   toJSON() {
     return {
       id: this.recordID,

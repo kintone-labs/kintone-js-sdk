@@ -13,8 +13,6 @@ class DeleteCursorRequest {
    * Get cursor id
    * @return {String}
    */
-
-
   getCursorID() {
     return this.cursorID;
   }
@@ -22,15 +20,12 @@ class DeleteCursorRequest {
    * Get JSON struct of this model
    * @return {JSON}
    */
-
-
   toJSON() {
     const data = {};
 
     if (this.getCursorID() !== undefined) {
       data.id = this.getCursorID();
     }
-
     return data;
   }
   /**

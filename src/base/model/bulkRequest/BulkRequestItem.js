@@ -16,13 +16,11 @@ class BulkRequestItem {
      * Get JSON struct of this model
      * @return {JSON}
      */
-
-
   toJSON() {
     return {
       method: this.method,
       api: this.api,
-      payload: this.payload
+      payload: this.payload,
     };
   }
   /**

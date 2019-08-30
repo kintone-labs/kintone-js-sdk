@@ -13,8 +13,6 @@ class GetRecordCursorRequest {
    * Get cursor id
    * @return {String}
    */
-
-
   getCursorID() {
     return this.cursorID;
   }
@@ -22,15 +20,12 @@ class GetRecordCursorRequest {
    * Get JSON struct of this model
    * @return {JSON}
    */
-
-
   toJSON() {
     const data = {};
 
     if (this.getCursorID() !== undefined) {
       data.id = this.getCursorID();
     }
-
     return data;
   }
   /**

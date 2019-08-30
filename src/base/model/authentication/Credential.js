@@ -14,8 +14,6 @@ class Credential {
      * Get username of Credential model
      * @return {String}
      */
-
-
   getUsername() {
     return this.username;
   }

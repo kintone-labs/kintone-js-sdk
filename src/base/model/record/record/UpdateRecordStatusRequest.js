@@ -21,8 +21,6 @@ class UpdateRecordStatusRequest extends UpdateRecordStatusItem {
      * Get JSON struct of this model
      * @return {Object}
      */
-
-
   toJSON() {
     const data = super.toJSON();
     data.app = this.appID;
