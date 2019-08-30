@@ -12,11 +12,10 @@ class App {
    * The constructor for this module 
    * @param {Connection} connection
    */
-  constructor(connection) { 
+  constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
-
     this.connection = connection;
   }
   /**
