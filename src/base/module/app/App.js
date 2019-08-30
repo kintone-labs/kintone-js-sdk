@@ -1,7 +1,6 @@
 import _common from "../../utils/Common";
 import _AppModel from "../../model/app/AppModels";
-import _Connection from "../../connection/Connection";
-const Connection = _Connection;
+import Connection from "../../connection/Connection";
 const AppModel = _AppModel;
 const common = _common;
 /**
@@ -10,10 +9,10 @@ const common = _common;
 
 class App {
   /**
-   * The constructor for this module
+   * The constructor for this module 
    * @param {Connection} connection
    */
-  constructor(connection) {
+  constructor(connection) { 
     if (!(connection instanceof Connection)) {
       throw new Error(`${connection} not an instance of Connection`);
     }
