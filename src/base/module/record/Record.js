@@ -67,7 +67,7 @@ class Record {
   }
 
   getAllRecordsByCursor({app, query, fields} = {}) {
-    const kintoneRC = new RecordCursor(this.connection);
+    const kintoneRC = new RecordCursor({connection:this.connection});
     let myCursor;
     return kintoneRC.createCursor({app, fields, query, DEFAULT_CURSOR_SIZE})
       .then((creatCursorResponse)=>{
