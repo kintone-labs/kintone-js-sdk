@@ -1,15 +1,14 @@
-const Connection = require('../../connection/Connection');
-const AppModel = require('../../model/app/AppModels');
-const common = require('../../utils/Common');
-
+import common from "../../utils/Common";
+import AppModel from "../../model/app/AppModels";
+import Connection from "../../connection/Connection";
 /**
  * App module
  */
+
 class App {
   /**
-   * The constructor for this module
-   * @param {Object} params
-   * @param {Connection} params.connection
+   * The constructor for this module 
+   * @param {Connection} connection
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
@@ -271,4 +270,4 @@ class App {
     return this.sendRequest('PUT', 'APP_SETTINGS_PREVIEW', dataRequest);
   }
 }
-module.exports = App;
+export default App;

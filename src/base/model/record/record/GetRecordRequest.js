@@ -34,8 +34,12 @@ class GetRecordRequest {
   /**
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetRecordRequest;
+
+export default GetRecordRequest;

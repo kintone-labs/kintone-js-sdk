@@ -1,15 +1,10 @@
-/**
- * kintone api - nodejs client
- * kintoneSDK
- */
+import RecordCursor from "./module/cursor/RecordCursor";
+import KintoneAPIException from "./exception/KintoneAPIException";
+import File from "./module/file/File";
+import Connection from "./connection/Connection";
+import App from "./module/app/App";
+import BulkRequest from "./module/bulkRequest/BulkRequest";
+import Record from "./module/record/Record";
+import Auth  from './authentication/Auth';
 
-module.exports = {
-  Record: require('./module/record/Record'),
-  BulkRequest: require('./module/bulkRequest/BulkRequest'),
-  App: require('./module/app/App'),
-  Connection: require('./connection/Connection'),
-  Auth: require('./authentication/Auth'),
-  File: require('./module/file/File'),
-  KintoneAPIException: require('./exception/KintoneAPIException'),
-  RecordCursor: require('./module/cursor/RecordCursor')
-};
+export { Record, BulkRequest, App, Connection, Auth, File, KintoneAPIException, RecordCursor };

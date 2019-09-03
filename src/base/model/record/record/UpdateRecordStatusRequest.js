@@ -1,8 +1,8 @@
-const UpdateRecordStatusItem = require('./UpdateRecordStatusItem');
-
+import UpdateRecordStatusItem from "./UpdateRecordStatusItem";
 /**
  * UpdateRecordStatusRequest model
  */
+
 class UpdateRecordStatusRequest extends UpdateRecordStatusItem {
   /**
      * constructor
@@ -29,8 +29,12 @@ class UpdateRecordStatusRequest extends UpdateRecordStatusItem {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = UpdateRecordStatusRequest;
+
+export default UpdateRecordStatusRequest;

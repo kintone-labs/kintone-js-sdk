@@ -5,7 +5,7 @@
 const nock = require('nock');
 const common = require('../../../utils/common');
 const {URI} = require('../../../utils/constant');
-const {Record, Connection, Auth} = require('../../../../src/base/main');
+const {Record, Connection, Auth} = require('../../../../cjs/base/main');
 
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});

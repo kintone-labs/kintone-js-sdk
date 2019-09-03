@@ -21,8 +21,11 @@ class HTTPHeader {
      * get header value
      * @return {this}
      */
+
   getValue() {
     return this.value;
   }
+
 }
-module.exports = HTTPHeader;
+
+export default HTTPHeader;

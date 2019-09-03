@@ -2,16 +2,18 @@
  * kintone api - nodejs client
  * kintone-nodeks-SDK
  */
+import Auth from "./authentication/Auth";
+import File from './module/file/File';
+import Connection from './connection/Connection';
+import { App, Record, BulkRequest, KintoneAPIException, RecordCursor } from "../base/main";
 
-const {App, Record, BulkRequest, KintoneAPIException, RecordCursor} = require('../base/main');
-
-module.exports = {
-  Auth: require('./authentication/Auth'),
-  Connection: require('./connection/Connection'),
+export {
+  Auth,
+  Connection,
   App,
   Record,
   BulkRequest,
   KintoneAPIException,
-  File: require('./module/file/File'),
+  File,
   RecordCursor
 };

@@ -32,8 +32,12 @@ class DeleteCursorRequest {
    * Convert this model to JSON string
    * @return {String}
    */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = DeleteCursorRequest;
+
+export default DeleteCursorRequest;

@@ -34,8 +34,12 @@ class GetCommentRequest {
      * Convert this model to JSON string
      * @return {String}
      */
+
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = GetCommentRequest;
+
+export default GetCommentRequest;

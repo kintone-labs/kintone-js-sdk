@@ -15,7 +15,6 @@ class ErrorResponse {
     this.setMessage(message);
     this.setErrors(errors);
   }
-
   /**
      * @param {Object} errors
      * @return {this}
@@ -85,8 +84,10 @@ class ErrorResponse {
       id: this.getID(),
       code: this.getCode(),
       message: this.getMessage(),
-      errors: this.getErrors() || '{}',
+      errors: this.getErrors() || '{}'
     };
   }
+
 }
-module.exports = ErrorResponse;
+
+export default ErrorResponse;
