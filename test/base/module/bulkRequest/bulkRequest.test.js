@@ -5,9 +5,9 @@
  */
 const nock = require('nock');
 const common = require('../../../utils/common');
-const {BulkRequest, Connection, Auth} = require(common.MAIN_PATH_BASE); 
+const {BulkRequest, Connection, Auth} = require(common.MAIN_PATH_BASE);
 
-const auth = new Auth();  
+const auth = new Auth();
 auth.setPasswordAuth(common.USERNAME, common.PASSWORD);
 
 const conn = new Connection(common.DOMAIN, auth);
