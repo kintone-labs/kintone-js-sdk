@@ -6,7 +6,7 @@
 const nock = require('nock');
 const common = require('../../../utils/common');
 const {URI} = require('../../../utils/constant');
-const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../dist/cjs/base/main');
+const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../../cjs/base/main');
 
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});

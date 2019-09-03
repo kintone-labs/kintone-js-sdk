@@ -1,6 +1,6 @@
 {
   "name": "@kintone/kintone-js-sdk",
-  "version": "0.4.2",
+  "version": "0.5.2",
   "description": "The SDK of kintone REST API client on node and browser",
   "main": "./src/node/main.js",
   "browser": "./src/browser/main.js",
@@ -10,11 +10,10 @@
   "scripts": {
     "test-base": "jest ./test/base",
     "test-node": "jest ./test/node",
-    "build": "BABEL_ENV=browser webpack --mode production && npm run browser && npm run node && npm run cp",
-    "browser": "BABEL_ENV=browser babel src -d dist/esm",
-    "node": "BABEL_ENV=node babel src -d dist/cjs",
-    "watch": "webpack --mode development --watch",
-    "cp": "cp -r package.json ./dist"
+    "build": "BABEL_ENV=browser webpack --mode production && npm run build:browser && npm run build:node",
+    "build:browser": "BABEL_ENV=browser babel src -d esm",
+    "build:node": "BABEL_ENV=node babel src -d cjs",
+    "watch": "webpack --mode development --watch"
   },
   "repository": {
     "type": "git",
