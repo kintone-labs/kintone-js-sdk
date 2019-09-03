@@ -1,13 +1,9 @@
-import _RecordModel from "../../model/record/RecordModels";
-import _BulkRequestItemModel from "../../model/bulkRequest/BulkRequestItem";
-import _BulkRequestModel from "../../model/bulkRequest/BulkRequest";
-import _Connection from "../../connection/Connection";
-import _KintoneAPIException from "../../exception/KintoneAPIException";
-const KintoneAPIException = _KintoneAPIException;
-const Connection = _Connection;
-const BulkRequestModel = _BulkRequestModel;
-const BulkRequestItemModel = _BulkRequestItemModel;
-const RecordModel = _RecordModel;
+import RecordModel from "../../model/record/RecordModels";
+import BulkRequestItemModel from "../../model/bulkRequest/BulkRequestItem";
+import BulkRequestModel from "../../model/bulkRequest/BulkRequest";
+import Connection from "../../connection/Connection";
+import KintoneAPIException from "../../exception/KintoneAPIException";
+
 
 /**
  * BulkRequest module

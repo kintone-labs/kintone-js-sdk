@@ -1,8 +1,6 @@
-import _common from "../../utils/Common";
-import _AppModel from "../../model/app/AppModels";
+import common from "../../utils/Common";
+import AppModel from "../../model/app/AppModels";
 import Connection from "../../connection/Connection";
-const AppModel = _AppModel;
-const common = _common;
 /**
  * App module
  */

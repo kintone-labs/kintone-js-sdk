@@ -1,5 +1,4 @@
-import _UpdateRecordStatusItem from "./UpdateRecordStatusItem";
-const UpdateRecordStatusItem = _UpdateRecordStatusItem;
+import UpdateRecordStatusItem from "./UpdateRecordStatusItem";
 /**
  * UpdateRecordStatusRequest model
  */

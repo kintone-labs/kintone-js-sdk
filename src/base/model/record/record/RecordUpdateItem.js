@@ -1,5 +1,4 @@
-import _RecordUpdateKey from "./RecordUpdateKey";
-const RecordUpdateKey = _RecordUpdateKey;
+import RecordUpdateKey from "./RecordUpdateKey";
 /**
  * RecordUpdateItem model
  */

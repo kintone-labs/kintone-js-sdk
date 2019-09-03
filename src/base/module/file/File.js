@@ -1,7 +1,5 @@
-import _FileModel from "../../model/file/FileModels";
-import _Connection from "../../connection/Connection";
-const Connection = _Connection;
-const FileModel = _FileModel;
+import FileModel from "../../model/file/FileModels";
+import Connection from "../../connection/Connection";
 
 /**
  * File module

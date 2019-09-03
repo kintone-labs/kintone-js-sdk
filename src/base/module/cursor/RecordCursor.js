@@ -1,16 +1,12 @@
-import _KintoneAPIException from "../../model/exception/KintoneAPIException";
-import _CursorModel from "../../model/cursor/CursorModels";
-import _common from "../../utils/Common";
-import _Connection from "../../connection/Connection";
+import KintoneAPIException from "../../model/exception/KintoneAPIException";
+import CursorModel from "../../model/cursor/CursorModels";
+import common from "../../utils/Common";
+import Connection from "../../connection/Connection";
 /* eslint-disable no-loop-func */
 
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
 
 import '@babel/polyfill';
-const Connection = _Connection;
-const common = _common;
-const CursorModel = _CursorModel;
-const KintoneAPIException = _KintoneAPIException;
 
 /**
  * RecordCursor module
