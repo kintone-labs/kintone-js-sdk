@@ -100,45 +100,22 @@ class Record {
    * @return {Promise} Promise
    */
   getAllRecordsByQuery({app, query, fields, totalCount, seek = false} = {}) {
+    return this.getAllRecordsRecursive(app, query, fields, totalCount, null, null, seek);
+  }
+
+  getAllRecordsRecursive(app, query, fields, totalCount, lastCount, records, seek) {
+    let allRecords = records || [];
+    let validQuery;
+    let nextCountNum;
+    const limit = LIMIT_RECORD;
     if (seek) {
-      return this.getAllRecordsBySeekMethodRecursive(app, query, fields, totalCount, null, null);
-    }
-    return this.getAllRecordsByOffsetMethodRecursive(app, query, fields, totalCount, null, null);
-  }
-
-  getAllRecordsByOffsetMethodRecursive(app, query, fields, totalCount, offset, records) {
-    let allRecords = records || [];
-    const offsetNum = offset || 0;
-    const limit = LIMIT_RECORD;
-    const validQuery = (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
-
-    const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
-    return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
-      allRecords = allRecords.concat(response.records);
-      if (response.records.length < limit) {
-        return {
-          records: allRecords,
-          totalCount: totalCount ? allRecords.length : null
-        };
-      }
-      return this.getAllRecordsByOffsetMethodRecursive(app, query, fields, totalCount, offsetNum + limit, allRecords);
-    });
-  }
-
-  getAllRecordsBySeekMethodRecursive(app, query, fields, totalCount, lastId, records) {
-    let allRecords = records || [];
-    const lastRecordId = lastId || 0;
-    const limit = LIMIT_RECORD;
-    const validQuery = (query)
-      ? `$id > ${lastRecordId} and (${query}) order by $id asc limit ${limit}`
-      : `$id > ${lastRecordId} order by $id asc limit ${limit}`;
-
-    if (fields && fields.length > 0) {
-      if (fields.indexOf('$id') <= -1) {
+      validQuery = this.createValidQueryForSeek(query, lastCount, limit);
+      if (fields && fields.length > 0 && fields.indexOf('$id') <= -1) {
         fields.push('$id');
       }
+    } else {
+      validQuery = this.createValidQueryForOffset(query, lastCount, limit);
     }
-
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
       allRecords = allRecords.concat(response.records);
@@ -148,9 +125,27 @@ class Record {
           totalCount: totalCount ? allRecords.length : null
         };
       }
-      return this.getAllRecordsBySeekMethodRecursive(app, query, fields, totalCount, response.records[limit - 1].$id.value, allRecords);
+      if (seek) {
+        nextCountNum = response.records[limit - 1].$id.value;
+      } else {
+        nextCountNum = lastCount + limit;
+      }
+      return this.getAllRecordsRecursive(app, query, fields, totalCount, nextCountNum, allRecords, seek);
     });
   }
+
+  createValidQueryForOffset(query, offset, limit) {
+    const offsetNum = offset || 0;
+    return (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
+  }
+
+  createValidQueryForSeek(query, lastRecord, limit) {
+    const lastRecordId = lastRecord || 0;
+    return (query)
+      ? `$id > ${lastRecordId} and (${query}) order by $id asc limit ${limit}`
+      : `$id > ${lastRecordId} order by $id asc limit ${limit}`;
+  }
+
 
   /**
    * Add the record
