@@ -35,7 +35,9 @@ const kintone = window.kintoneJSSDK;
 const kintone = require('@kintone/kintone-js-sdk')
 ```
 * ESM: install kintone-js-sdk using "npm i @kintone/kintone-js-sdk"<br/>
+```
 import * as kintoneJSSDK from '@kintone/kintone-js-sdk'
+```
 
 
 # Document
