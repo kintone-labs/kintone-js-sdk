@@ -100,10 +100,10 @@ class Record {
    * @return {Promise} Promise
    */
   getAllRecordsByQuery({app, query, fields, totalCount, seek = false} = {}) {
-    return this.getAllRecordsRecursive(app, query, fields, totalCount, null, null, seek);
+    return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
   }
 
-  getAllRecordsRecursive(app, query, fields, totalCount, lastCount, records, seek) {
+  getAllRecordsByQueryRecursive(app, query, fields, totalCount, lastCount, records, seek) {
     let allRecords = records || [];
     let validQuery;
     let nextCountNum;
@@ -130,7 +130,7 @@ class Record {
       } else {
         nextCountNum = lastCount + limit;
       }
-      return this.getAllRecordsRecursive(app, query, fields, totalCount, nextCountNum, allRecords, seek);
+      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, nextCountNum, allRecords, seek);
     });
   }
 
