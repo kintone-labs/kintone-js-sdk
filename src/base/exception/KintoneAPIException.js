@@ -1,9 +1,11 @@
-const KintoneErrorResponseModel = require('../model/exception/ErrorResponse');
-const KintoneAPIExceptionModel = require('../model/exception/KintoneAPIException');
-
+import _KintoneAPIExceptionModel from "../model/exception/KintoneAPIException";
+import _KintoneErrorResponseModel from "../model/exception/ErrorResponse";
+const KintoneErrorResponseModel = _KintoneErrorResponseModel;
+const KintoneAPIExceptionModel = _KintoneAPIExceptionModel;
 /**
  * kintone Exception Module
  */
+
 class KintoneAPIException {
   /**
      * The constructor ofc  KintoneAPIException functions
@@ -21,7 +23,6 @@ class KintoneAPIException {
       if (Buffer.isBuffer(dataResponse)) {
         const stringError = errors.response.data.toString();
         errorResponse = this.getErrorResponse(stringError);
-
       } else if (dataResponse instanceof ArrayBuffer) {
         const stringError = String.fromCharCode(...new Uint8Array(dataResponse));
         errorResponse = this.getErrorResponse(stringError);
@@ -101,4 +102,4 @@ Details:
   }
 }
 
-module.exports = KintoneAPIException;
+export default KintoneAPIException;

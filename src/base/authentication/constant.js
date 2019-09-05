@@ -12,4 +12,4 @@ const constant = function() {
   };
 };
 
-module.exports = constant();
+export default constant();

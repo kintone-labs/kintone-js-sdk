@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": {
+      "ignore":["./src/node"],
+      "presets": [["@babel/preset-env", { "modules": false }]],
+      "plugins": ["@babel/plugin-proposal-class-properties"]
+    },
+    "node": {
+      "presets": ["@babel/preset-env"],
+      "ignore":["./src/browser"],
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
+    }
+  }
+ }
+ 

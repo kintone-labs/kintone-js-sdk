@@ -4,13 +4,11 @@
  */
 
 'use-strict';
+import { File as FileModule } from "../../../base/main";
+import path from "path";
+import fs from "fs";
+import { Connection, KintoneAPIException } from "../../../base/main";
 
-const fs = require('fs');
-const path = require('path');
-
-const {Connection, KintoneAPIException} = require('../../../base/main');
-
-const FileModule = require('../../../base/main').File;
 /**
  * File module for NodeJS
  */
@@ -58,4 +56,4 @@ class File extends FileModule {
     return super.upload({fileName: fileName, fileContent: fileContent});
   }
 }
-module.exports = File;
+export default File;

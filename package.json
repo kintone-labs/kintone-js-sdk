@@ -1,16 +1,18 @@
 {
   "name": "@kintone/kintone-js-sdk",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "The SDK of kintone REST API client on node and browser",
-  "main": "./src/node/main.js",
-  "browser": "./src/browser/main.js",
+  "main": "./cjs/node/main.js",
+  "browser": "./esm/browser/main.js",
   "unpkg": "./dist/kintone-js-sdk.min.js",
   "license": "MIT",
   "author": "Cybozu, Inc.",
   "scripts": {
     "test-base": "jest ./test/base",
     "test-node": "jest ./test/node",
-    "build": "webpack --mode production",
+    "build": "cross-env BABEL_ENV=browser webpack --mode production && npm run build:browser && npm run build:node",
+    "build:browser": "cross-env BABEL_ENV=browser babel src -d esm",
+    "build:node": "cross-env BABEL_ENV=node babel src -d cjs",
     "watch": "webpack --mode development --watch"
   },
   "repository": {
@@ -32,10 +34,16 @@
     "src"
   ],
   "devDependencies": {
-    "@babel/core": "7.0.0",
+    "@babel/cli": "7.5.5",
+    "@babel/core": "7.5.5",
+    "@babel/plugin-proposal-class-properties": "7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "7.5.0",
+    "@babel/plugin-transform-runtime": "7.5.5",
     "@babel/preset-env": "7.0.0",
+    "@babel/runtime": "7.5.5",
     "@cybozu/eslint-config": "3.0.1",
     "babel-loader": "8.0.2",
+    "cross-env": "5.2.1",
     "eslint": "5.0.0",
     "jest": "24.8.0",
     "nock": "9.6.0",

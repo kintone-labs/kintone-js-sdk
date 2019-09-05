@@ -1,14 +1,12 @@
+import { KintoneAPIException as KintoneAPIException } from "../../base/main";
+import { Connection as BaseConnection } from "../../base/main";
+import CONNECTION_CONST from "./constant";
+import https from "https";
+import FormData from "form-data";
+import tls from "tls";
+import axios from "axios";
+import tunnel from "tunnel";
 /* eslint-disable node/no-extraneous-require */
-const tunnel = require('tunnel');
-const axios = require('axios');
-const tls = require('tls');
-const FormData = require('form-data');
-const https = require('https');
-
-const CONNECTION_CONST = require('./constant');
-const BaseConnection = require('../../base/main').Connection;
-const KintoneAPIException = require('../../base/main').KintoneAPIException;
-
 const CONTENT_TYPE_KEY = 'Content-Type';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
 const FILE_RESPONSE_TYPE_VALUE = 'arraybuffer';
@@ -220,5 +218,7 @@ class Connection extends BaseConnection {
     this.refreshHeader();
     return request;
   }
+
 }
-module.exports = Connection;
+
+export default Connection;

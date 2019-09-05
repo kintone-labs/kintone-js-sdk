@@ -21,8 +21,11 @@ class UserBase {
      * Get the code of user
      * @return {String} the user ccode
      */
+
   getCode() {
     return this.code;
   }
+
 }
-module.exports = UserBase;
+
+export default UserBase;

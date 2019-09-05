@@ -1,8 +1,9 @@
-const KintoneAPIException = require('../../exception/KintoneAPIException');
-const Connection = require('../../connection/Connection');
-const BulkRequestModel = require('../../model/bulkRequest/BulkRequest');
-const BulkRequestItemModel = require('../../model/bulkRequest/BulkRequestItem');
-const RecordModel = require('../../model/record/RecordModels');
+import RecordModel from "../../model/record/RecordModels";
+import BulkRequestItemModel from "../../model/bulkRequest/BulkRequestItem";
+import BulkRequestModel from "../../model/bulkRequest/BulkRequest";
+import Connection from "../../connection/Connection";
+import KintoneAPIException from "../../exception/KintoneAPIException";
+
 
 /**
  * BulkRequest module
@@ -182,7 +183,6 @@ class BulkRequest {
     this.bulkRequests.addRequest(bulkRequestItem);
     return this;
   }
-
   /**
    * Execute the BulkRequest and get data which is returned from kintone.
    * @return {Promise}
@@ -216,8 +216,10 @@ class BulkRequest {
         formatErrors.push(errors[key]);
       }
     }
-    return formatErrors;
 
+    return formatErrors;
   }
+
 }
-module.exports = BulkRequest;
+
+export default BulkRequest;

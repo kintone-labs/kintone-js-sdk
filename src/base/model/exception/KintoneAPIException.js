@@ -19,8 +19,12 @@ class KintoneAPIException {
   /**
      * @return {ErrorResponse}
      */
+
+
   getErrorResponse() {
     return this.errorResponse;
   }
+
 }
-module.exports = KintoneAPIException;
+
+export default KintoneAPIException;

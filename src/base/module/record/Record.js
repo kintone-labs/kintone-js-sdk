@@ -1,9 +1,9 @@
+import common from "../../utils/Common";
+import RecordCursor from "../../module/cursor/RecordCursor";
+import BulkRequest from "../../module/bulkRequest/BulkRequest";
+import RecordModel from "../../model/record/RecordModels";
+import Connection from "../../connection/Connection";
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
-const Connection = require('../../connection/Connection');
-const RecordModel = require('../../model/record/RecordModels');
-const BulkRequest = require('../../module/bulkRequest/BulkRequest');
-const RecordCursor = require('../../module/cursor/RecordCursor');
-const common = require('../../utils/Common');
 
 const LIMIT_UPDATE_RECORD = 100;
 const LIMIT_POST_RECORD = 100;
@@ -144,7 +144,6 @@ class Record {
     addRecordsRequest.setRecords(records);
     return this.sendRequest('POST', 'records', addRecordsRequest);
   }
-
   /**
    * Add multi records
    * @param {Number} app
@@ -642,4 +641,4 @@ class Record {
     return this.sendRequest('DELETE', 'RECORD_COMMENT', deleteCommentRequest);
   }
 }
-module.exports = Record;
+export default Record;

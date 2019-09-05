@@ -1,10 +1,12 @@
+import KintoneAPIException from "../../model/exception/KintoneAPIException";
+import CursorModel from "../../model/cursor/CursorModels";
+import common from "../../utils/Common";
+import Connection from "../../connection/Connection";
 /* eslint-disable no-loop-func */
+
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
-require('@babel/polyfill');
-const Connection = require('../../connection/Connection');
-const common = require('../../utils/Common');
-const CursorModel = require('../../model/cursor/CursorModels');
-const KintoneAPIException = require('../../model/exception/KintoneAPIException');
+
+import '@babel/polyfill';
 
 /**
  * RecordCursor module
@@ -107,6 +109,7 @@ class RecordCursor {
       model: deleteRecordCursorRequest
     });
   }
+
 }
 
-module.exports = RecordCursor;
+export default RecordCursor;

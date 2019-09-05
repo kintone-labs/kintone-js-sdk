@@ -1,10 +1,9 @@
-const axios = require('axios');
-const Auth = require('../authentication/Auth');
-const HTTPHeader = require('../model/http/HTTPHeader');
-const KintoneAPIException = require('../exception/KintoneAPIException');
-const packageFile = require('../../../package.json');
-
-const CONNECTION_CONST = require('./constant');
+import axios from 'axios';
+import Auth from '../authentication/Auth';
+import HTTPHeader from '../model/http/HTTPHeader';
+import KintoneAPIException from '../exception/KintoneAPIException';
+import packageFile from'../../../package.json';
+import CONNECTION_CONST from './constant';
 const DEFAULT_PORT = '443';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
 const FILE_RESPONSE_TYPE_VALUE = 'blob';
@@ -320,4 +319,4 @@ class Connection {
     this.headers = header;
   }
 }
-module.exports = Connection;
+export default Connection ;

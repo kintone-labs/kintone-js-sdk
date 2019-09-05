@@ -1,8 +1,8 @@
+import KintoneAPIException from "../exception/KintoneAPIException";
 /**
  * kintone api - nodejs client
  * Common function
  */
-const KintoneAPIException = require('../exception/KintoneAPIException');
 
 class Common {
   /**
@@ -24,4 +24,4 @@ class Common {
 
 }
 
-module.exports = new Common();
+export default new Common();

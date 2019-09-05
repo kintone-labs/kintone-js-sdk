@@ -41,4 +41,4 @@ class GetAppDeployStatusRequest {
     return JSON.stringify(this.toJSON());
   }
 }
-module.exports = GetAppDeployStatusRequest;
+export default GetAppDeployStatusRequest;

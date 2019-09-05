@@ -1,12 +1,12 @@
+import CommentMention from "./CommentMention";
+import CommentContent from "./CommentContent";
 /**
  * kintone api - nodejs client
  * Comment model
  */
 
-module.exports = {
-  // TODO: Write unit test
-  CommentContent: require('./CommentContent'),
-  // TODO: Write unit test
-  CommentMention: require('./CommentMention'),
-  //
+
+export default {
+  CommentContent,
+  CommentMention
 };
