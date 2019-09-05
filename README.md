@@ -11,9 +11,9 @@ REST API client of kintone for node.js and javascript
 ```
 
 ```
-$git clone https://github.com/kintone/kintone-ui-component.git
-$npm install
-$npm run build
+$ git clone https://github.com/kintone/kintone-ui-component.git
+$ npm install
+$ npm run build
 ```
 ### Output
 ```
@@ -23,7 +23,7 @@ $npm run build
 ```
 
 # Installation
-For CommonJS usage: npm i @kintone/kintone-js-sdk
+npm i @kintone/kintone-js-sdk
 
 # Usage
 * UMD: include <i>kintone-js-sdk.min.js</i> from <i>dist</i> folder <br/>
