@@ -43,7 +43,7 @@
     "@babel/runtime": "7.5.5",
     "@cybozu/eslint-config": "3.0.1",
     "babel-loader": "8.0.2",
-    "cross-env": "^5.2.1",
+    "cross-env": "5.2.1",
     "eslint": "5.0.0",
     "jest": "24.8.0",
     "nock": "9.6.0",
