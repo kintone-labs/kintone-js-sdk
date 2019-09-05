@@ -7,7 +7,8 @@ For CommonJS usage: npm i @kintone/kintone-js-sdk
 ## Note
 From v0.5.0 completely changed parameters of all modules' constructors and functions to single object parameters.
 If you will not use v0.5.0 or upper, please specify the version to install.<br/>
-ex.
+
+Ex.
 ```
 npm i @kintone/kintone-js-sdk@v0.4.2
 ```
