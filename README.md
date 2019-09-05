@@ -30,7 +30,7 @@ For CommonJS usage: npm i @kintone/kintone-js-sdk
 ```
 const kintone = window.kintoneJSSDK;
 ```
-* CommonJS: install kintone-js-sdk using "npm i @kintone/kintone-js-sdk"<br/>
+* CommonJS: install kintone-js-sdk using "npm i kintone-js-sdk"<br/>
 ```
 const kintone = require('@kintone/kintone-js-sdk')
 ```
