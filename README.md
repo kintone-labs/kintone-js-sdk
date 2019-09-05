@@ -23,7 +23,6 @@ const kintone = window.kintoneJSSDK;
 const kintone = require('@kintone/kintone-js-sdk')
 ```
 
-
 # Document
 [kintone-js-sdk](https://kintone.github.io/kintone-js-sdk)
 
