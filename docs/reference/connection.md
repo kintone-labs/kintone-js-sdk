@@ -147,7 +147,7 @@
 **Sample code**
 
 <details class="tab-container" open>
-<Summary>Set header of the Connection</Summary>
+<Summary>Add request option of the Connection</Summary>
 
 <strong class="tab-name">Javascript</strong>
 
