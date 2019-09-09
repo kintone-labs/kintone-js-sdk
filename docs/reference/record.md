@@ -172,7 +172,7 @@ Promise
 | params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
 | params.fields | Array<String\> | (optional) | List of field codes you want in the response.
 | params.totalCount | Boolean | (optional) | If "true", the request will retrieve total count of records match with query conditions.
-| params.seek | Boolean | (optional) | Default value is "false".<br> ・false：using offset method<br> You can get all records within limitation of offset.(※Around July 2020, cybozu plan to set an offset upper limit of 10,000)<br> You can not specify "offset" and "limit" clause on the query, when you use offset method because these clauses are already used internal.<br><br> ・true：using seek method<br>You get all records(over limitation of offset) in order by record ID. <br>But you can not specify "order by", "offset" and "limit" clause on the query, when you use seek method because these clauses are already used internal. |
+| params.seek | Boolean | (optional) | Default value is "false".<br> ・false：using offset method<br> You can get all records within limitation of offset.(※[Around July 2020, cybozu plan to set an offset upper limit of 10,000](https://developer.cybozu.io/hc/ja/articles/202331474#step2))<br> You can not specify "offset" and "limit" clause on the query, when you use offset method because these clauses are already used internal.<br><br> ・true：using seek method<br>You get all records(over limitation of offset) in order by record ID. <br>But you can not specify "order by", "offset" and "limit" clause on the query, when you use seek method because these clauses are already used internal. |
 
 *usage about offset and seek method*
 
