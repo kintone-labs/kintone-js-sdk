@@ -96,17 +96,26 @@ class Record {
    * @param {String} params.query
    * @param {Array<String>} params.fields
    * @param {Boolean} params.totalCount
+   * @param {Boolean} params.seek
    * @return {Promise} Promise
    */
-  getAllRecordsByQuery({app, query, fields, totalCount} = {}) {
-    return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null);
+  getAllRecordsByQuery({app, query, fields, totalCount, seek = false} = {}) {
+    return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
   }
 
-  getAllRecordsByQueryRecursive(app, query, fields, totalCount, offset, records) {
+  getAllRecordsByQueryRecursive(app, query, fields, totalCount, lastCount, records, seek) {
     let allRecords = records || [];
-    const offsetNum = offset || 0;
+    let validQuery;
+    let nextCountNum;
     const limit = LIMIT_RECORD;
-    const validQuery = (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
+    if (seek) {
+      validQuery = this.createValidQueryForSeek(query, lastCount, limit);
+      if (fields && fields.length > 0 && fields.indexOf('$id') <= -1) {
+        fields.push('$id');
+      }
+    } else {
+      validQuery = this.createValidQueryForOffset(query, lastCount, limit);
+    }
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
     return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
       allRecords = allRecords.concat(response.records);
@@ -116,9 +125,27 @@ class Record {
           totalCount: totalCount ? allRecords.length : null
         };
       }
-      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, offsetNum + limit, allRecords);
+      if (seek) {
+        nextCountNum = response.records[limit - 1].$id.value;
+      } else {
+        nextCountNum = lastCount + limit;
+      }
+      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, nextCountNum, allRecords, seek);
     });
   }
+
+  createValidQueryForOffset(query, offset, limit) {
+    const offsetNum = offset || 0;
+    return (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
+  }
+
+  createValidQueryForSeek(query, lastRecord, limit) {
+    const lastRecordId = lastRecord || 0;
+    return (query)
+      ? `$id > ${lastRecordId} and (${query}) order by $id asc limit ${limit}`
+      : `$id > ${lastRecordId} order by $id asc limit ${limit}`;
+  }
+
 
   /**
    * Add the record
@@ -203,7 +230,7 @@ class Record {
       const begin = index * LIMIT_POST_RECORD;
       const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + LIMIT_POST_RECORD;
       const recordsPerRequest = records.slice(begin, end);
-      bulkRequest.addRecords({app: app,records: recordsPerRequest});
+      bulkRequest.addRecords({app: app, records: recordsPerRequest});
     }
     return bulkRequest.execute();
   }
