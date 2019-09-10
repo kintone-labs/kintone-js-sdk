@@ -130,7 +130,7 @@ class Connection extends BaseConnection {
       this.USER_AGENT = headersRequest[CONNECTION_CONST.BASE.USER_AGENT];
     });
     // Set request options
-    const requestOptions = this.options;
+    const requestOptions = this.copyObject(this.options);
     requestOptions.method = method;
     requestOptions.url = uri;
 
