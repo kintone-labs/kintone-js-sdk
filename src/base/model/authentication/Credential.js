@@ -21,8 +21,12 @@ class Credential {
      * Get password of Credential model
      * @return {String}
      */
+
+
   getPassword() {
     return this.password;
   }
+
 }
-module.exports = Credential;
+
+export default Credential;

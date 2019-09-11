@@ -1,10 +1,9 @@
-const fs = require('fs');
-const BaseAuth = require('../../base/main').Auth;
-
-
+import { Auth as BaseAuth } from "../../base/main";
+import fs from "fs";
 /**
  * Authentication module
  */
+
 class Auth extends BaseAuth {
   constructor(basicAuth, passwordAuth, apiToken) {
     super(basicAuth, passwordAuth, apiToken);
@@ -42,7 +41,6 @@ class Auth extends BaseAuth {
       throw new Error(`File path is not valid`);
     }
   }
-
   /**
    * Get the client certificate data
    * @return {cert}
@@ -60,4 +58,4 @@ class Auth extends BaseAuth {
   }
 }
 
-module.exports = Auth;
+export default Auth;

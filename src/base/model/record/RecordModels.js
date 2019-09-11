@@ -1,47 +1,58 @@
+import AddCommentRequest from "./comment/AddCommentRequest";
+import GetCommentsRequest from "./comments/GetCommentRequest";
+import DeleteCommentRequest from "./comment/DeleteCommentRequest";
+import RecordsUpdateKey from "./record/RecordUpdateKey";
+import RecordsUpdateStatusItem from "./record/UpdateRecordStatusItem";
+import RecordsUpdateItem from "./record/RecordUpdateItem";
+import RecordUpdateStatusItem from "./record/UpdateRecordStatusItem";
+import UpdateRecordAssigneesRequest from "./record/UpdateRecordAssigneesRequest";
+import UpdateRecordStatusRequest from "./record/UpdateRecordStatusRequest";
+import DeleteRecordsRequest from "./records/DeleteRecordsRequest";
+import UpdateRecordsRequest from "./records/UpdateRecordsRequest";
+import UpdateRecordRequest from "./record/UpdateRecordRequest";
+import AddRecordsRequest from "./records/AddRecordsRequest";
+import AddRecordRequest from "./record/AddRecordRequest";
+import GetRecordsRequest from "./records/GetRecordsRequest";
+import GetRecordRequest from "./record/GetRecordRequest";
 /**
  * kintone api - nodejs client
  * Record model
  */
+// TODO,
 
-module.exports = {
-  // TODO: Write unit test
-  GetRecordRequest: require('./record/GetRecordRequest'),
-  // TODO: Write unit test
-  GetRecordsRequest: require('./records/GetRecordsRequest'),
 
+export default {
   // TODO: Write unit test
-  AddRecordRequest: require('./record/AddRecordRequest'),
+  GetRecordRequest,
   // TODO: Write unit test
-  AddRecordsRequest: require('./records/AddRecordsRequest'),
-
+  GetRecordsRequest,
   // TODO: Write unit test
-  UpdateRecordRequest: require('./record/UpdateRecordRequest'),
+  AddRecordRequest,
   // TODO: Write unit test
-  UpdateRecordsRequest: require('./records/UpdateRecordsRequest'),
-
+  AddRecordsRequest,
   // TODO: Write unit test
-  DeleteRecordsRequest: require('./records/DeleteRecordsRequest'),
-
+  UpdateRecordRequest,
   // TODO: Write unit test
-  UpdateRecordStatusRequest: require('./record/UpdateRecordStatusRequest'),
+  UpdateRecordsRequest,
   // TODO: Write unit test
-
+  DeleteRecordsRequest,
   // TODO: Write unit test
-  UpdateRecordAssigneesRequest: require('./record/UpdateRecordAssigneesRequest'),
-
+  UpdateRecordStatusRequest,
   // TODO: Write unit test
-  RecordUpdateStatusItem: require('./record/UpdateRecordStatusItem'),
   // TODO: Write unit test
-  RecordsUpdateItem: require('./record/RecordUpdateItem'),
+  UpdateRecordAssigneesRequest,
   // TODO: Write unit test
-  RecordsUpdateStatusItem: require('./record/UpdateRecordStatusItem'),
+  RecordUpdateStatusItem,
   // TODO: Write unit test
-  RecordsUpdateKey: require('./record/RecordUpdateKey'),
-
+  RecordsUpdateItem,
   // TODO: Write unit test
-  DeleteCommentRequest: require('./comment/DeleteCommentRequest'),
+  RecordsUpdateStatusItem,
   // TODO: Write unit test
-  GetCommentsRequest: require('./comments/GetCommentRequest'),
+  RecordsUpdateKey,
   // TODO: Write unit test
-  AddCommentRequest: require('./comment/AddCommentRequest'),
+  DeleteCommentRequest,
+  // TODO: Write unit test
+  GetCommentsRequest,
+  // TODO: Write unit test
+  AddCommentRequest
 };

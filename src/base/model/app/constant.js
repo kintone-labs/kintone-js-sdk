@@ -57,4 +57,4 @@ const constant = function() {
   return CONST;
 };
 
-module.exports = constant();
+export default constant();

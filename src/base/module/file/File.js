@@ -1,5 +1,5 @@
-const Connection = require('../../connection/Connection');
-const FileModel = require('../../model/file/FileModels');
+import FileModel from "../../model/file/FileModels";
+import Connection from "../../connection/Connection";
 
 /**
  * File module
@@ -38,4 +38,4 @@ class File {
     return this.connection.upload(fileName, fileContent);
   }
 }
-module.exports = File;
+export default File;

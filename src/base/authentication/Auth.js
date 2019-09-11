@@ -1,10 +1,10 @@
-const AUTH_CONST = require('./constant');
-const KintoneCredential = require('../model/authentication/Credential');
-const KintoneHTTPHeader = require('../model/http/HTTPHeader');
-
+import AUTH_CONST from './constant';
+import KintoneCredential from '../model/authentication/Credential';
+import KintoneHTTPHeader from '../model/http/HTTPHeader';
 /**
  * Authentication module
  */
+
 class Auth {
   constructor() {
     this.basicAuth = null;
@@ -99,4 +99,4 @@ class Auth {
   }
 }
 
-module.exports = Auth;
+export default Auth;

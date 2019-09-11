@@ -1,8 +1,8 @@
-const RecordUpdateKey = require('./RecordUpdateKey');
-
+import RecordUpdateKey from "./RecordUpdateKey";
 /**
  * RecordUpdateItem model
  */
+
 class RecordUpdateItem {
   /**
      * constructor
@@ -72,8 +72,11 @@ class RecordUpdateItem {
      * Convert this model to JSON string
      * @return {String}
      */
+
   toJSONString() {
     return JSON.stringify(this.toJSON());
   }
+
 }
-module.exports = RecordUpdateItem;
+
+export default RecordUpdateItem;

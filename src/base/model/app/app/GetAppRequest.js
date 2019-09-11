@@ -40,4 +40,4 @@ class GetAppRequest {
     return JSON.stringify(this.toJSON());
   }
 }
-module.exports = GetAppRequest;
+export default GetAppRequest;
