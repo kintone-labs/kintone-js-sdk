@@ -20,7 +20,7 @@ Step 2: Add **index.js** file to test/ folder
 <details class="tab-container" open>
 <Summary>Get record sample</Summary>
 
-<strong class="tab-name">Source code</strong>
+<strong class="tab-name">Promise</strong>
 <pre class="inline-code">
 
     const kintone = require('@kintone/kintone-js-sdk');
@@ -50,6 +50,43 @@ Step 2: Add **index.js** file to test/ folder
         // The promise function always reject with KintoneAPIExeption
         console.log(err.get());
     });
+
+</pre>
+
+<strong class="tab-name">async/await</strong>
+<pre class="inline-code">
+
+    const kintone = require('@kintone/kintone-js-sdk');
+
+    let auth = new kintone.Auth();
+    const passwordAuthParam = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
+    };
+    auth.setPasswordAuth(passwordAuthParam);
+
+    const connParam = {
+        domain: 'YOUR_DOMAIN',
+        auth: auth
+    };
+    const connection = new kintone.Connection(connParam);
+
+    const kintoneRecord = new kintone.Record({connection});
+
+    const params = {
+        app:  'YOUR_APPID',
+        id: 'RECORD_ID'
+    };
+    const getRecord = async () => {	
+        try {	
+            let recordResult = await kintoneRecord.getRecord(params);	
+            console.log(recordResult);	
+        } catch (error) {	
+            // The promise function always reject with KintoneAPIExeption	
+            console.log(error.get());	
+        }	
+    }	
+    getRecord();
 
 </pre>
 </details>
