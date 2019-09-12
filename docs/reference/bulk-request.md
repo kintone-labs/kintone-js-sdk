@@ -41,7 +41,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <pre class="inline-code">
 
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneBulkRequest = new kintone.BulkRequest({connection});
+  const kintoneBulkRequest = new kintone.BulkRequest({connection});
 
 </pre>
 
@@ -182,14 +182,18 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
   responseBulkRequest.then((resp) => {
     console.log(resp);
   }).catch((err) => {
-    if (Array.isArray(err)) {
+    // The error will be an array if there are errors occur in addRecord, addRecords, updateRecords, updateRecords,deleteRecords... function 
+    if (Array.isArray(err)) {  
         for (let i = 0; i < err.length; i++) {
+            // Need to check the type of error because err array can have some empty object like: 
+            // [KintoneAPIException ,{},{},{},{}]
             if (err[i] instanceof kintoneJSSDK.KintoneAPIException) {
                 console.log(err[i].get());
-            }
-            
+            }   
         }
-    } else {
+    } 
+    // The error will be a KintoneAPIException if setting wrong Auth, Connection ... for BulkRequest
+    else {  
         console.log(err.get());
     }
   });
@@ -210,14 +214,15 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
   responseBulkRequest.then((resp) => {
     console.log(resp);
   }).catch((err) => {
-    if (Array.isArray(err)) {
+    if (Array.isArray(err)) {  // The error will be an array if there are errors occur in addRecord, addRecords, updateRecords, updateRecords,deleteRecords... function 
         for (let i = 0; i < err.length; i++) {
+            // Need to check the type of error because err array can have some empty object like: 
+            // [KintoneAPIException ,{},{},{},{}]
             if (err[i] instanceof kintone.KintoneAPIException) {
                 console.log(err[i].get());
             }
-            
         }
-    } else {
+    } else {  // the error will be an element if setting wrong Auth, Connection ... for BulkRequest
         console.log(err.get());
     }
   });
