@@ -8,7 +8,8 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params | Object | (optional) | `This parameter is required for Nodejs` <br>Constructor params.
+| connection | [Connection](../connection) | (optional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
 
 **Sample code**
 
@@ -70,7 +71,7 @@ Promise
   kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -85,7 +86,7 @@ Promise
   kintoneRecord.getRecord({app, id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -130,7 +131,7 @@ Promise
   kintoneRecord.getRecords({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -150,7 +151,7 @@ Promise
   kintoneRecord.getRecords({app, query, fields, totalCount}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -335,7 +336,7 @@ Promise
   kintoneRecord.addRecord({app, record}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -355,7 +356,7 @@ Promise
   kintoneRecord.addRecord({app, record}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -402,7 +403,7 @@ Promise
   kintoneRecord.addRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -426,7 +427,7 @@ Promise
   kintoneRecord.addRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -649,7 +650,7 @@ Promise
   kintoneRecord.updateRecordByID({app, id, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -671,7 +672,7 @@ Promise
   kintoneRecord.updateRecordByID({app, id, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -721,7 +722,7 @@ Promise
   kintoneRecord.updateRecordByUpdateKey({app, updateKey, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -742,11 +743,11 @@ Promise
     },
     // Another fieldcode here
   };
-  const revision = /*{revision_of_record}*/;
-  kintoneRecord.updateRecordByUpdateKey(app, updateKey, record, revision).then((rsp) => {
+  const revision = REVISION_OF_RECORD;
+  kintoneRecord.updateRecordByUpdateKey({app, updateKey, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -802,7 +803,7 @@ Promise
   kintoneRecord.updateRecords({app, records}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
-      // This SDK return err with KintoneAPIExeption
+      // This SDK return err with KintoneAPIException
       console.log(err.get());
     });
 
@@ -835,7 +836,7 @@ Promise
   kintoneRecord.updateRecords({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1064,7 +1065,7 @@ Promise
   kintoneRecord.deleteRecords({app, ids}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
-      // This SDK return err with KintoneAPIExeption
+      // This SDK return err with KintoneAPIException
       console.log(err.get());
     });
 
@@ -1079,7 +1080,7 @@ Promise
   kintoneRecord.deleteRecords({app, ids}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1119,7 +1120,7 @@ Promise
   kintoneRecord.deleteRecordsWithRevision({app, idsWithRevision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1136,7 +1137,7 @@ Promise
   kintoneRecord.deleteRecordsWithRevision({app, idsWithRevision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1345,7 +1346,7 @@ Promise
   kintoneRecord.upsertRecord({app, updateKey, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1370,7 +1371,7 @@ Promise
   kintoneRecord.upsertRecord({app, updateKey, record, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1556,7 +1557,7 @@ Promise
   kintoneRecord.updateRecordAssignees({app, id, assignees, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1574,7 +1575,7 @@ Promise
   kintoneRecord.updateRecordAssignees({app, id, assignees, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1619,7 +1620,7 @@ Promise
   kintoneRecord.updateRecordStatus({app, id, action, assignee, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1638,7 +1639,7 @@ Promise
   kintoneRecord.updateRecordStatus({app, id, action, assignee, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1685,7 +1686,7 @@ Promise
   kintoneRecord.updateRecordsStatus({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1709,7 +1710,7 @@ Promise
   kintoneRecord.updateRecordsStatus({app, records}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1744,14 +1745,14 @@ Promise
 <pre class="inline-code">
 
   var app = YOUR_APP_ID;
-  var id = YOUR_RECORD_ID;
+  var record = YOUR_RECORD_ID;
   var order = 'your_order_type'; // asc or desc
   var offset = 'your_offset_number';
   var limit = 'your_limit number';
-  kintoneRecord.getComments({app, id, order, offset, limit}).then((rsp) => {
+  kintoneRecord.getComments({app, record, order, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1762,14 +1763,14 @@ Promise
 <pre class="inline-code">
 
   const app = YOUR_APP_ID;
-  const id = YOUR_RECORD_ID;
-  const order = /*{your_order_type}*/; // asc or desc
-  const offset = /*{your_offset_number}*/;
-  const limit = /*{your_limit number}*/;
-  kintoneRecord.getComments({app, id, order, offset, limit}).then((rsp) => {
+  const record = YOUR_RECORD_ID;
+  const order = 'your_order_type'; // asc or desc
+  const offset = 'your_offset_number';
+  const limit = 'your_limit number';
+  kintoneRecord.getComments({app, record, order, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1783,6 +1784,7 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
+| params | Object | yes | Params to add comment
 | params.app | Integer | yes | The kintone app ID |
 | params.record | Integer | yes | The ID of record |
 | params.comment | JSONObject | yes | About the format, please look the sample below or [reference](#reference) at the end of this page.|
@@ -1815,7 +1817,7 @@ Promise
   kintoneRecord.addComment({app, record, comment}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1838,11 +1840,11 @@ Promise
     ]
   };
   kintoneRecord.addComment({app, record, comment}).then((rsp) => {
-      console.log(rsp);
-    }).catch((err) => {
-      // This SDK return err with KintoneAPIExeption
-      console.log(err.get());
-    });
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err.get());
+  });
 
 </pre>
 
@@ -1878,7 +1880,7 @@ Promise
   kintoneRecord.deleteComment({app, record, comment}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1894,7 +1896,7 @@ Promise
   kintoneRecord.deleteComment({app, record, comment}).then((rsp) => {
       console.log(rsp);
     }).catch((err) => {
-      // This SDK return err with KintoneAPIExeption
+      // This SDK return err with KintoneAPIException
       console.log(err.get());
     });
     

@@ -9,7 +9,7 @@ Download and upload file via kintone Rest API.
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | The parameters that include **connection** property
-| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. <br> Required in  If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
 **Sample code**
 
@@ -71,7 +71,7 @@ Promise
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 </pre>
@@ -86,7 +86,7 @@ Promise
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -123,7 +123,7 @@ Promise
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -163,7 +163,7 @@ Promise
     //file blob
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -177,7 +177,7 @@ Promise
     outPutFilePath: 'your_output_directory'
   };
   kintoneFile.download(params).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
   

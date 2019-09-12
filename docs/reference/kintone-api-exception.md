@@ -25,7 +25,7 @@ Handle error responses from kintone Rest API
 
     var appID = {your_invalid_app_id};
     kintoneApp.getApp(appID).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
     });
 
@@ -37,7 +37,7 @@ Handle error responses from kintone Rest API
 
     let appID = {your_invalid_app_id};
     kintoneApp.getApp(appID).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
     });
     
@@ -81,7 +81,7 @@ The result of Promise.Reject()
 
     var appID = {your_invalid_app_id};
     kintoneApp.getApp(appID).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.getAll());
     });
 
@@ -94,7 +94,7 @@ The result of Promise.Reject()
     let appID = {your_invalid_app_id};
     kintoneApp.getApp(appID)
         .catch((err) => {
-            // This SDK return err with KintoneAPIExeption
+            // This SDK return err with KintoneAPIException
             console.log(err.getAll());
         });
 

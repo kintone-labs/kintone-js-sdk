@@ -72,7 +72,7 @@ Promise
   kintoneApp.getApp({id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -86,7 +86,7 @@ Promise
   kintoneApp.getApp({id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
   
@@ -124,7 +124,7 @@ Promise
   kintoneApp.getApps({offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -139,7 +139,7 @@ Promise
   kintoneApp.getApps({offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -179,7 +179,7 @@ Promise
   kintoneApp.getAppsByIDs({ids, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -195,7 +195,7 @@ Promise
   kintoneApp.getAppsByIDs({ids, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -235,7 +235,7 @@ Promise
   kintoneApp.getAppsByCodes({codes, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -251,7 +251,7 @@ Promise
   kintoneApp.getAppsByCodes({codes, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -291,7 +291,7 @@ Promise
   kintoneApp.getAppsByName({name, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -308,7 +308,7 @@ Promise
   kintoneApp.getAppsByName({name, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -348,7 +348,7 @@ Promise
   kintoneApp.getAppsBySpaceIDs({spaceIds, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -364,7 +364,7 @@ Promise
   kintoneApp.getAppsBySpaceIDs({spaceIds, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -408,7 +408,7 @@ Promise
   kintoneApp.addPreviewApp({name, space, thread}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -424,7 +424,7 @@ Promise
   kintoneApp.addPreviewApp({name, space, thread}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -465,7 +465,7 @@ Promise
   kintoneApp.deployAppSettings({apps, revert}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -483,7 +483,7 @@ Promise
   kintoneApp.deployAppSettings({apps, revert}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -522,7 +522,7 @@ Promise
   kintoneApp.getAppDeployStatus({apps}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -539,7 +539,7 @@ Promise
   kintoneApp.getAppDeployStatus({apps}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -578,7 +578,7 @@ Promise
   kintoneApp.getViews({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -589,7 +589,7 @@ Promise
   kintoneApp.getViews({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -604,7 +604,7 @@ Promise
   kintoneApp.getViews({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -615,7 +615,7 @@ Promise
   kintoneApp.getViews({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -669,7 +669,7 @@ Promise
   kintoneApp.updateViews({app, views, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
   
@@ -699,7 +699,7 @@ Promise
   kintoneApp.updateViews({app, views, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -738,7 +738,7 @@ Promise
   kintoneApp.getGeneralSettings({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -749,7 +749,7 @@ Promise
   kintoneApp.getGeneralSettings({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -764,7 +764,7 @@ Promise
   kintoneApp.getGeneralSettings({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -775,7 +775,7 @@ Promise
   kintoneApp.getGeneralSettings({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -827,7 +827,7 @@ Promise
   kintoneApp.updateGeneralSettings(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -852,7 +852,7 @@ Promise
   kintoneApp.updateGeneralSettings(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -891,7 +891,7 @@ Promise
   kintoneApp.getFormFields({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -902,7 +902,7 @@ Promise
   kintoneApp.getFormFields({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -917,7 +917,7 @@ Promise
   kintoneApp.getFormFields({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -928,7 +928,7 @@ Promise
   kintoneApp.getFormFields({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -982,7 +982,7 @@ Promise
   kintoneApp.addFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1008,7 +1008,7 @@ Promise
   kintoneApp.addFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1062,7 +1062,7 @@ Promise
   kintoneApp.updateFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1088,7 +1088,7 @@ Promise
   kintoneApp.updateFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1135,7 +1135,7 @@ Promise
   kintoneApp.deleteFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1154,7 +1154,7 @@ Promise
   kintoneApp.deleteFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1192,7 +1192,7 @@ Promise
   kintoneApp.getFormLayout({app}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1201,7 +1201,7 @@ Promise
   kintoneApp.getFormLayout({app, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1216,7 +1216,7 @@ Promise
   kintoneApp.getFormLayout({app}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1225,7 +1225,7 @@ Promise
   kintoneApp.getFormLayout({app, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1286,7 +1286,7 @@ Promise
   kintoneApp.updateFormLayout({app, layout, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
+    // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
@@ -1319,7 +1319,7 @@ Promise
   kintoneApp.updateFormLayout({app, layout, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-  // This SDK return err with KintoneAPIExeption
+  // This SDK return err with KintoneAPIException
     console.log(err.get());
   });
 
