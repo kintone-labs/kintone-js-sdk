@@ -5,7 +5,7 @@ Latest version of kintone-js-sdk.
 
 | Versions| Documentation| Release| 
 | --- | --- | --- | 
-| 0.6.0| [Documentation](../)| [Release Notes](https://github.com/kintone/kintone-js-sdk/releases/tag/v0.6.0)|
+| 0.6.1| [Documentation](../)| [Release Notes](https://github.com/kintone/kintone-js-sdk/releases/tag/v0.6.1)|
 
 ## Past Versions
 Here you can find documentation for previous versions of kintone-js-sdk.
