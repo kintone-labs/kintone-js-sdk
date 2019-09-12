@@ -121,7 +121,7 @@ See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisiona
 
 [BulkRequest](#bulkrequest)
 
-### updateRecordAssignees({app, record, assignees, revision})
+### updateRecordAssignees({app, id, assignees, revision})
 
 **Parameter**
 
