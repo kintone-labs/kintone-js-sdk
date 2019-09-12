@@ -176,16 +176,22 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
     .addRecord({/*[Args]*/})
     .addRecords({/*[Args]*/})
     .updateRecords({/*[Args]*/})
-    .deleteRecords()
+    .deleteRecords({/*[Args]*/})
     .execute();
 
   responseBulkRequest.then((resp) => {
     console.log(resp);
   }).catch((err) => {
-    // write error to console
-    console.log(err.get());
-    // Throw error
-    err.throw();
+    if (Array.isArray(err)) {
+        for (let i = 0; i < err.length; i++) {
+            if (err[i] instanceof kintoneJSSDK.KintoneAPIException) {
+                console.log(err[i].get());
+            }
+            
+        }
+    } else {
+        console.log(err.get());
+    }
   });
 
 </pre>
@@ -198,16 +204,22 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
     .addRecord({/* [Args]*/})
     .addRecords({/* [Args]*/})
     .updateRecords({/* [Args]*/})
-    .deleteRecords()
+    .deleteRecords({/*[Args]*/})
     .execute();
 
   responseBulkRequest.then((resp) => {
     console.log(resp);
   }).catch((err) => {
-    // write error to console
-    console.log(err.get());
-    // Throw error
-    err.throw();
+    if (Array.isArray(err)) {
+        for (let i = 0; i < err.length; i++) {
+            if (err[i] instanceof kintone.KintoneAPIException) {
+                console.log(err[i].get());
+            }
+            
+        }
+    } else {
+        console.log(err.get());
+    }
   });
   
 </pre>
