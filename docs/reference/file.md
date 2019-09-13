@@ -9,7 +9,7 @@ Download and upload file via kintone Rest API.
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | The parameters that include **connection** property
-| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. <br> Required in  If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. <br> If initializing in the browser environment on kintone, this parameter can be omitted to use session authentication.
 
 **Sample code**
 
@@ -49,8 +49,8 @@ Download and upload file via kintone Rest API.
 | --- | --- | --- | --- |
 | params | Object | yes | The parameters that include **fileName, fileBlob, fileContent** properties
 | params.fileName | String | yes | The name of file
-| params.fileBlob | Blob | yes | `This param only use for Javascript` <br> The content of file
-| params.fileContent | Stream | yes | `This param only use for Nodejs` <br> The content of file
+| params.fileBlob | Blob | yes | `This parameter only use for Javascript` <br> The content of file
+| params.fileContent | Stream | yes | `This parameter only use for Nodejs` <br> The content of file
 
 **Return**
 
