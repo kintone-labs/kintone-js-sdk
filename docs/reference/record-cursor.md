@@ -2,7 +2,7 @@
 
 Provide functions to work with kintone Cursor
 
-Currently there's only cursor for records.
+Currently, there's the only cursor for records.
 
 ## Constructor
 
@@ -24,17 +24,30 @@ Currently there's only cursor for records.
 
     (function(kintoneJSSDK) {
         'use strict';
-        const kintoneConnection = kintoneJSSDK.Connection;
-        const kintoneRecordCursorModule = kintoneJSSDK.RecordCursor;
-        
-        // Init Connection
-        const conn = new kintoneConnection();
-        
-        // Init RecordCursor module
-        const kintoneRC = new kintoneRecordCursorModule({connection: conn})
-            
+        // with connection
+        // Define Authentication object
+        const kintoneAuth = new kintoneJSSDK.Auth();
+        const paramsAuth = {
+            username: 'YOUR_USER_NAME',
+            password: 'YOUR_PASSWORD'
+        };
+        kintoneAuth.setPasswordAuth(paramsAuth);
+
+        const paramsConnection = {
+            domain: 'YOUR_DOMAIN',
+            auth: kintoneAuth
+        };
+        const connection = new kintoneJSSDK.Connection(paramsConnection);
+        // with connection
+        var kintoneRC = new kintoneJSSDK.RecordCursor({connection});
+
+        // without connection, module will use session authentication of kintone
+        var kintoneRC = new kintoneJSSDK.RecordCursor();
+
         //...
+  
     }(window.kintoneJSSDK));
+
 
 </pre>
 
@@ -81,7 +94,7 @@ Currently there's only cursor for records.
 
 **Return**
 
-Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone. 
+**Promise&lt;CreateCursorResponse&gt;**
 
 | Name| Type| Description |
 | --- | --- | --- |
@@ -97,12 +110,12 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
 
 <pre class="inline-code">
     const rcOption = {
-        app: appID,
-        fields: [],
-        query: '',
-        size: 2
+        app: YOUR_APP_ID,
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
     }
-        
+
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
         const myCursor = creatCursorResponse;
         console.log('Cursor ID: ' + myCursor.id );
@@ -115,18 +128,17 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
 
 <pre class="inline-code">
     const rcOption = {
-        app: appID,
-        fields: [],
-        query: '',
-        size: 2
+        app: YOUR_APP_ID,
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
     }
 
-    kintoneRC.createCursor(rcOption)
-        .then(function(creatCursorResponse){
-            const myCursor = creatCursorResponse;
-            console.log('Cursor ID: ' + myCursor.id );
-            console.log('Total Count: ' + myCursor.totalCount );
-        })
+    kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
+        const myCursor = creatCursorResponse;
+        console.log('Cursor ID: ' + myCursor.id );
+        console.log('Total Count: ' + myCursor.totalCount );
+    })
 </pre>
 
 </details>

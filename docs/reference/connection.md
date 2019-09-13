@@ -25,8 +25,8 @@
 <pre class="inline-code">
     // Define Authentication object
     var paramsAuth = {
-        username: '{your_user_name}',
-        password: '{your_password}'
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     var kintoneAuth = new kintoneJSSDK.Auth();
     kintoneAuth.setPasswordAuth(paramsAuth);
@@ -40,13 +40,13 @@
     // Define connection that included guest space and auth
     var paramsConnection = {
         auth: kintoneAuth,
-        guestSpaceID: {guest_Space_ID}
+        guestSpaceID: GUEST_SPACE_ID
     };
     var kintoneConnectionWithGuestSpaceAndAuthDemo = new kintoneJSSDK.Connection(paramsConnection);
 
     // Define connection without auth included guest space 
     var paramsConnection = {
-        guestSpaceID: {guest_Space_ID}
+        guestSpaceID: GUEST_SPACE_ID
     };
     var kintoneConnectionWithGuestSpaceDemo = new kintoneJSSDK.Connection(paramsConnection);
 </pre>
@@ -57,26 +57,26 @@
     const kintone = require('@kintone/kintone-js-sdk');
 
     // Define Authentication object
-    let kintoneAuth = new kintone.Auth();
-    let paramsAuth = {
-        username: '{your_user_name}';
-        password: '{your_password}'
+    const kintoneAuth = new kintone.Auth();
+    const paramsAuth = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setPasswordAuth(paramsAuth);
 
-    let paramsConnection = {
-        domain: 'my.domain.tld',
+    const paramsConnection = {
+        domain: 'YOUR_DOMAIN',
         auth: kintoneAuth
     };
-    let kintoneConnection = new kintone.Connection(paramsConnection);
+    const kintoneConnection = new kintone.Connection(paramsConnection);
 
     // Define connection that included guest space
-    let paramsConnection = {
-        domain: 'my.domain.tld',
+    const paramsConnection = {
+        domain: 'YOUR_DOMAIN',
         auth: kintoneAuth,
-        guestSpaceID: {guest_Space_ID}
+        guestSpaceID: GUEST_SPACE_ID
     };
-    let kintoneConnectionWithGuestSpaceDemo = new kintone.Connection(paramsConnection);
+    const kintoneConnectionWithGuestSpaceDemo = new kintone.Connection(paramsConnection);
 
 </pre>
 
@@ -118,7 +118,7 @@
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    let params = {
+    const params = {
         key: '{your_header_key}',
         value: '{your_header_value}'
     };
@@ -201,10 +201,10 @@
 
 <pre class="inline-code">
     const params = {
-        proxyHost: '{your_proxy_host}',
-        proxyPort: '{your_proxy_post}',
-        proxyUsername: '{your_proxy_user}',
-        proxyPassword: '{your_proxy_password}'
+        proxyHost: 'YOUR_PROXY_HOST',
+        proxyPort: 'YOUR_PROXY_POST',
+        proxyUsername: 'YOUR_PROXY_USER',
+        proxyPassword: 'YOUR_PROXY_PASSWORD'
     };
     kintoneConnection.setProxy(params);
 </pre>
@@ -240,10 +240,10 @@
 
 <pre class="inline-code">
     const params = {
-        proxyHost: '{your_proxy_host}',
-        proxyPort: '{your_proxy_post}',
-        proxyUsername: '{your_proxy_user}',
-        proxyPassword: '{your_proxy_password}'
+        proxyHost: 'YOUR_PROXY_HOST',
+        proxyPort: 'YOUR_PROXY_POST',
+        proxyUsername: 'YOUR_PROXY_USER',
+        proxyPassword: 'YOUR_PROXY_PASSWORD'
     };
     kintoneConnection.setHttpsProxy(params);
 </pre>
