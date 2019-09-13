@@ -1,7 +1,7 @@
-import KintoneAPIException from "../../model/exception/KintoneAPIException";
-import CursorModel from "../../model/cursor/CursorModels";
-import common from "../../utils/Common";
-import Connection from "../../connection/Connection";
+import KintoneAPIException from '../../exception/KintoneAPIException';
+import CursorModel from '../../model/cursor/CursorModels';
+import common from '../../utils/Common';
+import Connection from '../../connection/Connection';
 /* eslint-disable no-loop-func */
 
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
