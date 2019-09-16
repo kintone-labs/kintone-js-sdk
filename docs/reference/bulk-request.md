@@ -28,11 +28,29 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest({connection});
+  (function(kintoneJSSDK) {
+      'use strict';
+      // with connection
+      // Define Authentication object
+      const kintoneAuth = new kintoneJSSDK.Auth();
+      const paramsAuth = {
+          username: 'YOUR_USER_NAME',
+          password: 'YOUR_PASSWORD'
+      };
+      kintoneAuth.setPasswordAuth(paramsAuth);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
+      const paramsConnection = {
+          domain: 'YOUR_DOMAIN',
+          auth: kintoneAuth
+      };
+      const connection = new kintoneJSSDK.Connection(paramsConnection);
+    // with connection
+    var kintoneBulkRequest = new kintoneJSSDK.BulkRequest({connection});
+
+    // without connection, module will use session authentication of kintone
+    var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
+  }(window.kintoneJSSDK));
+
 
 </pre>
 

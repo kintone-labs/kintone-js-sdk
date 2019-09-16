@@ -51,9 +51,9 @@ Handle error responses from kintone Rest API
 
 <pre class="inline-code">
     {
-        "id":"kintone_error_id",
-        "code":"{kintone_error_code}",
-        "message":"{kintone_error_message}",
+        "id":"KINTONE_ERROR_ID",
+        "code":"KINTONE_ERROR_CODE",
+        "message":"KINTONE_ERROR_MESSAGE",
         "errors": [
             /*errors items here*/
         ]

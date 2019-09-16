@@ -67,8 +67,8 @@
 
 <pre class="inline-code">
     var basicAuth = {
-        username: '{YOUR_USER_NAME}',
-        password: '{YOUR_PASSWORD}'
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setPasswordAuth(basicAuth);
 
@@ -78,8 +78,8 @@
 
 <pre class="inline-code">
     const basicAuth = {
-        username: '{YOUR_USER_NAME}',
-        password: '{YOUR_PASSWORD}'
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setPasswordAuth(basicAuth);
 
@@ -110,7 +110,7 @@
 
 <pre class="inline-code">
     var params = {
-        apiToken: '{your_token}'
+        apiToken: 'YOUR_TOKEN'
     };
     kintoneAuth.setApiToken(params);
 
@@ -120,7 +120,7 @@
 
 <pre class="inline-code">
     const params = {
-        apiToken: '{your_token}'
+        apiToken: 'YOUR_TOKEN'
     };
     kintoneAuth.setApiToken(params);
 

@@ -19,11 +19,31 @@ Download and upload file via kintone Rest API.
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneFile = new kintoneJSSDK.File({connection: connection});
+  (function(kintoneJSSDK) {
+      'use strict';
+      // with connection
+      // Define Authentication object
+      const kintoneAuth = new kintoneJSSDK.Auth();
+      const paramsAuth = {
+          username: 'YOUR_USER_NAME',
+          password: 'YOUR_PASSWORD'
+      };
+      kintoneAuth.setPasswordAuth(paramsAuth);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneFile = new kintoneJSSDK.File();
+      const paramsConnection = {
+          domain: 'YOUR_DOMAIN',
+          auth: kintoneAuth
+      };
+      const connection = new kintoneJSSDK.Connection(paramsConnection);
+      // with connection
+        // with connection
+    var kintoneFile = new kintoneJSSDK.File({connection: connection});
+
+    // without connection, module will use session authentication of kintone
+    var kintoneFile = new kintoneJSSDK.File();
+    // ...
+  }(window.kintoneJSSDK));
+
 
 </pre>
 
@@ -65,14 +85,14 @@ Promise
 
 <pre class="inline-code">
   var params = {
-    fileBlob: 'your_file_blob',
-    fileName: 'your_file_name'
+    fileBlob: 'YOUR_FILE_BLOB',
+    fileName: 'YOUR_FILE_NAME'
   };
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 </pre>
 
@@ -80,14 +100,14 @@ Promise
 
 <pre class="inline-code">
   const params = {
-    fileContent: fs.createReadStream('./cd.png'),
-    fileName: path.basename('./cd.png')
+    fileContent: fs.createReadStream('YOUR_FILE_PATH'),
+    fileName: path.basename('YOUR_FILE_PATH')
   };
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -118,13 +138,13 @@ Promise
 
 <pre class="inline-code">
   const params = {
-    filePath: './cd.png'
+    filePath: 'YOUR_FILE_PATH'
   };
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -156,15 +176,14 @@ Promise
 
 <pre class="inline-code">
   var params = {
-    fileKey: 'your_file_Key',
-    outPutFilePath: 'your_output_directory'
+    fileKey: 'YOUR_FILE_KEY'
   };
   kintoneFile.download(params).then(rsp => {
     //file blob
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -173,12 +192,12 @@ Promise
 
 <pre class="inline-code">
   const params = {
-    fileKey: 'your_file_Key',
-    outPutFilePath: 'your_output_directory'
+    fileKey: 'YOUR_FILE_KEY',
+    outPutFilePath: 'YOUR_OUTPUT_DIRECTORY'
   };
   kintoneFile.download(params).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
   
 </pre>
