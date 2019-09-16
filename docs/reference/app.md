@@ -342,8 +342,8 @@ Promise
 <pre class="inline-code">
 
   var spaceIds = [];
-  var limit = {your_limit_number};
-  var offset = {your_offset_number};
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsBySpaceIDs({spaceIds, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -997,7 +997,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
+  const app = YOUR_APP_ID;
   const fields = {
     'YOUR_FIELD_CODE': {
       'type': 'SINGLE_LINE_TEXT',
