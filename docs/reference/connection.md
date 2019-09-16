@@ -109,8 +109,8 @@
 
 <pre class="inline-code">
     var params = {
-        key: '{your_header_key}',
-        value: '{your_header_value}'
+        key: 'YOUR_HEADER_KEY',
+        value: 'YOUR_HEADER_VALUE'
     };
     kintoneConnection.setHeader(params);
 </pre>
@@ -119,8 +119,8 @@
 
 <pre class="inline-code">
     const params = {
-        key: '{your_header_key}',
-        value: '{your_header_value}'
+        key: 'YOUR_HEADER_KEY',
+        value: 'YOUR_HEADER_VALUE'
     };
     kintoneConnection.setHeader(params);
 
@@ -153,8 +153,8 @@
 
 <pre class="inline-code">
     var params = {
-        key: '{your_option_key}',
-        value: '{your_option_value}'
+        key: 'YOUR_OPTION_KEY',
+        value: 'YOUR_OPTION_VALUE'
     };
     kintoneConnection.addRequestOption(params);
 
@@ -163,9 +163,9 @@
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    let params = {
-        key: '{your_option_key}',
-        value: '{your_option_value}'
+    const params = {
+        key: 'YOUR_OPTION_KEY',
+        value: 'YOUR_OPTION_VALUE'
     };
     kintoneConnection.addRequestOption(params);
 </pre>

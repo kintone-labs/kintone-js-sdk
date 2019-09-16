@@ -186,7 +186,7 @@ Promise&lt;GetRecordCursorResponse&gt;
         console.log(getRecordsResponse);
     }).catch((err) => {
         // This SDK return err with KintoneAPIException
-        console.log(err.get());
+        console.log(err);
     });
 
 </pre>
@@ -210,7 +210,7 @@ Promise&lt;GetRecordCursorResponse&gt;
         console.log(getRecordsResponse);
     }).catch((err) => {
         // This SDK return err with KintoneAPIException
-        console.log(err.get());
+        console.log(err);
     });
 
 </pre>
@@ -261,7 +261,7 @@ Promise&lt;GetRecordsResponse&gt;
         console.log(getAllRecordsResponse);
     }).catch((err) => {
         // This SDK return err with KintoneAPIException
-        console.log(err.get());
+        console.log(err);
     });
 
 </pre>
@@ -285,7 +285,7 @@ Promise&lt;GetRecordsResponse&gt;
         console.log(getAllRecordsResponse);
     }).catch((err) => {
         // This SDK return err with KintoneAPIException
-        console.log(err.get());
+        console.log(err);
     });
 
 </pre>
@@ -330,7 +330,7 @@ None
         console.log('Cursor Deleted');
     }).catch((err) => {
         // This SDK return err with KintoneAPIException
-        console.log(err.get());
+        console.log(err);
     });
 
 </pre>
@@ -353,7 +353,7 @@ None
         console.log('Cursor Deleted');
     }).catch((err) => {
         // This SDK return err with KintoneAPIException
-        console.log(err.get());
+        console.log(err);
     });
 
 </pre>

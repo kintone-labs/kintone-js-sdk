@@ -55,7 +55,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 **Parameter**
 
-See at [Record - addRecord](../record#addrecordapp-record)
+See at [Record - addRecord](../record#addrecordparams)
 
 **Return**
 
@@ -65,7 +65,7 @@ See at [Record - addRecord](../record#addrecordapp-record)
 
 **Parameter**
 
-See at [Record - addRecords](../record#addrecordsapp-records)
+See at [Record - addRecords](../record#addrecordsparams)
 
 **Return**
 
@@ -75,7 +75,7 @@ See at [Record - addRecords](../record#addrecordsapp-records)
 
 **Parameter**
 
-See at [Record - updateRecordByID](../record#updaterecordbyidapp-id-record-revision)
+See at [Record - updateRecordByID](../record#updaterecordbyidparams)
 
 **Return**
 
@@ -85,7 +85,7 @@ See at [Record - updateRecordByID](../record#updaterecordbyidapp-id-record-revis
 
 **Parameter**
 
-See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyapp-updatekey-record-revision)
+See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyparams)
 
 **Return**
 
@@ -95,7 +95,7 @@ See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyapp-u
 
 **Parameter**
 
-See at [Record - updateRecords](../record#updaterecordsapp-records)
+See at [Record - updateRecords](../record#addrecordsparams)
 
 **Return**
 
@@ -105,7 +105,7 @@ See at [Record - updateRecords](../record#updaterecordsapp-records)
 
 **Parameter**
 
-See at [Record - deleteRecords](../record#deleterecordsapp-ids)
+See at [Record - deleteRecords](../record#deleterecordsparams)
 
 **Return**
 
@@ -115,7 +115,7 @@ See at [Record - deleteRecords](../record#deleterecordsapp-ids)
 
 **Parameter**
 
-See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionapp-idswithrevision)
+See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionparams)
 
 **Return**
 
@@ -125,7 +125,7 @@ See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisiona
 
 **Parameter**
 
-See at [Record - updateRecordAssignees](../record#updaterecordassigneesapp-id-assignees-revision)
+See at [Record - updateRecordAssignees](../record#updaterecordassigneesparams)
 
 **Return**
 
@@ -135,7 +135,7 @@ See at [Record - updateRecordAssignees](../record#updaterecordassigneesapp-id-as
 
 **Parameter**
 
-See at [Record - updateRecordStatus](../record#updaterecordstatusapp-id-action-assignee-revision)
+See at [Record - updateRecordStatus](../record#updaterecordstatusparams)
 
 **Return**
 
@@ -145,7 +145,7 @@ See at [Record - updateRecordStatus](../record#updaterecordstatusapp-id-action-a
 
 **Parameter**
 
-See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
+See at [Record - updateRecordsStatus](../record#updaterecordsstatusparams)
 
 **Return**
 
@@ -188,13 +188,13 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
             // Need to check the type of error because err array can have some empty object like: 
             // [KintoneAPIException ,{},{},{},{}]
             if (err[i] instanceof kintoneJSSDK.KintoneAPIException) {
-                console.log(err[i].get());
+                console.log(err[i]);
             }   
         }
     } 
     // The error will be a KintoneAPIException if setting wrong Auth, Connection ... for BulkRequest
     else {  
-        console.log(err.get());
+        console.log(err);
     }
   });
 
@@ -219,11 +219,11 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
             // Need to check the type of error because err array can have some empty object like: 
             // [KintoneAPIException ,{},{},{},{}]
             if (err[i] instanceof kintone.KintoneAPIException) {
-                console.log(err[i].get());
+                console.log(err[i]);
             }
         }
     } else {  // the error will be an element if setting wrong Auth, Connection ... for BulkRequest
-        console.log(err.get());
+        console.log(err);
     }
   });
   

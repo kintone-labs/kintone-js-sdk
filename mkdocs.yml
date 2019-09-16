@@ -34,5 +34,5 @@ nav:
   - Record Cursor: reference/record-cursor.md
   - Bulk Request: reference/bulk-request.md
   - App: reference/app.md
-  - Kintone APIException: reference/kintone-api-exception.md
+  - Kintone API Exception: reference/kintone-api-exception.md
   - File: reference/file.md
