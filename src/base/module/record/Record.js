@@ -1,8 +1,9 @@
-import common from "../../utils/Common";
-import RecordCursor from "../../module/cursor/RecordCursor";
-import BulkRequest from "../../module/bulkRequest/BulkRequest";
-import RecordModel from "../../model/record/RecordModels";
-import Connection from "../../connection/Connection";
+import common from '../../utils/Common';
+import RecordCursor from '../../module/cursor/RecordCursor';
+import BulkRequest from '../../module/bulkRequest/BulkRequest';
+import RecordModel from '../../model/record/RecordModels';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
 
 const LIMIT_UPDATE_RECORD = 100;
@@ -25,7 +26,7 @@ class Record {
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
   }
@@ -530,7 +531,7 @@ class Record {
       } else if (resp.records.length === 1) {
         return this.updateRecordByUpdateKey({app, updateKey, record, revision});
       }
-      throw new Error(`${updateKey.field} is not unique field`);
+      throw new KintoneAPIException(`${updateKey.field} is not unique field`);
     });
   }
 
@@ -544,7 +545,7 @@ class Record {
   upsertRecords({app, records} = {}) {
     const validRecords = Array.isArray(records) ? records : [];
     if (validRecords.length > LIMIT_UPSERT_RECORD) {
-      throw new Error(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
+      throw new KintoneAPIException(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
     }
 
     const doesExistSameFieldValue = (allRecords, comparedRecord) => {

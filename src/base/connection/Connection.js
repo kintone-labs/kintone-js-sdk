@@ -2,7 +2,7 @@ import axios from 'axios';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
 import KintoneAPIException from '../exception/KintoneAPIException';
-import packageFile from'../../../package.json';
+import packageFile from '../../../package.json';
 import CONNECTION_CONST from './constant';
 const DEFAULT_PORT = '443';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
@@ -305,7 +305,7 @@ class Connection {
    */
   setAuth(auth) {
     if (!(auth instanceof Auth)) {
-      throw new Error(`${auth} not an instance of Auth`);
+      throw new KintoneAPIException(`${auth} not an instance of Auth`);
     }
     this.auth = auth;
     return this;
@@ -319,4 +319,4 @@ class Connection {
     this.headers = header;
   }
 }
-export default Connection ;
+export default Connection;

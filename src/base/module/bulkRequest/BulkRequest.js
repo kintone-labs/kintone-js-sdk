@@ -1,8 +1,8 @@
-import RecordModel from "../../model/record/RecordModels";
-import BulkRequestItemModel from "../../model/bulkRequest/BulkRequestItem";
-import BulkRequestModel from "../../model/bulkRequest/BulkRequest";
-import Connection from "../../connection/Connection";
-import KintoneAPIException from "../../exception/KintoneAPIException";
+import RecordModel from '../../model/record/RecordModels';
+import BulkRequestItemModel from '../../model/bulkRequest/BulkRequestItem';
+import BulkRequestModel from '../../model/bulkRequest/BulkRequest';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 
 
 /**
@@ -16,7 +16,7 @@ class BulkRequest {
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
     this.bulkRequests = new BulkRequestModel();

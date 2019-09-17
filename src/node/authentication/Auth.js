@@ -1,5 +1,5 @@
-import { Auth as BaseAuth } from "../../base/main";
-import fs from "fs";
+import {Auth as BaseAuth, KintoneAPIException} from '../../base/main';
+import fs from 'fs';
 /**
  * Authentication module
  */
@@ -38,7 +38,7 @@ class Auth extends BaseAuth {
       this.passwordCert = password;
       return this;
     } catch (err) {
-      throw new Error(`File path is not valid`);
+      throw new KintoneAPIException(err);
     }
   }
   /**

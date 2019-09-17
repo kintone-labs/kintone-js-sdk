@@ -19,7 +19,7 @@ class RecordCursor {
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
     Promise.resolve().finally();
