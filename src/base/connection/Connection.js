@@ -1,4 +1,5 @@
 import axios from 'axios';
+import common from '../utils/Common';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
 import KintoneAPIException from '../exception/KintoneAPIException';
@@ -37,6 +38,15 @@ class Connection {
       });
   }
 
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return common.validateRequiredArgs(params);
+  }
   /**
    * request to URL
    * @param {String} methodName
@@ -280,6 +290,7 @@ class Connection {
    * @return {this}
    */
   addRequestOption({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.options[key] = value;
     return this;
   }
@@ -295,6 +306,7 @@ class Connection {
    * @return {this}
    */
   setHeader({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.headers.push(new HTTPHeader(key, value));
     return this;
   }
@@ -305,7 +317,7 @@ class Connection {
    */
   setAuth(auth) {
     if (!(auth instanceof Auth)) {
-      throw new KintoneAPIException(`${auth} not an instance of Auth`);
+      throw new KintoneAPIException(`${auth} is not an instance of Auth`);
     }
     this.auth = auth;
     return this;

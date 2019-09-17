@@ -13,7 +13,7 @@ class App {
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new KintoneAPIException(`${connection} not an instance of Connection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
   }

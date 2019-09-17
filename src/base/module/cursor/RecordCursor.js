@@ -37,6 +37,16 @@ class RecordCursor {
   }
 
   /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return common.validateRequiredArgs(params);
+  }
+
+  /**
    * Create a new record cursor
    * @param {Object} params
    * @param {Integer} params.app
@@ -74,6 +84,7 @@ class RecordCursor {
    * @return {Promise}
    */
   async getAllRecords({id} = {}) {
+    this._validateRequiredArgs({id});
     let next = true;
     let allRecords = [];
     while (next) {

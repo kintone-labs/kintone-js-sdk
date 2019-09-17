@@ -40,6 +40,16 @@ class Record {
   sendRequest(method, url, model) {
     return common.sendRequest(method, url, model, this.connection);
   }
+
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return common.validateRequiredArgs(params);
+  }
   /**
    * Get record by specific ID
    * TODO: Parse to response model
@@ -68,6 +78,7 @@ class Record {
   }
 
   getAllRecordsByCursor({app, query, fields} = {}) {
+    this._validateRequiredArgs({app});
     const kintoneRC = new RecordCursor({connection: this.connection});
     let myCursor;
     return kintoneRC.createCursor({app, fields, query, DEFAULT_CURSOR_SIZE})
@@ -101,6 +112,7 @@ class Record {
    * @return {Promise} Promise
    */
   getAllRecordsByQuery({app, query, fields, totalCount, seek = false} = {}) {
+    this._validateRequiredArgs({app});
     return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
   }
 
@@ -209,6 +221,7 @@ class Record {
    * @return {Promise} Promise
    */
   addAllRecords({app, records}) {
+    this._validateRequiredArgs({app, records});
     return this.addAllRecordsRecursive(app, records).then((response) => {
       return {
         results: response
@@ -388,6 +401,7 @@ class Record {
      * @return {}
   **/
   deleteAllRecordsByQuery({app, query} = {}) {
+    this._validateRequiredArgs({app});
     return this.getAllRecordsByQuery({app, query}).then((resp) => {
       const ids = [];
       const records = resp.records;
@@ -498,6 +512,7 @@ class Record {
     });
   }
   updateAllRecords({app, records} = {}) {
+    this._validateRequiredArgs({app, records});
     return this.updateAllRecordsRecursive(app, records).then(rsp => {
       return {
         'results': rsp
@@ -518,6 +533,7 @@ class Record {
    * @return {Promise}
    */
   upsertRecord({app, updateKey, record, revision} = {}) {
+    this._validateRequiredArgs({app, updateKey, record});
     const getRecordsParam = {
       app: app,
       query: `${updateKey.field} = "${updateKey.value}"`,
@@ -543,6 +559,7 @@ class Record {
    * @return {Promise}
    */
   upsertRecords({app, records} = {}) {
+    this._validateRequiredArgs({app, records});
     const validRecords = Array.isArray(records) ? records : [];
     if (validRecords.length > LIMIT_UPSERT_RECORD) {
       throw new KintoneAPIException(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);

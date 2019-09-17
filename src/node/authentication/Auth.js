@@ -3,14 +3,12 @@ import fs from 'fs';
 /**
  * Authentication module
  */
-
 class Auth extends BaseAuth {
   constructor(basicAuth, passwordAuth, apiToken) {
     super(basicAuth, passwordAuth, apiToken);
     this.cert = null;
     this.passwordCert = null;
   }
-
   /**
    * Set certificate for request by data
    * @param {Object} params
@@ -19,6 +17,7 @@ class Auth extends BaseAuth {
    * @return {this}
    */
   setClientCert({cert, password}) {
+    this._validateRequiredArgs({cert, password});
     this.cert = cert;
     this.passwordCert = password;
     return this;
@@ -32,6 +31,7 @@ class Auth extends BaseAuth {
    * @return {this}
    */
   setClientCertByPath({filePath, password}) {
+    this._validateRequiredArgs({filePath, password});
     try {
       const fileContent = fs.readFileSync(filePath);
       this.cert = fileContent;
