@@ -50,11 +50,19 @@ class KintoneAPIException extends Error {
   }
 
   /**
-   * get ErrorResponse
+   * get ErrorResponse by Json
    * @return {String}
    */
   get() {
     return this.errorResponse.toJSON();
+  }
+
+  /**
+   * get ErrorResponse
+   * @return {ErrorResponse}
+   */
+  getErrorResponse() {
+    return this.errorResponse;
   }
 
   /**
