@@ -2,7 +2,6 @@
 
 Gets general information of an App, including the name, description, related Space, creator and updater information.
 
->
 - Permissions to view the App is needed.
 - API Tokens cannot be used with this API.
 
@@ -68,7 +67,7 @@ Promise
 
 <pre class="inline-code">
 
-  var id = {your_app_id};
+  var id = YOUR_APP_ID;
   kintoneApp.getApp({id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -82,7 +81,7 @@ Promise
 
 <pre class="inline-code">
   
-  const id = 'your_app_id';
+  const id = YOUR_APP_ID;
   kintoneApp.getApp({id}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -119,8 +118,8 @@ Promise
 
 <pre class="inline-code">
 
-  var limit = {your_limit_number};
-  var offset = {your_offset_number};
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getApps({offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -134,8 +133,8 @@ Promise
 
 <pre class="inline-code">
 
-  const limit = 'your_limit_number';
-  const offset = 'your_offset_number';
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getApps({offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -173,9 +172,9 @@ Promise
 
 <pre class="inline-code">
 
-  var ids = [{YOUR_APP_ID_1}, {YOUR_APP_ID_2}, {YOUR_APP_ID_n}];
-  var limit = {your_limit_number};
-  var offset = {your_offset_number};
+  var ids = [YOUR_APP_ID_1, YOUR_APP_ID_2, YOUR_APP_ID_n];
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsByIDs({ids, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -189,9 +188,9 @@ Promise
 
 <pre class="inline-code">
 
-  const ids = ['YOUR_APP_ID_1', 'YOUR_APP_ID_2', 'YOUR_APP_ID_n'];
-  const limit = 'your_limit_number';
-  const offset = 'your_offset_number';
+  const ids = [YOUR_APP_ID_1, YOUR_APP_ID_2, YOUR_APP_ID_n];
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsByIDs({ids, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -230,8 +229,8 @@ Promise
 <pre class="inline-code">
 
   var codes = ['YOUR_APP_CODE_1', 'YOUR_APP_CODE_2'];
-  var limit = {your_limit_number};
-  var offset = {your_offset_number};
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsByCodes({codes, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -246,8 +245,8 @@ Promise
 <pre class="inline-code">
 
   const codes = ['YOUR_APP_CODE_1', 'YOUR_APP_CODE_2'];
-  const limit = 'your_limit_number';
-  const offset = 'your_offset_number';
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsByCodes({codes, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -285,9 +284,9 @@ Promise
 
 <pre class="inline-code">
 
-  var name = 'your app name';
-  var limit = {your_limit_number};
-  var offset = {your_offset_number};
+  var name = 'YOUR_APP_NAME';
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsByName({name, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -302,9 +301,9 @@ Promise
 
 <pre class="inline-code">
 
-  const name = 'your app name';
-  const limit = /*{your_limit_number}*/;
-  const offset = /*{your_offset_number}*/;
+  const name = 'YOUR_APP_NAME';
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsByName({name, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -343,8 +342,8 @@ Promise
 <pre class="inline-code">
 
   var spaceIds = [];
-  var limit = {your_limit_number};
-  var offset = {your_offset_number};
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsBySpaceIDs({spaceIds, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -359,8 +358,8 @@ Promise
 <pre class="inline-code">
 
   const spaceIds = [];
-  const limit = /*{your_limit_number}*/;
-  const offset = /*{your_offset_number}*/;
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
   kintoneApp.getAppsBySpaceIDs({spaceIds, offset, limit}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -402,9 +401,9 @@ Promise
 
 <pre class="inline-code">
 
-  var name = {your_app_name};
-  var space = {space_of_app};
-  var thread = {thread_id_in_space};
+  var name = 'YOUR_APP_NAME';
+  var space = YOUR_APP_SPACE_ID;
+  var thread = YOUR_THREAD_ID_OF_SPACE;
   kintoneApp.addPreviewApp({name, space, thread}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -418,9 +417,9 @@ Promise
 
 <pre class="inline-code">
 
-  const name = {your_app_name};
-  const space = {space_of_app};
-  const thread = {thread_id_in_space};
+  const name = 'YOUR_APP_NAME';
+  const space = YOUR_APP_SPACE_ID;
+  const thread = YOUR_THREAD_ID_OF_SPACE;
   kintoneApp.addPreviewApp({name, space, thread}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -458,7 +457,10 @@ Promise
 <pre class="inline-code">
 
   var apps = [
-    appPreview
+    {
+      revision: YOUR_REVISION,
+      app: YOUR_APP_ID
+    }
   // Another app preview here
   ];
   var revert = false;
@@ -476,7 +478,10 @@ Promise
 <pre class="inline-code">
 
   const apps = [
-      appPreview
+      {
+        revision: YOUR_REVISION,
+        app: YOUR_APP_ID
+      }
       // Another app preview here
   ];
   const revert = false;
@@ -516,7 +521,7 @@ Promise
 <pre class="inline-code">
 
   var apps = [
-    'your_app_id'
+    YOUR_APP_ID
   // Another app id here
   ];
   kintoneApp.getAppDeployStatus({apps}).then((rsp) => {
@@ -533,8 +538,8 @@ Promise
 <pre class="inline-code">
 
   const apps = [
-      'your_app_id'
-      // Another app id here
+    YOUR_APP_ID
+    // Another app id here
   ];
   kintoneApp.getAppDeployStatus({apps}).then((rsp) => {
     console.log(rsp);
@@ -573,8 +578,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
-  var lang = {language_code}; // Ex: JA
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
   kintoneApp.getViews({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -583,8 +588,8 @@ Promise
   });
 
   // Get a pre-live (preview) views
-  var app = {your_app_id};
-  var lang = {language_code}; // Ex: JA
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
   var isPreview = true;
   kintoneApp.getViews({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
@@ -599,8 +604,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
-  const lang = {language_code}; // Ex: JA
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
   kintoneApp.getViews({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -609,8 +614,8 @@ Promise
   });
 
   // Get a pre-live (preview) views
-  const app = {your_app_id};
-  const lang = {language_code}; // Ex: JA
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
   const isPreview = true;
   kintoneApp.getViews({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
@@ -649,22 +654,22 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = YOUR_APP_ID;
   var views = {
-    'Your_view_name': {
+    'YOUR_VIEW_NAME': {
       'index': 0,
-      'type': 'your_view_type', // Default: 'LIST', 'CALENDAR', 'CUSTOM'
-      'name': 'Your_view_name',
+      'type': 'YOUR_VIEW_TYPE', // Default: 'LIST', 'CALENDAR', 'CUSTOM'
+      'name': 'YOUR_VIEW_NAME',
       'fields': [
-        'your_field_code'
+        'YOUR_FIELD_CODE'
         // Another field code here
       ],
-      'filterCond': 'your_query',
-      'sort': 'your_sort'
+      'filterCond': 'YOUR_QUERY',
+      'sort': 'YOUR_SORT'
     }
     // Another view here
   };
-  var revision = 'settings_revision';
+  var revision = 'YOUR_SETTINGS_REVISION';
 
   kintoneApp.updateViews({app, views, revision}).then((rsp) => {
     console.log(rsp);
@@ -679,22 +684,22 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
+  const app = YOUR_APP_ID;
   const views = {
-      "Your_view_name": {
+      "YOUR_VIEW_NAME": {
         "index": 0,
-        "type": "your_view_type", // Default: 'LIST', 'CALENDAR', 'CUSTOM'
-        "name": "Your_view_name",
+        "type": "YOUR_VIEW_TYPE", // Default: 'LIST', 'CALENDAR', 'CUSTOM'
+        "name": "YOUR_VIEW_NAME",
         "fields": [
-          "your_field_code"
+          "YOUR_FIELD_CODE"
           // Another field code here
         ],
-        "filterCond": "your_query",
-        "sort": "your_sort"      
+        "filterCond": "YOUR_QUERY",
+        "sort": "YOUR_SORT"      
       }
       // Another view here
   }; 
-  const revision = 'settings_revision';
+  const revision = 'YOUR_SETTINGS_REVISION';
 
   kintoneApp.updateViews({app, views, revision}).then((rsp) => {
     console.log(rsp);
@@ -733,8 +738,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
-  var lang = {language_code}; // Ex: JA
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
   kintoneApp.getGeneralSettings({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -743,8 +748,8 @@ Promise
   });
 
   // Get a pre-live (preview) general settings
-  var app = {your_app_id};
-  var lang = {language_code}; // Ex: JA
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
   var isPreview = true;
   kintoneApp.getGeneralSettings({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
@@ -759,8 +764,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
-  const lang = {language_code}; // Ex: JA
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
   kintoneApp.getGeneralSettings({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -769,8 +774,8 @@ Promise
   });
 
   // Get a pre-live (preview) general settings
-  const app = {your_app_id};
-  const lang = {language_code}; // Ex: JA
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
   const isPreview = true;
   kintoneApp.getGeneralSettings({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
@@ -813,15 +818,15 @@ Promise
 <pre class="inline-code">
 
   var params= {
-    app: {your_app_id},
-    name: 'APP_NAME',
-    description: 'Here is app description.',
+    app: YOUR_APP_ID,
+    name: 'YOUR_APP_NAME',
+    description: 'YOUR_COOL_DESCRIPTION',
     icon: {
-      type: 'icon_type', // specified: FILE, PRESET
-      key: 'icon_key'
+      type: 'YOUR_ICON_TYPE', // specified: FILE, PRESET
+      key: 'YOUR_ICON_KEY'
     },
-    theme: 'your_theme', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
-    revision: 'settings_revision'
+    theme: 'YOUR_THEME', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
+    revision: 'YOUR_SETTINGS_REVISION'
   };
 
   kintoneApp.updateGeneralSettings(params).then((rsp) => {
@@ -838,15 +843,15 @@ Promise
 <pre class="inline-code">
 
   var params= {
-      app: {your_app_id},
-      name: 'APP_NAME',
-      description: 'Here is app description.',
+      app: YOUR_APP_ID,
+      name: 'YOUR_APP_NAME',
+      description: 'YOUR_COOL_DESCRIPTION',
       icon: {
-        type: 'icon_type', // specified: FILE, PRESET
-        key: 'icon_key'
+        type: 'YOUR_ICON_TYPE', // specified: FILE, PRESET
+        key: 'YOUR_ICON_KEY'
       },
-      theme: 'your_theme', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
-      revision: 'settings_revision'
+      theme: 'YOUR_THEME', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
+      revision: 'YOUR_SETTINGS_REVISION'
     };
 
   kintoneApp.updateGeneralSettings(params).then((rsp) => {
@@ -886,8 +891,8 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
-  var lang = {language_code}; // Ex: JA
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
   kintoneApp.getFormFields({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -896,8 +901,8 @@ Promise
   });
 
   // Get a pre-live (preview) form fields
-  var app = {your_app_id};
-  var lang = {language_code}; // Ex: JA
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
   var isPreview = true;
   kintoneApp.getFormFields({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
@@ -912,8 +917,8 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
-  const lang = {language_code}; // Ex: JA
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
   kintoneApp.getFormFields({app, lang}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -922,8 +927,8 @@ Promise
   });
 
   // Get a pre-live (preview) form fields
-  const app = {your_app_id};
-  const lang = {language_code}; // Ex: JA
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
   const isPreview = true;
   kintoneApp.getFormFields({app, lang, isPreview}).then((rsp) => {
     console.log(rsp);
@@ -966,11 +971,11 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = YOUR_APP_ID;
   var fields = {
-    YourFieldCode: {
+    'YOUR_FIELD_CODE': {
       'type': 'SINGLE_LINE_TEXT',
-      'code': 'YourFieldCode',
+      'code': 'YOUR_FIELD_CODE',
       'label': 'Text (single-line)',
       'noLabel': false,
       'required': true,
@@ -978,7 +983,7 @@ Promise
     }
     // Another field here
   };
-  var revision = 'the_revision_of_the_settings ';
+  var revision = 'YOUR_SETTINGS_REVISION';
   kintoneApp.addFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -992,11 +997,11 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
+  const app = YOUR_APP_ID;
   const fields = {
-    YourFieldCode: {
+    'YOUR_FIELD_CODE': {
       'type': 'SINGLE_LINE_TEXT',
-      'code': 'YourFieldCode',
+      'code': 'YOUR_FIELD_CODE',
       'label': 'Text (single-line)',
       'noLabel': false,
       'required': true,
@@ -1004,7 +1009,7 @@ Promise
     }
     // Another field here
   };
-  const revision = 'the_revision_of_the_settings ';
+  const revision = 'YOUR_SETTINGS_REVISION';
   kintoneApp.addFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -1046,11 +1051,11 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = YOUR_APP_ID;
   var fields = {
-    YourFieldCode: {
+    'YOUR_FIELD_CODE': {
       'type': 'SINGLE_LINE_TEXT',
-      'code': 'YourFieldCode',
+      'code': 'YOUR_FIELD_CODE',
       'label': 'Text (single-line)',
       'noLabel': false,
       'required': true,
@@ -1072,11 +1077,11 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
+  const app = YOUR_APP_ID;
   const fields = {
-    YourFieldCode: {
+    'YOUR_FIELD_CODE': {
       'type': 'SINGLE_LINE_TEXT',
-      'code': 'YourFieldCode',
+      'code': 'YOUR_FIELD_CODE',
       'label': 'Text (single-line)',
       'noLabel': false,
       'required': true,
@@ -1084,7 +1089,7 @@ Promise
     }
     // Another field here
   };
-  const revision = 'the_revision_of_the_settings ';
+  const revision = 'YOUR_SETTINGS_REVISION';
   kintoneApp.updateFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -1126,12 +1131,12 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = YOUR_APP_ID;
   var fields = [
-    'your_field_cde'
+    'YOUR_FIELD_CODE'
     // Another field code here
   ];
-  var revision = 'revision_of_the_Settings ';
+  var revision = 'YOUR_SETTINGS_REVISION';
   kintoneApp.deleteFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -1145,12 +1150,12 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
+  const app = YOUR_APP_ID;
   const fields = [
-    'your_field_cde'
+    'YOUR_FIELD_CODE'
     // Another field code here
   ];
-  const revision = 'revision_of_the_Settings ';
+  const revision = 'YOUR_SETTINGS_REVISION';
   kintoneApp.deleteFormFields({app, fields, revision}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
@@ -1187,7 +1192,7 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
+  var app = YOUR_APP_ID;
   // Get form layout
   kintoneApp.getFormLayout({app}).then((rsp) => {
     console.log(rsp);
@@ -1211,7 +1216,7 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
+  const app = YOUR_APP_ID;
   // Get form layout
   kintoneApp.getFormLayout({app}).then((rsp) => {
     console.log(rsp);
@@ -1263,24 +1268,24 @@ Promise
 
 <pre class="inline-code">
 
-  var app = {your_app_id};
-  var fisrtRowLayout = {
-    'type': 'kintone_layout_type',
+  var app = YOUR_APP_ID;
+  var firstRowLayout = {
+    'type': 'YOUR_LAYOUT_TYPE',
     'fields': [
       {
-        'type': 'kintone_field_type',
-        'code': 'your_field_code',
+        'type': 'YOUR_FIELD_TYPE',
+        'code': 'YOUR_FIELD_CODE',
         'size': {
-          'width': 'your_field_width'
+          'width': 'YOUR_FIELD_WIDTH'
         }
       }
     ]
   };
   var layout = [
-    fisrtRowLayout
+    firstRowLayout
     // Another row layout here
   ];
-  var revision = 'settings_revision';
+  var revision = 'YOUR_SETTINGS_REVISION';
 
   // Update form layout
   kintoneApp.updateFormLayout({app, layout, revision}).then((rsp) => {
@@ -1296,15 +1301,15 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
+  const app = YOUR_APP_ID;
   const fisrtRowLayout = {
-    'type': 'kintone_layout_type',
+    'type': 'YOUR_LAYOUT_TYPE',
     'fields': [
       {
-        'type': 'kintone_field_type',
-        'code': 'your_field_code',
+        'type': 'YOUR_FIELD_TYPE',
+        'code': 'YOUR_FIELD_CODE',
         'size': {
-          'width': 'your_field_width'
+          'width': 'YOUR_FIELD_WIDTH'
         }
       }
     ]
@@ -1313,7 +1318,7 @@ Promise
     fisrtRowLayout
   // Another row layout here
   ];
-  const revision = 'settings_revision';
+  const revision = 'YOUR_SETTINGS_REVISION';
 
   // Update form layout
   kintoneApp.updateFormLayout({app, layout, revision}).then((rsp) => {
@@ -1327,9 +1332,22 @@ Promise
 
 </details>
 
+
 ## Reference
 
-- [Get App](https://developer.kintone.io/hc/en-us/articles/212494888)`on developer network`
-- [Get Apps](https://developer.kintone.io/hc/en-us/articles/115005336727)`on developer network`
-- [Get Form fields](https://developer.kintone.io/hc/en-us/articles/115005509288)`on developer network`
-- [Get Form Layout](https://developer.kintone.io/hc/en-us/articles/115005509068)`on developer network`
+Developer network's reference:
+<br/>[Get App](https://developer.kintone.io/hc/en-us/articles/212494888)
+<br/>[Get Apps](https://developer.kintone.io/hc/en-us/articles/115005336727)
+<br/>[Get Form fields](https://developer.kintone.io/hc/en-us/articles/115005509288)
+<br/>[Add Form Fields](https://developer.kintone.io/hc/en-us/articles/115005506868)
+<br/>[Update Form Fields](https://developer.kintone.io/hc/en-us/articles/115005507788)
+<br/>[Delete Form Fields](https://developer.kintone.io/hc/en-us/articles/115005341187)
+<br/>[Get Form Layout](https://developer.kintone.io/hc/en-us/articles/115005509068)
+<br/>[Deploy App Settings](https://developer.kintone.io/hc/en-us/articles/115004881348)
+<br/>[Get App Deploy Status](https://developer.kintone.io/hc/en-us/articles/115004890947)
+<br/>[Get Views](https://developer.kintone.io/hc/en-us/articles/115004401787)
+<br/>[Update Views](https://developer.kintone.io/hc/en-us/articles/115004880588)
+<br/>[Get General Settings](https://developer.kintone.io/hc/en-us/articles/115004811668)
+<br/>[Update General Settings](https://developer.kintone.io/hc/en-us/articles/115004868628)
+<br/>[Get Form Layout](https://developer.kintone.io/hc/en-us/articles/115005509068)
+<br/>[Update Form Layout](https://developer.kintone.io/hc/en-us/articles/115005341427)
