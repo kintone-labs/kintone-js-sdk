@@ -134,7 +134,7 @@ Promise
 | --- | --- | --- | --- |
 | params | Object | yes | Get records params
 | params.app | Integer | yes | The kintone app ID
-| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/360019245194) that will specify what records will be responded.
 | params.fields | Array<String\> | (optional) | List of field codes you want in the response.
 | params.totalCount | Boolean | (optional) | If "true", the request will retrieve the total count of records match with query conditions.
 
@@ -200,7 +200,7 @@ Promise
 | --- | --- | --- | --- |
 | params | Object | yes | Get records by query params
 | params.app | Integer | yes | The kintone app ID
-| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/360019245194) that will specify what records will be responded.
 | params.fields | Array<String\> | (optional) | List of field codes you want in the response.
 | params.totalCount | Boolean | (optional) | If "true", the request will retrieve the total count of records match with query conditions.
 | params.seek | Boolean | (optional) | Default value is "false".<br> ・false：using offset method<br> You can get all records within the limits of offset.(※[Around July 2020, cybozu plan to set an offset upper limit of 10,000](https://developer.cybozu.io/hc/ja/articles/202331474#step2))<br> You can not specify "offset" and "limit" clause on the query when you use offset method because these clauses are already used internally.<br><br> ・true：using seek method<br>You get all records(over limitation of offset) in order by record ID. <br>But you can not specify "order by", "offset" and "limit" clause on the query when you use seek method because these clauses are already used internally. |
@@ -276,7 +276,7 @@ Promise
 | --- | --- | --- | --- |
 | params | Object | yes | Params to get all record by cursor
 | params.app | Integer | yes | The kintone app ID
-| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/360019245194) that will specify what records will be responded.
 | option.fields | Array<String\> | (optional) | List of field codes you want in the response.
 
 **Return**
@@ -1097,7 +1097,7 @@ Promise
 
 **Return**
 
-Promise
+None
 
 **Sample code**
 
@@ -1150,7 +1150,7 @@ Promise
 
 **Return**
 
-Promise
+None
 
 **Sample code**
 
@@ -1204,7 +1204,7 @@ Promise
 | --- | --- | --- | --- |
 | params | Object | yes | Delete all records by query
 | params.app | Integer | yes | The kintone app ID
-| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded. <br>The query parameter can't indicate limit and offset.
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/360019245194) that will specify what records will be responded. <br>The query parameter can't indicate limit and offset.
 
 **Return**
 

@@ -198,8 +198,8 @@
 <pre class="inline-code">
     const filePath = 'YOUR_CERT_PATH_FILE';
     const params = {
-        fileContent: fs.readFileSync(filePath),
-        certPassword: 'YOUR_CERT_FILE_PASSWORD'
+        cert: fs.readFileSync(filePath),
+        password: 'YOUR_CERT_FILE_PASSWORD'
     };
     //set client cert by file content and password
     kintoneAuth.setClientCert(params);
@@ -234,7 +234,7 @@
 <pre class="inline-code">
     const params = {
         filePath: 'YOUR_CERT_PATH_FILE',
-        certPassword: 'YOUR_CERT_FILE_PASSWORD'
+        password: 'YOUR_CERT_FILE_PASSWORD'
     };
     //set client cert by file path and password
     kintoneAuth.setClientCertByPath(params);

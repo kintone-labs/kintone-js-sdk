@@ -89,27 +89,22 @@ Currently, there's the only cursor for records.
 | params | Object | yes | Create cursor params
 | params.app | Integer | yes | The kintone app ID
 | params.fields | Array<String\> | (optional) | List of field codes you want in the response.
-| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| params.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/360019245194) that will specify what records will be responded.
 | params.size | Integer | (optional) | Number of records to retrieve per request. <br> Default: 100. <br>Maximum: 500.
 
 **Return**
 
-**Promise&lt;CreateCursorResponse&gt;**
-
-| Name| Type| Description |
-| --- | --- | --- |
-| id | String | The cursor ID
-| totalCount | Integer | The total count of records that match the query conditions
+Promise
 
 **Sample code**
 
 <details class="tab-container" open>
-<Summary>Init Record Cursor module</Summary>
+<Summary>Create cursor</Summary>
 
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-    const rcOption = {
+    var rcOption = {
         app: YOUR_APP_ID,
         fields: ['YOUR_FIELD_CODE'],
         query: 'YOUR_QUERY',
@@ -117,10 +112,13 @@ Currently, there's the only cursor for records.
     }
 
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
-        const myCursor = creatCursorResponse;
+        var myCursor = creatCursorResponse;
         console.log('Cursor ID: ' + myCursor.id );
         console.log('Total Count: ' + myCursor.totalCount );
-    })
+    }).catch((err) => {
+        // This SDK return err with KintoneAPIException
+        console.log(err);
+    });
 
 </pre>
 
@@ -138,7 +136,11 @@ Currently, there's the only cursor for records.
         const myCursor = creatCursorResponse;
         console.log('Cursor ID: ' + myCursor.id );
         console.log('Total Count: ' + myCursor.totalCount );
-    })
+    }).catch((err) => {
+        // This SDK return err with KintoneAPIException
+        console.log(err);
+    });
+
 </pre>
 
 </details>
@@ -156,7 +158,7 @@ Currently, there's the only cursor for records.
 
 **Return**
 
-Promise&lt;GetRecordCursorResponse&gt;
+Promise
 
 | Name| Type| Description |
 | --- | --- | --- |
@@ -172,11 +174,11 @@ Promise&lt;GetRecordCursorResponse&gt;
 
 <pre class="inline-code">
     var rcOption = {
-            app: appID,
-            fields: [],
-            query: '',
-            size: 2
-        }
+        app: YOUR_APP_ID,
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
+    }
         
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
         var myCursor = creatCursorResponse;
@@ -197,9 +199,9 @@ Promise&lt;GetRecordCursorResponse&gt;
 
     const rcOption = {
         app: YOUR_APP_ID,
-        fields: [],
-        query: '',
-        size: 2
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
     }
     
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
@@ -248,9 +250,9 @@ Promise&lt;GetRecordsResponse&gt;
 
     var rcOption = {
         app: YOUR_APP_ID,
-        fields: [],
-        query: '',
-        size: 2
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
     }
     
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
@@ -272,9 +274,9 @@ Promise&lt;GetRecordsResponse&gt;
 
     const rcOption = {
         app: YOUR_APP_ID,
-        fields: [],
-        query: '',
-        size: 2
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
     }
     
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
@@ -318,9 +320,9 @@ None
 
     var rcOption = {
         app: YOUR_APP_ID,
-        fields: [],
-        query: '',
-        size: 2
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
     }
     
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
@@ -341,9 +343,9 @@ None
 
     const rcOption = {
         app: YOUR_APP_ID,
-        fields: [],
-        query: '',
-        size: 2
+        fields: ['YOUR_FIELD_CODE'],
+        query: 'YOUR_QUERY',
+        size: YOUR_SIZE
     }
     
     kintoneRC.createCursor(rcOption).then(function(creatCursorResponse){
