@@ -140,7 +140,7 @@ class Connection {
     const request = axios(requestOptions).then(response => {
       return response.data;
     }).catch(err => {
-      throw new KintoneAPIException(err);
+      throw new KintoneAPIException(err.message, err);
     });
     this.refreshHeader();
     return request;

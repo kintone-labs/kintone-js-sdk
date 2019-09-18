@@ -39,7 +39,7 @@ class File extends FileModule {
         };
         fs.writeFileSync(outPutFilePath, fileContent, options);
       } catch (err) {
-        throw new KintoneAPIException(err);
+        throw new KintoneAPIException(err.message, err);
       }
     });
   }

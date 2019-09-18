@@ -11,7 +11,7 @@ class KintoneAPIException extends Error {
    * @param {*} args
    * @memberof KintoneAPIException
    */
-  constructor(errors = null, message = '', ...args) {
+  constructor(message = '', errors = null, ...args) {
     super(message, ...args);
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, KintoneAPIException);

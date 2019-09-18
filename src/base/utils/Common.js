@@ -20,7 +20,7 @@ class Common {
         return result;
       })
       .catch(err => {
-        throw new KintoneAPIException(err);
+        throw new KintoneAPIException(err.message, err);
       });
   }
 

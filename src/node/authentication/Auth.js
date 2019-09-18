@@ -38,7 +38,7 @@ class Auth extends BaseAuth {
       this.passwordCert = password;
       return this;
     } catch (err) {
-      throw new KintoneAPIException(err);
+      throw new KintoneAPIException(err.message, err);
     }
   }
   /**

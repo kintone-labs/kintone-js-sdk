@@ -202,7 +202,7 @@ class Connection extends BaseConnection {
       try {
         tls.createSecureContext(requestOptions.httpsAgent.options);
       } catch (err) {
-        return Promise.reject(new KintoneAPIException(err));
+        return Promise.reject(new KintoneAPIException(err.message, err));
       }
     }
     // set data to param if using GET method
@@ -216,7 +216,7 @@ class Connection extends BaseConnection {
     const request = axios(requestOptions).then(response => {
       return response.data;
     }).catch(err => {
-      throw new KintoneAPIException(err);
+      throw new KintoneAPIException(err.message, err);
     });
     this.refreshHeader();
     return request;
