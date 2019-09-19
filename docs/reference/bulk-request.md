@@ -263,4 +263,4 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusparams)
 
 ## Reference
 
-- [Get Record](https://developer.kintone.io/hc/en-us/articles/213149287/) `on developer network`
+- [Bulk Request](https://developer.kintone.io/hc/en-us/articles/213148977) `on developer network`
