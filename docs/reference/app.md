@@ -11,8 +11,8 @@ Gets general information of an App, including the name, description, related Spa
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (optional) | Constructor params.
-| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params | Object | (condition) | `Required for nodejs` <br>Constructor params.
+| params.connection | [Connection](../connection) | (condition) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
 **Sample code**
 
@@ -72,7 +72,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -86,7 +86,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
   
 </pre>
@@ -124,7 +124,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -139,7 +139,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -155,7 +155,7 @@ Promise
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | Get apps by ids params.
-| params.ids | Array<Integer\> | yes | The array of app ids
+| params.ids | Array<Integer\> | (optional) | The array of app ids
 | params.offset | Integer | (optional) | The offset off data result
 | params.limit | Integer | (optional) | The limit number of result
 
@@ -179,7 +179,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -195,7 +195,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -211,7 +211,7 @@ Promise
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | Get apps by codes params.
-| params.codes | Array<String\> | yes | The array of app codes
+| params.codes | Array<String\> | (optional) | The array of app codes
 | params.offset | Integer | (optional) | The offset off data result
 | params.limit | Integer | (optional) | The limit number of result
 
@@ -235,7 +235,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -251,7 +251,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -267,7 +267,7 @@ Promise
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | Get apps by name params.
-| params.name | String | yes | The app name
+| params.name | String | (optional) | The app name
 | params.offset | Integer | (optional) | The offset off data result
 | params.limit | Integer | (optional) | The limit number of result
 
@@ -291,7 +291,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -308,7 +308,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -324,7 +324,7 @@ Promise
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | Get apps by space ids params.
-| params.spaceIds | Array<Integer\> | yes | The array of space ids
+| params.spaceIds | Array<Integer\> | (optional) | The array of space ids
 | params.offset | Integer | (optional) | The offset off data result
 | params.limit | Integer | (optional) | The limit number of result
 
@@ -348,7 +348,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -364,7 +364,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -408,7 +408,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -424,7 +424,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -468,7 +468,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -489,7 +489,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -528,7 +528,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -545,7 +545,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -584,7 +584,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a pre-live (preview) views
@@ -595,7 +595,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -610,7 +610,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a pre-live (preview) views
@@ -621,7 +621,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -675,7 +675,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
   
 </pre>
@@ -705,7 +705,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -744,7 +744,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a pre-live (preview) general settings
@@ -755,7 +755,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -770,7 +770,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a pre-live (preview) general settings
@@ -781,7 +781,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -833,7 +833,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -858,7 +858,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -897,7 +897,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a pre-live (preview) form fields
@@ -908,7 +908,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -923,7 +923,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a pre-live (preview) form fields
@@ -934,7 +934,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -988,7 +988,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1014,7 +1014,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1068,7 +1068,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1094,7 +1094,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1141,7 +1141,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1160,7 +1160,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1198,7 +1198,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a preview (pre-live) form layout
@@ -1207,7 +1207,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1222,7 +1222,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
   // Get a preview (pre-live) form layout
@@ -1231,7 +1231,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1292,7 +1292,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>
@@ -1325,7 +1325,7 @@ Promise
     console.log(rsp);
   }).catch((err) => {
   // This SDK return err with KintoneAPIException
-    console.log(err.get());
+    console.log(err);
   });
 
 </pre>

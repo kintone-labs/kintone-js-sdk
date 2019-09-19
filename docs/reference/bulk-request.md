@@ -17,8 +17,8 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (optional) | Constructor params.
-| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params | Object | (condition) |`Required for nodejs`<br> Constructor params.
+| params.connection | [Connection](../connection) | (condition) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
 ### **Sample code**
 
@@ -113,7 +113,7 @@ See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyparam
 
 **Parameter**
 
-See at [Record - updateRecords](../record#addrecordsparams)
+See at [Record - updateRecords](../record#updaterecordsparams)
 
 **Return**
 
@@ -139,7 +139,7 @@ See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionp
 
 [BulkRequest](#bulkrequest)
 
-### updateRecordAssignees({app, id, assignees, revision})
+### updateRecordAssignees({app, record, assignees, revision})
 
 **Parameter**
 
@@ -225,8 +225,14 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusparams)
   const responseBulkRequest = kintoneBulkRequest
     .addRecord({/* [Args]*/})
     .addRecords({/* [Args]*/})
+    .updateRecordByID({/* [Args]*/})
+    .updateRecordByUpdateKey({/* [Args]*/})
     .updateRecords({/* [Args]*/})
     .deleteRecords({/*[Args]*/})
+    .deleteRecordsWithRevision({/* [Args]*/})
+    .updateRecordAssignees({/* [Args]*/})
+    .updateRecordStatus({/* [Args]*/})
+    .updateRecordsStatus({/* [Args]*/})
     .execute();
 
   responseBulkRequest.then((resp) => {

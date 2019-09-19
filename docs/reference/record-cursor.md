@@ -10,8 +10,8 @@ Currently, there's the only cursor for records.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (optional) | `This parameter is required for Nodejs` <br>Constructor params.
-| connection | [Connection](../connection) | (optional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
+| params | Object | (condition) | `Required for nodejs` <br>Constructor params.
+| connection | [Connection](../connection) | (condition) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
 
 **Sample code**
 
@@ -160,11 +160,6 @@ Promise
 
 Promise
 
-| Name| Type| Description |
-| --- | --- | --- |
-| records | Array | The array of records data
-| next | Boolean | Show states whether there are more records to get from kintone of cursor.
-
 **Sample code**
 
 <details class="tab-container" open>
@@ -232,12 +227,7 @@ Promise
 
 **Return**
 
-Promise&lt;GetRecordsResponse&gt;
-
-| Name| Type| Description |
-| --- | --- | --- |
-| records | Array | The array of records data
-| totalCount | Integer | The number of records response.
+Promise
 
 **Sample code**
 
