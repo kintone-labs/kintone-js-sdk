@@ -13,14 +13,14 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 ## Constructor
 
-### **Parameters**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | (conditional) |`Required for nodejs`<br> Constructor params.
 | params.connection | [Connection](../connection) | (conditional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
-### **Sample code**
+**Sample code**
 
 <details class="tab-container" open>
 <Summary>Init bulk request module</Summary>
