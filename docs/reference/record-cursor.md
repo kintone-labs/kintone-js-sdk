@@ -10,8 +10,8 @@ Currently, there's the only cursor for records.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (condition) | `Required for nodejs` <br>Constructor params.
-| connection | [Connection](../connection) | (condition) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
+| params | Object | (conditional) | `Required for nodejs` <br>Constructor params.
+| connection | [Connection](../connection) | (conditional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
 
 **Sample code**
 

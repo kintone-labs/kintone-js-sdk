@@ -8,8 +8,8 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (condition) | `Required for nodejs` <br>Constructor params.
-| connection | [Connection](../connection) | (condition) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
+| params | Object | (conditional) | `Required for nodejs` <br>Constructor params.
+| connection | [Connection](../connection) | (conditional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
 
 **Sample code**
 
@@ -1643,7 +1643,7 @@ Promise
 | params.app | Integer | yes | The kintone app ID.
 | params.id | Integer | yes | The record ID on kintone app.
 | params.action | String | yes | The Action name will be run.
-| params.assignee | String | (condition) | The next Assignee. Specify the Assignee's login name.<br>Required, if the "Assignee List" of the current status is set to "User chooses one assignee from the list to take action", and a selectable assignee exists.
+| params.assignee | String | (conditional) | The next Assignee. Specify the Assignee's login name.<br>Required, if the "Assignee List" of the current status is set to "User chooses one assignee from the list to take action", and a selectable assignee exists.
 | params.revision | Integer | (optional) | The revision of record
 
 **Return**

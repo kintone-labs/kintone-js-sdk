@@ -8,8 +8,8 @@ Download and upload file via kintone Rest API.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (condition) | `Required for nodejs`<br> The parameters that include **connection** property
-| params.connection | [Connection](../connection) | (condition) | The connection module of this SDK. <br> If initializing in the browser environment on kintone, this parameter can be omitted to use session authentication.
+| params | Object | (conditional) | `Required for nodejs`<br> The parameters that include **connection** property
+| params.connection | [Connection](../connection) | (conditional) | The connection module of this SDK. <br> If initializing in the browser environment on kintone, this parameter can be omitted to use session authentication.
 
 **Sample code**
 
