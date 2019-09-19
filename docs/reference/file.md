@@ -155,7 +155,7 @@ Promise
 
 > Download file from kintone
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |

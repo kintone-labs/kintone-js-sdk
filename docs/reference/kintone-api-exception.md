@@ -132,7 +132,7 @@ The result of Promise.Reject()
 
 > This function will throw result of [getAll()](#getall) function
 
-**Parameter **
+**Parameters**
 
 (none)
 

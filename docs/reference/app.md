@@ -150,7 +150,7 @@ Promise
 
 > Get multiple apps by list of ids
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -500,7 +500,7 @@ Promise
 
 > Gets the deployment status of the App settings for multiple Apps.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -556,7 +556,7 @@ Promise
 
 > Gets the View settings of a an App.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -632,7 +632,7 @@ Promise
 
 > Get field of form in kintone app
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -716,7 +716,7 @@ Promise
 
 > Gets the description, name, icon, revision and color theme of an App.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -792,7 +792,7 @@ Promise
 
 > Update the description, name, icon, revision and color theme of an App.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -869,7 +869,7 @@ Promise
 
 > Get field of form in kintone app
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -949,7 +949,7 @@ Promise
 
     - After using this method, use the [deployAppSettings](#deployappsettingsapps-revert) to deploy the settings to the live App.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1029,7 +1029,7 @@ Promise
 
     - After using this method, use the [deployAppSettings](#deployappsettingsapps-revert) to deploy the settings to the live App.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1109,7 +1109,7 @@ Promise
 
     - After using this method, use the [deployAppSettings](#deployappsettingsapps-revert) to deploy the settings to the live App.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1171,7 +1171,7 @@ Promise
 
 > Get layout of form in kintone app
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1246,7 +1246,7 @@ Promise
 
     - After using this method, use the [deployAppSettings](#deployappsettingsapps-revert) to deploy the settings to the live App.
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
