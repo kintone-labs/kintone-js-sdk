@@ -6,12 +6,12 @@ import KintoneErrorResponseModel from './ErrorResponse';
 class KintoneAPIException extends Error {
   /**
    * The constructor of KintoneAPIException functions
-   * @param {Error} [errors=null]
+   * @param {Error} [errors={}]
    * @param {String} [message='']
    * @param {*} args
    * @memberof KintoneAPIException
    */
-  constructor(message = '', errors = null, ...args) {
+  constructor(message = '', errors = {}, ...args) {
     super(message, ...args);
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, KintoneAPIException);
