@@ -4,7 +4,7 @@ Download and upload file via kintone Rest API.
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ Download and upload file via kintone Rest API.
 
 > Upload file into kintone
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -118,7 +118,7 @@ Promise
 
 > Upload file into kintone using <b>nodejs</b>
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |

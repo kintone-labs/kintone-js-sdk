@@ -7,7 +7,7 @@ Gets general information of an App, including the name, description, related Spa
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ Gets general information of an App, including the name, description, related Spa
 
 > Get single app
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ Promise
 
 > Get multiple apps
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -206,7 +206,7 @@ Promise
 
 > Get multiple apps by a list of codes name
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -262,7 +262,7 @@ Promise
 
 > Get multiple apps by name
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -319,7 +319,7 @@ Promise
 
 > Get multiple apps by list of space's ids
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -379,7 +379,7 @@ Promise
 
     - After using this method, use the [deployAppSettings](#deployappsettingsapps-revert) to deploy the settings to the live App.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -435,7 +435,7 @@ Promise
 
 > Updates the settings of a pre-live App to the live App.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |

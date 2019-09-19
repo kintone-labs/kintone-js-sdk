@@ -6,12 +6,12 @@ Currently, there's the only cursor for records.
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | (conditional) | `Required for nodejs` <br>Constructor params.
-| connection | [Connection](../connection) | (conditional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
+| params.connection | [Connection](../connection) | (conditional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
 
 **Sample code**
 
@@ -82,7 +82,7 @@ Currently, there's the only cursor for records.
 
 > Create a cursor.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -149,7 +149,7 @@ Promise
 
 > Get one block of records.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -218,7 +218,7 @@ Promise
 
 > Get all records 
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -288,7 +288,7 @@ Promise
 
 > Delete a cursor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |

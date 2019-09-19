@@ -6,7 +6,7 @@ Handle error responses from kintone Rest API
 
 ### get()
 
-**Parameter**
+**Parameters**
 
 (none)
 
@@ -66,7 +66,7 @@ Handle error responses from kintone Rest API
 
 ### getAll()
 
-**Parameter**
+**Parameters**
 
 (none)
 

@@ -6,7 +6,7 @@
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -88,7 +88,7 @@
 
 > Set new header of the [Connection](./#)
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -132,7 +132,7 @@
 
 > Add option that supported by [axios](https://www.npmjs.com/package/axios) option
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -178,7 +178,7 @@
 > This function is available on node.js environment only. <br>
 > On Browser environment, proxy settings are controlled by the Browser.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -217,7 +217,7 @@
 > This function is available on node.js environment only. <br>
 > On Browser environment, proxy settings are controlled by the Browser.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |

@@ -12,7 +12,7 @@
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 (none)
 
@@ -46,7 +46,7 @@
 
 > Set password authentication for Authentication module.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -91,7 +91,7 @@
 
 > Set Api Token for Authentication module.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -132,7 +132,7 @@
 
 > Set Basic authentication for Authentication module.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -176,7 +176,7 @@
 
 > Setting Authentication with the client certificate & password set.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -212,7 +212,7 @@
 
 > Setting Authentication with the client certificate & password set by file path
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |

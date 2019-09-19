@@ -4,12 +4,12 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | (conditional) | `Required for nodejs` <br>Constructor params.
-| connection | [Connection](../connection) | (conditional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
+| params.connection | [Connection](../connection) | (conditional) | The connection module of this SDK.<br>If initializing in a browser environment on kintone, this parameter can be `omitted` to use session authentication.
 
 **Sample code**
 
@@ -74,7 +74,7 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 > Retrieves details of 1 record from an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -128,7 +128,7 @@ Promise
 
 > Retrieves details of multiple records from an app using a query string.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -194,7 +194,7 @@ Promise
 >* Retrieves details of all records from an app using a query string.
 >* Number of records can be retrieved at once is greater than the default limitations
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -270,7 +270,7 @@ Promise
 >* Can't indicate limit and offset of the query.
 >* Number of records can be retrieved at once is greater than the default limitations
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -337,7 +337,7 @@ Promise
 
 >Add one record to an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -400,7 +400,7 @@ Promise
 
 >Add multiple records to an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -473,7 +473,7 @@ Promise
 >* Add multiple records to an app.
 >* Can insert over 2000 records to kintone app, but can't do the rollback.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -647,7 +647,7 @@ Promise
 
 > Updates details of 1 record in an app by specifying its record number.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -716,7 +716,7 @@ Promise
 
 > Updates details of 1 record in an app by a unique key.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -791,7 +791,7 @@ Promise
 
 > Updates details of multiple records in an app, by specifying their record number, or a different unique key.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -889,7 +889,7 @@ Promise
 >* Updates details of multiple records in an app, by specifying their record number, or a different unique key.
 >* Can update over 2000 records to kintone app, but can't do the rollback.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1087,7 +1087,7 @@ Promise
 
 > Delete multiple records in an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1140,7 +1140,7 @@ None
 
 > Delete multiple records in an app with revision.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1198,7 +1198,7 @@ None
 >* Deletes all records in an app by query string
 >* Can delete over 2000 records, but can't do the rollback.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1356,7 +1356,7 @@ Promise
 >* Insert or update a record to kintone app.
 >* Insert the record if the updateKey doesn't exist and update the record if the updateKey exists.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1433,7 +1433,7 @@ Promise
 >* If the records are over 1500, It is thrown Error.<br>
 >* Insert the records if the updateKey doesn't exist and update the records if the updateKey exists.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1574,7 +1574,7 @@ Promise
 
 > Update assignees of a record.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1635,7 +1635,7 @@ Promise
 
 > Updates the Status of a record of an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1699,7 +1699,7 @@ Promise
 
 > Updates the Status of multiple records of an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1770,7 +1770,7 @@ Promise
 
 > Retrieves multiple comments from a record in an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1832,7 +1832,7 @@ Promise
 
 >Add a comment to a record in an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -1906,7 +1906,7 @@ Promise
 
 >Delete a comment in a record in an app.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |

@@ -13,7 +13,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 ## Constructor
 
-### **Parameter**
+### **Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -71,7 +71,7 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 ### addRecord({app, record})
 
-**Parameter**
+**Parameters**
 
 See at [Record - addRecord](../record#addrecordparams)
 
@@ -81,7 +81,7 @@ See at [Record - addRecord](../record#addrecordparams)
 
 ### addRecords({app, records})
 
-**Parameter**
+**Parameters**
 
 See at [Record - addRecords](../record#addrecordsparams)
 
@@ -91,7 +91,7 @@ See at [Record - addRecords](../record#addrecordsparams)
 
 ### updateRecordByID({app, id, record, revision})
 
-**Parameter**
+**Parameters**
 
 See at [Record - updateRecordByID](../record#updaterecordbyidparams)
 
@@ -101,7 +101,7 @@ See at [Record - updateRecordByID](../record#updaterecordbyidparams)
 
 ### updateRecordByUpdateKey({app, updateKey, record, revision})
 
-**Parameter**
+**Parameters**
 
 See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyparams)
 
@@ -111,7 +111,7 @@ See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyparam
 
 ### updateRecords({app, records})
 
-**Parameter**
+**Parameters**
 
 See at [Record - updateRecords](../record#updaterecordsparams)
 
@@ -121,7 +121,7 @@ See at [Record - updateRecords](../record#updaterecordsparams)
 
 ### deleteRecords({app, ids})
 
-**Parameter**
+**Parameters**
 
 See at [Record - deleteRecords](../record#deleterecordsparams)
 
@@ -131,7 +131,7 @@ See at [Record - deleteRecords](../record#deleterecordsparams)
 
 ### deleteRecordsWithRevision({app, idsWithRevision})
 
-**Parameter**
+**Parameters**
 
 See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionparams)
 
@@ -141,7 +141,7 @@ See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionp
 
 ### updateRecordAssignees({app, record, assignees, revision})
 
-**Parameter**
+**Parameters**
 
 See at [Record - updateRecordAssignees](../record#updaterecordassigneesparams)
 
@@ -151,7 +151,7 @@ See at [Record - updateRecordAssignees](../record#updaterecordassigneesparams)
 
 ### updateRecordStatus({app, id, action, assignee, revision})
 
-**Parameter**
+**Parameters**
 
 See at [Record - updateRecordStatus](../record#updaterecordstatusparams)
 
@@ -161,7 +161,7 @@ See at [Record - updateRecordStatus](../record#updaterecordstatusparams)
 
 ### updateRecordsStatus({app, records})
 
-**Parameter**
+**Parameters**
 
 See at [Record - updateRecordsStatus](../record#updaterecordsstatusparams)
 
@@ -173,7 +173,7 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusparams)
 
 > Execute the bulk request and get data response
 
-**Parameter**
+**Parameters**
 
 (none)
 
@@ -191,10 +191,16 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusparams)
 <pre class="inline-code">
 
   var responseBulkRequest = kintoneBulkRequest
-    .addRecord({/*[Args]*/})
-    .addRecords({/*[Args]*/})
-    .updateRecords({/*[Args]*/})
+    .addRecord({/* [Args]*/})
+    .addRecords({/* [Args]*/})
+    .updateRecordByID({/* [Args]*/})
+    .updateRecordByUpdateKey({/* [Args]*/})
+    .updateRecords({/* [Args]*/})
     .deleteRecords({/*[Args]*/})
+    .deleteRecordsWithRevision({/* [Args]*/})
+    .updateRecordAssignees({/* [Args]*/})
+    .updateRecordStatus({/* [Args]*/})
+    .updateRecordsStatus({/* [Args]*/})
     .execute();
 
   responseBulkRequest.then((resp) => {
