@@ -6,13 +6,13 @@
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | The parameters that include **domain, auth, guestSpaceID** properties
-| params.domain | String | (condition) | `Required for nodejs` <br> The domain that is able to authenticate on kintone app
-| params.auth | [Auth](../authentication) | (condition) | `Required for nodejs` <br> The authentication object.
+| params.domain | String | (conditional) | `Required for nodejs` <br> The domain that is able to authenticate on kintone app
+| params.auth | [Auth](../authentication) | (conditional) | `Required for nodejs` <br> The authentication object.
 | params.guestSpaceID | Integer | (optional) | The guest space id. Use this parameter to connect to kintone guest space.
 
 **Sample code**
@@ -25,8 +25,8 @@
 <pre class="inline-code">
     // Define Authentication object
     var paramsAuth = {
-        username: '{your_user_name}',
-        password: '{your_password}'
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     var kintoneAuth = new kintoneJSSDK.Auth();
     kintoneAuth.setPasswordAuth(paramsAuth);
@@ -40,13 +40,13 @@
     // Define connection that included guest space and auth
     var paramsConnection = {
         auth: kintoneAuth,
-        guestSpaceID: {guest_Space_ID}
+        guestSpaceID: GUEST_SPACE_ID
     };
     var kintoneConnectionWithGuestSpaceAndAuthDemo = new kintoneJSSDK.Connection(paramsConnection);
 
     // Define connection without auth included guest space 
     var paramsConnection = {
-        guestSpaceID: {guest_Space_ID}
+        guestSpaceID: GUEST_SPACE_ID
     };
     var kintoneConnectionWithGuestSpaceDemo = new kintoneJSSDK.Connection(paramsConnection);
 </pre>
@@ -57,26 +57,26 @@
     const kintone = require('@kintone/kintone-js-sdk');
 
     // Define Authentication object
-    let kintoneAuth = new kintone.Auth();
-    let paramsAuth = {
-        username: '{your_user_name}';
-        password: '{your_password}'
+    const kintoneAuth = new kintone.Auth();
+    const paramsAuth = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setPasswordAuth(paramsAuth);
 
-    let paramsConnection = {
-        domain: 'my.domain.tld',
+    const paramsConnection = {
+        domain: 'YOUR_DOMAIN',
         auth: kintoneAuth
     };
-    let kintoneConnection = new kintone.Connection(paramsConnection);
+    const kintoneConnection = new kintone.Connection(paramsConnection);
 
     // Define connection that included guest space
-    let paramsConnection = {
-        domain: 'my.domain.tld',
+    const paramsConnection = {
+        domain: 'YOUR_DOMAIN',
         auth: kintoneAuth,
-        guestSpaceID: {guest_Space_ID}
+        guestSpaceID: GUEST_SPACE_ID
     };
-    let kintoneConnectionWithGuestSpaceDemo = new kintone.Connection(paramsConnection);
+    const kintoneConnectionWithGuestSpaceDemo = new kintone.Connection(paramsConnection);
 
 </pre>
 
@@ -88,7 +88,7 @@
 
 > Set new header of the [Connection](./#)
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -109,8 +109,8 @@
 
 <pre class="inline-code">
     var params = {
-        key: '{your_header_key}',
-        value: '{your_header_value}'
+        key: 'YOUR_HEADER_KEY',
+        value: 'YOUR_HEADER_VALUE'
     };
     kintoneConnection.setHeader(params);
 </pre>
@@ -118,9 +118,9 @@
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    let params = {
-        key: '{your_header_key}',
-        value: '{your_header_value}'
+    const params = {
+        key: 'YOUR_HEADER_KEY',
+        value: 'YOUR_HEADER_VALUE'
     };
     kintoneConnection.setHeader(params);
 
@@ -132,7 +132,7 @@
 
 > Add option that supported by [axios](https://www.npmjs.com/package/axios) option
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -153,8 +153,8 @@
 
 <pre class="inline-code">
     var params = {
-        key: '{your_option_key}',
-        value: '{your_option_value}'
+        key: 'YOUR_OPTION_KEY',
+        value: 'YOUR_OPTION_VALUE'
     };
     kintoneConnection.addRequestOption(params);
 
@@ -163,9 +163,9 @@
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    let params = {
-        key: '{your_option_key}',
-        value: '{your_option_value}'
+    const params = {
+        key: 'YOUR_OPTION_KEY',
+        value: 'YOUR_OPTION_VALUE'
     };
     kintoneConnection.addRequestOption(params);
 </pre>
@@ -178,7 +178,7 @@
 > This function is available on node.js environment only. <br>
 > On Browser environment, proxy settings are controlled by the Browser.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -201,10 +201,10 @@
 
 <pre class="inline-code">
     const params = {
-        proxyHost: '{your_proxy_host}',
-        proxyPort: '{your_proxy_post}',
-        proxyUsername: '{your_proxy_user}',
-        proxyPassword: '{your_proxy_password}'
+        proxyHost: 'YOUR_PROXY_HOST',
+        proxyPort: 'YOUR_PROXY_POST',
+        proxyUsername: 'YOUR_PROXY_USER',
+        proxyPassword: 'YOUR_PROXY_PASSWORD'
     };
     kintoneConnection.setProxy(params);
 </pre>
@@ -217,7 +217,7 @@
 > This function is available on node.js environment only. <br>
 > On Browser environment, proxy settings are controlled by the Browser.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -240,10 +240,10 @@
 
 <pre class="inline-code">
     const params = {
-        proxyHost: '{your_proxy_host}',
-        proxyPort: '{your_proxy_post}',
-        proxyUsername: '{your_proxy_user}',
-        proxyPassword: '{your_proxy_password}'
+        proxyHost: 'YOUR_PROXY_HOST',
+        proxyPort: 'YOUR_PROXY_POST',
+        proxyUsername: 'YOUR_PROXY_USER',
+        proxyPassword: 'YOUR_PROXY_PASSWORD'
     };
     kintoneConnection.setHttpsProxy(params);
 </pre>

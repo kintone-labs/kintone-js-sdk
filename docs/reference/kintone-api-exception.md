@@ -6,7 +6,7 @@ Handle error responses from kintone Rest API
 
 ### get()
 
-**Parameter**
+**Parameters**
 
 (none)
 
@@ -23,10 +23,12 @@ Handle error responses from kintone Rest API
 
 <pre class="inline-code">
 
-    var appID = {your_invalid_app_id};
-    kintoneApp.getApp(appID).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    var id = YOUR_APP_ID;
+    kintoneApp.getApp({id}).then((rsp) => {
+        console.log(rsp);
+    }).catch((err) => {
+        // This SDK return err with KintoneAPIException
+        console.log(err.get());
     });
 
 </pre>
@@ -35,10 +37,12 @@ Handle error responses from kintone Rest API
 
 <pre class="inline-code">
 
-    let appID = {your_invalid_app_id};
-    kintoneApp.getApp(appID).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    let id = YOUR_APP_ID;
+    kintoneApp.getApp({id}).then((rsp) => {
+        console.log(rsp);
+    }).catch((err) => {
+        // This SDK return err with KintoneAPIException
+        console.log(err.get());
     });
     
 </pre>
@@ -47,9 +51,9 @@ Handle error responses from kintone Rest API
 
 <pre class="inline-code">
     {
-        "id":"kintone_error_id",
-        "code":"{kintone_error_code}",
-        "message":"{kintone_error_message}",
+        "id":"KINTONE_ERROR_ID",
+        "code":"KINTONE_ERROR_CODE",
+        "message":"KINTONE_ERROR_MESSAGE",
         "errors": [
             /*errors items here*/
         ]
@@ -62,7 +66,7 @@ Handle error responses from kintone Rest API
 
 ### getAll()
 
-**Parameter**
+**Parameters**
 
 (none)
 
@@ -79,10 +83,12 @@ The result of Promise.Reject()
 
 <pre class="inline-code">
 
-    var appID = {your_invalid_app_id};
-    kintoneApp.getApp(appID).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.getAll());
+    var id = YOUR_APP_ID;
+    kintoneApp.getApp({id}).then((rsp) => {
+        console.log(rsp);
+    }).catch((err) => {
+        // This SDK return err with KintoneAPIException
+        console.log(err.getAll());
     });
 
 </pre>
@@ -91,12 +97,13 @@ The result of Promise.Reject()
 
 <pre class="inline-code">
 
-    let appID = {your_invalid_app_id};
-    kintoneApp.getApp(appID)
-        .catch((err) => {
-            // This SDK return err with KintoneAPIExeption
-            console.log(err.getAll());
-        });
+    let id = YOUR_APP_ID;
+    kintoneApp.getApp({id}).then((rsp) => {
+        console.log(rsp);
+    }).catch((err) => {
+        // This SDK return err with KintoneAPIException
+        console.log(err.getAll());
+    });
 
 </pre>
 
@@ -125,7 +132,7 @@ The result of Promise.Reject()
 
 > This function will throw result of [getAll()](#getall) function
 
-**Parameter **
+**Parameters**
 
 (none)
 

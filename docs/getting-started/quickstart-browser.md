@@ -12,8 +12,7 @@ kintone-js-sdk.min.js
 ```javascript
 (function () {
     kintone.events.on("app.record.index.show", function (ev) {
-        var conn = new kintoneJSSDK.Connection();
-        var app = new kintoneJSSDK.App(conn);
+        var app = new kintoneJSSDK.App();
 
         app.getApps().then(rsp => {
             console.log(rsp);
@@ -95,11 +94,6 @@ module.exports = (env = {}) => {
         }
       ]
     },
-    node: {
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty'
-    },
     watch: env.watch
   };
 };
@@ -119,8 +113,7 @@ Step 3: Add the index.js file to src/ folder
 ```javacript
 import {Connection, App} from '@kintone/kintone-js-sdk';
 kintone.events.on("app.record.index.show", function (ev) {
-    const conn = new Connection();
-    const app = new App(conn);
+    const app = new App();
 
     app.getApps().then(rsp => {
         console.log(rsp);

@@ -4,12 +4,12 @@ Download and upload file via kintone Rest API.
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | The parameters that include **connection** property
-| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params | Object | (conditional) | `Required for nodejs`<br> The parameters that include **connection** property
+| params.connection | [Connection](../connection) | (conditional) | The connection module of this SDK. <br> If initializing in the browser environment on kintone, this parameter can be omitted to use session authentication.
 
 **Sample code**
 
@@ -19,11 +19,31 @@ Download and upload file via kintone Rest API.
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneFile = new kintoneJSSDK.File({connection: connection});
+  (function(kintoneJSSDK) {
+      'use strict';
+      // with connection
+      // Define Authentication object
+      const kintoneAuth = new kintoneJSSDK.Auth();
+      const paramsAuth = {
+          username: 'YOUR_USER_NAME',
+          password: 'YOUR_PASSWORD'
+      };
+      kintoneAuth.setPasswordAuth(paramsAuth);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneFile = new kintoneJSSDK.File();
+      const paramsConnection = {
+          domain: 'YOUR_DOMAIN',
+          auth: kintoneAuth
+      };
+      const connection = new kintoneJSSDK.Connection(paramsConnection);
+      // with connection
+        // with connection
+    var kintoneFile = new kintoneJSSDK.File({connection: connection});
+
+    // without connection, module will use session authentication of kintone
+    var kintoneFile = new kintoneJSSDK.File();
+    // ...
+  }(window.kintoneJSSDK));
+
 
 </pre>
 
@@ -43,14 +63,14 @@ Download and upload file via kintone Rest API.
 
 > Upload file into kintone
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | The parameters that include **fileName, fileBlob, fileContent** properties
 | params.fileName | String | yes | The name of file
-| params.fileBlob | Blob | yes | `This param only use for Javascript` <br> The content of file
-| params.fileContent | Stream | yes | `This param only use for Nodejs` <br> The content of file
+| params.fileBlob | Blob | yes | `This parameter only use for Javascript` <br> The content of file
+| params.fileContent | Stream | yes | `This parameter only use for Nodejs` <br> The content of file
 
 **Return**
 
@@ -65,14 +85,14 @@ Promise
 
 <pre class="inline-code">
   var params = {
-    fileBlob: 'your_file_blob',
-    fileName: 'your_file_name'
+    fileBlob: 'YOUR_FILE_BLOB',
+    fileName: 'YOUR_FILE_NAME'
   };
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // This SDK return err with KintoneAPIException
+    console.log(err);
   });
 </pre>
 
@@ -80,14 +100,14 @@ Promise
 
 <pre class="inline-code">
   const params = {
-    fileContent: fs.createReadStream('./cd.png'),
-    fileName: path.basename('./cd.png')
+    fileContent: fs.createReadStream('YOUR_FILE_PATH'),
+    fileName: path.basename('YOUR_FILE_PATH')
   };
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // This SDK return err with KintoneAPIException
+    console.log(err);
   });
 
 </pre>
@@ -98,7 +118,7 @@ Promise
 
 > Upload file into kintone using <b>nodejs</b>
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -118,13 +138,13 @@ Promise
 
 <pre class="inline-code">
   const params = {
-    filePath: './cd.png'
+    filePath: 'YOUR_FILE_PATH'
   };
   kintoneFile.upload(params).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // This SDK return err with KintoneAPIException
+    console.log(err);
   });
 
 </pre>
@@ -135,7 +155,7 @@ Promise
 
 > Download file from kintone
 
-**Parameter **
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -156,15 +176,14 @@ Promise
 
 <pre class="inline-code">
   var params = {
-    fileKey: 'your_file_Key',
-    outPutFilePath: 'your_output_directory'
+    fileKey: 'YOUR_FILE_KEY'
   };
   kintoneFile.download(params).then(rsp => {
     //file blob
     console.log(rsp);
   }).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // This SDK return err with KintoneAPIException
+    console.log(err);
   });
 
 </pre>
@@ -173,12 +192,12 @@ Promise
 
 <pre class="inline-code">
   const params = {
-    fileKey: 'your_file_Key',
-    outPutFilePath: 'your_output_directory'
+    fileKey: 'YOUR_FILE_KEY',
+    outPutFilePath: 'YOUR_OUTPUT_DIRECTORY'
   };
   kintoneFile.download(params).catch((err) => {
-    // This SDK return err with KintoneAPIExeption
-    console.log(err.get());
+    // This SDK return err with KintoneAPIException
+    console.log(err);
   });
   
 </pre>
