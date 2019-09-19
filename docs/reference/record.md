@@ -24,18 +24,18 @@ Provide manipulate functions on records: get, update, delete, update the record 
     'use strict';
     // with connection
     // Define Authentication object
-    const kintoneAuth = new kintoneJSSDK.Auth();
-    const paramsAuth = {
+    var kintoneAuth = new kintoneJSSDK.Auth();
+    var paramsAuth = {
         username: 'YOUR_USER_NAME',
         password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setPasswordAuth(paramsAuth);
 
-    const paramsConnection = {
+    var paramsConnection = {
         domain: 'YOUR_DOMAIN',
         auth: kintoneAuth
     };
-    const connection = new kintoneJSSDK.Connection(paramsConnection);
+    var connection = new kintoneJSSDK.Connection(paramsConnection);
     var kintoneRecord = new kintoneJSSDK.Record({connection});
 
     // without connection, module will use session authentication of kintone

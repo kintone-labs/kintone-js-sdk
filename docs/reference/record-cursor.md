@@ -26,18 +26,18 @@ Currently, there's the only cursor for records.
         'use strict';
         // with connection
         // Define Authentication object
-        const kintoneAuth = new kintoneJSSDK.Auth();
-        const paramsAuth = {
+        var kintoneAuth = new kintoneJSSDK.Auth();
+        var paramsAuth = {
             username: 'YOUR_USER_NAME',
             password: 'YOUR_PASSWORD'
         };
         kintoneAuth.setPasswordAuth(paramsAuth);
 
-        const paramsConnection = {
+        var paramsConnection = {
             domain: 'YOUR_DOMAIN',
             auth: kintoneAuth
         };
-        const connection = new kintoneJSSDK.Connection(paramsConnection);
+        var connection = new kintoneJSSDK.Connection(paramsConnection);
         // with connection
         var kintoneRC = new kintoneJSSDK.RecordCursor({connection});
 
