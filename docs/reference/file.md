@@ -67,10 +67,12 @@ Download and upload file via kintone Rest API.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | The parameters that include **fileName, fileBlob, fileContent** properties
-| params.fileName | String | yes | The name of file
-| params.fileBlob | Blob | yes | `This parameter only use for Javascript` <br> The content of file
-| params.fileContent | Stream | yes | `This parameter only use for Nodejs` <br> The content of file
+| params | Object | yes | The parameters that include **fileName, fileBlob, fileContent, filePath** properties
+| params.filePath | String | (conditional) | `This parameter can only be used in nodejs environment` <br> The path of file to be uploaded. <br> Required, if **fileContent** parameter is not specified.
+| params.fileContent | Stream | (conditional) | `This parameter can only be used in Nodejs environment`<br> The content of file. <br> Required, if **filePath** parameter is not specified. <br> If **filePath** parameter is specified, this parameter will be ignored.
+| params.fileBlob | Blob | yes | `This parameter can only be used in browser environment` <br> The content of file.
+| params.fileName | String | (conditional) | The name of file. <br> Required, if either **fileBlob** or **fileContent** parameter is specified. 
+
 
 **Return**
 
@@ -99,6 +101,7 @@ Promise
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
+  // Using fileName, fileContent
   const params = {
     fileContent: fs.createReadStream('YOUR_FILE_PATH'),
     fileName: path.basename('YOUR_FILE_PATH')
@@ -110,43 +113,16 @@ Promise
     console.log(err);
   });
 
-</pre>
-
-</details>
-
-### upload(params)
-
-> Upload file into kintone using <b>nodejs</b>
-
-**Parameters**
-
-| Name| Type| Required| Description |
-| --- | --- | --- | --- |
-| params | Object | yes | The parameters that include **filePath** property
-| params.filePath | String | yes | The path of file
-
-**Return**
-
-Promise
-
-**Sample code**
-
-<details class="tab-container" open>
-<Summary>Upload file sample</Summary>
-
-<strong class="tab-name">Nodejs</strong>
-
-<pre class="inline-code">
-  const params = {
+  // Using filePath
+  const param = {
     filePath: 'YOUR_FILE_PATH'
   };
-  kintoneFile.upload(params).then((rsp) => {
+  kintoneFile.upload(param).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
     console.log(err);
   });
-
 </pre>
 
 </details>
