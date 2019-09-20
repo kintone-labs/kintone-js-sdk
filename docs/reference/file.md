@@ -35,8 +35,6 @@ Download and upload file via kintone Rest API.
         auth: kintoneAuth
     };
     var connection = new kintoneJSSDK.Connection(paramsConnection);
-    // with connection
-    // with connection
     var kintoneFile = new kintoneJSSDK.File({connection: connection});
 
     // without connection, module will use session authentication of kintone
