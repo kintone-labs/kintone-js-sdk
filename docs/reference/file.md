@@ -68,10 +68,11 @@ Download and upload file via kintone Rest API.
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
 | params | Object | yes | The parameters that include **fileName, fileBlob, fileContent, filePath** properties
-| params.fileName | String | (conditional) | The name of file. <br> Required, if either **filePath** or **fileContent** parameter is specified. 
-| params.fileBlob | Blob | yes | `This parameter only use for the Browser environment` <br> The content of file.
-| params.fileContent | Stream | (conditional) | `This parameter only use for Nodejs environment`<br> The content of file. <br> Required, if **filePath** parameter is not specified. <br> If **filePath** parameter is specified, this parameter will be ignored.
-| params.filePath | String | (conditional) | `This parameter only use for Nodejs environment` <br> The path of file. <br> Required, if **fileContent** parameter is not specified.
+| params.filePath | String | (conditional) | `This parameter can only be used in nodejs environment` <br> The path of file to be uploaded. <br> Required, if **fileContent** parameter is not specified.
+| params.fileContent | Stream | (conditional) | `This parameter can only be used in Nodejs environment`<br> The content of file. <br> Required, if **filePath** parameter is not specified. <br> If **filePath** parameter is specified, this parameter will be ignored.
+| params.fileBlob | Blob | yes | `This parameter can only be used in browser environment` <br> The content of file.
+| params.fileName | String | (conditional) | The name of file. <br> Required, if either **fileBlob** or **fileContent** parameter is specified. 
+
 
 **Return**
 
@@ -113,10 +114,10 @@ Promise
   });
 
   // Using filePath
-  const params = {
+  const param = {
     filePath: 'YOUR_FILE_PATH'
   };
-  kintoneFile.upload(params).then((rsp) => {
+  kintoneFile.upload(param).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
