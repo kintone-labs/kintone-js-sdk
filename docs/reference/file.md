@@ -51,7 +51,21 @@ Download and upload file via kintone Rest API.
 
 <pre class="inline-code">
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneFile = new kintone.File({connection: connection});
+  
+  const kintoneAuth = new kintone.Auth();
+  const paramsAuth = {
+      username: 'YOUR_USER_NAME',
+      password: 'YOUR_PASSWORD'
+  };
+  kintoneAuth.setPasswordAuth(paramsAuth);
+
+
+  const paramsConnection = {
+      domain: 'YOUR_DOMAIN',
+      auth: kintoneAuth
+  };
+  const connection = new kintone.Connection(paramsConnection);
+  const kintoneFile = new kintone.File({connection: connection});
 
 </pre>
 

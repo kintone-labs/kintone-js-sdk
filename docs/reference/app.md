@@ -22,20 +22,52 @@ Gets general information of an App, including the name, description, related Spa
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneApp = new kintoneJSSDK.App({connection});
+  (function(kintoneJSSDK) {
+      'use strict';
+      // with connection
+      // Define Authentication object
+      var kintoneAuth = new kintoneJSSDK.Auth();
+      var paramsAuth = {
+          username: 'YOUR_USER_NAME',
+          password: 'YOUR_PASSWORD'
+      };
+      kintoneAuth.setPasswordAuth(paramsAuth);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneApp = new kintoneJSSDK.App();
+      var paramsConnection = {
+          domain: 'YOUR_DOMAIN',
+          auth: kintoneAuth
+      };
+      var connection = new kintoneJSSDK.Connection(paramsConnection);
+      
+      // with connection
+      var kintoneApp = new kintoneJSSDK.App({connection});
+
+      // without connection, module will use session authentication of kintone
+      var kintoneApp = new kintoneJSSDK.App();
+  }(window.kintoneJSSDK));
+
+
 
 </pre>
 
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneApp = new kintone.App({connection});
+
+  const kintoneAuth = new kintone.Auth();
+  const paramsAuth = {
+      username: 'YOUR_USER_NAME',
+      password: 'YOUR_PASSWORD'
+  };
+  kintoneAuth.setPasswordAuth(paramsAuth);
+
+  const paramsConnection = {
+      domain: 'YOUR_DOMAIN',
+      auth: kintoneAuth
+  };
+  const connection = new kintone.Connection(paramsConnection);
+  const kintoneApp = new kintone.App({connection});
 
 </pre>
 
