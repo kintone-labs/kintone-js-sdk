@@ -20,27 +20,27 @@ Provide manipulate functions on records: get, update, delete, update the record 
 
 <pre class="inline-code">
 
-(function(kintoneJSSDK) {
-    'use strict';
-    // with connection
-    // Define Authentication object
-    var kintoneAuth = new kintoneJSSDK.Auth();
-    var paramsAuth = {
-        username: 'YOUR_USER_NAME',
-        password: 'YOUR_PASSWORD'
-    };
-    kintoneAuth.setPasswordAuth(paramsAuth);
+  (function(kintoneJSSDK) {
+      'use strict';
+      // with connection
+      // Define Authentication object
+      var kintoneAuth = new kintoneJSSDK.Auth();
+      var paramsAuth = {
+          username: 'YOUR_USER_NAME',
+          password: 'YOUR_PASSWORD'
+      };
+      kintoneAuth.setPasswordAuth(paramsAuth);
 
-    var paramsConnection = {
-        domain: 'YOUR_DOMAIN',
-        auth: kintoneAuth
-    };
-    var connection = new kintoneJSSDK.Connection(paramsConnection);
-    var kintoneRecord = new kintoneJSSDK.Record({connection});
+      var paramsConnection = {
+          domain: 'YOUR_DOMAIN',
+          auth: kintoneAuth
+      };
+      var connection = new kintoneJSSDK.Connection(paramsConnection);
+      var kintoneRecord = new kintoneJSSDK.Record({connection});
 
-    // without connection, module will use session authentication of kintone
-    var kintoneRecord = new kintoneJSSDK.Record();
-}(window.kintoneJSSDK));
+      // without connection, module will use session authentication of kintone
+      var kintoneRecord = new kintoneJSSDK.Record();
+  }(window.kintoneJSSDK));
 
 </pre>
 

@@ -20,23 +20,23 @@ Download and upload file via kintone Rest API.
 
 <pre class="inline-code">
   (function(kintoneJSSDK) {
-      'use strict';
-      // with connection
-      // Define Authentication object
-      const kintoneAuth = new kintoneJSSDK.Auth();
-      const paramsAuth = {
-          username: 'YOUR_USER_NAME',
-          password: 'YOUR_PASSWORD'
-      };
-      kintoneAuth.setPasswordAuth(paramsAuth);
+    'use strict';
+    // with connection
+    // Define Authentication object
+    var kintoneAuth = new kintoneJSSDK.Auth();
+    var paramsAuth = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
+    };
+    kintoneAuth.setPasswordAuth(paramsAuth);
 
-      const paramsConnection = {
-          domain: 'YOUR_DOMAIN',
-          auth: kintoneAuth
-      };
-      const connection = new kintoneJSSDK.Connection(paramsConnection);
-      // with connection
-        // with connection
+    var paramsConnection = {
+        domain: 'YOUR_DOMAIN',
+        auth: kintoneAuth
+    };
+    var connection = new kintoneJSSDK.Connection(paramsConnection);
+    // with connection
+    // with connection
     var kintoneFile = new kintoneJSSDK.File({connection: connection});
 
     // without connection, module will use session authentication of kintone
