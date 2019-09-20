@@ -1,8 +1,9 @@
 import axios from 'axios';
+import common from '../utils/Common';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
 import KintoneAPIException from '../exception/KintoneAPIException';
-import packageFile from'../../../package.json';
+import packageFile from '../../../package.json';
 import CONNECTION_CONST from './constant';
 const DEFAULT_PORT = '443';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
@@ -37,6 +38,15 @@ class Connection {
       });
   }
 
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return common.validateRequiredArgs(params);
+  }
   /**
    * request to URL
    * @param {String} methodName
@@ -130,7 +140,7 @@ class Connection {
     const request = axios(requestOptions).then(response => {
       return response.data;
     }).catch(err => {
-      throw new KintoneAPIException(err);
+      throw new KintoneAPIException(err.message, err);
     });
     this.refreshHeader();
     return request;
@@ -280,6 +290,7 @@ class Connection {
    * @return {this}
    */
   addRequestOption({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.options[key] = value;
     return this;
   }
@@ -295,6 +306,7 @@ class Connection {
    * @return {this}
    */
   setHeader({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.headers.push(new HTTPHeader(key, value));
     return this;
   }
@@ -305,7 +317,7 @@ class Connection {
    */
   setAuth(auth) {
     if (!(auth instanceof Auth)) {
-      throw new Error(`${auth} not an instance of Auth`);
+      throw new KintoneAPIException(`${auth} is not an instance of Auth`);
     }
     this.auth = auth;
     return this;
@@ -319,4 +331,4 @@ class Connection {
     this.headers = header;
   }
 }
-export default Connection ;
+export default Connection;

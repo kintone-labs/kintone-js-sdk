@@ -1,11 +1,11 @@
-import { KintoneAPIException as KintoneAPIException } from "../../base/main";
-import { Connection as BaseConnection } from "../../base/main";
-import CONNECTION_CONST from "./constant";
-import https from "https";
-import FormData from "form-data";
-import tls from "tls";
-import axios from "axios";
-import tunnel from "tunnel";
+import {KintoneAPIException, Connection as BaseConnection} from '../../base/main';
+
+import CONNECTION_CONST from './constant';
+import https from 'https';
+import FormData from 'form-data';
+import tls from 'tls';
+import axios from 'axios';
+import tunnel from 'tunnel';
 /* eslint-disable node/no-extraneous-require */
 const CONTENT_TYPE_KEY = 'Content-Type';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
@@ -21,6 +21,7 @@ class Connection extends BaseConnection {
 
   constructor({domain, auth, guestSpaceID} = {}) {
     super({domain, auth, guestSpaceID});
+    this._validateRequiredArgs({domain, auth});
     this.setClientCert();
   }
 
@@ -51,6 +52,7 @@ class Connection extends BaseConnection {
    * @return {this}
    */
   setProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
+    this._validateRequiredArgs({proxyHost, proxyPort});
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -76,6 +78,7 @@ class Connection extends BaseConnection {
    * @return {this}
    */
   setHttpsProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
+    this._validateRequiredArgs({proxyHost, proxyPort});
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -199,7 +202,7 @@ class Connection extends BaseConnection {
       try {
         tls.createSecureContext(requestOptions.httpsAgent.options);
       } catch (err) {
-        return Promise.reject(new KintoneAPIException(err));
+        return Promise.reject(new KintoneAPIException(err.message, err));
       }
     }
     // set data to param if using GET method
@@ -213,7 +216,7 @@ class Connection extends BaseConnection {
     const request = axios(requestOptions).then(response => {
       return response.data;
     }).catch(err => {
-      throw new KintoneAPIException(err);
+      throw new KintoneAPIException(err.message, err);
     });
     this.refreshHeader();
     return request;
