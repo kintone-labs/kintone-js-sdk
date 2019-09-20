@@ -10,7 +10,7 @@
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | yes | The parameters that include **domain, auth, guestSpaceID** properties
+| params | Object | (conditional) | The parameters that include **domain, auth, guestSpaceID** properties
 | params.domain | String | (conditional) | `Required for nodejs` <br> The domain that is able to authenticate on kintone app
 | params.auth | [Auth](../authentication) | (conditional) | `Required for nodejs` <br> The authentication object.
 | params.guestSpaceID | Integer | (optional) | The guest space id. Use this parameter to connect to kintone guest space.
