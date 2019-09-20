@@ -12,6 +12,7 @@ REST API client of kintone for node.js and javascript
 
 ```
 $ git clone https://github.com/kintone/kintone-js-sdk.git
+$ cd kintone-js-sdk
 $ npm install
 $ npm run build
 ```
