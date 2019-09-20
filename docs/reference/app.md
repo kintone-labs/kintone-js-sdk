@@ -620,10 +620,10 @@ Promise
   });
 
   // Get a pre-live (preview) views
-  var app = YOUR_APP_ID;
-  var lang = 'LANGUAGE_CODE'; // Ex: JA
+  var previewApp = YOUR_APP_ID;
+  var previewLang = 'LANGUAGE_CODE'; // Ex: JA
   var isPreview = true;
-  kintoneApp.getViews({app, lang, isPreview}).then((rsp) => {
+  kintoneApp.getViews({app: previewApp, lang: previewLang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
@@ -646,10 +646,10 @@ Promise
   });
 
   // Get a pre-live (preview) views
-  const app = YOUR_APP_ID;
-  const lang = 'LANGUAGE_CODE'; // Ex: JA
+  const previewApp = YOUR_APP_ID;
+  const previewLang = 'LANGUAGE_CODE'; // Ex: JA
   const isPreview = true;
-  kintoneApp.getViews({app, lang, isPreview}).then((rsp) => {
+  kintoneApp.getViews({app: previewApp, lang: previewLang, isPreview}).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
