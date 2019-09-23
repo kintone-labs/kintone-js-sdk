@@ -4,16 +4,7 @@ import nock from 'nock';
 const APP_VIEW_PREVIEW_API_ROUTE = '/k/v1/preview/app/views.json';
 
 describe('Checking App.updateViews', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.updateViews().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
-  it('[View-17] Valid request - should update successfully the app views', () => {
+  it('Valid request - should update successfully the app views', () => {
     const data = {
       'app': 1,
       'views': {
@@ -58,6 +49,15 @@ describe('Checking App.updateViews', () => {
     const updateViewsResult = appModule.updateViews(data);
     return updateViewsResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.updateViews().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

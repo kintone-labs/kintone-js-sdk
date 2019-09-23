@@ -5,15 +5,6 @@ const APP_SETTINGS_API_ROUTE = '/k/v1/app/settings.json';
 const APP_PREVIEW_SETTINGS_API_ROUTE = '/k/v1/preview/app/settings.json';
 
 describe('Checking App.getGeneralSettings', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getGeneralSettings().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('[General setting-4]should get successfully the app general settings information', () => {
     const data = {
       'app': 1,
@@ -81,6 +72,15 @@ describe('Checking App.getGeneralSettings', () => {
     const getGeneralSettingsResult = appModule.getGeneralSettings(dataToRequest);
     return getGeneralSettingsResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getGeneralSettings().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });
