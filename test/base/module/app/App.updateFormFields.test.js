@@ -4,7 +4,6 @@ import nock from 'nock';
 const APP_FORM_FIELD_PREVIEW_API_ROUTE = '/k/v1/preview/app/form/fields.json';
 
 describe('Checking App.updateFormFields', () => {
-
   it('Should update successfully the app formfield', () => {
     const dataForNock = {
       'app': 1,

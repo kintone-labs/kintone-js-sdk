@@ -4,15 +4,6 @@ import nock from 'nock';
 const APP_FORM_FIELD_PREVIEW_API_ROUTE = '/k/v1/preview/app/form/fields.json';
 
 describe('Checking App.addFormFields', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.addFormFields().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('should add successfully the app formfield', () => {
     const dataForNock = {
       'app': 1,
@@ -65,5 +56,14 @@ describe('Checking App.addFormFields', () => {
       .then((rsp) => {
         expect(rsp).toMatchObject(expectResult);
       });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.addFormFields().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
+    });
   });
 });
