@@ -4,15 +4,6 @@ import nock from 'nock';
 const APP_PREVIEW_SETTINGS_API_ROUTE = '/k/v1/preview/app/settings.json';
 
 describe('Checking App.updateGeneralSettings', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.updateGeneralSettings().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('should update successfully the general settings', () => {
     const expectBody = {
       'app': 1,
@@ -47,6 +38,15 @@ describe('Checking App.updateGeneralSettings', () => {
     const updateGeneralSettingsResult = appModule.updateGeneralSettings(expectBody);
     return updateGeneralSettingsResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.updateGeneralSettings().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

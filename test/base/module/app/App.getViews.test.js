@@ -5,15 +5,6 @@ const APP_VIEW_API_ROUTE = '/k/v1/app/views.json';
 const APP_VIEW_PREVIEW_API_ROUTE = '/k/v1/preview/app/views.json';
 
 describe('Checking App.getViews', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getViews().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('Valid request', () => {
     const dataForNock = {
       'app': 1,
@@ -88,6 +79,15 @@ describe('Checking App.getViews', () => {
     const getViewsResult = appModule.getViews(data);
     return getViewsResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getViews().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

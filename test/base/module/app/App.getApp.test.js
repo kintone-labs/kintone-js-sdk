@@ -4,15 +4,6 @@ import nock from 'nock';
 const APP_API_ROUTE = '/k/v1/app.json';
 
 describe('Checking App.getApp', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getApp().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('Can get successfully the app infomation by getApp function', () => {
     const appID = 1;
     const expectResult = {
@@ -46,6 +37,15 @@ describe('Checking App.getApp', () => {
     const getAppResult = appModule.getApp({id: appID});
     return getAppResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+  
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getApp().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

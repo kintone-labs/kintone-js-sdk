@@ -4,15 +4,6 @@ import nock from 'nock';
 const APP_PREVIEW_DEPLOY_API_ROUTE = '/k/v1/preview/app/deploy.json';
 
 describe('Checking App.deployAppSettings', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.deployAppSettings().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('should deploy successfully the app', () => {
     const data = {
       'apps': [
@@ -46,6 +37,15 @@ describe('Checking App.deployAppSettings', () => {
     const deployAppSettingsResult = appModule.deployAppSettings(data);
     return deployAppSettingsResult.then((rsp) => {
       expect(rsp).toMatchObject({});
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.deployAppSettings().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

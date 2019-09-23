@@ -4,51 +4,6 @@ import nock from 'nock';
 const APPS_API_ROUTE = '/k/v1/apps.json';
 
 describe('Checking App.getApps', () => {
-  it('verify call getApps function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getApps().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
-  it('verify call getAppsByCodes function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getAppsByCodes().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
-  it('verify call getAppsByName function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getAppsByName().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
-  it('verify call getAppsByIDs function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getAppsByIDs().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
-  it('verify call getAppsBySpaceIDs function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getAppsBySpaceIDs().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('should return the apps information based on the limit', () => {
     const limit = 3;
     const offset = 1;
@@ -284,6 +239,51 @@ describe('Checking App.getApps', () => {
     const actualResult = appModule.getAppsBySpaceIDs({spaceIds});
     return actualResult.then(rsp => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call getApps function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getApps().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
+    });
+  });
+
+  it('verify call getAppsByCodes function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getAppsByCodes().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
+    });
+  });
+
+  it('verify call getAppsByName function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getAppsByName().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
+    });
+  });
+
+  it('verify call getAppsByIDs function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getAppsByIDs().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
+    });
+  });
+
+  it('verify call getAppsBySpaceIDs function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getAppsBySpaceIDs().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

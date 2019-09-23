@@ -4,15 +4,6 @@ import nock from 'nock';
 const APP_PREVIEW_API_ROUTE = '/k/v1/preview/app.json';
 
 describe('Checking App.addPreviewApp', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.addPreviewApp().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('should add successfully a new app', () => {
     const data = {
       name: 'app 1',
@@ -42,6 +33,15 @@ describe('Checking App.addPreviewApp', () => {
     const addPreviewAppResult = appModule.addPreviewApp(data);
     return addPreviewAppResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.addPreviewApp().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

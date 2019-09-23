@@ -5,15 +5,6 @@ const APP_FORM_FIELD_API_ROUTE = '/k/v1/app/form/fields.json';
 const APP_FORM_FIELD_PREVIEW_API_ROUTE = '/k/v1/preview/app/form/fields.json';
 
 describe('Checking App.getFormFields', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getFormFields().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('should return the app form field base on full data', () => {
     const app = 10;
     const lang = 'en';
@@ -87,6 +78,15 @@ describe('Checking App.getFormFields', () => {
     const getFormFieldsResult = appModule.getFormFields({app, lang, isPreview});
     return getFormFieldsResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getFormFields().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });

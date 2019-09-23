@@ -5,15 +5,6 @@ const APP_FORM_LAYOUT_API_ROUTE = '/k/v1/app/form/layout.json';
 const APP_FORM_LAYOUT_PREVIEW_API_ROUTE = '/k/v1/preview/app/form/layout.json';
 
 describe('Checking App.getFormLayout', () => {
-  it('verify call app function without params', () => {
-    const appModule = createAppToSendRequest();
-    return appModule.getFormLayout().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
-  });
-
   it('should return the app formfield base on full data by getFormLayout function', () => {
     const app = 10;
     const isPreview = false;
@@ -90,6 +81,15 @@ describe('Checking App.getFormLayout', () => {
     const getFormLayoutResult = appModule.getFormLayout({app, isPreview});
     return getFormLayoutResult.then((rsp) => {
       expect(rsp).toMatchObject(expectResult);
+    });
+  });
+
+  it('verify call app function without params', () => {
+    const appModule = createAppToSendRequest();
+    return appModule.getFormLayout().then((resp) => {
+      // TODO: verify the resp
+    }).catch((error) => {
+      // TODO: verify the error
     });
   });
 });
