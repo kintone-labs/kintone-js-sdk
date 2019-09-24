@@ -8,11 +8,14 @@ const getPasswordAuth = (userName, password) => {
   return Buffer.from(userName + ':' + password).toString('base64');
 };
 
+const GET_RECORDS_LIMIT = 500;
+
 export {
   USERNAME,
   PASSWORD,
   URI,
   DOMAIN,
   PASSWORD_AUTH_HEADER,
+  GET_RECORDS_LIMIT,
   getPasswordAuth
 };
