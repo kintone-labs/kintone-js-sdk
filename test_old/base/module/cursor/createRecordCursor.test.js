@@ -11,7 +11,7 @@ const {RecordCursor, Connection, Auth, KintoneAPIException} = require('../../../
 const auth = new Auth();
 auth.setPasswordAuth({username: common.USERNAME, password: common.PASSWORD});
 
-const conn = new Connection({domain: common.DOMAIN, auth: auth});
+const conn = new Connection({auth: auth});
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
