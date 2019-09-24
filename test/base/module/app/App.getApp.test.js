@@ -39,7 +39,7 @@ describe('Checking App.getApp', () => {
       expect(rsp).toMatchObject(expectResult);
     });
   });
-  
+
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     return appModule.getApp().then((resp) => {
