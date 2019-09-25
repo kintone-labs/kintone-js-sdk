@@ -13,14 +13,14 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 ## Constructor
 
-### **Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| params | Object | (optional) | Constructor params.
-| params.connection | [Connection](../connection) | (optional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
+| params | Object | (conditional) |`Required for nodejs`<br> Constructor params.
+| params.connection | [Connection](../connection) | (conditional) | The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.
 
-### **Sample code**
+**Sample code**
 
 <details class="tab-container" open>
 <Summary>Init bulk request module</Summary>
@@ -28,11 +28,29 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-  // with connection
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest({connection});
+  (function(kintoneJSSDK) {
+    'use strict';
+    // with connection
+    // Define Authentication object
+    var kintoneAuth = new kintoneJSSDK.Auth();
+    var paramsAuth = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
+    };
+    kintoneAuth.setPasswordAuth(paramsAuth);
 
-  // without connection, module will use session authentication of kintone
-  var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
+    var paramsConnection = {
+        domain: 'YOUR_DOMAIN',
+        auth: kintoneAuth
+    };
+    var connection = new kintoneJSSDK.Connection(paramsConnection);
+    // with connection
+    var kintoneBulkRequest = new kintoneJSSDK.BulkRequest({connection});
+
+    // without connection, module will use session authentication of kintone
+    var kintoneBulkRequest = new kintoneJSSDK.BulkRequest();
+  }(window.kintoneJSSDK));
+
 
 </pre>
 
@@ -41,7 +59,20 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 <pre class="inline-code">
 
   const kintone = require('@kintone/kintone-js-sdk');
-  let kintoneBulkRequest = new kintone.BulkRequest({connection});
+  
+  const kintoneAuth = new kintone.Auth();
+  const paramsAuth = {
+      username: 'YOUR_USER_NAME',
+      password: 'YOUR_PASSWORD'
+  };
+  kintoneAuth.setPasswordAuth(paramsAuth);
+
+  const paramsConnection = {
+      domain: 'YOUR_DOMAIN',
+      auth: kintoneAuth
+  };
+  const connection = new kintone.Connection(paramsConnection);
+  const kintoneBulkRequest = new kintone.BulkRequest({connection});
 
 </pre>
 
@@ -53,9 +84,9 @@ The Bulk Request API allows multiple API requests to run on multiple kintone app
 
 ### addRecord({app, record})
 
-**Parameter**
+**Parameters**
 
-See at [Record - addRecord](../record#addrecordapp-record)
+See at [Record - addRecord](../record#addrecordparams)
 
 **Return**
 
@@ -63,9 +94,9 @@ See at [Record - addRecord](../record#addrecordapp-record)
 
 ### addRecords({app, records})
 
-**Parameter**
+**Parameters**
 
-See at [Record - addRecords](../record#addrecordsapp-records)
+See at [Record - addRecords](../record#addrecordsparams)
 
 **Return**
 
@@ -73,9 +104,9 @@ See at [Record - addRecords](../record#addrecordsapp-records)
 
 ### updateRecordByID({app, id, record, revision})
 
-**Parameter**
+**Parameters**
 
-See at [Record - updateRecordByID](../record#updaterecordbyidapp-id-record-revision)
+See at [Record - updateRecordByID](../record#updaterecordbyidparams)
 
 **Return**
 
@@ -83,9 +114,9 @@ See at [Record - updateRecordByID](../record#updaterecordbyidapp-id-record-revis
 
 ### updateRecordByUpdateKey({app, updateKey, record, revision})
 
-**Parameter**
+**Parameters**
 
-See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyapp-updatekey-record-revision)
+See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyparams)
 
 **Return**
 
@@ -93,9 +124,9 @@ See at [Record - updateRecordByUpdateKey](../record#updaterecordbyupdatekeyapp-u
 
 ### updateRecords({app, records})
 
-**Parameter**
+**Parameters**
 
-See at [Record - updateRecords](../record#updaterecordsapp-records)
+See at [Record - updateRecords](../record#updaterecordsparams)
 
 **Return**
 
@@ -103,9 +134,9 @@ See at [Record - updateRecords](../record#updaterecordsapp-records)
 
 ### deleteRecords({app, ids})
 
-**Parameter**
+**Parameters**
 
-See at [Record - deleteRecords](../record#deleterecordsapp-ids)
+See at [Record - deleteRecords](../record#deleterecordsparams)
 
 **Return**
 
@@ -113,9 +144,9 @@ See at [Record - deleteRecords](../record#deleterecordsapp-ids)
 
 ### deleteRecordsWithRevision({app, idsWithRevision})
 
-**Parameter**
+**Parameters**
 
-See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionapp-idswithrevision)
+See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisionparams)
 
 **Return**
 
@@ -123,9 +154,9 @@ See at [Record - deleteRecordsWithRevision](../record#deleterecordswithrevisiona
 
 ### updateRecordAssignees({app, record, assignees, revision})
 
-**Parameter**
+**Parameters**
 
-See at [Record - updateRecordAssignees](../record#updaterecordassigneesapp-id-assignees-revision)
+See at [Record - updateRecordAssignees](../record#updaterecordassigneesparams)
 
 **Return**
 
@@ -133,9 +164,9 @@ See at [Record - updateRecordAssignees](../record#updaterecordassigneesapp-id-as
 
 ### updateRecordStatus({app, id, action, assignee, revision})
 
-**Parameter**
+**Parameters**
 
-See at [Record - updateRecordStatus](../record#updaterecordstatusapp-id-action-assignee-revision)
+See at [Record - updateRecordStatus](../record#updaterecordstatusparams)
 
 **Return**
 
@@ -143,9 +174,9 @@ See at [Record - updateRecordStatus](../record#updaterecordstatusapp-id-action-a
 
 ### updateRecordsStatus({app, records})
 
-**Parameter**
+**Parameters**
 
-See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
+See at [Record - updateRecordsStatus](../record#updaterecordsstatusparams)
 
 **Return**
 
@@ -155,7 +186,7 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
 
 > Execute the bulk request and get data response
 
-**Parameter**
+**Parameters**
 
 (none)
 
@@ -173,19 +204,35 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
 <pre class="inline-code">
 
   var responseBulkRequest = kintoneBulkRequest
-    .addRecord({/*[Args]*/})
-    .addRecords({/*[Args]*/})
-    .updateRecords({/*[Args]*/})
-    .deleteRecords()
+    .addRecord({/* [Args]*/})
+    .addRecords({/* [Args]*/})
+    .updateRecordByID({/* [Args]*/})
+    .updateRecordByUpdateKey({/* [Args]*/})
+    .updateRecords({/* [Args]*/})
+    .deleteRecords({/*[Args]*/})
+    .deleteRecordsWithRevision({/* [Args]*/})
+    .updateRecordAssignees({/* [Args]*/})
+    .updateRecordStatus({/* [Args]*/})
+    .updateRecordsStatus({/* [Args]*/})
     .execute();
 
   responseBulkRequest.then((resp) => {
     console.log(resp);
   }).catch((err) => {
-    // write error to console
-    console.log(err.get());
-    // Throw error
-    err.throw();
+    // The error will be an array if there are errors occur in addRecord, addRecords, updateRecords, updateRecords,deleteRecords... function 
+    if (Array.isArray(err)) {  
+        for (let i = 0; i < err.length; i++) {
+            // Need to check the type of error because err array can have some empty object like: 
+            // [KintoneAPIException ,{},{},{},{}]
+            if (err[i] instanceof kintoneJSSDK.KintoneAPIException) {
+                console.log(err[i]);
+            }   
+        }
+    } 
+    // The error will be a KintoneAPIException if setting wrong Auth, Connection ... for BulkRequest
+    else {  
+        console.log(err);
+    }
   });
 
 </pre>
@@ -197,17 +244,30 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
   const responseBulkRequest = kintoneBulkRequest
     .addRecord({/* [Args]*/})
     .addRecords({/* [Args]*/})
+    .updateRecordByID({/* [Args]*/})
+    .updateRecordByUpdateKey({/* [Args]*/})
     .updateRecords({/* [Args]*/})
-    .deleteRecords()
+    .deleteRecords({/*[Args]*/})
+    .deleteRecordsWithRevision({/* [Args]*/})
+    .updateRecordAssignees({/* [Args]*/})
+    .updateRecordStatus({/* [Args]*/})
+    .updateRecordsStatus({/* [Args]*/})
     .execute();
 
   responseBulkRequest.then((resp) => {
     console.log(resp);
   }).catch((err) => {
-    // write error to console
-    console.log(err.get());
-    // Throw error
-    err.throw();
+    if (Array.isArray(err)) {  // The error will be an array if there are errors occur in addRecord, addRecords, updateRecords, updateRecords,deleteRecords... function 
+        for (let i = 0; i < err.length; i++) {
+            // Need to check the type of error because err array can have some empty object like: 
+            // [KintoneAPIException ,{},{},{},{}]
+            if (err[i] instanceof kintone.KintoneAPIException) {
+                console.log(err[i]);
+            }
+        }
+    } else {  // the error will be an element if setting wrong Auth, Connection ... for BulkRequest
+        console.log(err);
+    }
   });
   
 </pre>
@@ -216,4 +276,4 @@ See at [Record - updateRecordsStatus](../record#updaterecordsstatusapp-records)
 
 ## Reference
 
-- [Get Record](https://developer.kintone.io/hc/en-us/articles/213149287/) `on developer network`
+- [Bulk Request](https://developer.kintone.io/hc/en-us/articles/213148977) `on developer network`

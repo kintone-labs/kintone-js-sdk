@@ -7,110 +7,117 @@
 
 ## How to use
 
-```shell
-cd your-project
-npm init
-npm install --save @kintone/kintone-js-sdk
-```
+Step 1: Run commands
 
-## Code example
+```shell
+$ mkdir test
+$ cd ./test
+$ npm init
+$ npm install --save @kintone/kintone-js-sdk
+```
+Step 2: Add **index.js** file to test/ folder
 
 <details class="tab-container" open>
 <Summary>Get record sample</Summary>
 
-<strong class="tab-name">Source code</strong>
+<strong class="tab-name">Promise</strong>
 <pre class="inline-code">
 
     const kintone = require('@kintone/kintone-js-sdk');
 
-    let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
-    let kintoneConnection = new kintone.Connection('your.FQDN.tld', kintoneAuthWithAPIToken);
+    let auth = new kintone.Auth();
+    const passwordAuthParam = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
+    };
+    auth.setPasswordAuth(passwordAuthParam);
 
-    let kintoneRecord = new kintone.Record(kintoneConnection);
+    const connParam = {
+        domain: 'YOUR_DOMAIN',
+        auth: auth
+    };
+    let connection = new kintone.Connection(connParam);
 
-    let appID = {your_app_id};
-    let recordID = {record_id_that_will_be_retrived};
-    kintoneRecord.getRecord(appID, recordID)
-        .then((rsp) => {
-            console.log(rsp);
-        })
-        .catch((err) => {
-            // The promise function always reject with KintoneAPIExeption
-            console.log(err.get());
-        });
+    let kintoneRecord = new kintone.Record({connection});
+
+    const params = {
+        app:  'YOUR_APPID',
+        id: 'RECORD_ID'
+    };
+    kintoneRecord.getRecord(params).then((rsp) => {
+        console.log(rsp);
+    }).catch((err) => {
+        // The promise function always reject with KintoneAPIExeption
+        console.log(err.get());
+    });
 
 </pre>
-<strong class="tab-name">Response success</strong>
+
+<strong class="tab-name">async/await</strong>
 <pre class="inline-code">
 
-    {
-        "record":{
-            // record data should be here
-        }
-    }
+    const kintone = require('@kintone/kintone-js-sdk');
 
-</pre>
-<strong class="tab-name">Response error</strong>
-<pre class="inline-code">
+    let auth = new kintone.Auth();
+    const passwordAuthParam = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
+    };
+    auth.setPasswordAuth(passwordAuthParam);
 
-    {
-        id: '{ID}',
-        code: '{CODE}',
-        message: '{Message string}',
-        errors: '{JSON String}'
-    }
+    const connParam = {
+        domain: 'YOUR_DOMAIN',
+        auth: auth
+    };
+    const connection = new kintone.Connection(connParam);
+
+    const kintoneRecord = new kintone.Record({connection});
+
+    const params = {
+        app:  'YOUR_APPID',
+        id: 'RECORD_ID'
+    };
+    const getRecord = async () => {	
+        try {	
+            let recordResult = await kintoneRecord.getRecord(params);	
+            console.log(recordResult);	
+        } catch (error) {	
+            // The promise function always reject with KintoneAPIExeption	
+            console.log(error.get());	
+        }	
+    }	
+    getRecord();
 
 </pre>
 </details>
 
+Step 3: Run index.js file
+```
+$ node index.js
+```
+
 <details class="tab-container" open>
-<Summary>Get record sample with Async</Summary>
-
-<strong class="tab-name">Source code</strong>
-
-<pre class="inline-code">
-
-    const kintone = require('@kintone/kintone-js-sdk');
-
-    let kintoneAuthWithAPIToken = (new kintone.Auth()).setApiToken('MY_TOKEN');
-    let kintoneConnection = new kintone.Connection('your.FQDN', kintoneAuthWithAPIToken);
-
-    let kintoneRecord = new kintone.Record(kintoneConnection);
-
-    let appID = {your_app_id};
-    let recordID = {record_id_that_will_be_retrived};
-    let getRecord = async () => {
-        try {
-            let recordResult = await kintoneRecord.getRecord(appID, recordID);
-            console.log(recordResult);
-        } catch (error) {
-            // The promise function always reject with KintoneAPIExeption
-            console.log(error.get());
-        }
-    }
-    getRecord();
-
-</pre>
+<Summary>Get record response</Summary>
 
 <strong class="tab-name">Response success</strong>
-
 <pre class="inline-code">
+
     {
         "record":{
             // record data should be here
         }
     }
+
 </pre>
-
 <strong class="tab-name">Response error</strong>
-
 <pre class="inline-code">
-    { 
+
+    {
         id: '{ID}',
         code: '{CODE}',
         message: '{Message string}',
         errors: '{JSON String}'
     }
-</pre>
 
+</pre>
 </details>

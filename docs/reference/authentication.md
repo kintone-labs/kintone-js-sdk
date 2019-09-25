@@ -1,7 +1,10 @@
 # Authentication
 
-Authentication module will be used by [Connection](../connection).
-This module allows authenticating with the Kintone app by password authenticator or API token authenticator. This module is also supported the basic authenticator.
+ * Authentication module will be used by [Connection](../connection).
+ * This module allows authenticating with the Kintone app by:
+    * Password Authentication
+    * API token authentication
+    * Basic authenticator
 
 !!! warning
 
@@ -9,7 +12,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 ## Constructor
 
-**Parameter**
+**Parameters**
 
 (none)
 
@@ -43,7 +46,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 > Set password authentication for Authentication module.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -64,8 +67,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 <pre class="inline-code">
     var basicAuth = {
-        username: '{your_user_name}',
-        password: '{your_password}'
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setPasswordAuth(basicAuth);
 
@@ -74,9 +77,9 @@ This module allows authenticating with the Kintone app by password authenticator
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    let basicAuth = {
-        username: '{your_user_name}',
-        password: '{your_password}'
+    const basicAuth = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setPasswordAuth(basicAuth);
 
@@ -88,7 +91,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 > Set Api Token for Authentication module.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -107,7 +110,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 <pre class="inline-code">
     var params = {
-        apiToken: '{your_token}'
+        apiToken: 'YOUR_TOKEN'
     };
     kintoneAuth.setApiToken(params);
 
@@ -116,8 +119,8 @@ This module allows authenticating with the Kintone app by password authenticator
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    let params = {
-        apiToken: '{your_token}'
+    const params = {
+        apiToken: 'YOUR_TOKEN'
     };
     kintoneAuth.setApiToken(params);
 
@@ -129,7 +132,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 > Set Basic authentication for Authentication module.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -150,8 +153,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 <pre class="inline-code">
     var basicAuth = {
-        username: '{your_user_name}',
-        password: '{your_password}'
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setBasicAuth(basicAuth);
 
@@ -159,9 +162,9 @@ This module allows authenticating with the Kintone app by password authenticator
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    let basicAuth = {
-        username: '{your_user_name}',
-        password: '{your_password}'
+    const basicAuth = {
+        username: 'YOUR_USER_NAME',
+        password: 'YOUR_PASSWORD'
     };
     kintoneAuth.setBasicAuth(basicAuth);
     
@@ -173,7 +176,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 > Setting Authentication with the client certificate & password set.
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -193,10 +196,10 @@ This module allows authenticating with the Kintone app by password authenticator
 <strong class="tab-name">Nodejs</strong>
 
 <pre class="inline-code">
-    const filePath = "your_cert_path_file";
+    const filePath = 'YOUR_CERT_PATH_FILE';
     const params = {
-        fileContent: fs.readFileSync(filePath),
-        certPassword: "your_cert_file_password"
+        cert: fs.readFileSync(filePath),
+        password: 'YOUR_CERT_FILE_PASSWORD'
     };
     //set client cert by file content and password
     kintoneAuth.setClientCert(params);
@@ -209,7 +212,7 @@ This module allows authenticating with the Kintone app by password authenticator
 
 > Setting Authentication with the client certificate & password set by file path
 
-**Parameter**
+**Parameters**
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
@@ -230,8 +233,8 @@ This module allows authenticating with the Kintone app by password authenticator
 
 <pre class="inline-code">
     const params = {
-        filePath: "your_cert_path_file",
-        certPassword: "your_cert_file_password"
+        filePath: 'YOUR_CERT_PATH_FILE',
+        password: 'YOUR_CERT_FILE_PASSWORD'
     };
     //set client cert by file path and password
     kintoneAuth.setClientCertByPath(params);
