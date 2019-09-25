@@ -41,8 +41,8 @@ describe("Checking Record.getComments", () => {
         newer: false
       });
     const actualResult = recordModule.getComments(data);
-    return actualResult.then(response => {
-      expect(response).toHaveProperty("comments");
+    return actualResult.then(response => {      
+      expect(Object.keys(response)).toEqual(expect.arrayContaining(['comments', 'older',"newer"]))
     });
   });
 });
