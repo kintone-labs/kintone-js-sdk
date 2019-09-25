@@ -9,6 +9,7 @@ const getPasswordAuth = (userName, password) => {
 };
 
 const GET_RECORDS_LIMIT = 500;
+const UPDATE_RECORDS_LIMIT = 100;
 
 export {
   USERNAME,
@@ -17,5 +18,6 @@ export {
   DOMAIN,
   PASSWORD_AUTH_HEADER,
   GET_RECORDS_LIMIT,
+  UPDATE_RECORDS_LIMIT,
   getPasswordAuth
 };
