@@ -130,7 +130,7 @@ class Connection extends BaseConnection {
       this.USER_AGENT = headersRequest[CONNECTION_CONST.BASE.USER_AGENT];
     });
     // Set request options
-    const requestOptions = this.copyObject(this.options);
+    const requestOptions = Object.assign({}, this.options);
     requestOptions.method = method;
     requestOptions.url = uri;
 
@@ -190,7 +190,7 @@ class Connection extends BaseConnection {
     });
 
     // Set request options
-    const requestOptions = this.copyObject(this.options);
+    const requestOptions = Object.assign({}, this.options);
     requestOptions.method = String(methodName).toUpperCase();
     requestOptions.url = this.getUri(restAPIName);
     requestOptions.headers = headersRequest;
