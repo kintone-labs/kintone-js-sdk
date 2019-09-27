@@ -2,8 +2,18 @@
   "env": {
     "browser": {
       "ignore":["./src/node"],
-      "presets": [["@babel/preset-env", { "modules": false }]],
-      "plugins": ["@babel/plugin-proposal-class-properties"]
+      "presets": [
+        ["@babel/preset-env", 
+          { "modules": false, 
+            "useBuiltIns": "usage",
+            "corejs": "3",
+            "targets": {
+              "browsers": ["last 1 version,> 1%,maintained node versions,not dead"]
+            }
+          }
+        ]
+      ],
+      "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime"]
     },
     "node": {
       "presets": ["@babel/preset-env"],
