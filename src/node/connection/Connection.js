@@ -1,11 +1,11 @@
-import { KintoneAPIException as KintoneAPIException } from "../../base/main";
-import { Connection as BaseConnection } from "../../base/main";
-import CONNECTION_CONST from "./constant";
-import https from "https";
-import FormData from "form-data";
-import tls from "tls";
-import axios from "axios";
-import tunnel from "tunnel";
+import {KintoneAPIException, Connection as BaseConnection} from '../../base/main';
+
+import CONNECTION_CONST from './constant';
+import https from 'https';
+import FormData from 'form-data';
+import tls from 'tls';
+import axios from 'axios';
+import tunnel from 'tunnel';
 /* eslint-disable node/no-extraneous-require */
 const CONTENT_TYPE_KEY = 'Content-Type';
 const FILE_RESPONSE_TYPE_KEY = 'responseType';
@@ -100,7 +100,7 @@ class Connection extends BaseConnection {
   upload(fileName, fileContent) {
     const formData = new FormData();
     formData.append('file', fileContent, fileName);
-    this.setHeader({key: CONTENT_TYPE_KEY, value: formData.getHeaders()['content-type']});
+    this._setLocalHeaders({key: CONTENT_TYPE_KEY, value: formData.getHeaders()['content-type']});
     return this.requestFile('POST', 'FILE', formData);
   }
 
@@ -112,58 +112,16 @@ class Connection extends BaseConnection {
    * @return {Promise}
    */
   request(methodName, restAPIName, body) {
-    const method = String(methodName).toUpperCase();
-    const uri = this.getUri(restAPIName);
-    // Set Header
-    const headersRequest = {};
-    // set header with credentials
-    this.auth.createHeaderCredentials().forEach((httpHeaderObj) => {
-      headersRequest[httpHeaderObj.getKey()] = httpHeaderObj.getValue();
-    });
-    this.headers.forEach((httpHeaderObj) => {
-      const headerKey = httpHeaderObj.getKey();
-      if (headersRequest.hasOwnProperty(headerKey) && headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
-        headersRequest[headerKey] += ' ' + httpHeaderObj.getValue();
-      } else {
-        headersRequest[headerKey] = httpHeaderObj.getValue();
-      }
-      this.USER_AGENT = headersRequest[CONNECTION_CONST.BASE.USER_AGENT];
-    });
-    // Set request options
-    const requestOptions = Object.assign({}, this.options);
-    requestOptions.method = method;
-    requestOptions.url = uri;
+    const requestOptions = this.getRequestOptions(methodName, restAPIName, body);
 
-    if (requestOptions.hasOwnProperty('httpsAgent')) {
-      try {
-        tls.createSecureContext(requestOptions.httpsAgent.options);
-      } catch (err) {
-        return Promise.reject(err);
-      }
-    }
-
-    // set data to param if using GET method
-    if (requestOptions.method === 'GET') {
-      requestOptions.params = body;
-      delete requestOptions.data;
-      if (this.isExceedLimitUri(uri, body)) {
-        requestOptions.params = {_method: method};
-        requestOptions.method = 'POST';
-        headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = String(methodName).toUpperCase();
-        requestOptions.data = body;
-      }
-      requestOptions.paramsSerializer = this.serializeParams;
-    } else {
-      requestOptions.data = body;
-    }
-    requestOptions.headers = headersRequest;
+    return this._handleSecureContextError(requestOptions).then(() => {
     // Execute request
-    const request = axios(requestOptions).then(response => {
+      return axios(requestOptions);
+    }).then(response => {
       return response.data;
+    }).catch(err => {
+      throw err;
     });
-    // reset header
-    this.refreshHeader();
-    return request;
   }
   /**
    * request to URL
@@ -174,34 +132,14 @@ class Connection extends BaseConnection {
    */
   requestFile(methodName, restAPIName, body) {
     // Set Header
-    const headersRequest = {};
-    // set header with credentials
-    this.auth.createHeaderCredentials().forEach((httpHeaderObj) => {
-      headersRequest[httpHeaderObj.getKey()] = httpHeaderObj.getValue();
-    });
-    this.headers.forEach((httpHeaderObj) => {
-      const headerKey = httpHeaderObj.getKey();
-      if (headersRequest.hasOwnProperty(headerKey) && headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
-        headersRequest[headerKey] += ' ' + httpHeaderObj.getValue();
-      } else {
-        headersRequest[headerKey] = httpHeaderObj.getValue();
-      }
-      this.USER_AGENT = headersRequest[CONNECTION_CONST.BASE.USER_AGENT];
-    });
+    const headersRequest = this.getRequestHeader();
 
     // Set request options
     const requestOptions = Object.assign({}, this.options);
     requestOptions.method = String(methodName).toUpperCase();
-    requestOptions.url = this.getUri(restAPIName);
+    requestOptions.url = this.getURL(restAPIName);
     requestOptions.headers = headersRequest;
 
-    if (requestOptions.hasOwnProperty(CONNECTION_CONST.BASE.HTTPS_AGENT)) {
-      try {
-        tls.createSecureContext(requestOptions.httpsAgent.options);
-      } catch (err) {
-        return Promise.reject(new KintoneAPIException(err));
-      }
-    }
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
@@ -209,16 +147,27 @@ class Connection extends BaseConnection {
     } else {
       requestOptions.data = body;
     }
-    // Execute request
-    const request = axios(requestOptions).then(response => {
+
+    return this._handleSecureContextError(requestOptions).then(() => {
+      // Execute request
+      return axios(requestOptions);
+    }).then(response => {
       return response.data;
     }).catch(err => {
       throw new KintoneAPIException(err);
     });
-    this.refreshHeader();
-    return request;
   }
 
+  _handleSecureContextError(requestOptions) {
+    if (requestOptions.hasOwnProperty(CONNECTION_CONST.BASE.HTTPS_AGENT)) {
+      try {
+        tls.createSecureContext(requestOptions.httpsAgent.options);
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+    return Promise.reslove(true);
+  }
 }
 
 export default Connection;

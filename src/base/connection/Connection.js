@@ -1,12 +1,8 @@
-import axios from 'axios';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
-import KintoneAPIException from '../exception/KintoneAPIException';
-import packageFile from'../../../package.json';
+import packageFile from '../../../package.json';
 import CONNECTION_CONST from './constant';
 const DEFAULT_PORT = '443';
-const FILE_RESPONSE_TYPE_KEY = 'responseType';
-const FILE_RESPONSE_TYPE_VALUE = 'blob';
 /**
  * Connection module
  */
@@ -21,47 +17,54 @@ class Connection {
     this.domain = domain;
     this.guestSpaceID = parseInt(guestSpaceID, 10);
 
-    this.headers = [];
+    this.globalHeaders = [];
+    this.localHeaders = [];
     this.options = {};
 
     this.setAuth(auth);
     this.addRequestOption({key: CONNECTION_CONST.BASE.PROXY, value: false});
-    this.USER_AGENT = '';
-
-    this.setHeader(
-      {key: CONNECTION_CONST.BASE.USER_AGENT,
-        value: CONNECTION_CONST.BASE.USER_AGENT_BASE_VALUE
-          .replace('{name}',
-            packageFile.name || 'kintone-js-sdk')
-          .replace('{version}', packageFile.version || '(none)')
-      });
   }
 
   /**
-   * request to URL
-   * @param {String} methodName
-   * @param {String} restAPIName
-   * @param {Object} body
-   * @return {Promise}
+   * Get header request
+   * @return {Object}
    */
-  request(methodName, restAPIName, body) {
-    const method = String(methodName).toUpperCase();
-    const uri = this.getUri(restAPIName);
-    // Set Header
+  getRequestHeader() {
     const headersRequest = {};
     // set header with credentials
     this.auth.createHeaderCredentials().forEach((httpHeaderObj) => {
       headersRequest[httpHeaderObj.getKey()] = httpHeaderObj.getValue();
     });
-    this.headers.forEach((httpHeaderObj) => {
+
+    const userAgent = CONNECTION_CONST.BASE.USER_AGENT_BASE_VALUE
+      .replace('{name}', packageFile.name || 'kintone-js-sdk')
+      .replace('{version}', packageFile.version || '(none)');
+
+    const headers = this.globalHeaders.concat(this.localHeaders);
+    this.localHeaders = [];
+    headers.forEach((httpHeaderObj) => {
       const headerKey = httpHeaderObj.getKey();
       if (headersRequest.hasOwnProperty(headerKey) && headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
-        headersRequest[headerKey] += ' ' + httpHeaderObj.getValue();
+        headersRequest[headerKey] = userAgent + ' ' + httpHeaderObj.getValue();
       } else {
         headersRequest[headerKey] = httpHeaderObj.getValue();
       }
-      this.USER_AGENT = headersRequest[CONNECTION_CONST.BASE.USER_AGENT];
     });
+    return headersRequest;
+  }
+
+  /**
+   * Get request options
+   * @param {String} methodName
+   * @param {String} restAPIName
+   * @param {Object} body
+   * @return {Object}
+   */
+  getRequestOptions(methodName, restAPIName, body) {
+    const method = String(methodName).toUpperCase();
+    const uri = this.getURL(restAPIName);
+    // Set Header
+    const headersRequest = this.getRequestHeader();
     // Set request options
     const requestOptions = Object.assign({}, this.options);
     requestOptions.method = method;
@@ -69,7 +72,6 @@ class Connection {
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
-      delete requestOptions.data;
       if (this.isExceedLimitUri(uri, body)) {
         requestOptions.params = {_method: method};
         requestOptions.method = 'POST';
@@ -81,89 +83,16 @@ class Connection {
       requestOptions.data = body;
     }
     requestOptions.headers = headersRequest;
-    // Execute request
-    const request = axios(requestOptions).then(response => {
-      return response.data;
-    });
-    // reset header
-    this.refreshHeader();
-    return request;
+    return requestOptions;
   }
+
   /**
-   * request to URL
+   * request file
    * @param {String} methodName
    * @param {String} restAPIName
    * @param {String} body
-   * @return {Promise}
    */
-  requestFile(methodName, restAPIName, body) {
-    // Set Header
-    const headersRequest = {};
-    // set header with credentials
-    this.auth.createHeaderCredentials().forEach((httpHeaderObj) => {
-      headersRequest[httpHeaderObj.getKey()] = httpHeaderObj.getValue();
-    });
-    this.headers.forEach((httpHeaderObj) => {
-      const headerKey = httpHeaderObj.getKey();
-      if (headersRequest.hasOwnProperty(headerKey) && headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
-        headersRequest[headerKey] += ' ' + httpHeaderObj.getValue();
-      } else {
-        headersRequest[headerKey] = httpHeaderObj.getValue();
-      }
-      this.USER_AGENT = headersRequest[CONNECTION_CONST.BASE.USER_AGENT];
-    });
-
-    // Set request options
-    const requestOptions = Object.assign({}, this.options);
-    requestOptions.method = String(methodName).toUpperCase();
-    requestOptions.url = this.getUri(restAPIName);
-    requestOptions.headers = headersRequest;
-    // set data to param if using GET method
-    if (requestOptions.method === 'GET') {
-      requestOptions.params = body;
-      requestOptions[FILE_RESPONSE_TYPE_KEY] = FILE_RESPONSE_TYPE_VALUE;
-    } else {
-      requestOptions.data = body;
-    }
-    this.axiousInterceptErrRsp();
-    // Execute request
-    const request = axios(requestOptions).then(response => {
-      return response.data;
-    }).catch(err => {
-      throw new KintoneAPIException(err);
-    });
-    this.refreshHeader();
-    return request;
-  }
-
-  axiousInterceptErrRsp() {
-    axios.interceptors.response.use(
-      response => {
-        return response;
-      },
-      error => {
-        if (
-          error.request.responseType === 'blob' &&
-            error.response.data instanceof Blob &&
-            error.response.data.type &&
-            error.response.data.type.toLowerCase().indexOf('json') !== -1
-        ) {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              error.response.data = JSON.parse(reader.result);
-              resolve(Promise.reject(error));
-            };
-            reader.onerror = () => {
-              reject(error);
-            };
-            reader.readAsText(error.response.data);
-          });
-        }
-        return Promise.reject(error);
-      }
-    );
-  }
+  requestFile(methodName, restAPIName, body) {}
 
   /**
    * Download file from kintone
@@ -210,7 +139,7 @@ class Connection {
    * @param {String} url - api name or FQDN
    * @return {String}
    */
-  getUri(url) {
+  getURL(url) {
     let urlFQDN = CONNECTION_CONST.BASE.SCHEMA + '://' + this.domain;
     const apiNameUpperCase = String(url).toUpperCase();
     urlFQDN += ':' + DEFAULT_PORT;
@@ -247,19 +176,26 @@ class Connection {
     this.options[key] = value;
     return this;
   }
-  removeRequestOption(key) {
-    delete this.options[key];
-    return this;
-  }
   /**
-   * set header for request
+   * set header for all request
    * @param {Object} params
    * @param {String} params.key
    * @param {String} params.value
    * @return {this}
    */
   setHeader({key, value}) {
-    this.headers.push(new HTTPHeader(key, value));
+    this.globalHeaders.push(new HTTPHeader(key, value));
+    return this;
+  }
+  /**
+   * set header for specify request
+   * @param {Object} params
+   * @param {String} params.key
+   * @param {String} params.value
+   * @return {this}
+   */
+  _setLocalHeaders({key, value}) {
+    this.localHeaders.push(new HTTPHeader(key, value));
     return this;
   }
   /**
@@ -274,13 +210,5 @@ class Connection {
     this.auth = auth;
     return this;
   }
-
-  refreshHeader() {
-    const header = [];
-    if (this.USER_AGENT) {
-      header.push(new HTTPHeader(CONNECTION_CONST.BASE.USER_AGENT, this.USER_AGENT));
-    }
-    this.headers = header;
-  }
 }
-export default Connection ;
+export default Connection;
