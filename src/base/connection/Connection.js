@@ -44,7 +44,7 @@ class Connection {
     this.localHeaders = [];
     headers.forEach((httpHeaderObj) => {
       const headerKey = httpHeaderObj.getKey();
-      if (headersRequest.hasOwnProperty(headerKey) && headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
+      if (headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
         headersRequest[headerKey] = userAgent + ' ' + httpHeaderObj.getValue();
       } else {
         headersRequest[headerKey] = httpHeaderObj.getValue();
@@ -62,17 +62,17 @@ class Connection {
    */
   getRequestOptions(methodName, restAPIName, body) {
     const method = String(methodName).toUpperCase();
-    const uri = this.getURL(restAPIName);
+    const url = this.getURL(restAPIName);
     // Set Header
     const headersRequest = this.getRequestHeader();
     // Set request options
     const requestOptions = Object.assign({}, this.options);
     requestOptions.method = method;
-    requestOptions.url = uri;
+    requestOptions.url = url;
     // set data to param if using GET method
     if (requestOptions.method === 'GET') {
       requestOptions.params = body;
-      if (this.isExceedLimitUri(uri, body)) {
+      if (this.isExceedLimitUri(url, body)) {
         requestOptions.params = {_method: method};
         requestOptions.method = 'POST';
         headersRequest[CONNECTION_CONST.BASE.X_HTTP_METHOD_OVERRIDE] = method;
