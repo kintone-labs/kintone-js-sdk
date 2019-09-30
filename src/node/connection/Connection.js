@@ -105,6 +105,15 @@ class Connection extends BaseConnection {
   }
 
   /**
+   * Download file from kintone
+   * @param {String} body
+   * @return {Promise}
+   */
+  download(body) {
+    return this.requestFile('GET', 'FILE', body);
+  }
+
+  /**
    * request to URL
    * @param {String} methodName
    * @param {String} restAPIName
