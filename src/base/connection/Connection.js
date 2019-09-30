@@ -86,23 +86,6 @@ class Connection {
     return requestOptions;
   }
 
-  /**
-   * request file
-   * @param {String} methodName
-   * @param {String} restAPIName
-   * @param {String} body
-   */
-  requestFile(methodName, restAPIName, body) {}
-
-  /**
-   * Download file from kintone
-   * @param {String} body
-   * @return {Promise}
-   */
-  download(body) {
-    return this.requestFile('GET', 'FILE', body);
-  }
-
   serializeParams(object) {
     const parseParams = (obj, prefix) => {
       const queryArray = [];
