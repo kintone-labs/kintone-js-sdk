@@ -120,7 +120,7 @@ class Connection extends BaseConnection {
     }).then(response => {
       return response.data;
     }).catch(err => {
-      throw err;
+      throw new KintoneAPIException(err);
     });
   }
   /**
@@ -166,7 +166,7 @@ class Connection extends BaseConnection {
         return Promise.reject(err);
       }
     }
-    return Promise.reslove(true);
+    return Promise.resolve(true);
   }
 }
 

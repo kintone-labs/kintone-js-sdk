@@ -44,10 +44,10 @@ export class Connection extends kintoneBaseJSSDK.Connection {
             data: err
           }
         };
-        throw error;
+        throw new kintoneBaseJSSDK.KintoneAPIException(error);
       });
     }
-    return this._requestByAxious(methodName, restAPIName, body);
+    return this._requestByAxios(methodName, restAPIName, body);
   }
   /**
    * send request by axios
@@ -56,11 +56,13 @@ export class Connection extends kintoneBaseJSSDK.Connection {
    * @param {Object} body
    * @return {Promise}
    */
-  _requestByAxious(methodName, restAPIName, body) {
+  _requestByAxios(methodName, restAPIName, body) {
     const requestOptions = this.getRequestOptions(methodName, restAPIName, body);
 
     const request = axios(requestOptions).then(response => {
       return response.data;
+    }).catch(err => {
+      throw new kintoneBaseJSSDK.KintoneAPIException(err);
     });
     return request;
   }
