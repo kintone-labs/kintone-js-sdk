@@ -188,7 +188,7 @@ class BulkRequest {
    * @return {Promise}
    */
   execute() {
-    return this.connection.addRequestOption('json', true)
+    return this.connection.addRequestOption({key: 'json', value: true})
       .request('POST', 'BULK_REQUEST', this.bulkRequests.toJSON())
       .then((result) => {
         return result;
