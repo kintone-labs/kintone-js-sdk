@@ -36,7 +36,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
   request(methodName, restAPIName, body) {
     if (window && window.kintone && !this.kintoneAuth) {
       // use kintone.api
-      return kintone.api(super.getUri(restAPIName), String(methodName).toUpperCase(), body).then((response) => {
+      return kintone.api(super.getURL(restAPIName), String(methodName).toUpperCase(), body).then((response) => {
         return response;
       }).catch(err => {
         const error = {
