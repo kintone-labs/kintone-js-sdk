@@ -1,4 +1,4 @@
-import {Connection as BaseConnection} from '../../base/main';
+import {KintoneAPIException, Connection as BaseConnection} from '../../base/main';
 
 import CONNECTION_CONST from './constant';
 import https from 'https';
@@ -163,7 +163,7 @@ class Connection extends BaseConnection {
     }).then(response => {
       return response.data;
     }).catch(err => {
-      throw err;
+      throw new KintoneAPIException(err);
     });
   }
 
