@@ -100,21 +100,30 @@ function (_FileModule) {
        * Upload file from local to kintone environment
        * @param {Object} params
        * @param {String} params.filePath
+       * @param {String} params.fileName
+       * @param {String} params.fileContent
        * @return {Promise}
        */
 
   }, {
     key: "upload",
-    value: function upload(_ref3) {
-      var filePath = _ref3.filePath;
+    value: function upload() {
+      var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          filePath = _ref3.filePath,
+          fileName = _ref3.fileName,
+          fileContent = _ref3.fileContent;
 
-      var fileContent = _fs.default.createReadStream(filePath);
+      var validFilecontent = fileContent;
+      var validFilename = fileName;
 
-      var fileName = _path.default.basename(filePath);
+      if (filePath) {
+        validFilecontent = _fs.default.createReadStream(filePath);
+        validFilename = _path.default.basename(filePath);
+      }
 
       return _get(_getPrototypeOf(File.prototype), "upload", this).call(this, {
-        fileName: fileName,
-        fileContent: fileContent
+        fileName: validFilename,
+        fileContent: validFilecontent
       });
     }
   }]);

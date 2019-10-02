@@ -6,8 +6,6 @@ import Connection from '../../connection/Connection';
 
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
 
-import '@babel/polyfill';
-
 /**
  * RecordCursor module
  */
