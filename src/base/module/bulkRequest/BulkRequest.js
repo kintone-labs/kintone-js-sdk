@@ -195,7 +195,7 @@ class BulkRequest {
       })
       .catch((err) => {
         if (!err || !err.response || !err.response.data || err.response.data.code) {
-          throw err;
+          throw new KintoneAPIException(err);
         }
         const errors = err.response.data.results;
         throw this.bulkRequestException(errors);
@@ -211,7 +211,7 @@ class BulkRequest {
       if (errors[key].hasOwnProperty('code')) {
         const errObject = JSON.parse(formatErr);
         errObject.response.data = errors[key];
-        formatErrors.push(errObject);
+        formatErrors.push(new KintoneAPIException(errObject));
       } else {
         formatErrors.push(errors[key]);
       }

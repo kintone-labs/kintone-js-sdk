@@ -44,7 +44,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
             data: err
           }
         };
-        throw new kintoneBaseJSSDK.KintoneAPIException(error);
+        throw error;
       });
     }
     return this._requestByAxios(methodName, restAPIName, body);
@@ -61,8 +61,6 @@ export class Connection extends kintoneBaseJSSDK.Connection {
 
     const request = axios(requestOptions).then(response => {
       return response.data;
-    }).catch(err => {
-      throw new kintoneBaseJSSDK.KintoneAPIException(err);
     });
     return request;
   }

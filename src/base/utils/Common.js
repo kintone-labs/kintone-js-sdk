@@ -2,6 +2,7 @@
  * kintone api - nodejs client
  * Common function
  */
+import KintoneAPIException from '../exception/KintoneAPIException';
 
 class Common {
   /**
@@ -13,7 +14,12 @@ class Common {
    */
   sendRequest(method, url, model, connection) {
     const body = model.toJSON ? model.toJSON() : model;
-    return connection.request(method, url, body);
+    return connection.request(method, url, body)
+      .then((result) => {
+        return result;
+      }).catch((err) => {
+        throw new KintoneAPIException(err);
+      });
   }
 
 }
