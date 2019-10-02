@@ -11,6 +11,12 @@ const getPasswordAuth = (userName, password) => {
 const GET_RECORDS_LIMIT = 500;
 const UPDATE_RECORDS_LIMIT = 100;
 
+const API_ROUTE = {
+  RECORD: `/k/v1/record.json`,
+  RECORDS: `/k/v1/records.json`,
+  BULK: `/k/v1/bulkRequest.json`
+};
+
 export {
   USERNAME,
   PASSWORD,
@@ -19,5 +25,6 @@ export {
   PASSWORD_AUTH_HEADER,
   GET_RECORDS_LIMIT,
   UPDATE_RECORDS_LIMIT,
+  API_ROUTE,
   getPasswordAuth
 };

@@ -1,15 +1,15 @@
 import Auth from '../../../../src/base/authentication/Auth';
 import Connection from '../../../../src/base/connection/Connection';
 import RecordCursor from '../../../../src/base/module/cursor/RecordCursor';
-import { USERNAME, PASSWORD, DOMAIN, PASSWORD_AUTH_HEADER, getPasswordAuth, URI } from './common'
+import {USERNAME, PASSWORD, DOMAIN, PASSWORD_AUTH_HEADER, getPasswordAuth, URI} from './common';
 
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 
 const auth = new Auth();
-auth.setPasswordAuth({ username: USERNAME, password: PASSWORD });
+auth.setPasswordAuth({username: USERNAME, password: PASSWORD});
 
-const conn = new Connection({ domain: DOMAIN, auth: auth });
+const conn = new Connection({domain: DOMAIN, auth: auth});
 
 const CURSOR_ROUTE = '/k/v1/records/cursor.json';
 
@@ -82,8 +82,8 @@ describe('Checking RecordCursor getAllRecords function', () => {
     const rc = new RecordCursor({connection: conn});
     return rc.getAllRecords()
       .catch((err)=>{
-        expect(err).toBeInstanceOf(KintoneAPIException)
-        expect(err.message).toEqual('id is a required argument.')
+        expect(err).toBeInstanceOf(KintoneAPIException);
+        expect(err.message).toEqual('id is a required argument.');
       });
   });
 });

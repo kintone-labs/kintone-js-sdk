@@ -1,0 +1,945 @@
+{
+  "API_TOKEN_ERROR": {
+    "code": "GAIA_NO01",
+    "message": "Using this API token, you cannot run the specified API."
+  },
+  "PERMISSION_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_NO02",
+    "message": "No privilege to proceed."
+  },
+  "MISSING_APPS_ERROR": {
+    "code": "CB_VA01",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_REQUEST_DATA_ERROR": {
+    "code": "CB_VA01",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "requests": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_APP_ERROR": {
+    "code": "CB_VA01",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "app": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_APP_ID_ERROR": {
+    "code": "CB_VA01",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "id": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_APPS_ID_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps[%VARIABLE].app": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_NAME_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "name": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_FIELD_ADD_UPDATE_FORM_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "properties": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_FIELD_DELETE_FORM_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "fields": {
+        "messages": [
+          "Required field.",
+          "size must be between 1 and 100"
+        ]
+      }
+    }
+  },
+  "MISSING_SPACE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "space": {
+        "messages": [
+          "Space parameter is required to create an app in space."
+        ]
+      }
+    }
+  },
+  "MISSING_THREAD_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "thread": {
+        "messages": [
+          "Thread parameter is required to create an app in space."
+        ]
+      }
+    }
+  },
+  "MISSING_LAYOUT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "layout": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_ICON_TYPE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "icon.type": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_ICON_KEY_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "icon.key": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_VIEWS_INDEX_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "views[%VARIABLE].index": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_VIEWS_TYPE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "views[%VARIABLE].type": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "NEGATIVE_APPID_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "id": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_APP_ID_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "app": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_APPS_ID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_APPSID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps[0].app": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_LIMIT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "limit": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_OFFSET_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "offset": {
+        "messages": [
+          "must be greater than or equal to 0"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_SPACE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "space": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_THREAD_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "thread": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "INVALID_LANGUAGE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "lang": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "INVALID_APP_ID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "id": {
+        "messages": [
+          "Enter an integer value."
+        ]
+      }
+    }
+  },
+  "INVALID_APPS_ID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps": {
+        "messages": [
+          "Enter an integer value."
+        ]
+      }
+    }
+  },
+  "INVALID_REVISION_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps[%VARIABLE].revision": {
+        "messages": [
+          "Enter an integer value."
+        ]
+      }
+    }
+  },
+  "INVALID_REVERT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "revert": {
+        "messages": [
+          "must be boolean."
+        ]
+      }
+    }
+  },
+  "INVALID_FIELD_TYPE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "properties[%VARIABLE].type": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "INVALID_FIELD_CODE_ERROR": {
+    "code": "GAIA_FC01",
+    "message": "The field (code: %VARIABLE) not found."
+  },
+  "INVALID_FIELD_TYPE_UPDATE_LAYOUT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "layout[%LAYOUT].fields[%FIELD].type": {
+        "messages": [
+          "Failed to update form. The type of the field (code: %CODE) does not match the type parameter."
+        ]
+      }
+    }
+  },
+  "INVALID_LAYOUT_TYPE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "layout[%VARIABLE].type": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "INVALID_THEME_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "theme": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "INVALID_VIEWS_TYPE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "views[%VARIABLE].type": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "INVALID_VIEWS_KEY_ERROR": {
+    "code": "GAIA_IN01",
+    "message": "Failed to update view. Key %KEY does not match the value of %NAME in the name parameter."
+  },
+  "NONEXISTENT_APP_ID_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "GAIA_AP01",
+    "message": "The app (ID: %VARIABLE) not found. The app may have been deleted."
+  },
+  "NONEXISTENT_APP_ID_GUEST_SPACE_ERROR": {
+    "code": "CB_NO02",
+    "message": "No privilege to proceed."
+  },
+  "NONEXISTENT_SPACE_ERROR": {
+    "code": "OC_NO01",
+    "message": "The space (id: %VARIABLE) could not be found, or no longer exists."
+  },
+  "NONEXISTENT_THREAD_ERROR": {
+    "code": "OC_NO02",
+    "message": "The thread (id: %VARIABLE) could not be found, or no longer exists."
+  },
+  "NONEXISTENT_FIELD_CODE_UPDATE_LAYOUT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "layout[%LAYOUT].fields[%FIELD].code": {
+        "messages": [
+          "Failed to update form. Field (code: %CODE) is not found."
+        ]
+      }
+    }
+  },
+  "NONEXISTENT_USER_ERROR": {
+    "code": "GAIA_IL26",
+    "message": "The specified user (code：NONEXISTENT_USER) not found."
+  },
+  "INCORRECT_REVISION_ERROR": {
+    "code": "GAIA_CO03",
+    "message": "The revision is not the latest. Someone may update the app settings (ID: %VARIABLE)."
+  },
+  "DUPLICATE_APP_ID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps[%VARIABLE].app": {
+        "messages": [
+          "App ID is duplicated."
+        ]
+      }
+    }
+  },
+  "LIMIT_LARGER_THAN_100_ERRORS": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "limit": {
+        "messages": [
+          "must be less than or equal to 100"
+        ]
+      }
+    }
+  },
+  "APP_ID_LARGER_THAN_300_ERROR": {
+    "code": "GAIA_TO03",
+    "message": "The number of parameters exceeds the limit. - apps[300]"
+  },
+  "APP_ID_LARGER_THAN_100_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "ids": {
+        "messages": [
+          "size must be between 0 and 100"
+        ]
+      }
+    }
+  },
+  "CODES_LARGER_THAN_100_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "codes": {
+        "messages": [
+          "size must be between 0 and 100"
+        ]
+      }
+    }
+  },
+  "SPACE_ID_LARGER_THAN_100_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "spaceIds": {
+        "messages": [
+          "size must be between 0 and 100"
+        ]
+      }
+    }
+  },
+  "OFFSET_LARGER_THAN_2147483647_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "offset": {
+        "messages": [
+          "must be less than or equal to 2,147,483,647"
+        ]
+      }
+    }
+  },
+  "NAME_LARGER_THAN_64_CHARACTERS_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "name": {
+        "messages": [
+          "Name must be between 1 and 64 characters."
+        ]
+      }
+    }
+  },
+  "FIELDS_LARGER_THAN_100_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "fields": {
+        "messages": [
+          "size must be between 1 and 100"
+        ]
+      }
+    }
+  },
+  "LIMIT_LARGER_THAN_10_ERRORS": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "limit": {
+        "messages": [
+          "must be less than or equal to 10"
+        ]
+      }
+    }
+  },
+  "MISSING_RECORD_ID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "id": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "NEGATIVE_RECORD_ID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "id": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NEGATIVE_RECORD_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "record": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "NONEXISTENT_RECORD_ID_ERROR": {
+    "code": "GAIA_RE01",
+    "message": "The specified record (ID: %VARIABLE) is not found."
+  },
+  "NEGATIVE_REVISION_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "revision": {
+        "messages": [
+          "must be greater than or equal to -1"
+        ]
+      }
+    }
+  },
+  "INCORRECT_UPDATEKEY_VALUE_ERROR": {
+    "code": "GAIA_RE20",
+    "message": "No records match the conditions specified in the \"updateKey\" field."
+  },
+  "INCORRECT_UPDATEKEY_FIELD_ERROR": {
+    "code": "GAIA_IQ11",
+    "message": "Specified field (%VARIABLE) not found."
+  },
+  "RECORD_ID_LARGER_THAN_100_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "ids": {
+        "messages": [
+          "Between 1 and 100 records can be deleted at one time."
+        ]
+      }
+    }
+  },
+  "RECORD_REVISIONS_LARGER_THAN_100_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "ids": {
+        "messages": [
+          "Between 1 and 100 records can be deleted at one time."
+        ]
+      },
+      "revisions": {
+        "messages": [
+          "size must be between 0 and 100"
+        ]
+      }
+    }
+  },
+  "INVALID_COMMENT_ORDER_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "order": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "MISSING_COMMENT_OBJECT_ERROR": {
+    "code": "CB_IJ01",
+    "message": "Invalid JSON string."
+  },
+  "MISSING_COMMENT_TEXT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "comment.%VARIABLE": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_COMMENT_MENTIONS_TYPE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "comment.mentions[%VARIABLE].type": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "MISSING_COMMENT_MENTIONS_CODE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "comment.mentions[%VARIABLE].code": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "INVALID_COMMENT_MENTIONS_TYPE_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "comment.mentions[%VARIABLE].type": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "NONEXISTENT_COMMENT_ID_ERROR": {
+    "code": "GAIA_RE02",
+    "message": "The specified comment does not exist. The comment may have been deleted."
+  },
+  "NEGATIVE_COMMENT_ID_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "comment": {
+        "messages": [
+          "must be greater than or equal to 1"
+        ]
+      }
+    }
+  },
+  "MISSING_DELETE_COMMENT_OBJECT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "comment": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "INVALID_QUERY_GET_DATA_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "errors": {
+      "query": {
+        "messages": [
+          "unsupported query format"
+        ]
+      }
+    }
+  },
+  "LIMIT_LARGER_THAN_500_ERROR": {
+    "code": "GAIA_QU01",
+    "message": "limit must be 500 or less."
+  },
+  "INVALID_FIELD_TYPE_NUMBER_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "record%VARIABLE.value": {
+        "messages": [
+          "Only numbers are allowed."
+        ]
+      }
+    }
+  },
+  "INVALID_VALUE_DUPLICATED_ERROR": {
+    "code": "CB_VA01",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "record%VARIABLE.value": {
+        "messages": [
+          "This value already exists in another record."
+        ]
+      }
+    }
+  },
+  "MISSING_REQUIRED_FIELD_ADD_RECORD_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "record%VARIABLE.value": {
+        "messages": [
+          "Required."
+        ]
+      }
+    }
+  },
+  "RECORD_ID_LARGER_THAN_100_ERROR_ADD_RECORD": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "records": {
+        "messages": [
+          "A maximum of 100 records can be added at one time."
+        ]
+      }
+    }
+  },
+  "INCORRECT_REVISION_RECORD_ERROR": {
+    "code": "GAIA_CO02",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "message": "The revision is not the latest. Someone may update a record."
+  },
+  "COMMENTS_FEATURE_DISABLED_ERROR": {
+    "code": "GAIA_RE12",
+    "message": "Comment feature is disabled."
+  },
+  "DELETE_OTHER_USER_COMMENT_ERROR": {
+    "code": "GAIA_RE03",
+    "message": "Cannot delete the comment (ID: %VARIABLE). The comment was posted by someone other than you."
+  },
+  "INVALID_STRICT_FIELD_TYPE_UPDATE_RECORD_ERROR": {
+    "code": "GAIA_UN10",
+    "message": "Cannot update field whose type is %VARIABLE."
+  },
+  "MORE_THAN_300_APP_IDS": {
+    "code": "CB_VA01",
+    "id": "s3lynBtXfNz63yMJe641",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "apps": {
+        "messages": [
+          "size must be between 0 and 300"
+        ]
+      }
+    }
+  },
+  "INVALID_UPDATEKEY_NOT_UNIQUE": {
+    "code": "GAIA_IQ27",
+    "message": "Failed to update record. The field (code: Number) set as \"updateKey\" must be set to \"Prohibit duplicate values\"."
+  },
+  "INCORRECT_FILE_KEY_DOWNLOAD": {
+    "code": "GAIA_BL01",
+    "message": "The specified file (id: %VARIABLE) not found."
+  },
+  "ASSIGNEES_MORE_THAN_100_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "assignees": {
+        "messages": [
+          "size must be between 0 and 100"
+        ]
+      }
+    }
+  },
+  "PROCESS_MANAGEMENT_DISABLED_ERROR": {
+    "code": "GAIA_ST02",
+    "message": "Your request failed. The process management feature has been disabled."
+  },
+  "NOT_ASSIGNEE_CHANGE_STATUS_ERROR": {
+    "code": "GAIA_NT01",
+    "message": "Only Assignee can change the status."
+  },
+  "UNSPECIFIED_ASSIGNEE_UPDATED_STATUS_ERROR": {
+    "code": "GAIA_SA04",
+    "message": "Failed to update status. Assignee cannot be specified by the action."
+  },
+  "INVALID_STATUS_ERROR": {
+    "code": "GAIA_IL03",
+    "message": "Failed to update the status. The settings or the status itself may have been changed by someone."
+  },
+  "MORE_THAN_100_UPDATE_RECORDS_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "records": {
+        "messages": [
+          "A maximum of 100 records can be updated at one time."
+        ]
+      }
+    }
+  },
+  "MISSING_ASSIGNEE_ERROR": {
+    "code": "GAIA_SA01",
+    "message": "Assignee is required."
+  },
+  "MISSING_RECORD_ID_UPDATE_RECORDS_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "records[0].id": {
+        "messages": [
+          "Required field."
+        ]
+      },
+      "records[1].id": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "NONEXISTENT_FIELD_IN_TABLE_UPDATE_LAYOUT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "layout[%LAYOUT].fields": {
+        "messages": [
+          "Failed to update form. The format of table %TABLE_CODE is not valid. Some fields may be missing or the specified fields may not exist in the table."
+        ]
+      }
+    }
+  },
+  "INVALID_FIELD_CODE_UPDATE_LAYOUT_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "layout[%LAYOUT].fields[%FIELD].code": {
+        "messages": [
+          "must be one of the enum value"
+        ]
+      }
+    }
+  },
+  "INVALID_TOTAL_COUNT_ERROR": {
+    "code": "CB_VA01",
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "totalCount": {
+        "messages": [
+          "must be boolean."
+        ]
+      }
+    }
+  },
+  "FIELD_NUMBER_LESS_THAN_VALUE_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "record%VARIABLE.value": {
+        "messages": [
+          "The value must be 64 or less."
+        ]
+      }
+    }
+  },
+  "ADD_FIELD_STATUS_ERROR": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "GAIA_UN10",
+    "message": "Cannot update field whose type is STATUS."
+  },
+  "ADD_RECORD_SYSTEM_FIELD_WITHOUT_ADMIN_PERMISSION": {
+    "id": "Jt2jVNMHlZxXPufVeZCz",
+    "code": "GAIA_BF02",
+    "message": "App permissions are required to add records with specifying a value in the \"%VARIABLE\" field."
+  },
+  "MISSING_RECORDS_DATA_ERROR": {
+    "code": "CB_VA01",
+    "message": "Missing or invalid input.",
+    "errors": {
+      "records": {
+        "messages": [
+          "Required field."
+        ]
+      }
+    }
+  },
+  "UPDATE_RECORD_MODIFIER_ERROR": {
+    "code": "GAIA_UN10",
+    "message": "Cannot update field whose type is MODIFIER."
+  },
+  "UPDATE_RECORD_CREATOR_ERROR": {
+    "code": "GAIA_UN10",
+    "message": "Cannot update field whose type is CREATOR."
+  },
+  "UPDATE_RECORD_CREATED_AT_ERROR": {
+    "code": "GAIA_UN10",
+    "id": "JkEZZDZMRe3ZkrfCWRaq",
+    "message": "Cannot update field whose type is CREATED_AT."
+  },
+  "UPDATE_RECORD_MODIFIED_AT_ERROR": {
+    "code": "GAIA_UN10",
+    "message": "Cannot update field whose type is MODIFIED_AT."
+  },
+  "EDIT_RECORD_WITHOUT_FIELD_PERMISSION": {
+    "code": "GAIA_FU01",
+    "id": "JkEZZDZMRe3ZkrfCWRaq",
+    "message": "Edit permissions are required to edit field \"%VARIABLE\"."
+  }
+}
