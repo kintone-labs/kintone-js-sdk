@@ -1,8 +1,8 @@
-import KintoneAPIException from "../exception/KintoneAPIException";
 /**
  * kintone api - nodejs client
  * Common function
  */
+import KintoneAPIException from '../exception/KintoneAPIException';
 
 class Common {
   /**

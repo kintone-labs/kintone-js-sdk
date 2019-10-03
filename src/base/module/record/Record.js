@@ -553,7 +553,7 @@ class Record {
         return false;
       }
       for (let i = 0; i < allRecords.length; i++) {
-        if (allRecords[i][comparedRecord.updateKey.field].value === comparedRecord.updateKey.value) {
+        if (allRecords[i][comparedRecord.updateKey.field].value === `${comparedRecord.updateKey.value}`) {
           // exist => put
           return true;
         }
