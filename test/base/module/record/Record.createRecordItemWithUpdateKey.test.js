@@ -1,5 +1,5 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
 import {USERNAME, PASSWORD, DOMAIN} from './common';
 import RecordsUpdateItem from '../../../../src/base/model/record/record/RecordUpdateItem';

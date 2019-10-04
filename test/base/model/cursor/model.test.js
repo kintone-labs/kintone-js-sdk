@@ -1,6 +1,6 @@
-import CreateRecordCursorRequest from '../../../../../src/base/model/cursor/recordCursor/CreateRecordCursorRequest';
-import GetRecordCursorRequest from '../../../../../src/base/model/cursor/recordCursor/GetRecordCursorRequest';
-import DeleteCursorRequest from '../../../../../src/base/model/cursor/recordCursor/DeleteCursorRequest';
+import CreateRecordCursorRequest from '../../../../src/base/model/cursor/recordCursor/CreateRecordCursorRequest';
+import GetRecordCursorRequest from '../../../../src/base/model/cursor/recordCursor/GetRecordCursorRequest';
+import DeleteCursorRequest from '../../../../src/base/model/cursor/recordCursor/DeleteCursorRequest';
 
 describe('Checking RecordCursor model', () => {
   it('verify CreateRecordCursorRequest.toJSONString() function', () => {

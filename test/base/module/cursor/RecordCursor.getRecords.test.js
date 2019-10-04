@@ -1,5 +1,5 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import RecordCursor from '../../../../src/base/module/cursor/RecordCursor';
 import {USERNAME, PASSWORD, DOMAIN, PASSWORD_AUTH_HEADER, getPasswordAuth, URI} from './common';
 

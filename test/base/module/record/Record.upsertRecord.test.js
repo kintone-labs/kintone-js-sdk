@@ -1,8 +1,9 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
 import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth, API_ROUTE} from './common';
 import nock from 'nock';
+import {KintoneAPIException} from '../../../../src/base/main';
 
 const auth = new Auth();
 auth.setPasswordAuth({username: USERNAME, password: PASSWORD});
@@ -59,6 +60,13 @@ describe('Check Record.upsertRecord', () => {
       .then(rsp => {
         expect(rsp.revision).toBe('1');
         expect(rsp.id).toBe('100');
+      });
+  });
+
+  it('should throw error when called with empty param', () => {
+    return recordModule.upsertRecord()
+      .catch(err => {
+        expect(err).toBeInstanceOf(KintoneAPIException);
       });
   });
 });

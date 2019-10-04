@@ -3,6 +3,7 @@ import HTTPHeader from '../model/http/HTTPHeader';
 import packageFile from '../../../package.json';
 import CONNECTION_CONST from './constant';
 import KintoneAPIException from '../exception/KintoneAPIException';
+import common from '../utils/Common';
 const DEFAULT_PORT = '443';
 /**
  * Connection module
@@ -24,6 +25,16 @@ class Connection {
 
     this.setAuth(auth);
     this.addRequestOption({key: CONNECTION_CONST.BASE.PROXY, value: false});
+  }
+
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return common.validateRequiredArgs(params);
   }
 
   /**

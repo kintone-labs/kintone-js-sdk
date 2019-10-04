@@ -1,5 +1,5 @@
-import Auth from '../../../src/base/authentication/Auth';
-import Connection from '../../../src/base/connection/Connection';
+import Auth from '../../../src/node/authentication/Auth';
+import Connection from '../../../src/node/connection/Connection';
 import CONNECTION_CONST from '../../../src/base/connection/constant';
 
 import nock from 'nock';
@@ -13,6 +13,14 @@ describe('Checking Connection object', () => {
 
     const conn = new Connection({domain, auth, guestSpaceID});
     expect(conn).toBeInstanceOf(Connection);
+  });
+
+  it('should throw error when create new instance with empty param', () => {
+    try {
+      new Connection();
+    } catch (error) {
+      expect(error).toBeInstanceOf(KintoneAPIException);
+    }
   });
 
   it('should be throw error when creatting a Connection with wrong Auth instance', () => {
@@ -166,12 +174,12 @@ describe('Checking Connection object', () => {
     expect(resultArr).toEqual('0=1&1=2&2=3');
   });
 
-  it('can run getUri function with full url', () => {
+  it('can run getURL function with full url', () => {
     const auth = new Auth();
     const domain = 'MY_DOMAIN';
 
     const conn = new Connection({domain, auth});
-    const result = conn.getUri('https://MY_DOMAIN:443/k/v1/app.json');
+    const result = conn.getURL('https://MY_DOMAIN:443/k/v1/app.json');
 
     expect(result).toEqual('https://MY_DOMAIN:443/k/v1/app.json');
   });

@@ -1,11 +1,11 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import BulkRequest from '../../../../src/base/module/bulkRequest/BulkRequest';
 import {
   BULK_REQUEST_API_ROUTE, RECORD_API_ROUTE,
   RECORDS_API_ROUTE, URI,
   ASSIGNEES_API_ROUTE,
-  PASSWORD_AUTH_HEADER, USERNAME, PASSWORD
+  PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN
 } from './common';
 
 import nock from 'nock';
@@ -13,7 +13,7 @@ import nock from 'nock';
 describe('Checking BulkRequest.addRecord function', () => {
   const auth = new Auth();
   auth.setPasswordAuth({username: USERNAME, password: PASSWORD});
-  const connection = new Connection({auth});
+  const connection = new Connection({auth, domain: DOMAIN});
 
   const addRecordData = {app: 1, record: {Text: {value: 'add'}}};
   const addRecordsData = {app: 2, records: [addRecordData.record]};

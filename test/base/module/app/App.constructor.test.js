@@ -1,12 +1,13 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import App from '../../../../src/base/module/app/App';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
+import {DOMAIN} from './common';
 
 describe('Checking App.constructor', () => {
   it('can creating App module', () => {
     const auth = new Auth();
-    const connection = new Connection({auth});
+    const connection = new Connection({auth, domain: DOMAIN});
     const app = new App({connection});
     expect(app).toBeInstanceOf(App);
   });

@@ -1,5 +1,5 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
 import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth, UPDATE_RECORDS_LIMIT} from './common';
 import nock from 'nock';
@@ -209,7 +209,9 @@ describe('Check Record.updateAllRecords', () => {
       results: [error]
     };
     nock(URI)
-      .post(BULK_REQUEST_ROUTE)
+      .post(BULK_REQUEST_ROUTE, (rqBody) => {
+        return true;
+      })
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
@@ -220,8 +222,7 @@ describe('Check Record.updateAllRecords', () => {
       })
       .reply(400, expectBody);
 
-    const getRecordResult = recordModule.updateAllRecords({app: -1, records: recordsData.records});
-    return getRecordResult.catch((err) => {
+    return recordModule.updateAllRecords({app: -1, records: recordsData.records}).catch((err) => {
       expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
       expect(err.results[0].get()).toMatchObject(error);
     });

@@ -1,8 +1,9 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import App from '../../../../src/base/module/app/App';
 
-const URI = 'https://my_domain';
+const DOMAIN = 'my_domain';
+const URI = `https://${DOMAIN}`;
 const PASSWORD_AURH_HEADER = 'X-Cybozu-Authorization';
 const MY_USERNAME = 'MY_USERNAME';
 const MY_PASSWORD = 'MY_PASSWORD';
@@ -22,6 +23,7 @@ export {
   PASSWORD_AURH_HEADER,
   MY_USERNAME,
   MY_PASSWORD,
+  DOMAIN,
   createPasswordAuthToCheck,
   createAppToSendRequest
 };

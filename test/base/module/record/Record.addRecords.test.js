@@ -1,5 +1,5 @@
-import Auth from '../../../../src/base/authentication/Auth';
-import Connection from '../../../../src/base/connection/Connection';
+import Auth from '../../../../src/node/authentication/Auth';
+import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
 import {URI, PASSWORD_AUTH_HEADER, API_ROUTE, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
 import nock from 'nock';
