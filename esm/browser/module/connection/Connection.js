@@ -1,26 +1,16 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
+import "core-js/modules/es.object.assign";
+import "core-js/modules/es.object.to-string";
+import "core-js/modules/es.promise";
+import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
+import _createClass from "@babel/runtime/helpers/createClass";
+import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstructorReturn";
+import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
+import _get from "@babel/runtime/helpers/get";
+import _inherits from "@babel/runtime/helpers/inherits";
+import axios from 'axios';
 import * as kintoneBaseJSSDK from '../../../base/main';
+var FILE_RESPONSE_TYPE_KEY = 'responseType';
+var FILE_RESPONSE_TYPE_VALUE = 'blob';
 /**
  * Connection module
  */
@@ -63,7 +53,6 @@ function (_kintoneBaseJSSDK$Con) {
       _this.kintoneAuth = undefined;
     }
 
-    _this.headers = [];
     return _possibleConstructorReturn(_this);
   }
   /**
@@ -80,7 +69,7 @@ function (_kintoneBaseJSSDK$Con) {
     value: function request(methodName, restAPIName, body) {
       if (window && window.kintone && !this.kintoneAuth) {
         // use kintone.api
-        return kintone.api(_get(_getPrototypeOf(Connection.prototype), "getUri", this).call(this, restAPIName), String(methodName).toUpperCase(), body).then(function (response) {
+        return kintone.api(_get(_getPrototypeOf(Connection.prototype), "getURL", this).call(this, restAPIName), String(methodName).toUpperCase(), body).then(function (response) {
           return response;
         }).catch(function (err) {
           var error = {
@@ -92,7 +81,24 @@ function (_kintoneBaseJSSDK$Con) {
         });
       }
 
-      return _get(_getPrototypeOf(Connection.prototype), "request", this).call(this, methodName, restAPIName, body);
+      return this._requestByAxios(methodName, restAPIName, body);
+    }
+    /**
+     * send request by axios
+     * @param {String} methodName
+     * @param {String} restAPIName
+     * @param {Object} body
+     * @return {Promise}
+     */
+
+  }, {
+    key: "_requestByAxios",
+    value: function _requestByAxios(methodName, restAPIName, body) {
+      var requestOptions = this.getRequestOptions(methodName, restAPIName, body);
+      var request = axios(requestOptions).then(function (response) {
+        return response.data;
+      });
+      return request;
     }
     /**
      * Upload file from local to kintone environment
@@ -108,14 +114,86 @@ function (_kintoneBaseJSSDK$Con) {
 
       if (window.kintone !== undefined) {
         formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
-        this.setHeader({
+
+        this._setLocalHeaders({
           key: 'X-Requested-With',
           value: 'XMLHttpRequest'
         });
       }
 
       formData.append('file', fileBlob, fileName);
-      return _get(_getPrototypeOf(Connection.prototype), "requestFile", this).call(this, 'POST', 'FILE', formData);
+      return this.requestFile('POST', 'FILE', formData);
+    }
+    /**
+     * Download file from kintone
+     * @param {String} body
+     * @return {Promise}
+     */
+
+  }, {
+    key: "download",
+    value: function download(body) {
+      return this.requestFile('GET', 'FILE', body);
+    }
+    /**
+     * request to URL
+     * @param {String} methodName
+     * @param {String} restAPIName
+     * @param {String} body
+     * @return {Promise}
+     */
+
+  }, {
+    key: "requestFile",
+    value: function requestFile(methodName, restAPIName, body) {
+      var _this2 = this;
+
+      // Set Header
+      var headersRequest = this.getRequestHeader(); // Set request options
+
+      var requestOptions = Object.assign({}, this.options);
+      requestOptions.method = String(methodName).toUpperCase();
+      requestOptions.url = this.getURL(restAPIName);
+      requestOptions.headers = headersRequest; // set data to param if using GET method
+
+      if (requestOptions.method === 'GET') {
+        requestOptions.params = body;
+        requestOptions[FILE_RESPONSE_TYPE_KEY] = FILE_RESPONSE_TYPE_VALUE;
+      } else {
+        requestOptions.data = body;
+      } // Execute request
+
+
+      var request = axios(requestOptions).then(function (response) {
+        return response.data;
+      }).catch(function (err) {
+        return _this2._handleError(err);
+      }).catch(function (err) {
+        throw new kintoneBaseJSSDK.KintoneAPIException(err);
+      });
+      return request;
+    }
+  }, {
+    key: "_handleError",
+    value: function _handleError(error) {
+      if (error.request.responseType === 'blob' && error.response.data instanceof Blob) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+
+          reader.onload = function () {
+            error.response.data = JSON.parse(reader.result);
+            reject(error);
+          };
+
+          reader.onerror = function () {
+            reject(error);
+          };
+
+          reader.readAsText(error.response.data);
+        });
+      }
+
+      return Promise.reject(error);
     }
   }]);
 

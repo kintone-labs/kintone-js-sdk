@@ -5,26 +5,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 /**
  * AddRecordRequest model
  */
-var AddRecordRequest =
-/*#__PURE__*/
-function () {
+class AddRecordRequest {
   /**
      * constructor for AddRecordRequest
      * @param {integer} appID
      * @param {HashTable<String, FieldValue>} recordHashTableData
      */
-  function AddRecordRequest(appID, recordHashTableData) {
-    _classCallCheck(this, AddRecordRequest);
-
+  constructor(appID, recordHashTableData) {
     this.app = appID;
     this.record = recordHashTableData;
   }
@@ -34,53 +24,46 @@ function () {
      */
 
 
-  _createClass(AddRecordRequest, [{
-    key: "getAppID",
-    value: function getAppID() {
-      return this.app;
+  getAppID() {
+    return this.app;
+  }
+  /**
+     * Get record data
+     * @return {HashTable<String, FieldValue>}
+     */
+
+
+  getRecordData() {
+    return this.record;
+  }
+  /**
+     * Get JSON struct of this model
+     * @return {JSON}
+     */
+
+
+  toJSON() {
+    const data = {
+      record: this.getRecordData()
+    };
+
+    if (this.getAppID() !== undefined) {
+      data.app = this.getAppID();
     }
-    /**
-       * Get record data
-       * @return {HashTable<String, FieldValue>}
-       */
 
-  }, {
-    key: "getRecordData",
-    value: function getRecordData() {
-      return this.record;
-    }
-    /**
-       * Get JSON struct of this model
-       * @return {JSON}
-       */
+    return data;
+  }
+  /**
+     * Convert this model to JSON string
+     * @return {String}
+     */
 
-  }, {
-    key: "toJSON",
-    value: function toJSON() {
-      var data = {
-        record: this.getRecordData()
-      };
 
-      if (this.getAppID() !== undefined) {
-        data.app = this.getAppID();
-      }
+  toJSONString() {
+    return JSON.stringify(this.toJSON());
+  }
 
-      return data;
-    }
-    /**
-       * Convert this model to JSON string
-       * @return {String}
-       */
-
-  }, {
-    key: "toJSONString",
-    value: function toJSONString() {
-      return JSON.stringify(this.toJSON());
-    }
-  }]);
-
-  return AddRecordRequest;
-}();
+}
 
 var _default = AddRecordRequest;
 exports.default = _default;

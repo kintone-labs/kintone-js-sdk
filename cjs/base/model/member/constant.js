@@ -9,7 +9,7 @@ exports.default = void 0;
  * kintone api - nodejs client
  * Member constants
  */
-var constant = function constant() {
+const constant = function () {
   return {
     USER: 'USER',
     // user
