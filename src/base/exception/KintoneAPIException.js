@@ -36,7 +36,7 @@ class KintoneAPIException extends Error {
         errorResponse = new KintoneErrorResponseModel(0, null, errors.response.statusMessage, errorResponse);
       }
     }
-    const statusCode = errors.response ? errors.response.statusCode || 0 : 0;
+    const statusCode = errors.response ? errors.response.status || 0 : 0;
     this.httpErrorCode = statusCode;
     this.errorResponse = errorResponse;
   }

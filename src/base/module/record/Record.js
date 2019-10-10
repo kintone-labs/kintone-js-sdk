@@ -45,10 +45,17 @@ class Record {
    * check required arguments
    *
    * @param {Object} params
-   * @returns {Boolean}
+   * @returns {Promise<Boolean>}
    */
   _validateRequiredArgs(params) {
-    return common.validateRequiredArgs(params);
+    return new Promise((resolve, reject) => {
+      try {
+        common.validateRequiredArgs(params);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
   /**
    * Get record by specific ID
@@ -78,26 +85,28 @@ class Record {
   }
 
   getAllRecordsByCursor({app, query, fields} = {}) {
-    this._validateRequiredArgs({app});
-    const kintoneRC = new RecordCursor({connection: this.connection});
-    let myCursor;
-    return kintoneRC.createCursor({app, fields, query, DEFAULT_CURSOR_SIZE})
-      .then((creatCursorResponse)=>{
-        myCursor = creatCursorResponse;
-        return kintoneRC.getAllRecords({id: myCursor.id});
-      })
-      .then((allRecords)=>{
-        if (allRecords.totalCount < myCursor.totalCount) {
-          kintoneRC.deleteCursor({id: myCursor.id});
-        }
-        return allRecords;
-      })
-      .catch((err)=>{
-        if (myCursor) {
-          kintoneRC.deleteCursor({id: myCursor.id});
-        }
-        throw err;
-      });
+    return this._validateRequiredArgs({app}).then(() => {
+      const kintoneRC = new RecordCursor({connection: this.connection});
+      let myCursor;
+      return kintoneRC
+        .createCursor({app, fields, query, DEFAULT_CURSOR_SIZE})
+        .then(creatCursorResponse => {
+          myCursor = creatCursorResponse;
+          return kintoneRC.getAllRecords({id: myCursor.id});
+        })
+        .then(allRecords => {
+          if (allRecords.totalCount < myCursor.totalCount) {
+            kintoneRC.deleteCursor({id: myCursor.id});
+          }
+          return allRecords;
+        })
+        .catch(err => {
+          if (myCursor) {
+            kintoneRC.deleteCursor({id: myCursor.id});
+          }
+          throw err;
+        });
+    });
   }
 
   /**
@@ -112,8 +121,9 @@ class Record {
    * @return {Promise} Promise
    */
   getAllRecordsByQuery({app, query, fields, totalCount, seek = false} = {}) {
-    this._validateRequiredArgs({app});
-    return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
+    return this._validateRequiredArgs({app}).then(() => {
+      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
+    });
   }
 
   getAllRecordsByQueryRecursive(app, query, fields, totalCount, lastCount, records, seek) {
@@ -130,7 +140,7 @@ class Record {
       validQuery = this.createValidQueryForOffset(query, lastCount, limit);
     }
     const getRecordsRequest = new RecordModel.GetRecordsRequest(app, validQuery, fields, totalCount);
-    return this.sendRequest('GET', 'records', getRecordsRequest).then((response) => {
+    return this.sendRequest('GET', 'records', getRecordsRequest).then(response => {
       allRecords = allRecords.concat(response.records);
       if (response.records.length < limit) {
         return {
@@ -149,16 +159,13 @@ class Record {
 
   createValidQueryForOffset(query, offset, limit) {
     const offsetNum = offset || 0;
-    return (query) ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
+    return query ? `${query} limit ${limit} offset ${offsetNum}` : `limit ${limit} offset ${offsetNum}`;
   }
 
   createValidQueryForSeek(query, lastRecord, limit) {
     const lastRecordId = lastRecord || 0;
-    return (query)
-      ? `$id > ${lastRecordId} and (${query}) order by $id asc limit ${limit}`
-      : `$id > ${lastRecordId} order by $id asc limit ${limit}`;
+    return query ? `$id > ${lastRecordId} and (${query}) order by $id asc limit ${limit}` : `$id > ${lastRecordId} order by $id asc limit ${limit}`;
   }
-
 
   /**
    * Add the record
@@ -195,23 +202,24 @@ class Record {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_POST_RECORD;
     let begin = offset || 0;
     const length = records.length || 0;
-    const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
+    const end = length - begin < LIMIT_POST_RECORD ? length : begin + numRecordsPerBulk;
     const recordsPerBulk = records.slice(begin, end);
     let allResults = results || [];
-    return this.addBulkRecord(app, recordsPerBulk).then((response) => {
-      allResults = allResults.concat(response.results);
-      begin += numRecordsPerBulk;
-      if (records.length <= begin) {
-        return allResults;
-      }
-      return this.addAllRecordsRecursive(app, records, begin, allResults);
-    }).catch(errors => {
-      if (errors.length <= NUM_BULK_REQUEST) {
-        errors = allResults.concat(errors);
-      }
-      throw errors;
-    });
-
+    return this.addBulkRecord(app, recordsPerBulk)
+      .then(response => {
+        allResults = allResults.concat(response.results);
+        begin += numRecordsPerBulk;
+        if (records.length <= begin) {
+          return allResults;
+        }
+        return this.addAllRecordsRecursive(app, records, begin, allResults);
+      })
+      .catch(errors => {
+        if (errors.length <= NUM_BULK_REQUEST) {
+          errors = allResults.concat(errors);
+        }
+        throw errors;
+      });
   }
   /**
    * Add all records
@@ -221,18 +229,21 @@ class Record {
    * @return {Promise} Promise
    */
   addAllRecords({app, records}) {
-    this._validateRequiredArgs({app, records});
-    return this.addAllRecordsRecursive(app, records).then((response) => {
-      return {
-        results: response
-      };
-    }).catch(errors => {
-      if (!Array.isArray(errors)) {
-        const emptyArray = [];
-        errors = emptyArray.concat(errors);
-      }
-      const errorsResponse = {results: errors};
-      throw errorsResponse;
+    return this._validateRequiredArgs({app, records}).then(() => {
+      return this.addAllRecordsRecursive(app, records)
+        .then(response => {
+          return {
+            results: response
+          };
+        })
+        .catch(errors => {
+          if (!Array.isArray(errors)) {
+            const emptyArray = [];
+            errors = emptyArray.concat(errors);
+          }
+          const errorsResponse = {results: errors};
+          throw errorsResponse;
+        });
     });
   }
 
@@ -242,7 +253,7 @@ class Record {
     const loopTimes = Math.ceil(length / LIMIT_POST_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_POST_RECORD;
-      const end = (length - begin) < LIMIT_POST_RECORD ? length : begin + LIMIT_POST_RECORD;
+      const end = length - begin < LIMIT_POST_RECORD ? length : begin + LIMIT_POST_RECORD;
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.addRecords({app: app, records: recordsPerRequest});
     }
@@ -268,7 +279,6 @@ class Record {
 
     return this.sendRequest('PUT', 'record', updateRecordRequest);
   }
-
 
   /**
    * Update the specific record by updateKey
@@ -344,12 +354,12 @@ class Record {
   }
 
   /**
-     * Delete records at the specific revision
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Object} params.idsWithRevision
-     * @return {Promise}
-     */
+   * Delete records at the specific revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.idsWithRevision
+   * @return {Promise}
+   */
   deleteRecordsWithRevision({app, idsWithRevision} = {}) {
     const deleteRecordsRequest = new RecordModel.DeleteRecordsRequest(app);
     deleteRecordsRequest.setIDsWithRevision(idsWithRevision);
@@ -363,7 +373,7 @@ class Record {
     const loopTimes = Math.ceil(length / LIMIT_DELETE_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_DELETE_RECORD;
-      const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + LIMIT_DELETE_RECORD;
+      const end = length - begin < LIMIT_DELETE_RECORD ? length : begin + LIMIT_DELETE_RECORD;
       const idsPerRequest = ids.slice(begin, end);
       bulkRequest.deleteRecords({app: app, ids: idsPerRequest});
     }
@@ -374,66 +384,70 @@ class Record {
     const numIdsPerBulk = NUM_BULK_REQUEST * LIMIT_DELETE_RECORD;
     let begin = offset || 0;
     const length = ids.length || 0;
-    const end = (length - begin) < LIMIT_DELETE_RECORD ? length : begin + numIdsPerBulk;
+    const end = length - begin < LIMIT_DELETE_RECORD ? length : begin + numIdsPerBulk;
     const idsPerBulk = ids.slice(begin, end);
 
     let allResults = results || [];
-    return this.deleteBulkRecord(app, idsPerBulk).then((response) => {
-      allResults = allResults.concat(response.results);
-      begin += numIdsPerBulk;
-      if (ids.length <= begin) {
-        return allResults;
-      }
-      return this.deleteAllRecords(app, ids, begin, allResults);
-    }).catch(errors => {
-      if (errors.length <= NUM_BULK_REQUEST) {
-        errors = allResults.concat(errors);
-      }
-      throw errors;
-    });
-  }
-
-  /**
-     * deleteAllRecordsByQuery for use with update all records
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {String} params.query
-     * @return {}
-  **/
-  deleteAllRecordsByQuery({app, query} = {}) {
-    this._validateRequiredArgs({app});
-    return this.getAllRecordsByQuery({app, query}).then((resp) => {
-      const ids = [];
-      const records = resp.records;
-      if (!records || !records.length) {
-        return {};
-      }
-      for (let i = 0; i < records.length; i++) {
-        ids.push(records[i].$id.value);
-      }
-      return this.deleteAllRecords(app, ids).then((response) => {
-        return {results: response};
+    return this.deleteBulkRecord(app, idsPerBulk)
+      .then(response => {
+        allResults = allResults.concat(response.results);
+        begin += numIdsPerBulk;
+        if (ids.length <= begin) {
+          return allResults;
+        }
+        return this.deleteAllRecords(app, ids, begin, allResults);
+      })
+      .catch(errors => {
+        if (errors.length <= NUM_BULK_REQUEST) {
+          errors = allResults.concat(errors);
+        }
+        throw errors;
       });
-    }).catch(errors => {
-      if (!Array.isArray(errors)) {
-        const emptyArray = [];
-        errors = emptyArray.concat(errors);
-      }
-      const errorsResponse = {results: errors};
-      throw errorsResponse;
+  }
+
+  /**
+   * deleteAllRecordsByQuery for use with update all records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.query
+   * @return {}
+   **/
+  deleteAllRecordsByQuery({app, query} = {}) {
+    return this._validateRequiredArgs({app}).then(() => {
+      return this.getAllRecordsByQuery({app, query})
+        .then(resp => {
+          const ids = [];
+          const records = resp.records;
+          if (!records || !records.length) {
+            return {};
+          }
+          for (let i = 0; i < records.length; i++) {
+            ids.push(records[i].$id.value);
+          }
+          return this.deleteAllRecords(app, ids).then(response => {
+            return {results: response};
+          });
+        })
+        .catch(errors => {
+          if (!Array.isArray(errors)) {
+            const emptyArray = [];
+            errors = emptyArray.concat(errors);
+          }
+          const errorsResponse = {results: errors};
+          throw errorsResponse;
+        });
     });
   }
 
-
   /**
-     * Update assignees of the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.id
-     * @param {Array<String>} params.assignees
-     * @param {Number} params.revision
-     * @return {Promise}
-     */
+   * Update assignees of the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
+   * @param {Array<String>} params.assignees
+   * @param {Number} params.revision
+   * @return {Promise}
+   */
   updateRecordAssignees({app, id, assignees, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordAssigneesRequest(app, id, assignees, revision);
 
@@ -441,15 +455,15 @@ class Record {
   }
 
   /**
-     * Update status of the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.id
-     * @param {String} params.action
-     * @param {String} params.assignee
-     * @param {Number} params.revision
-     * @return {Promise}
-     */
+   * Update status of the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
+   * @param {String} params.action
+   * @param {String} params.assignee
+   * @param {Number} params.revision
+   * @return {Promise}
+   */
   updateRecordStatus({app, id, action, assignee, revision} = {}) {
     const updateRecordRequest = new RecordModel.UpdateRecordStatusRequest(app, id, action, assignee, revision);
 
@@ -457,12 +471,12 @@ class Record {
   }
 
   /**
-     * Update status of the multi records
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Array <{RecordStatusUpdate}>} records
-     * @return {Promise}
-     */
+   * Update status of the multi records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array <{RecordStatusUpdate}>} records
+   * @return {Promise}
+   */
   updateRecordsStatus({app, records} = {}) {
     const updateRecordsRequest = new RecordModel.UpdateRecordsRequest(app, records);
 
@@ -475,51 +489,56 @@ class Record {
     const loopTimes = Math.ceil(length / LIMIT_UPDATE_RECORD);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * LIMIT_UPDATE_RECORD;
-      const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + LIMIT_UPDATE_RECORD;
+      const end = length - begin < LIMIT_UPDATE_RECORD ? length : begin + LIMIT_UPDATE_RECORD;
       const recordsPerRequest = records.slice(begin, end);
       bulkRequest.updateRecords({app: app, records: recordsPerRequest});
     }
     return bulkRequest.execute();
   }
   /**
-     * updateAllRecords for use with update all records
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Object} params.records
-     * @return {UpdateRecordsResponse}
-  **/
+   * updateAllRecords for use with update all records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.records
+   * @return {UpdateRecordsResponse}
+   **/
   updateAllRecordsRecursive(app, records, offset, results) {
     const numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
     let begin = offset || 0;
     const validRecord = Array.isArray(records) ? records : [];
     const length = validRecord.length;
-    const end = (length - begin) < LIMIT_UPDATE_RECORD ? length : begin + numRecordsPerBulk;
+    const end = length - begin < LIMIT_UPDATE_RECORD ? length : begin + numRecordsPerBulk;
     const recordsPerBulk = validRecord.slice(begin, end);
     let allResults = results || [];
-    return this.updateBulkRecord(app, recordsPerBulk).then((response) => {
-      allResults = allResults.concat(response.results);
-      begin += numRecordsPerBulk;
-      if (length <= begin) {
-        return allResults;
-      }
-      return this.updateAllRecordsRecursive(app, validRecord, begin, allResults);
-    }).catch(err => {
-      let error = Array.isArray(err) ? err : [err];
-      if (err.length <= NUM_BULK_REQUEST) {
-        error = allResults.concat(error);
-      }
-      throw error;
-    });
+    return this.updateBulkRecord(app, recordsPerBulk)
+      .then(response => {
+        allResults = allResults.concat(response.results);
+        begin += numRecordsPerBulk;
+        if (length <= begin) {
+          return allResults;
+        }
+        return this.updateAllRecordsRecursive(app, validRecord, begin, allResults);
+      })
+      .catch(err => {
+        let error = Array.isArray(err) ? err : [err];
+        if (err.length <= NUM_BULK_REQUEST) {
+          error = allResults.concat(error);
+        }
+        throw error;
+      });
   }
   updateAllRecords({app, records} = {}) {
-    this._validateRequiredArgs({app, records});
-    return this.updateAllRecordsRecursive(app, records).then(rsp => {
-      return {
-        'results': rsp
-      };
-    }).catch(err => {
-      const errorsResponse = {results: err};
-      throw errorsResponse;
+    return this._validateRequiredArgs({app, records}).then(() => {
+      return this.updateAllRecordsRecursive(app, records)
+        .then(rsp => {
+          return {
+            results: rsp
+          };
+        })
+        .catch(err => {
+          const errorsResponse = {results: err};
+          throw errorsResponse;
+        });
     });
   }
 
@@ -533,21 +552,22 @@ class Record {
    * @return {Promise}
    */
   upsertRecord({app, updateKey, record, revision} = {}) {
-    this._validateRequiredArgs({app, updateKey, record});
-    const getRecordsParam = {
-      app: app,
-      query: `${updateKey.field} = "${updateKey.value}"`,
-      fields: [updateKey.field],
-      totalCount: false,
-    };
-    return this.getRecords(getRecordsParam).then((resp) => {
-      if (updateKey.value === '' || resp.records.length < 1) {
-        record[updateKey.field] = {value: updateKey.value};
-        return this.addRecord({app, record});
-      } else if (resp.records.length === 1) {
-        return this.updateRecordByUpdateKey({app, updateKey, record, revision});
-      }
-      throw new KintoneAPIException(`${updateKey.field} is not unique field`);
+    return this._validateRequiredArgs({app, updateKey, record}).then(() => {
+      const getRecordsParam = {
+        app: app,
+        query: `${updateKey.field} = "${updateKey.value}"`,
+        fields: [updateKey.field],
+        totalCount: false
+      };
+      return this.getRecords(getRecordsParam).then(resp => {
+        if (updateKey.value === '' || resp.records.length < 1) {
+          record[updateKey.field] = {value: updateKey.value};
+          return this.addRecord({app, record});
+        } else if (resp.records.length === 1) {
+          return this.updateRecordByUpdateKey({app, updateKey, record, revision});
+        }
+        throw new KintoneAPIException(`${updateKey.field} is not unique field`);
+      });
     });
   }
 
@@ -559,12 +579,6 @@ class Record {
    * @return {Promise}
    */
   upsertRecords({app, records} = {}) {
-    this._validateRequiredArgs({app, records});
-    const validRecords = Array.isArray(records) ? records : [];
-    if (validRecords.length > LIMIT_UPSERT_RECORD) {
-      throw new KintoneAPIException(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
-    }
-
     const doesExistSameFieldValue = (allRecords, comparedRecord) => {
       if (comparedRecord.updateKey.value === '') {
         // updateKey.value is '' => post
@@ -587,26 +601,34 @@ class Record {
       return bulkRequest.execute();
     };
 
-    return this.getAllRecordsByQuery({app}).then((resp) => {
-      const allRecords = resp.records;
-      const recordsForPut = [];
-      const recordsForPost = [];
-      for (let i = 0; i < validRecords.length; i++) {
-        if (doesExistSameFieldValue(allRecords, validRecords[i])) {
-          recordsForPut.push(validRecords[i]);
-        } else {
-          const record = validRecords[i].record;
-          record[validRecords[i].updateKey.field] = {
-            value: validRecords[i].updateKey.value
-          };
-          recordsForPost.push(record);
-        }
+    return this._validateRequiredArgs({app, records}).then(() => {
+      const validRecords = Array.isArray(records) ? records : [];
+      if (validRecords.length > LIMIT_UPSERT_RECORD) {
+        throw new KintoneAPIException(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
       }
-      return executeUpsertBulkRequest(recordsForPost, recordsForPut);
-    }).catch(errors => {
-      const errorsArray = Array.isArray(errors) ? errors : [errors];
-      const errorsResponse = {results: errorsArray};
-      throw errorsResponse;
+      return this.getAllRecordsByQuery({app})
+        .then(resp => {
+          const allRecords = resp.records;
+          const recordsForPut = [];
+          const recordsForPost = [];
+          for (let i = 0; i < validRecords.length; i++) {
+            if (doesExistSameFieldValue(allRecords, validRecords[i])) {
+              recordsForPut.push(validRecords[i]);
+            } else {
+              const record = validRecords[i].record;
+              record[validRecords[i].updateKey.field] = {
+                value: validRecords[i].updateKey.value
+              };
+              recordsForPost.push(record);
+            }
+          }
+          return executeUpsertBulkRequest(recordsForPost, recordsForPut);
+        })
+        .catch(errors => {
+          const errorsArray = Array.isArray(errors) ? errors : [errors];
+          const errorsResponse = {results: errorsArray};
+          throw errorsResponse;
+        });
     });
   }
 
@@ -621,7 +643,7 @@ class Record {
     const loopTimes = Math.ceil(length / recordLimit);
     for (let index = 0; index < loopTimes; index++) {
       const begin = index * recordLimit;
-      const end = (length - begin) < recordLimit ? length : begin + recordLimit;
+      const end = length - begin < recordLimit ? length : begin + recordLimit;
       const recordsPerRequest = records.slice(begin, end);
       if (method === 'POST') {
         bulkRequest.addRecords({app: app, records: recordsPerRequest});
@@ -633,54 +655,53 @@ class Record {
   }
 
   /**
-     * createRecordStatusItem for use with update multi record status
-     * @param {Object} params
-     * @param {Number} params.recordIDInput
-     * @param {String} params.actionNameInput
-     * @param {String} params.assigneeIDInput
-     * @param {String} params.revisionIDInput
-     * @return {RecordsUpdateStatusItem}
-     */
-  createRecordStatusItem(recordIDInput, actionNameInput,
-    assigneeIDInput, revisionIDInput) {
+   * createRecordStatusItem for use with update multi record status
+   * @param {Object} params
+   * @param {Number} params.recordIDInput
+   * @param {String} params.actionNameInput
+   * @param {String} params.assigneeIDInput
+   * @param {String} params.revisionIDInput
+   * @return {RecordsUpdateStatusItem}
+   */
+  createRecordStatusItem(recordIDInput, actionNameInput, assigneeIDInput, revisionIDInput) {
     return new RecordModel.RecordsUpdateStatusItem(recordIDInput, actionNameInput, assigneeIDInput, revisionIDInput);
   }
   /**
-     * Get comments of the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.record
-     * @param {string} params.order  {asc|desc}
-     * @param {Number} params.offset
-     * @param {Number} params.limit
-     * @return {Promise}
-     */
+   * Get comments of the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.record
+   * @param {string} params.order  {asc|desc}
+   * @param {Number} params.offset
+   * @param {Number} params.limit
+   * @return {Promise}
+   */
   getComments({app, record, order, offset, limit}) {
     const getCommentsRequest = new RecordModel.GetCommentsRequest(app, record, order, offset, limit);
     return this.sendRequest('GET', 'RECORD_COMMENTS', getCommentsRequest);
   }
 
   /**
-     * Add new comment to the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.record
-     * @param {CommentContent} comment
-     * @return {Promise}
-     */
+   * Add new comment to the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.record
+   * @param {CommentContent} comment
+   * @return {Promise}
+   */
   addComment({app, record, comment} = {}) {
     const addCommentRequest = new RecordModel.AddCommentRequest(app, record, comment);
     return this.sendRequest('POST', 'RECORD_COMMENT', addCommentRequest);
   }
 
   /**
-     * Delete a comment
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.record
-     * @param {Number} params.comment
-     * @return {Promise}
-     */
+   * Delete a comment
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.record
+   * @param {Number} params.comment
+   * @return {Promise}
+   */
   deleteComment({app, record, comment} = {}) {
     const deleteCommentRequest = new RecordModel.DeleteCommentRequest(app, record, comment);
     return this.sendRequest('DELETE', 'RECORD_COMMENT', deleteCommentRequest);
