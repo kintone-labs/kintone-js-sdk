@@ -143,12 +143,12 @@ class App {
    * Add form fields
    * @param {Object} params
    * @param {Number} params.app
-   * @param {Object} params.properties
+   * @param {Object} params.fields
    * @param {Number} params.revision
    * @returns {Promise} Promise
    */
-  addFormFields({app, properties, revision} = {}) {
-    const dataRequest = new AppModel.AddFormFieldsRequest(app, properties, revision);
+  addFormFields({app, fields, revision} = {}) {
+    const dataRequest = new AppModel.AddFormFieldsRequest(app, fields, revision);
     return this.sendRequest('POST', 'APP_FIELDS_PREVIEW', dataRequest);
   }
 
@@ -156,12 +156,12 @@ class App {
    * Update form fields
    * @param {Object} params
    * @param {Number} params.app
-   * @param {Object} params.properties
+   * @param {Object} params.fields
    * @param {Number} params.revision
    * @returns {Promise} Promise
    */
-  updateFormFields({app, properties, revision}) {
-    const dataRequest = new AppModel.UpdateFormFieldsRequest(app, properties, revision);
+  updateFormFields({app, fields, revision}) {
+    const dataRequest = new AppModel.UpdateFormFieldsRequest(app, fields, revision);
     return this.sendRequest('PUT', 'APP_FIELDS_PREVIEW', dataRequest);
   }
 

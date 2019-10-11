@@ -47,12 +47,18 @@ class File extends FileModule {
      * Upload file from local to kintone environment
      * @param {Object} params
      * @param {String} params.filePath
+     * @param {String} params.fileName
+     * @param {String} params.fileContent
      * @return {Promise}
      */
-  upload({filePath}) {
-    const fileContent = fs.createReadStream(filePath);
-    const fileName = path.basename(filePath);
-    return super.upload({fileName: fileName, fileContent: fileContent});
+  upload({filePath, fileName, fileContent} = {}) {  
+    let validFilecontent = fileContent;
+    let validFilename = fileName;
+    if (filePath) {
+      validFilecontent = fs.createReadStream(filePath);
+      validFilename = path.basename(filePath);
+    }
+    return super.upload({fileName: validFilename, fileContent: validFilecontent});
   }
 }
 export default File;

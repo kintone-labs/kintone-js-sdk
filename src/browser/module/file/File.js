@@ -32,7 +32,7 @@ export class File {
      */
   download({fileKey}) {
     if (window.kintone !== undefined) {
-      this.connection.setHeader({key: 'X-Requested-With', value: 'XMLHttpRequest'});
+      this.connection._setLocalHeaders({key: 'X-Requested-With', value: 'XMLHttpRequest'});
     }
     const dataRequest =
               new FileModel.GetFileRequest(fileKey);

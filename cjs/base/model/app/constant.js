@@ -9,8 +9,8 @@ exports.default = void 0;
  * kintone api - nodejs client
  * Member constants
  */
-var constant = function constant() {
-  var CONST = {}; // FIELD TYPE constant
+const constant = function () {
+  const CONST = {}; // FIELD TYPE constant
 
   CONST.FIELD = {
     CALC: 'CALC',

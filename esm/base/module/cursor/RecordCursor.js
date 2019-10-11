@@ -1,13 +1,12 @@
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+import "core-js/modules/es.array.concat";
+import "core-js/modules/es.object.to-string";
+import "core-js/modules/es.promise";
+import "core-js/modules/es.promise.finally";
+import _regeneratorRuntime from "@babel/runtime/regenerator";
+import "regenerator-runtime/runtime";
+import _asyncToGenerator from "@babel/runtime/helpers/asyncToGenerator";
+import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
+import _createClass from "@babel/runtime/helpers/createClass";
 import KintoneAPIException from "../../model/exception/KintoneAPIException";
 import CursorModel from "../../model/cursor/CursorModels";
 import common from "../../utils/Common";
@@ -16,7 +15,6 @@ import Connection from "../../connection/Connection";
 
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
 
-import '@babel/polyfill';
 /**
  * RecordCursor module
  */
@@ -120,7 +118,7 @@ function () {
     value: function () {
       var _getAllRecords = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
+      _regeneratorRuntime.mark(function _callee() {
         var _ref5,
             id,
             next,
@@ -128,7 +126,7 @@ function () {
             recordBlockResponse,
             _args = arguments;
 
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        return _regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:

@@ -1,9 +1,6 @@
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+import "core-js/modules/es.function.name";
+import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
+import _createClass from "@babel/runtime/helpers/createClass";
 import common from "../../utils/Common";
 import AppModel from "../../model/app/AppModels";
 import Connection from "../../connection/Connection";
@@ -223,7 +220,7 @@ function () {
      * Add form fields
      * @param {Object} params
      * @param {Number} params.app
-     * @param {Object} params.properties
+     * @param {Object} params.fields
      * @param {Number} params.revision
      * @returns {Promise} Promise
      */
@@ -233,17 +230,17 @@ function () {
     value: function addFormFields() {
       var _ref11 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           app = _ref11.app,
-          properties = _ref11.properties,
+          fields = _ref11.fields,
           revision = _ref11.revision;
 
-      var dataRequest = new AppModel.AddFormFieldsRequest(app, properties, revision);
+      var dataRequest = new AppModel.AddFormFieldsRequest(app, fields, revision);
       return this.sendRequest('POST', 'APP_FIELDS_PREVIEW', dataRequest);
     }
     /**
      * Update form fields
      * @param {Object} params
      * @param {Number} params.app
-     * @param {Object} params.properties
+     * @param {Object} params.fields
      * @param {Number} params.revision
      * @returns {Promise} Promise
      */
@@ -252,9 +249,9 @@ function () {
     key: "updateFormFields",
     value: function updateFormFields(_ref12) {
       var app = _ref12.app,
-          properties = _ref12.properties,
+          fields = _ref12.fields,
           revision = _ref12.revision;
-      var dataRequest = new AppModel.UpdateFormFieldsRequest(app, properties, revision);
+      var dataRequest = new AppModel.UpdateFormFieldsRequest(app, fields, revision);
       return this.sendRequest('PUT', 'APP_FIELDS_PREVIEW', dataRequest);
     }
     /**

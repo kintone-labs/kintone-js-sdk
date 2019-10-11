@@ -1,9 +1,8 @@
 import KintoneAPIException from '../exception/KintoneAPIException';
+
 /**
- * kintone api - nodejs client
  * Common function
  */
-
 class Common {
   /**
    * @param {String} method
