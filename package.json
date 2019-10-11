@@ -1,6 +1,6 @@
 {
   "name": "@kintone/kintone-js-sdk",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "The SDK of kintone REST API client on node and browser",
   "main": "./cjs/node/main.js",
   "browser": "./esm/browser/main.js",
