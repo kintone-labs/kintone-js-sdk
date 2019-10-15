@@ -53,11 +53,11 @@ class File extends FileModule {
         try {
           validFilecontent = fs.createReadStream(filePath);
           validFilename = path.basename(filePath);
+          resolve(super.upload({fileName: validFilename, fileContent: validFilecontent}));
         } catch (error) {
           reject(new KintoneAPIException(error.message, error));
         }
       }
-      return resolve(super.upload({fileName: validFilename, fileContent: validFilecontent}));
     });
   }
 }
