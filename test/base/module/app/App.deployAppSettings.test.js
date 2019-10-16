@@ -42,10 +42,26 @@ describe('Checking App.deployAppSettings', () => {
 
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.deployAppSettings().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_IL02',
+      'id': 'fY0nuklF16LsztA9FfM0',
+      'message': 'Illegal request.'
+    };
+    nock(URI)
+      .post(APP_PREVIEW_DEPLOY_API_ROUTE, (rqBody) => {
+        expect(rqBody).toEqual({});
+        return true;
+      })
+      .matchHeader('Content-Type', (type) => {
+        expect(type).toEqual(expect.stringContaining('application/json'));
+        return true;
+      })
+      .reply(520, expectResult);
+
+    return appModule.deployAppSettings()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 });
