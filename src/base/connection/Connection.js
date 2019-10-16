@@ -1,12 +1,9 @@
-
-import common from '../utils/Common';;
+import common from '../utils/Common';
 import KintoneAPIException from '../exception/KintoneAPIException';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
 import packageFile from '../../../package.json';
 import CONNECTION_CONST from './constant';
-import KintoneAPIException from '../exception/KintoneAPIException';
-import common from '../utils/Common';
 const DEFAULT_PORT = '443';
 /**
  * Connection module
@@ -59,10 +56,7 @@ class Connection {
     this.localHeaders = [];
     headers.forEach((httpHeaderObj) => {
       const headerKey = httpHeaderObj.getKey();
-      if (headerKey 
-          
-          
-          CONNECTION_CONST.BASE.USER_AGENT) {
+      if (headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
         headersRequest[headerKey] = userAgent + ' ' + httpHeaderObj.getValue();
       } else {
         headersRequest[headerKey] = httpHeaderObj.getValue();
