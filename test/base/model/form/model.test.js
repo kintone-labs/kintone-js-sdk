@@ -1,9 +1,9 @@
-import GetFormFieldsRequest from '../../../../../src/base/model/app/form/GetFormFieldsRequest';
-import AddFormFieldsRequest from '../../../../../src/base/model/app/form/AddFormFieldsRequest';
-import UpdateFormFieldsRequest from '../../../../../src/base/model/app/form/UpdateFormFieldsRequest';
-import DeleteFormFieldsRequest from '../../../../../src/base/model/app/form/DeleteFormFieldsRequest';
-import GetFormLayoutRequest from '../../../../../src/base/model/app/form/GetFormLayoutRequest';
-import UpdateFormLayoutRequest from '../../../../../src/base/model/app/form/UpdateFormLayoutRequest';
+import GetFormFieldsRequest from '../../../../src/base/model/app/form/GetFormFieldsRequest';
+import AddFormFieldsRequest from '../../../../src/base/model/app/form/AddFormFieldsRequest';
+import UpdateFormFieldsRequest from '../../../../src/base/model/app/form/UpdateFormFieldsRequest';
+import DeleteFormFieldsRequest from '../../../../src/base/model/app/form/DeleteFormFieldsRequest';
+import GetFormLayoutRequest from '../../../../src/base/model/app/form/GetFormLayoutRequest';
+import UpdateFormLayoutRequest from '../../../../src/base/model/app/form/UpdateFormLayoutRequest';
 
 describe('Checking App from model', () => {
   it('verify GetFormFieldsRequest.toJSONString() function', () => {

@@ -1,12 +1,12 @@
-import AddPreviewAppRequest from '../../../../../src/base/model/app/app/AddPreviewAppRequest';
-import DeployAppSettingsRequest from '../../../../../src/base/model/app/app/DeployAppSettingsRequest';
-import GetAppDeployStatusRequest from '../../../../../src/base/model/app/app/GetAppDeployStatusRequest';
-import GetAppRequest from '../../../../../src/base/model/app/app/GetAppRequest';
-import GetAppsRequest from '../../../../../src/base/model/app/app/GetAppsRequest';
-import GetViewsRequest from '../../../../../src/base/model/app/app/GetViewsRequest';
-import UpdateViewsRequest from '../../../../../src/base/model/app/app/UpdateViewsRequest';
-import GetGeneralSettingsRequest from '../../../../../src/base/model/app/app/GetGeneralSettingsRequest';
-import UpdateGeneralSettingsRequest from '../../../../../src/base/model/app/app/UpdateGeneralSettingsRequest';
+import AddPreviewAppRequest from '../../../../src/base/model/app/app/AddPreviewAppRequest';
+import DeployAppSettingsRequest from '../../../../src/base/model/app/app/DeployAppSettingsRequest';
+import GetAppDeployStatusRequest from '../../../../src/base/model/app/app/GetAppDeployStatusRequest';
+import GetAppRequest from '../../../../src/base/model/app/app/GetAppRequest';
+import GetAppsRequest from '../../../../src/base/model/app/app/GetAppsRequest';
+import GetViewsRequest from '../../../../src/base/model/app/app/GetViewsRequest';
+import UpdateViewsRequest from '../../../../src/base/model/app/app/UpdateViewsRequest';
+import GetGeneralSettingsRequest from '../../../../src/base/model/app/app/GetGeneralSettingsRequest';
+import UpdateGeneralSettingsRequest from '../../../../src/base/model/app/app/UpdateGeneralSettingsRequest';
 
 describe('Checking App app model', () => {
   it('verify AddPreviewAppRequest functions', () => {
