@@ -1,4 +1,4 @@
-import {KintoneAPIException, Connection as BaseConnection} from '../../base/main';
+import {Connection as BaseConnection, KintoneAPIException} from '../../base/main';
 
 import CONNECTION_CONST from './constant';
 import https from 'https';
