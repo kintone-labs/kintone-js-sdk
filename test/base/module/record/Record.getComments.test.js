@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 
 const RECORD_COMMENT_ROUTE = '/k/v1/record/comments.json';
@@ -21,10 +21,6 @@ describe('Checking Record.getComments', () => {
     nock(URI)
       .get(RECORD_COMMENT_ROUTE)
       .query(data)
-      .matchHeader('X-Cybozu-Authorization', authHeader => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
-      })
       .reply(200, {
         comments: [
           {

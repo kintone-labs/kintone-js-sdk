@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 
@@ -46,10 +46,6 @@ describe('Checking Record.getAllRecordsByCursor', () => {
       .get(CURSOR_ROUTE)
       .query({
         id: EXPECTED_CREATE_CURSOR_RESPONSE.id
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
       })
       .reply(200, EXPECTED_GET_RECORDS_RESPONSE);
 
@@ -102,10 +98,6 @@ describe('Checking Record.getAllRecordsByCursor', () => {
       .get(CURSOR_ROUTE)
       .query({
         id: EXPECTED_CREATE_CURSOR_RESPONSE.id
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
       })
       .reply(200, EXPECTED_GET_RECORDS_RESPONSE)
       .delete(CURSOR_ROUTE)
@@ -167,10 +159,6 @@ describe('Checking Record.getAllRecordsByCursor', () => {
       .get(CURSOR_ROUTE)
       .query({
         id: EXPECTED_CREATE_CURSOR_RESPONSE.id
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
       })
       .reply(400)
       .delete(CURSOR_ROUTE)

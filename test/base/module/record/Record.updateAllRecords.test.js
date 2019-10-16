@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth, UPDATE_RECORDS_LIMIT} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN, UPDATE_RECORDS_LIMIT} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 import ERROR_MESSAGE from '../../../resources/kintoneErrorMessage.json';
@@ -58,10 +58,6 @@ describe('Check Record.updateAllRecords', () => {
         expect(rqBody).toEqual(expectBodys);
         return true;
       })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
-      })
       .matchHeader('Content-Type', (type) => {
         expect(type).toBe('application/json;charset=utf-8');
         return true;
@@ -84,10 +80,6 @@ describe('Check Record.updateAllRecords', () => {
       .post(BULK_REQUEST_ROUTE, (rqBody) => {
         expect(rqBody).toHaveProperty('requests');
         expect(rqBody).toEqual(expectBodys);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {
@@ -156,20 +148,12 @@ describe('Check Record.updateAllRecords', () => {
 
     nock(URI)
       .post(BULK_REQUEST_ROUTE)
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
-      })
       .matchHeader('Content-Type', (type) => {
         expect(type).toBe('application/json;charset=utf-8');
         return true;
       })
       .reply(200, expectResults)
       .post(BULK_REQUEST_ROUTE)
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
-      })
       .matchHeader('Content-Type', (type) => {
         expect(type).toBe('application/json;charset=utf-8');
         return true;
@@ -210,10 +194,6 @@ describe('Check Record.updateAllRecords', () => {
     };
     nock(URI)
       .post(BULK_REQUEST_ROUTE, (rqBody) => {
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
       })
       .matchHeader('Content-Type', (type) => {

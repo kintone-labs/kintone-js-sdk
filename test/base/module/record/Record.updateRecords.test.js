@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 
@@ -34,10 +34,6 @@ describe('Checking Record.updateRecords', () => {
       .put(RECORDS_ROUTE, (rqBody) => {
         expect(rqBody.app).toEqual(appID);
         expect(rqBody.records).toEqual(recordsData);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {
@@ -73,10 +69,6 @@ describe('Checking Record.updateRecords', () => {
       .put(RECORDS_ROUTE, (rqBody) => {
         expect(rqBody.app).toEqual(appID);
         expect(rqBody.records).toEqual(recordsData);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {

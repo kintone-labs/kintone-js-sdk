@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth, API_ROUTE} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN, API_ROUTE} from './common';
 import nock from 'nock';
 import {KintoneAPIException} from '../../../../src/base/main';
 
@@ -43,10 +43,6 @@ describe('Check Record.upsertRecord', () => {
     };
     nock(URI)
       .get(`${API_ROUTE.RECORDS}?app=${body.app}&query=${encodeURIComponent(body.query)}&fields[0]=${body.fields[0]}&totalCount=${body.totalCount}`)
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
-      })
       .reply(200, {
         'records': []
       }).post(API_ROUTE.RECORD,

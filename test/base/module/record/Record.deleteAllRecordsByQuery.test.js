@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN} from './common';
 import ERROR_MESSAGE from '../../../resources/kintoneErrorMessage.json';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
@@ -57,10 +57,6 @@ describe('Check Record.deleteAllRecordsByQuery', () => {
 
     nock(URI)
       .get(`${RECORDS_ROUTE}?app=${data.app}&query=${encodeURIComponent(data.query + ' limit 500 offset 0')}`)
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
-        return true;
-      })
       .reply(200, expectResultGetRecord)
       .post(BULK_REQUEST_API_ROUTE, (rqBody) => {
         expect(rqBody).toEqual(expectBodys);
@@ -109,10 +105,6 @@ describe('Check Record.deleteAllRecordsByQuery', () => {
 
     nock(URI)
       .get(`${RECORDS_ROUTE}?app=${data.app}&query=${encodeURIComponent(data.query + ' limit 500 offset 0')}`)
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
-        return true;
-      })
       .reply(200, expectResultGetRecord);
 
     return recordModule.deleteAllRecordsByQuery(data).then((rsp) => {
@@ -121,7 +113,7 @@ describe('Check Record.deleteAllRecordsByQuery', () => {
   });
 
   it('should throw error when called with empty param', () => {
-    return recordModule.deleteAllRecordsByQuery().then((err) => {
+    return recordModule.deleteAllRecordsByQuery().catch((err) => {
       expect(err).toHaveProperty('results');
     });
   });
@@ -131,11 +123,7 @@ describe('Check Record.deleteAllRecordsByQuery', () => {
     const query = '';
     const expectResults = ERROR_MESSAGE.NEGATIVE_APPID_ERROR;
     nock(URI)
-      .get(`${RECORDS_ROUTE}?app=${appID}&query=${encodeURIComponent(query + 'limit 500 offset 0')}`)
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
-        return true;
-      }).reply(404, expectResults);
+      .get(`${RECORDS_ROUTE}?app=${appID}&query=${encodeURIComponent(query + 'limit 500 offset 0')}`).reply(404, expectResults);
 
     const deleteRecordsResult = recordModule.deleteAllRecordsByQuery({app: appID, query: query});
     return deleteRecordsResult.catch((err) => {

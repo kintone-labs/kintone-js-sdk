@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 
 const auth = new Auth();
@@ -21,10 +21,6 @@ describe('Check Record.deleteRecords', () => {
       .delete(RECORDS_ROUTE, (rqBody) => {
         expect(rqBody.app).toEqual(data.app);
         expect(rqBody.ids).toEqual(data.ids);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {

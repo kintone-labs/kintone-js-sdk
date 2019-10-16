@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, API_ROUTE, UPDATE_RECORDS_LIMIT, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, API_ROUTE, UPDATE_RECORDS_LIMIT, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 
@@ -52,10 +52,6 @@ describe('Checking Record.addAllRecords', () => {
       .post(API_ROUTE.BULK, (rqBody) => {
         expect(rqBody).toHaveProperty('requests');
         expect(rqBody).toEqual(expectBodys);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {
@@ -113,10 +109,6 @@ describe('Checking Record.addAllRecords', () => {
       .post(API_ROUTE.BULK, (rqBody) => {
         expect(rqBody).toHaveProperty('requests');
         expect(rqBody).toEqual(expectBodys);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {
