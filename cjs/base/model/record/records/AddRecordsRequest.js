@@ -5,24 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 /**
  * AddRecordsRequest model
  */
-var AddRecordsRequest =
-/*#__PURE__*/
-function () {
+class AddRecordsRequest {
   /**
      * @param {Integer} appID
      */
-  function AddRecordsRequest(appID) {
-    _classCallCheck(this, AddRecordsRequest);
-
+  constructor(appID) {
     this.app = appID;
     this.records = [];
   }
@@ -31,75 +21,66 @@ function () {
      */
 
 
-  _createClass(AddRecordsRequest, [{
-    key: "getAppID",
-    value: function getAppID() {
-      return this.app;
+  getAppID() {
+    return this.app;
+  }
+  /**
+     * Add record item to execute the add multi records function
+     * @param {Record} record
+     * @return {this} AddRecordsRequest
+     */
+
+
+  addRecord(record) {
+    this.records.push(record);
+    return this;
+  }
+  /**
+     * @param {Array<Record>} recordsData
+     * @return {this} AddRecordsRequest
+     */
+
+
+  setRecords(recordsData) {
+    this.records = recordsData;
+    return this;
+  }
+  /**
+     * @return {Array<Record>} Records
+     */
+
+
+  getRecordsData() {
+    return this.records;
+  }
+  /**
+     * Get JSON struct of this model
+     * @return {JSON}
+     */
+
+
+  toJSON() {
+    const data = {
+      records: this.getRecordsData()
+    };
+
+    if (this.app !== undefined) {
+      data.app = this.app;
     }
-    /**
-       * Add record item to execute the add multi records function
-       * @param {Record} record
-       * @return {this} AddRecordsRequest
-       */
 
-  }, {
-    key: "addRecord",
-    value: function addRecord(record) {
-      this.records.push(record);
-      return this;
-    }
-    /**
-       * @param {Array<Record>} recordsData
-       * @return {this} AddRecordsRequest
-       */
+    return data;
+  }
+  /**
+     * Convert this model to JSON string
+     * @return {String}
+     */
 
-  }, {
-    key: "setRecords",
-    value: function setRecords(recordsData) {
-      this.records = recordsData;
-      return this;
-    }
-    /**
-       * @return {Array<Record>} Records
-       */
 
-  }, {
-    key: "getRecordsData",
-    value: function getRecordsData() {
-      return this.records;
-    }
-    /**
-       * Get JSON struct of this model
-       * @return {JSON}
-       */
+  toJSONString() {
+    return JSON.stringify(this.toJSON());
+  }
 
-  }, {
-    key: "toJSON",
-    value: function toJSON() {
-      var data = {
-        records: this.getRecordsData()
-      };
-
-      if (this.app !== undefined) {
-        data.app = this.app;
-      }
-
-      return data;
-    }
-    /**
-       * Convert this model to JSON string
-       * @return {String}
-       */
-
-  }, {
-    key: "toJSONString",
-    value: function toJSONString() {
-      return JSON.stringify(this.toJSON());
-    }
-  }]);
-
-  return AddRecordsRequest;
-}();
+}
 
 var _default = AddRecordsRequest;
 exports.default = _default;

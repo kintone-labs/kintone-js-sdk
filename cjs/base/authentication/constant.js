@@ -9,7 +9,7 @@ exports.default = void 0;
  * kintone api - nodejs client
  * Authentication constants
  */
-var constant = function constant() {
+const constant = function () {
   return {
     HEADER_KEY_AUTH_PASSWORD: 'X-Cybozu-Authorization',
     HEADER_KEY_AUTH_APITOKEN: 'X-Cybozu-API-Token',

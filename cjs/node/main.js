@@ -5,49 +5,49 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "Auth", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _Auth.default;
   }
 });
 Object.defineProperty(exports, "File", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _File.default;
   }
 });
 Object.defineProperty(exports, "Connection", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _Connection.default;
   }
 });
 Object.defineProperty(exports, "App", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _main.App;
   }
 });
 Object.defineProperty(exports, "Record", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _main.Record;
   }
 });
 Object.defineProperty(exports, "BulkRequest", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _main.BulkRequest;
   }
 });
 Object.defineProperty(exports, "KintoneAPIException", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _main.KintoneAPIException;
   }
 });
 Object.defineProperty(exports, "RecordCursor", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _main.RecordCursor;
   }
 });

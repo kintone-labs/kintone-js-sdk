@@ -1,3 +1,6 @@
+
+import common from '../utils/Common';;
+import KintoneAPIException from '../exception/KintoneAPIException';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
 import packageFile from '../../../package.json';
@@ -56,7 +59,10 @@ class Connection {
     this.localHeaders = [];
     headers.forEach((httpHeaderObj) => {
       const headerKey = httpHeaderObj.getKey();
-      if (headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
+      if (headerKey 
+          
+          
+          CONNECTION_CONST.BASE.USER_AGENT) {
         headersRequest[headerKey] = userAgent + ' ' + httpHeaderObj.getValue();
       } else {
         headersRequest[headerKey] = httpHeaderObj.getValue();

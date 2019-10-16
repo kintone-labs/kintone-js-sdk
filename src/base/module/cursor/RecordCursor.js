@@ -41,7 +41,14 @@ class RecordCursor {
    * @returns {Boolean}
    */
   _validateRequiredArgs(params) {
-    return common.validateRequiredArgs(params);
+    return new Promise((resolve, reject) => {
+      try {
+        common.validateRequiredArgs(params);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   /**
@@ -82,7 +89,7 @@ class RecordCursor {
    * @return {Promise}
    */
   async getAllRecords({id} = {}) {
-    this._validateRequiredArgs({id});
+    await this._validateRequiredArgs({id});
     let next = true;
     let allRecords = [];
     while (next) {

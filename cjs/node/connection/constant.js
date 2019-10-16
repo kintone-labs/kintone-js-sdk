@@ -9,7 +9,7 @@ exports.default = void 0;
  * kintone api - nodejs client
  * Connection constants
  */
-var constant = function constant() {
+const constant = function () {
   return {
     BASE: {
       SCHEMA: 'https',

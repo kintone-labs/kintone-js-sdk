@@ -39,12 +39,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
       return kintone.api(super.getURL(restAPIName), String(methodName).toUpperCase(), body).then((response) => {
         return response;
       }).catch(err => {
-        const error = {
-          response: {
-            data: err
-          }
-        };
-        throw new kintoneBaseJSSDK.KintoneAPIException(error);
+        throw new kintoneBaseJSSDK.KintoneAPIException(err.message, err);
       });
     }
     return this._requestByAxios(methodName, restAPIName, body);
@@ -61,8 +56,6 @@ export class Connection extends kintoneBaseJSSDK.Connection {
 
     const request = axios(requestOptions).then(response => {
       return response.data;
-    }).catch(err => {
-      throw new kintoneBaseJSSDK.KintoneAPIException(err);
     });
     return request;
   }
@@ -120,7 +113,7 @@ export class Connection extends kintoneBaseJSSDK.Connection {
     }).catch(err => {
       return this._handleError(err);
     }).catch(err => {
-      throw new kintoneBaseJSSDK.KintoneAPIException(err);
+      throw new kintoneBaseJSSDK.KintoneAPIException(err.message, err);
     });
     return request;
   }

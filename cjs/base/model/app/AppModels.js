@@ -41,7 +41,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * kintone api - nodejs client
  * App models
  */
-var AppModels = {
+const AppModels = {
   GetAppRequest: _GetAppRequest.default,
   GetAppsRequest: _GetAppsRequest.default,
   GetFormFieldsRequest: _GetFormFieldsRequest.default,
