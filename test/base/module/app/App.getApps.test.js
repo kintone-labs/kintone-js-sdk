@@ -244,46 +244,109 @@ describe('Checking App.getApps', () => {
 
   it('verify call getApps function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getApps().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_IL02',
+      'id': 'fY0nuklF16LsztA9FfM0',
+      'message': 'Illegal request.'
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(520, expectResult);
+
+    return appModule.getApps()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 
   it('verify call getAppsByCodes function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsByCodes().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_IL02',
+      'id': 'fY0nuklF16LsztA9FfM0',
+      'message': 'Illegal request.'
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(520, expectResult);
+
+    return appModule.getAppsByCodes()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 
   it('verify call getAppsByName function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsByName().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_IL02',
+      'id': 'fY0nuklF16LsztA9FfM0',
+      'message': 'Illegal request.'
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(520, expectResult);
+
+    return appModule.getAppsByName()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 
   it('verify call getAppsByIDs function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsByIDs().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_IL02',
+      'id': 'fY0nuklF16LsztA9FfM0',
+      'message': 'Illegal request.'
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(520, expectResult);
+    return appModule.getAppsByIDs()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 
   it('verify call getAppsBySpaceIDs function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsBySpaceIDs().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_IL02',
+      'id': 'fY0nuklF16LsztA9FfM0',
+      'message': 'Illegal request.'
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(520, expectResult);
+    return appModule.getAppsBySpaceIDs()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 });
