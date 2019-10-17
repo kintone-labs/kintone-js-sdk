@@ -14,8 +14,7 @@ describe('Check File.constructor', () => {
 
   it('should throw error when created with no param', () => {
     try {
-      const file = new File();
-      expect(file).toBeInstanceOf(File);
+      new File();
     } catch (error) {
       expect(error).toBeInstanceOf(KintoneAPIException);
     }
