@@ -39,7 +39,7 @@ describe('Checking Auth object', () => {
     expect(credential.getPassword()).toEqual(password);
   });
 
-  it('Can set/get password authenticaion', () => {
+  it('Can set/get API token', () => {
     const auth = new Auth();
 
     const appAPIToken = 'APP_API_TOKEN';
