@@ -1,5 +1,5 @@
 
-import common from '../utils/Common';;
+import common from '../utils/Common';
 import KintoneAPIException from '../exception/KintoneAPIException';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
@@ -180,6 +180,7 @@ class Connection {
    * @return {this}
    */
   setHeader({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.globalHeaders.push(new HTTPHeader(key, value));
     return this;
   }
