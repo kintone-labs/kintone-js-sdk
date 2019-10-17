@@ -7,9 +7,14 @@ describe('Checking App.getAppDeployStatus', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      'code': 'CB_VA01',
+      'id': '9uydRVZKFebAvfWxsDW2',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'apps': {
+          'messages': ['Required field.']
+        }
+      }
     };
     nock(URI)
       .get(APP_PREVIEW_DEPLOY_API_ROUTE)
@@ -17,8 +22,7 @@ describe('Checking App.getAppDeployStatus', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
-
+      .reply(400, expectResult);
     return appModule.getAppDeployStatus()
       .catch((error) => {
         // (Resolved)TODO: verify the error
