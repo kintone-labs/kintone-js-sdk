@@ -39,9 +39,16 @@ describe('Checking App.addPreviewApp', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      'code': 'CB_VA01',
+      'id': 'WnoEhAtGyndxE9MFy0TW',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'name': {
+          'messages': [
+            'Required field.'
+          ]
+        }
+      }
     };
     nock(URI)
       .post(APP_PREVIEW_API_ROUTE, (rqBody) => {
@@ -56,7 +63,7 @@ describe('Checking App.addPreviewApp', () => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
       })
-      .reply(520, expectResult);
+      .reply(400, expectResult);
 
     return appModule.addPreviewApp()
       .catch((error) => {
