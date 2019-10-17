@@ -43,9 +43,14 @@ describe('Checking App.deployAppSettings', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      'code': 'CB_VA01',
+      'id': 'eH1w9UHl3ItjFu85en7C',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'apps': {
+          'messages': ['Required field.']
+        }
+      }
     };
     nock(URI)
       .post(APP_PREVIEW_DEPLOY_API_ROUTE, (rqBody) => {
@@ -56,7 +61,7 @@ describe('Checking App.deployAppSettings', () => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
       })
-      .reply(520, expectResult);
+      .reply(400, expectResult);
 
     return appModule.deployAppSettings()
       .catch((error) => {
