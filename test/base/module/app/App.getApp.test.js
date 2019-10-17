@@ -43,9 +43,14 @@ describe('Checking App.getApp', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      'code': 'CB_VA01',
+      'id': 'i6A0C71CEthGwQrYoYwT',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'id': {
+          'messages': ['Required field.']
+        }
+      }
     };
     nock(URI)
       .get(APP_API_ROUTE, (rqBody) => {
@@ -56,7 +61,7 @@ describe('Checking App.getApp', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
+      .reply(400, expectResult);
     return appModule.getApp()
       .catch((error) => {
         // (Resolved)TODO: verify the error
