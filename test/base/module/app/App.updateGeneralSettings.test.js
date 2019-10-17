@@ -44,9 +44,14 @@ describe('Checking App.updateGeneralSettings', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      'code': 'CB_VA01',
+      'id': 'Iq51O0sSCh8TFfspTVTX',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        }
+      }
     };
     nock(URI)
       .put(APP_PREVIEW_SETTINGS_API_ROUTE, (rqBody) => {
@@ -61,7 +66,7 @@ describe('Checking App.updateGeneralSettings', () => {
         expect(type).toBe('application/json;charset=utf-8');
         return true;
       })
-      .reply(520, expectResult);
+      .reply(400, expectResult);
     return appModule.updateGeneralSettings()
       .catch((error) => {
         // (Resolved)TODO: verify the error
