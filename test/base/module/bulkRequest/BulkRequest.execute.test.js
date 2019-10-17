@@ -142,10 +142,6 @@ describe('Checking BulkRequest.addRecord function', () => {
   it('should execute correctly all methods', () => {
     return bulkRequestResult.execute().then((resp) => {
       expect(resp).toEqual(expectResult);
-      // TODO:
-      // change addRequestOption in BulkRequest.execute to passing single object parameter
-    }).catch((err)=>{
-      expect(1).toEqual(1);
     });
   });
 
