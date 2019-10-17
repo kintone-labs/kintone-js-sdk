@@ -84,9 +84,14 @@ describe('Checking App.getFormFields', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      'code': 'CB_VA01',
+      'id': '5l01R1geBmVm6QQxzA3u',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        }
+      }
     };
     nock(URI)
       .get(APP_FORM_FIELD_API_ROUTE)
@@ -94,7 +99,7 @@ describe('Checking App.getFormFields', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
+      .reply(400, expectResult);
     return appModule.getFormFields()
       .catch((error) => {
         // (Resolved)TODO: verify the error
