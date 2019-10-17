@@ -245,9 +245,26 @@ describe('Checking App.getApps', () => {
   it('verify call getApps function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
     };
     nock(URI)
       .get(APPS_API_ROUTE)
@@ -255,21 +272,37 @@ describe('Checking App.getApps', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
+      .reply(200, expectResult);
 
-    return appModule.getApps()
-      .catch((error) => {
-        // (Resolved)TODO: verify the error
-        expect(error.errorResponse).toMatchObject(expectResult);
-      });
+    return appModule.getApps().then((rsp) => {
+      // (Resolved)TODO: verify the resp
+      expect(rsp).toMatchObject(expectResult);
+    });
   });
 
   it('verify call getAppsByCodes function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
     };
     nock(URI)
       .get(APPS_API_ROUTE)
@@ -277,21 +310,38 @@ describe('Checking App.getApps', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
+      .reply(200, expectResult);
 
     return appModule.getAppsByCodes()
-      .catch((error) => {
-        // (Resolved)TODO: verify the error
-        expect(error.errorResponse).toMatchObject(expectResult);
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
       });
   });
 
   it('verify call getAppsByName function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
     };
     nock(URI)
       .get(APPS_API_ROUTE)
@@ -299,21 +349,38 @@ describe('Checking App.getApps', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
+      .reply(200, expectResult);
 
     return appModule.getAppsByName()
-      .catch((error) => {
-        // (Resolved)TODO: verify the error
-        expect(error.errorResponse).toMatchObject(expectResult);
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
       });
   });
 
   it('verify call getAppsByIDs function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
     };
     nock(URI)
       .get(APPS_API_ROUTE)
@@ -321,20 +388,37 @@ describe('Checking App.getApps', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
+      .reply(200, expectResult);
     return appModule.getAppsByIDs()
-      .catch((error) => {
-        // (Resolved)TODO: verify the error
-        expect(error.errorResponse).toMatchObject(expectResult);
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
       });
   });
 
   it('verify call getAppsBySpaceIDs function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
     };
     nock(URI)
       .get(APPS_API_ROUTE)
@@ -342,11 +426,11 @@ describe('Checking App.getApps', () => {
         expect(authHeader).toBe(createPasswordAuthToCheck());
         return true;
       })
-      .reply(520, expectResult);
+      .reply(200, expectResult);
     return appModule.getAppsBySpaceIDs()
-      .catch((error) => {
-        // (Resolved)TODO: verify the error
-        expect(error.errorResponse).toMatchObject(expectResult);
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
       });
   });
 });
