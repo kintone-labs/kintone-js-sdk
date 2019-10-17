@@ -61,9 +61,19 @@ describe('Checking App.addFormFields', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
     const expectResult = {
-      'code': 'CB_IL02',
-      'id': 'fY0nuklF16LsztA9FfM0',
-      'message': 'Illegal request.'
+      'code': 'CB_VA01',
+      'id': 'EqmuwVLkOIGJsf9Dt0Tl',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages':
+            ['Required field.']
+        },
+        'properties': {
+          'messages':
+            ['Required field.']
+        }
+      }
     };
     nock(URI)
       .post(APP_FORM_FIELD_PREVIEW_API_ROUTE, (rqBody) => {
@@ -78,7 +88,7 @@ describe('Checking App.addFormFields', () => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
       })
-      .reply(520, expectResult);
+      .reply(400, expectResult);
 
     return appModule.addFormFields()
       .catch((error) => {
