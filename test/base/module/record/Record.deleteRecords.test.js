@@ -17,7 +17,7 @@ describe('Check Record.deleteRecords', () => {
       app: 2,
       ids: [1]
     };
-    nock(URI + ':443')
+    nock(URI)
       .delete(RECORDS_ROUTE, (rqBody) => {
         expect(rqBody.app).toEqual(data.app);
         expect(rqBody.ids).toEqual(data.ids);
