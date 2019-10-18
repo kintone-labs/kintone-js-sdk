@@ -37,6 +37,13 @@ describe('Checking Record.addRecord', () => {
     });
   });
   it('should throw error when fail when missing required field', () => {
+
+    const expectedError = {
+      'code': 'CB_IL02',
+      'id': 'LWcihB44Xa21wdYFV7aj',
+      'message': 'Illegal request.'
+    };
+
     nock(URI)
       .post(API_ROUTE.RECORDS, (rqBody) => {
         expect(rqBody).toEqual({});
@@ -46,10 +53,12 @@ describe('Checking Record.addRecord', () => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
       })
-      .reply(400, {});
+      .reply(400, expectedError);
     const addRecordsResult = recordModule.addRecords();
     return addRecordsResult.catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.httpErrorCode).toEqual(400);
+      expect(err.errorResponse).toMatchObject(expectedError);
     });
   });
 });
