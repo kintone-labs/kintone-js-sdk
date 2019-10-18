@@ -17,7 +17,20 @@ describe('Checking Record.getComments', () => {
       app: 1,
       record: 2
     };
-
+    const expectResponse = {
+      'comments': [{
+        'id': '1',
+        'text': 'user13 Global Sales APAC Taskforce \nHere is today\'s report.',
+        'createdAt': '2019-10-18T03:18:29Z',
+        'creator': {
+          'code': 'user14',
+          'name': 'user14'
+        },
+        'mentions': []
+      }],
+      'older': false,
+      'newer': false
+    };
     nock(URI)
       .get(RECORD_COMMENT_ROUTE)
       .query(data)
@@ -25,27 +38,12 @@ describe('Checking Record.getComments', () => {
         expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
-      .reply(200, {
-        comments: [
-          {
-            id: '2',
-            text: 'user13 Global Sales APAC Taskforce \nHere is today\'s report.',
-            createdAt: '2016-05-09T18:27:54Z',
-            creator: {
-              code: 'user14',
-              name: 'user14'
-            }
-          }
-        ],
-        older: false,
-        newer: false
-      });
+      .reply(200, expectResponse);
     const actualResult = recordModule.getComments(data);
     return actualResult.then(response => {
       expect(response).toHaveProperty('comments');
       expect(Array.isArray(response.comments)).toBe(true);
-      expect(response).toHaveProperty('older');
-      expect(response).toHaveProperty('newer');
+      expect(response).toMatchObject(expectResponse);
     });
   });
 });
