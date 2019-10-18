@@ -230,6 +230,7 @@ describe('Checking Record.addAllRecords', () => {
     const addRecordResult = recordModule.addAllRecords({app: appID, records: recordsData});
     return addRecordResult.catch((err) => {
       expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
+      expect(err.results[0].errorResponse).toMatchObject(expectResult.results[0]);
     });
   });
 });

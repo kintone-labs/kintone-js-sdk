@@ -62,6 +62,7 @@ describe('Checking Record.addRecord', () => {
     const addRecordsResult = recordModule.addRecord();
     return addRecordsResult.catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.httpErrorCode).toEqual(400);
     });
   });
 });
