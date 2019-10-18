@@ -59,9 +59,11 @@ describe('Checking Record.getAllRecordsByCursor', () => {
   });
 
   it('should throw error when called with empty param', () => {
+    const expectedErrString = 'Error: app is a required argument.';
     return recordModule.getAllRecordsByCursor()
       .catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
+        expect(err.toString()).toEqual(expectedErrString);
       });
   });
 
