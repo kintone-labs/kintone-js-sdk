@@ -46,9 +46,40 @@ describe('Checking Record.updateRecordByID', () => {
   });
 
   it('should throw error when called with empty parameter', () => {
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': 'Tzgc2eXoRcV3TsYBbLRH',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        },
+        'updateKey': {
+          'messages': ['The record to be updated must be specified by one of the parameters "id" and "updateKey".']
+        },
+        'id': {
+          'messages': ['The record to be updated must be specified by one of the parameters "id" and "updateKey".']
+        }
+      }
+    };
+    nock(URI)
+      .put(RECORD_ROUTE, (rqBody) => {
+        expect(rqBody).toEqual({revision: null});
+        return true;
+      })
+      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
+        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
+        return true;
+      })
+      .matchHeader('Content-Type', (type) => {
+        expect(type).toBe('application/json;charset=utf-8');
+        return true;
+      })
+      .reply(400, expectResult);
     const updateRecordByIdResult = recordModule.updateRecordByID();
-    return updateRecordByIdResult.catch((err)=>{
+    return updateRecordByIdResult.catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.errorResponse).toMatchObject(expectResult);
     });
   });
 });
