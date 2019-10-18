@@ -1,4 +1,3 @@
-import common from '../../utils/Common';
 import FileModel from '../../model/file/FileModels';
 import Connection from '../../connection/Connection';
 import KintoneAPIException from '../../exception/KintoneAPIException';
@@ -17,23 +16,6 @@ class File {
       throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
-  }
-
-  /**
-   * check required arguments
-   *
-   * @param {Object} params
-   * @returns {Promise<Boolean>}
-   */
-  _validateRequiredArgs(params) {
-    return new Promise((resolve, reject) => {
-      try {
-        common.validateRequiredArgs(params);
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    });
   }
   /**
    * Download file from kintone
@@ -54,12 +36,7 @@ class File {
    * @return {Promise}
    */
   upload({fileName, fileContent}) {
-    return this._validateRequiredArgs({
-      fileName,
-      fileContent
-    }).then(() => {
-      return this.connection.upload(fileName, fileContent);
-    });
+    return this.connection.upload(fileName, fileContent);
   }
 }
 export default File;

@@ -1,17 +1,19 @@
-import common from '../../../base/utils/Common';
+/**
+ * kintone api - js client
+ */
 import {Connection} from '../connection/Connection';
-import FileModel from '../../../base/model/file/FileModels';
-import KintoneAPIException from '../../../base/main';
-
 /**
  * File module
  */
+import FileModel from '../../../base/model/file/FileModels';
+import KintoneAPIException from '../../../base/main';
+
 export class File {
   /**
-   * The constructor for this module
-   * @param {Object} params
-   * @param {Connection} params.connection
-   */
+     * The constructor for this module
+     * @param {Object} params
+     * @param {Connection} params.connection
+     */
   constructor({connection: conn} = {}) {
     let connection = conn;
     if (!connection) {
@@ -22,29 +24,12 @@ export class File {
     }
     this.connection = connection;
   }
-
   /**
-   * check required arguments
-   *
-   * @param {Object} params
-   * @returns {Promise<Boolean>}
-   */
-  _validateRequiredArgs(params) {
-    return new Promise((resolve, reject) => {
-      try {
-        common.validateRequiredArgs(params);
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-  /**
-   * Download file from kintone
-   * @param {Object} params
-   * @param {String} params.fileKey
-   * @return {Promise}
-   */
+     * Download file from kintone
+     * @param {Object} params
+     * @param {String} params.fileKey
+     * @return {Promise}
+     */
   download({fileKey}) {
     if (window.kintone !== undefined) {
       this.connection._setLocalHeaders({key: 'X-Requested-With', value: 'XMLHttpRequest'});
@@ -54,15 +39,13 @@ export class File {
     return this.connection.download(dataRequest.toJSON());
   }
   /**
-   * Upload file from local to kintone environment
-   * @param {Object} params
-   * @param {String} params.fileName
-   * @param {Blob} params.fileBlob
-   * @return {Promise}
-   */
+     * Upload file from local to kintone environment
+     * @param {Object} params
+     * @param {String} params.fileName
+     * @param {Blob} params.fileBlob
+     * @return {Promise}
+     */
   upload({fileName, fileBlob}) {
-    return this._validateRequiredArgs({fileName, fileBlob}).then(() => {
-      return this.connection.upload(fileName, fileBlob);
-    });
+    return this.connection.upload(fileName, fileBlob);
   }
 }
