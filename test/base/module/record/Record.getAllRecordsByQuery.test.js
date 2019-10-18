@@ -22,9 +22,9 @@ describe('Checking Record.getAllRecordsByQuery', () => {
     };
 
     const recordsData = [];
-    const recordsDataLenght = 560;
+    const recordsDataLength = 560;
     const expectResponsePerRequest = [];
-    for (let index = 0; index < recordsDataLenght; index++) {
+    for (let index = 0; index < recordsDataLength; index++) {
       recordsData.push(
         {
           'recordID': {
@@ -34,9 +34,9 @@ describe('Checking Record.getAllRecordsByQuery', () => {
         });
     }
 
-    for (let index = 0; index < Math.ceil(recordsDataLenght / GET_RECORDS_LIMIT); index++) {
+    for (let index = 0; index < Math.ceil(recordsDataLength / GET_RECORDS_LIMIT); index++) {
       const start = index * GET_RECORDS_LIMIT;
-      const end = recordsDataLenght - start < GET_RECORDS_LIMIT ? recordsDataLenght : start + GET_RECORDS_LIMIT;
+      const end = recordsDataLength - start < GET_RECORDS_LIMIT ? recordsDataLength : start + GET_RECORDS_LIMIT;
       expectResponsePerRequest.push({
         'records': recordsData.slice(start, end)
       });
@@ -44,22 +44,31 @@ describe('Checking Record.getAllRecordsByQuery', () => {
 
     const expectResponse = {
       'records': recordsData,
-      'totalCount': recordsDataLenght
+      'totalCount': recordsDataLength
     };
 
-    let expectURL1 = `${RECORDS_ROUTE}?app=${body.app}`;
-    expectURL1 += `&query=${encodeURIComponent(`${body.query} limit ${GET_RECORDS_LIMIT} offset 0`)}`;
-    expectURL1 += `&fields[0]=${body.fields[0]}&totalCount=${body.totalCount}`;
-    let expectURL2 = `${RECORDS_ROUTE}?app=${body.app}&query=${encodeURIComponent(body.query + ' limit 500 offset 500')}`;
-    expectURL2 += `&fields[0]=${body.fields[0]}&totalCount=${body.totalCount}`;
+    const expectQuery1 = {
+      app: body.app,
+      query: `${body.query} limit ${GET_RECORDS_LIMIT} offset 0`,
+      fields: body.fields,
+      totalCount: body.totalCount
+    };
+    const expectQuery2 = {
+      app: body.app,
+      query: `${body.query} limit ${GET_RECORDS_LIMIT} offset ${GET_RECORDS_LIMIT}`,
+      fields: body.fields,
+      totalCount: body.totalCount
+    };
     nock(URI)
-      .get(expectURL1)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery1)
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
       })
       .reply(200, expectResponsePerRequest[0])
-      .get(expectURL2)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery2)
       .reply(200, expectResponsePerRequest[1]);
     return recordModule.getAllRecordsByQuery(body)
       .then(rsp => {
@@ -72,20 +81,20 @@ describe('Checking Record.getAllRecordsByQuery', () => {
     return recordModule.getAllRecordsByQuery()
       .catch((err)=>{
         expect(err).toBeInstanceOf(KintoneAPIException);
+        expect(err.message).toEqual('app is a required argument.');
       });
   });
 
   it('should be called successfully with no query and no totalCount', () => {
     const body = {
       app: 844,
-      totalCount: false,
       fields: ['recordID']
     };
 
     const recordsData = [];
-    const recordsDataLenght = 560;
+    const recordsDataLength = 560;
     const expectResponsePerRequest = [];
-    for (let index = 0; index < recordsDataLenght; index++) {
+    for (let index = 0; index < recordsDataLength; index++) {
       recordsData.push(
         {
           'recordID': {
@@ -95,9 +104,9 @@ describe('Checking Record.getAllRecordsByQuery', () => {
         });
     }
 
-    for (let index = 0; index < Math.ceil(recordsDataLenght / GET_RECORDS_LIMIT); index++) {
+    for (let index = 0; index < Math.ceil(recordsDataLength / GET_RECORDS_LIMIT); index++) {
       const start = index * GET_RECORDS_LIMIT;
-      const end = recordsDataLenght - start < GET_RECORDS_LIMIT ? recordsDataLenght : start + GET_RECORDS_LIMIT;
+      const end = recordsDataLength - start < GET_RECORDS_LIMIT ? recordsDataLength : start + GET_RECORDS_LIMIT;
       expectResponsePerRequest.push({
         'records': recordsData.slice(start, end)
       });
@@ -108,19 +117,26 @@ describe('Checking Record.getAllRecordsByQuery', () => {
       'totalCount': null
     };
 
-    let expectURL1 = `${RECORDS_ROUTE}?app=${body.app}`;
-    expectURL1 += `&query=${encodeURIComponent(`limit ${GET_RECORDS_LIMIT} offset 0`)}`;
-    expectURL1 += `&fields[0]=${body.fields[0]}&totalCount=${body.totalCount}`;
-    let expectURL2 = `${RECORDS_ROUTE}?app=${body.app}&query=${encodeURIComponent('limit 500 offset 500')}`;
-    expectURL2 += `&fields[0]=${body.fields[0]}&totalCount=${body.totalCount}`;
+    const expectQuery1 = {
+      app: body.app,
+      query: `limit ${GET_RECORDS_LIMIT} offset 0`,
+      fields: body.fields,
+    };
+    const expectQuery2 = {
+      app: body.app,
+      query: `limit ${GET_RECORDS_LIMIT} offset ${GET_RECORDS_LIMIT}`,
+      fields: body.fields,
+    };
     nock(URI)
-      .get(expectURL1)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery1)
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
       })
       .reply(200, expectResponsePerRequest[0])
-      .get(expectURL2)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery2)
       .reply(200, expectResponsePerRequest[1]);
     return recordModule.getAllRecordsByQuery(body)
       .then(rsp => {
@@ -139,9 +155,9 @@ describe('Checking Record.getAllRecordsByQuery', () => {
     };
 
     const recordsData = [];
-    const recordsDataLenght = 560;
+    const recordsDataLength = 560;
     const expectResponsePerRequest = [];
-    for (let index = 0; index < recordsDataLenght; index++) {
+    for (let index = 0; index < recordsDataLength; index++) {
       recordsData.push(
         {
           'recordID': {
@@ -149,14 +165,15 @@ describe('Checking Record.getAllRecordsByQuery', () => {
             'value': index + 1
           },
           '$id': {
+            type: '__ID__',
             value: index + 1
           }
         });
     }
 
-    for (let index = 0; index < Math.ceil(recordsDataLenght / GET_RECORDS_LIMIT); index++) {
+    for (let index = 0; index < Math.ceil(recordsDataLength / GET_RECORDS_LIMIT); index++) {
       const start = index * GET_RECORDS_LIMIT;
-      const end = recordsDataLenght - start < GET_RECORDS_LIMIT ? recordsDataLenght : start + GET_RECORDS_LIMIT;
+      const end = recordsDataLength - start < GET_RECORDS_LIMIT ? recordsDataLength : start + GET_RECORDS_LIMIT;
       expectResponsePerRequest.push({
         'records': recordsData.slice(start, end)
       });
@@ -164,22 +181,32 @@ describe('Checking Record.getAllRecordsByQuery', () => {
 
     const expectResponse = {
       'records': recordsData,
-      'totalCount': recordsDataLenght
+      'totalCount': recordsDataLength
     };
 
-    let expectURL1 = `${RECORDS_ROUTE}?app=${body.app}`;
-    expectURL1 += `&query=${encodeURIComponent(`$id > 0 and (${body.query}) order by $id asc limit ${GET_RECORDS_LIMIT}`)}`;
-    expectURL1 += `&fields[0]=${body.fields[0]}&fields[1]=%24id&totalCount=${body.totalCount}`;
-    let expectURL2 = `${RECORDS_ROUTE}?app=${body.app}&query=${encodeURIComponent(`$id > ${GET_RECORDS_LIMIT} and (${body.query}) order by $id asc limit 500`)}`;
-    expectURL2 += `&fields[0]=${body.fields[0]}&fields[1]=%24id&totalCount=${body.totalCount}`;
+    const expectQuery1 = {
+      app: body.app,
+      query: `$id > 0 and (${body.query}) order by $id asc limit ${GET_RECORDS_LIMIT}`,
+      fields: ['recordID', '$id'],
+      totalCount: body.totalCount,
+    };
+    const expectQuery2 = {
+      app: body.app,
+      query: `$id > ${GET_RECORDS_LIMIT} and (${body.query}) order by $id asc limit ${GET_RECORDS_LIMIT}`,
+      fields: ['recordID', '$id'],
+      totalCount: body.totalCount,
+    };
+
     nock(URI)
-      .get(expectURL1)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery1)
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
       })
       .reply(200, expectResponsePerRequest[0])
-      .get(expectURL2)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery2)
       .reply(200, expectResponsePerRequest[1]);
 
     return recordModule.getAllRecordsByQuery(body)
@@ -198,9 +225,9 @@ describe('Checking Record.getAllRecordsByQuery', () => {
     };
 
     const recordsData = [];
-    const recordsDataLenght = 560;
+    const recordsDataLength = 560;
     const expectResponsePerRequest = [];
-    for (let index = 0; index < recordsDataLenght; index++) {
+    for (let index = 0; index < recordsDataLength; index++) {
       recordsData.push(
         {
           'recordID': {
@@ -208,14 +235,15 @@ describe('Checking Record.getAllRecordsByQuery', () => {
             'value': index + 1
           },
           '$id': {
+            type: '__ID__',
             value: index + 1
           }
         });
     }
 
-    for (let index = 0; index < Math.ceil(recordsDataLenght / GET_RECORDS_LIMIT); index++) {
+    for (let index = 0; index < Math.ceil(recordsDataLength / GET_RECORDS_LIMIT); index++) {
       const start = index * GET_RECORDS_LIMIT;
-      const end = recordsDataLenght - start < GET_RECORDS_LIMIT ? recordsDataLenght : start + GET_RECORDS_LIMIT;
+      const end = recordsDataLength - start < GET_RECORDS_LIMIT ? recordsDataLength : start + GET_RECORDS_LIMIT;
       expectResponsePerRequest.push({
         'records': recordsData.slice(start, end)
       });
@@ -223,22 +251,30 @@ describe('Checking Record.getAllRecordsByQuery', () => {
 
     const expectResponse = {
       'records': recordsData,
-      'totalCount': recordsDataLenght
+      'totalCount': recordsDataLength
     };
-
-    let expectURL1 = `${RECORDS_ROUTE}?app=${body.app}`;
-    expectURL1 += `&query=${encodeURIComponent(`$id > 0 order by $id asc limit ${GET_RECORDS_LIMIT}`)}`;
-    expectURL1 += `&fields[0]=${body.fields[0]}&fields[1]=%24id&totalCount=${body.totalCount}`;
-    let expectURL2 = `${RECORDS_ROUTE}?app=${body.app}&query=${encodeURIComponent(`$id > ${GET_RECORDS_LIMIT} order by $id asc limit 500`)}`;
-    expectURL2 += `&fields[0]=${body.fields[0]}&fields[1]=%24id&totalCount=${body.totalCount}`;
+    const expectQuery1 = {
+      app: body.app,
+      query: `$id > 0 order by $id asc limit ${GET_RECORDS_LIMIT}`,
+      fields: ['recordID', '$id'],
+      totalCount: body.totalCount,
+    };
+    const expectQuery2 = {
+      app: body.app,
+      query: `$id > ${GET_RECORDS_LIMIT} order by $id asc limit ${GET_RECORDS_LIMIT}`,
+      fields: ['recordID', '$id'],
+      totalCount: body.totalCount,
+    };
     nock(URI)
-      .get(expectURL1)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery1)
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
       })
       .reply(200, expectResponsePerRequest[0])
-      .get(expectURL2)
+      .get(RECORDS_ROUTE)
+      .query(expectQuery2)
       .reply(200, expectResponsePerRequest[1]);
 
     return recordModule.getAllRecordsByQuery(body)
