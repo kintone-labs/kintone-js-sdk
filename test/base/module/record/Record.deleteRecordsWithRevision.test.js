@@ -56,6 +56,7 @@ describe('Check Record.deleteRecordsWithRevision', () => {
       .reply(400, expectedError);
     return recordModule.deleteRecordsWithRevision().catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.errorResponse).toMatchObject(expectedError);
     });
   });
 });
