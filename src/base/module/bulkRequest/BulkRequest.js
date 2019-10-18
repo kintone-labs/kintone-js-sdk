@@ -1,8 +1,8 @@
-import RecordModel from "../../model/record/RecordModels";
-import BulkRequestItemModel from "../../model/bulkRequest/BulkRequestItem";
-import BulkRequestModel from "../../model/bulkRequest/BulkRequest";
-import Connection from "../../connection/Connection";
-import KintoneAPIException from "../../exception/KintoneAPIException";
+import RecordModel from '../../model/record/RecordModels';
+import BulkRequestItemModel from '../../model/bulkRequest/BulkRequestItem';
+import BulkRequestModel from '../../model/bulkRequest/BulkRequest';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 
 
 /**
@@ -16,7 +16,7 @@ class BulkRequest {
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
     this.bulkRequests = new BulkRequestModel();
@@ -195,7 +195,7 @@ class BulkRequest {
       })
       .catch((err) => {
         if (!err || !err.response || !err.response.data || err.response.data.code) {
-          throw new KintoneAPIException(err);
+          throw new KintoneAPIException(err.message, err);
         }
         const errors = err.response.data.results;
         throw this.bulkRequestException(errors);
@@ -211,7 +211,7 @@ class BulkRequest {
       if (errors[key].hasOwnProperty('code')) {
         const errObject = JSON.parse(formatErr);
         errObject.response.data = errors[key];
-        formatErrors.push(new KintoneAPIException(errObject));
+        formatErrors.push(new KintoneAPIException(errObject.message, errObject));
       } else {
         formatErrors.push(errors[key]);
       }

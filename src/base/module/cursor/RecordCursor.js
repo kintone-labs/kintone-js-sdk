@@ -1,7 +1,7 @@
-import KintoneAPIException from "../../model/exception/KintoneAPIException";
-import CursorModel from "../../model/cursor/CursorModels";
-import common from "../../utils/Common";
-import Connection from "../../connection/Connection";
+import KintoneAPIException from '../../exception/KintoneAPIException';
+import CursorModel from '../../model/cursor/CursorModels';
+import common from '../../utils/Common';
+import Connection from '../../connection/Connection';
 /* eslint-disable no-loop-func */
 
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
@@ -17,7 +17,7 @@ class RecordCursor {
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
     Promise.resolve().finally();
@@ -32,6 +32,23 @@ class RecordCursor {
    */
   sendRequest({method, url, model}) {
     return common.sendRequest(method, url, model, this.connection);
+  }
+
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return new Promise((resolve, reject) => {
+      try {
+        common.validateRequiredArgs(params);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   /**
@@ -72,6 +89,7 @@ class RecordCursor {
    * @return {Promise}
    */
   async getAllRecords({id} = {}) {
+    await this._validateRequiredArgs({id});
     let next = true;
     let allRecords = [];
     while (next) {

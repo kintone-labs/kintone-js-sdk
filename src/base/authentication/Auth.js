@@ -1,3 +1,4 @@
+import common from '../utils/Common';
 import AUTH_CONST from './constant';
 import KintoneCredential from '../model/authentication/Credential';
 import KintoneHTTPHeader from '../model/http/HTTPHeader';
@@ -13,67 +14,80 @@ class Auth {
   }
 
   /**
-     * setBasicAuth
-     * @param {Object} params
-     * @param {String} params.username
-     * @param {String} params.password
-     * @return {this}
-     */
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return common.validateRequiredArgs(params);
+  }
+
+  /**
+   * setBasicAuth
+   * @param {Object} params
+   * @param {String} params.username
+   * @param {String} params.password
+   * @return {this}
+   */
   setBasicAuth({username, password}) {
+    this._validateRequiredArgs({username, password});
     this.basicAuth = new KintoneCredential(username, password);
     return this;
   }
 
   /**
-     * getBasicAuth
-     * @return {KintoneCredential}
-     */
+   * getBasicAuth
+   * @return {KintoneCredential}
+   */
   getBasicAuth() {
     return this.basicAuth;
   }
 
   /**
-     * setPasswordAuth
-     * @param {Object} params
-     * @param {String} params.username
-     * @param {String} params.password
-     * @return {this}
-     */
+   * setPasswordAuth
+   * @param {Object} params
+   * @param {String} params.username
+   * @param {String} params.password
+   * @return {this}
+   */
   setPasswordAuth({username, password}) {
+    this._validateRequiredArgs({username, password});
     this.passwordAuth = new KintoneCredential(username, password);
     return this;
   }
 
   /**
-     * getPasswordAuth
-     * @return {KintoneCredential}
-     */
+   * getPasswordAuth
+   * @return {KintoneCredential}
+   */
   getPasswordAuth() {
     return this.passwordAuth;
   }
 
   /**
-     * setApiToken
-     * @param {Object} params
-     * @param {String} params.apiToken
-     * @return {this}
-     */
+   * setApiToken
+   * @param {Object} params
+   * @param {String} params.apiToken
+   * @return {this}
+   */
   setApiToken({apiToken}) {
+    this._validateRequiredArgs({apiToken});
     this.apiToken = apiToken;
     return this;
   }
 
   /**
-     * getApiToken
-     * @return {String}
-     */
+   * getApiToken
+   * @return {String}
+   */
   getApiToken() {
     return this.apiToken;
   }
   /**
-     * createHeaderCredentials
-     * @return {Array<HTTPHeader>}
-     */
+   * createHeaderCredentials
+   * @return {Array<HTTPHeader>}
+   */
   createHeaderCredentials() {
     const headerCredentials = [];
     if (this.apiToken) {
@@ -83,7 +97,7 @@ class Auth {
       headerCredentials.push(
         new KintoneHTTPHeader(
           AUTH_CONST.HEADER_KEY_AUTH_BASIC,
-          'Basic ' + (Buffer.from(this.basicAuth.getUsername() + ':' + this.basicAuth.getPassword()).toString('base64'))
+          'Basic ' + Buffer.from(this.basicAuth.getUsername() + ':' + this.basicAuth.getPassword()).toString('base64')
         )
       );
     }
