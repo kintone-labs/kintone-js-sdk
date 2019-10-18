@@ -86,10 +86,27 @@ describe('Checking App.getFormLayout', () => {
 
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getFormLayout().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': '9IXRiMGt6pZ784QqHcTi',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        }
+      }
+    };
+    nock(URI)
+      .get(APP_FORM_LAYOUT_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, (authHeader) => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(400, expectResult);
+    return appModule.getFormLayout()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 });

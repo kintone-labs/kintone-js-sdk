@@ -84,10 +84,27 @@ describe('Checking App.getViews', () => {
 
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getViews().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': '2JXrM1PqbIjhqfQieG1Y',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        }
+      }
+    };
+    nock(URI)
+      .get(APP_VIEW_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, (authHeader) => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(400, expectResult);
+    return appModule.getViews()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 });

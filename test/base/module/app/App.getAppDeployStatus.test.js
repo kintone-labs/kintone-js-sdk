@@ -6,11 +6,28 @@ const APP_PREVIEW_DEPLOY_API_ROUTE = '/k/v1/preview/app/deploy.json';
 describe('Checking App.getAppDeployStatus', () => {
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppDeployStatus().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': '9uydRVZKFebAvfWxsDW2',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'apps': {
+          'messages': ['Required field.']
+        }
+      }
+    };
+    nock(URI)
+      .get(APP_PREVIEW_DEPLOY_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, (authHeader) => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(400, expectResult);
+    return appModule.getAppDeployStatus()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 
   it('[App-107]should get successfully the app deploy status', () => {
