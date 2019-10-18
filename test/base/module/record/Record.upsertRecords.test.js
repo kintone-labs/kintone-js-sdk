@@ -114,16 +114,13 @@ describe('Check upsertRecords', () => {
       recordsForGet.push(record);
     }
     const body = {
-      app: appID
+      app: appID,
+      query: `limit ${GET_RECORDS_LIMIT} offset 0`
     };
-
     const expectResponsePerRequest = [{'records': recordsForGet}];
-
-    let expectURL1 = `${API_ROUTE.RECORDS}?app=${body.app}`;
-    expectURL1 += `&query=${encodeURIComponent(`limit ${GET_RECORDS_LIMIT} offset 0`)}`;
-
     nock(URI)
-      .get(expectURL1)
+      .get(API_ROUTE.RECORDS)
+      .query(body)
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
