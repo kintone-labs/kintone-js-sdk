@@ -14,8 +14,7 @@ describe('Checking RecordCursor', () => {
 
   it('should throw error if there is no params', () => {
     try {
-      const recordCursor = new RecordCursor();
-      expect(recordCursor).toBeInstanceOf(RecordCursor);
+      new RecordCursor();
     } catch (error) {
       expect(error).toBeInstanceOf(KintoneAPIException);
     }

@@ -4,6 +4,7 @@ import RecordCursor from '../../../../src/base/module/cursor/RecordCursor';
 import {USERNAME, PASSWORD, DOMAIN, PASSWORD_AUTH_HEADER, getPasswordAuth, URI} from './common';
 
 import nock from 'nock';
+import {KintoneAPIException} from '../../../../src/base/main';
 
 const auth = new Auth();
 auth.setPasswordAuth({username: USERNAME, password: PASSWORD});
@@ -54,14 +55,35 @@ describe('Checking RecordCursor', () => {
 
   it('should throw error when called with no param', () => {
     const rc = new RecordCursor({connection: conn});
-    return rc.createCursor()
-      .then(()=>{
-        expect(1).toEqual(1);
-        // TODO: validate createCursor params
+    const expectedResult = {
+      'code': 'CB_VA01',
+      'id': 'OKDbZ4fJcHwGMGEH8H1W',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        }
+      }
+    };
+    nock(URI)
+      .post(CURSOR_ROUTE, (rqBody) => {
+        expect(rqBody).toEqual({});
+        return true;
       })
-      .catch((err)=>{
-        // expect(err).toBeInstanceOf(KintoneAPIException)
-        // expect(err.message).toEqual('id is a required argument.')
+      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
+        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
+        return true;
+      })
+      .matchHeader('Content-Type', (type) => {
+        expect(type).toEqual(expect.stringContaining('application/json'));
+        return true;
+      })
+      .reply(400, expectedResult);
+    return rc.createCursor()
+      .catch((err) => {
+        // (Resolved)
+        expect(err).toBeInstanceOf(KintoneAPIException);
+        expect(err.errorResponse).toMatchObject(expectedResult);
       });
   });
 });
