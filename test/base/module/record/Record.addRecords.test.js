@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, API_ROUTE, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, API_ROUTE, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 
@@ -22,10 +22,6 @@ describe('Checking Record.addRecord', () => {
         expect(rqBody.record).toEqual(body.record);
         return rqBody.app === body.app;
       })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
-      })
       .matchHeader('Content-Type', (type) => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
@@ -41,23 +37,28 @@ describe('Checking Record.addRecord', () => {
     });
   });
   it('should throw error when fail when missing required field', () => {
+
+    const expectedError = {
+      'code': 'CB_IL02',
+      'id': 'LWcihB44Xa21wdYFV7aj',
+      'message': 'Illegal request.'
+    };
+
     nock(URI)
       .post(API_ROUTE.RECORDS, (rqBody) => {
         expect(rqBody).toEqual({});
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
       })
-      .reply(400, {});
+      .reply(400, expectedError);
     const addRecordsResult = recordModule.addRecords();
     return addRecordsResult.catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.httpErrorCode).toEqual(400);
+      expect(err.errorResponse).toMatchObject(expectedError);
     });
   });
 });

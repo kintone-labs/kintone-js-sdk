@@ -21,6 +21,8 @@ describe('Checking Auth object', () => {
     const credential = auth.getBasicAuth();
 
     expect(credential).toBeInstanceOf(KintoneCredential);
+    expect(credential.getUsername()).toEqual(username);
+    expect(credential.getPassword()).toEqual(password);
   });
 
   it('Can set/get password authenticaion', () => {
@@ -33,9 +35,11 @@ describe('Checking Auth object', () => {
     const credential = auth.getPasswordAuth();
 
     expect(credential).toBeInstanceOf(KintoneCredential);
+    expect(credential.getUsername()).toEqual(username);
+    expect(credential.getPassword()).toEqual(password);
   });
 
-  it('Can set/get password authenticaion', () => {
+  it('Can set/get API token', () => {
     const auth = new Auth();
 
     const appAPIToken = 'APP_API_TOKEN';

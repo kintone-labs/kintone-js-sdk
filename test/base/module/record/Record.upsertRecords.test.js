@@ -1,9 +1,9 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, GET_RECORDS_LIMIT, API_ROUTE, UPDATE_RECORDS_LIMIT} from './common';
+import {URI, USERNAME, PASSWORD, PASSWORD_AUTH_HEADER, DOMAIN, GET_RECORDS_LIMIT, API_ROUTE, UPDATE_RECORDS_LIMIT} from './common';
 import nock from 'nock';
-import { KintoneAPIException } from '../../../../src/base/main';
+import {KintoneAPIException} from '../../../../src/base/main';
 
 const auth = new Auth();
 auth.setPasswordAuth({username: USERNAME, password: PASSWORD});
@@ -128,10 +128,6 @@ describe('Check upsertRecords', () => {
       .reply(200, expectResponsePerRequest[0])
       .post(API_ROUTE.BULK, (rqBody) => {
         expect(rqBody).toEqual(expectBodys);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
       })
       .reply(200, expectResults);

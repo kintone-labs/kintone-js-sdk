@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 
@@ -30,10 +30,6 @@ describe('Checking Record.updateRecordByUpdateKey', () => {
     nock(URI)
       .put(RECORD_ROUTE, (rqBody) => {
         expect(rqBody).toEqual(data);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {
@@ -66,10 +62,6 @@ describe('Checking Record.updateRecordByUpdateKey', () => {
         const bodyData = Object.assign({}, data);
         bodyData.revision = null; // TODO: Update default revision to -1
         expect(rqBody).toEqual(bodyData);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {
@@ -111,10 +103,6 @@ describe('Checking Record.updateRecordByUpdateKey', () => {
     nock(URI)
       .put(RECORD_ROUTE, (rqBody) => {
         expect(rqBody).toEqual(data);
-        return true;
-      })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .matchHeader('Content-Type', (type) => {

@@ -14,8 +14,7 @@ describe('Checking Record.constructor', () => {
 
   it('should throw error if there is no params', () => {
     try {
-      const record = new Record();
-      expect(record).toBeInstanceOf(Record);
+      new Record();
     } catch (error) {
       expect(error).toBeInstanceOf(KintoneAPIException);
     }

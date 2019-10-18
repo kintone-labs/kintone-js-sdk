@@ -1,5 +1,4 @@
 import KintoneAPIException from '../../../src/base/exception/KintoneAPIException';
-import ErrorResponse from '../../../src/base/exception/ErrorResponse';
 
 describe('Checking KintoneAPIException object', () => {
   it('Can create new instance of KintoneAPIException with Buffer data', () => {
@@ -43,12 +42,12 @@ describe('Checking KintoneAPIException object', () => {
   it('Can getHttpErrorCode()', () => {
     const errors = {
       response: {
-        statusCode: 200
+        status: 400
       }
     };
     const kException = new KintoneAPIException(undefined, errors);
     const httpErrorCode = kException.getHttpErrorCode();
-    expect(httpErrorCode).toEqual(200);
+    expect(httpErrorCode).toEqual(400);
   });
 
   it('Can create a kintone error', () => {

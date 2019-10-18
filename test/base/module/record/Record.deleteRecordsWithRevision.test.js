@@ -1,7 +1,7 @@
 import Auth from '../../../../src/node/authentication/Auth';
 import Connection from '../../../../src/node/connection/Connection';
 import Record from '../../../../src/base/module/record/Record';
-import {URI, PASSWORD_AUTH_HEADER, USERNAME, PASSWORD, DOMAIN, getPasswordAuth} from './common';
+import {URI, USERNAME, PASSWORD, DOMAIN} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
 
@@ -33,10 +33,6 @@ describe('Check Record.deleteRecordsWithRevision', () => {
         expect(rqBody).toEqual(expectBody);
         return true;
       })
-      .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
-        expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
-        return true;
-      })
       .matchHeader('Content-Type', (type) => {
         expect(type).toEqual(expect.stringContaining('application/json;charset=utf-8'));
         return true;
@@ -49,8 +45,18 @@ describe('Check Record.deleteRecordsWithRevision', () => {
   });
 
   it('should throw error when called with empty param', () => {
+    const expectedError = {
+      'code': 'CB_IL02',
+      'id': 'dW6xRq9xjBnvBg99uLAK',
+      'message': 'Illegal request.'
+    };
+
+    nock(URI)
+      .delete(RECORDS_ROUTE)
+      .reply(400, expectedError);
     return recordModule.deleteRecordsWithRevision().catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.errorResponse).toMatchObject(expectedError);
     });
   });
 });

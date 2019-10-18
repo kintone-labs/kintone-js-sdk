@@ -127,8 +127,8 @@ describe('Checking BulkRequest.addRecord function', () => {
     })
     .reply(200, expectResult);
 
-  const bunkRequestResult = new BulkRequest({connection});
-  bunkRequestResult.addRecord({app: addRecordData.app, record: addRecordData.record})
+  const bulkRequestResult = new BulkRequest({connection});
+  bulkRequestResult.addRecord({app: addRecordData.app, record: addRecordData.record})
     .addRecords({app: addRecordsData.app, records: addRecordsData.records})
     .updateRecordByID({app: updateRecordByIdData.app, id: updateRecordByIdData.id, record: updateRecordByIdData.record})
     .updateRecordByUpdateKey({
@@ -137,15 +137,11 @@ describe('Checking BulkRequest.addRecord function', () => {
     .updateRecords({app: updateRecordsData.app, records: updateRecordsData.records})
     .deleteRecords({app: deleteRecordsData.app, ids: deleteRecordsData.ids})
     .deleteRecordsWithRevision({app: deleteRecordsWithRevisionData.app, idsWithRevision: deleteRecordsWithRevisionData.idsWithRevision})
-    .updateRecordAssignees({app: updateRecordAssigneesData.app, id: updateRecordAssigneesData.id, assignees: updateRecordAssigneesData.assignees});
+    .updateRecordAssignees({app: updateRecordAssigneesData.app, record: updateRecordAssigneesData.id, assignees: updateRecordAssigneesData.assignees});
 
   it('should execute correctly all methods', () => {
-    return bunkRequestResult.execute().then((resp) => {
+    return bulkRequestResult.execute().then((resp) => {
       expect(resp).toEqual(expectResult);
-      // TODO:
-      // change addRequestOption in BulkRequest.execute to passing single object parameter
-    }).catch((err)=>{
-      expect(1).toEqual(1);
     });
   });
 

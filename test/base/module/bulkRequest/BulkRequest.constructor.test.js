@@ -15,8 +15,7 @@ describe('Checking BulkRequest', () => {
 
   it('should throw error if there is no params', () => {
     try {
-      const bulkRequest = new BulkRequest();
-      expect(bulkRequest).toBeInstanceOf(BulkRequest);
+      new BulkRequest();
     } catch (error) {
       expect(error).toBeInstanceOf(KintoneAPIException);
     }
