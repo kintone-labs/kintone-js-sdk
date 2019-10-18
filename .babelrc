@@ -18,6 +18,9 @@
     "node": {
       "ignore":["./src/browser"],
       "plugins": ["@babel/plugin-transform-modules-commonjs"]
+    },
+    "test": {
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
     }
   }
  }

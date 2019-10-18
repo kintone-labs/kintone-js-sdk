@@ -1,4 +1,4 @@
-import {KintoneAPIException, Connection as BaseConnection} from '../../base/main';
+import {Connection as BaseConnection, KintoneAPIException} from '../../base/main';
 
 import CONNECTION_CONST from './constant';
 import https from 'https';
@@ -21,6 +21,7 @@ class Connection extends BaseConnection {
 
   constructor({domain, auth, guestSpaceID} = {}) {
     super({domain, auth, guestSpaceID});
+    this._validateRequiredArgs({domain, auth});
     this.setClientCert();
   }
 
@@ -51,6 +52,7 @@ class Connection extends BaseConnection {
    * @return {this}
    */
   setProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
+    this._validateRequiredArgs({proxyHost, proxyPort});
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -76,6 +78,7 @@ class Connection extends BaseConnection {
    * @return {this}
    */
   setHttpsProxy({proxyHost, proxyPort, proxyUsername, proxyPassword} = {proxyHost, proxyPort}) {
+    this._validateRequiredArgs({proxyHost, proxyPort});
     const option = {
       proxy: {host: proxyHost, port: proxyPort}
     };
@@ -163,7 +166,7 @@ class Connection extends BaseConnection {
     }).then(response => {
       return response.data;
     }).catch(err => {
-      throw new KintoneAPIException(err);
+      throw new KintoneAPIException(err.message, err);
     });
   }
 

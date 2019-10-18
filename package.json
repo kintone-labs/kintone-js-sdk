@@ -10,6 +10,7 @@
   "scripts": {
     "test-base": "jest ./test/base",
     "test-node": "jest ./test/node",
+    "test": "jest ./test/",
     "build": "cross-env BABEL_ENV=browser webpack --mode production && npm run build:browser && npm run build:node",
     "build:browser": "cross-env BABEL_ENV=browser babel src -d esm",
     "build:node": "cross-env BABEL_ENV=node babel src -d cjs",

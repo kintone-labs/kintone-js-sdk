@@ -1,18 +1,19 @@
-import common from "../../utils/Common";
-import AppModel from "../../model/app/AppModels";
-import Connection from "../../connection/Connection";
+import common from '../../utils/Common';
+import AppModel from '../../model/app/AppModels';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 /**
  * App module
  */
 
 class App {
   /**
-   * The constructor for this module 
+   * The constructor for this module
    * @param {Connection} connection
    */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
   }
