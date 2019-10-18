@@ -17,7 +17,6 @@ describe('Check Record.upsertRecord', () => {
       value: '1234'
     };
     const recordData = {
-
       Number: {
         value: 1
       }
@@ -42,14 +41,16 @@ describe('Check Record.upsertRecord', () => {
       }
     };
     nock(URI)
-      .get(`${API_ROUTE.RECORDS}?app=${body.app}&query=${encodeURIComponent(body.query)}&fields[0]=${body.fields[0]}&totalCount=${body.totalCount}`)
+      .get(API_ROUTE.RECORDS)
+      .query(body)
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
       .reply(200, {
         'records': []
-      }).post(API_ROUTE.RECORD,
+      })
+      .post(API_ROUTE.RECORD,
         (rqBody) => {
           expect(rqBody.record).toEqual(data.record);
           return rqBody.app === body.app;
@@ -67,6 +68,7 @@ describe('Check Record.upsertRecord', () => {
     return recordModule.upsertRecord()
       .catch(err => {
         expect(err).toBeInstanceOf(KintoneAPIException);
+        expect(err.message).toEqual('app is a required argument.');
       });
   });
 });
