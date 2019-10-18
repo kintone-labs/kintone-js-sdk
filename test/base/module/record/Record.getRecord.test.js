@@ -13,14 +13,10 @@ const RECORD_ROUTE = '/k/v1/record.json';
 
 describe('Checking Record.getRecord', () => {
   it('should be called successfully', () => {
-    const appID = 1;
-    const recordID = 1;
+    const data = {app: 1, id: 1};
     nock(URI)
       .get(RECORD_ROUTE)
-      .query({
-        app: appID,
-        id: recordID
-      })
+      .query(data)
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
         expect(authHeader).toBe(Buffer.from(USERNAME + ':' + PASSWORD).toString('base64'));
         return true;
@@ -28,7 +24,7 @@ describe('Checking Record.getRecord', () => {
       .reply(200, {
         'record': {}
       });
-    return recordModule.getRecord({app: appID, id: recordID})
+    return recordModule.getRecord(data)
       .then((rsp) => {
         expect(rsp).toHaveProperty('record');
       });
