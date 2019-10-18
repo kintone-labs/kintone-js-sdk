@@ -45,6 +45,15 @@ describe('Check Record.deleteRecordsWithRevision', () => {
   });
 
   it('should throw error when called with empty param', () => {
+    const expectedError = {
+      'code': 'CB_IL02',
+      'id': 'dW6xRq9xjBnvBg99uLAK',
+      'message': 'Illegal request.'
+    };
+
+    nock(URI)
+      .delete(RECORDS_ROUTE)
+      .reply(400, expectedError);
     return recordModule.deleteRecordsWithRevision().catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
     });
