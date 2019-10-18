@@ -41,13 +41,25 @@ describe('Checking Record.updateRecordAssignees', () => {
 
   it('should throw error when called with empty parameter', () => {
     const data = {
-      app: 1,
-      id: 1,
-      assignees: ['user1'],
-      revision: 2
+      revision: null
     };
 
-    const expectResult = {'revision': '3'};
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': 'Xa0aD93Khic5JYYyqy5m',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        },
+        'assignees': {
+          'messages': ['Required field.']
+        },
+        'id': {
+          'messages': ['Required field.']
+        }
+      }
+    };
 
     nock(URI)
       .put(`${RECORDS_ASSIGNEES_ROUTE}`, (rqBody) => {
@@ -58,10 +70,11 @@ describe('Checking Record.updateRecordAssignees', () => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
       })
-      .reply(200, expectResult);
+      .reply(400, expectResult);
     const updateRecordAssigneesResult = recordModule.updateRecordAssignees();
     return updateRecordAssigneesResult.catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.errorResponse).toMatchObject(expectResult);
     });
   });
 });

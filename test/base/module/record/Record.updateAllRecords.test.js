@@ -4,7 +4,6 @@ import Record from '../../../../src/base/module/record/Record';
 import {URI, USERNAME, PASSWORD, DOMAIN, UPDATE_RECORDS_LIMIT} from './common';
 import nock from 'nock';
 import KintoneAPIException from '../../../../src/base/exception/KintoneAPIException';
-import ERROR_MESSAGE from '../../../resources/kintoneErrorMessage.json';
 
 const auth = new Auth();
 auth.setPasswordAuth({username: USERNAME, password: PASSWORD});
@@ -74,8 +73,6 @@ describe('Check Record.updateAllRecords', () => {
     const recordsData = 'INVALID_RECORDS';
     const expectBodys = {'requests': []};
     const expectResults = {'results': []};
-    // const results = [];
-
     nock(URI)
       .post(BULK_REQUEST_ROUTE, (rqBody) => {
         expect(rqBody).toHaveProperty('requests');
@@ -171,40 +168,49 @@ describe('Check Record.updateAllRecords', () => {
   it('should throw error when called with empty param', () => {
     return recordModule.updateAllRecords().catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.message).toEqual('app is a required argument.');
     });
   });
 
   it('should throw error when called with invalid app ID', () => {
-    const recordsData = {
-      'records': [
-        {
-          'id': 1,
-          'revision': 4,
-          'record': {
-            'Created_datetime': {
-              'value': 'Silver plates'
-            }
+    const data = {
+      app: -1,
+      records: [{
+        'id': 1,
+        'revision': 4,
+        'record': {
+          'Created_datetime': {
+            'value': 'Silver plates'
           }
         }
-      ]
+      }]
     };
-    const error = ERROR_MESSAGE.NEGATIVE_APPID_ERROR;
-    const expectBody = {
-      results: [error]
+    const expectResult = {
+      'results': [{
+        'code': 'CB_VA01',
+        'id': 'XJ9ZCqVFNtYCuecn4xYw',
+        'message': 'Missing or invalid input.',
+        'errors': {
+          'app': {
+            'messages': ['must be greater than or equal to 1']
+          }
+        }
+      }]
     };
     nock(URI)
-      .post(BULK_REQUEST_ROUTE, (rqBody) => {
+      .post(BULK_REQUEST_ROUTE, () => {
         return true;
       })
       .matchHeader('Content-Type', (type) => {
         expect(type).toBe('application/json;charset=utf-8');
         return true;
       })
-      .reply(400, expectBody);
+      .reply(400, expectResult);
 
-    return recordModule.updateAllRecords({app: -1, records: recordsData.records}).catch((err) => {
-      expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
-      expect(err.results[0].get()).toMatchObject(error);
-    });
+    return recordModule.updateAllRecords(data)
+      .catch((err) => {
+        expect(err.results[0]).toBeInstanceOf(KintoneAPIException);
+        expect(err.results[0].get()).toMatchObject(expectResult.results[0]);
+      });
   });
 });

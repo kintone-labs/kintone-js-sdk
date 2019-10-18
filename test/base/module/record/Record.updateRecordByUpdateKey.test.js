@@ -84,6 +84,20 @@ describe('Checking Record.updateRecordByUpdateKey', () => {
         'string_multi': {
           'value': 'this value has been updated'
         }
+      },
+      updateKey: {}
+    };
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': 'w4L7A60XoUJAbG9EYhDt',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'updateKey.value': {
+          'messages': ['Required field.']
+        },
+        'updateKey.field': {
+          'messages': ['Required field.']
+        }
       }
     };
     nock(URI)
@@ -95,11 +109,12 @@ describe('Checking Record.updateRecordByUpdateKey', () => {
         expect(type).toBe('application/json;charset=utf-8');
         return true;
       })
-      .reply(400);
+      .reply(400, expectResult);
 
     const updateRecordByUpdateKeyResult = recordModule.updateRecordByUpdateKey(data);
     return updateRecordByUpdateKeyResult.catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.errorResponse).toMatchObject(expectResult);
     });
   });
 });

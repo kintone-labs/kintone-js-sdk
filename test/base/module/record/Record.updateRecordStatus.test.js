@@ -41,29 +41,37 @@ describe('Checking Record.updateRecordStatus', () => {
   });
 
   it('should throw error when called with empty parameter', () => {
-    const data = {
-      app: 1,
-      id: 1,
-      action: 'Submit',
-      assignee: 'user1',
-      revision: 2
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': 'PalJN1M6r4jm5q3nR0e7',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        },
+        'action': {
+          'messages': ['Required field.']
+        },
+        'id': {
+          'messages': ['Required field.']
+        }
+      }
     };
-
-    const expectResult = {'revision': '3'};
 
     nock(URI)
       .put(RECORD_STATUS_ROUTE, (rqBody) => {
-        expect(rqBody).toEqual(data);
+        expect(rqBody).toEqual({});
         return true;
       })
       .matchHeader('Content-Type', (type) => {
         expect(type).toEqual(expect.stringContaining('application/json'));
         return true;
       })
-      .reply(200, expectResult);
+      .reply(400, expectResult);
     const updateRecordStatusResult = recordModule.updateRecordStatus();
     return updateRecordStatusResult.catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.errorResponse).toMatchObject(expectResult);
     });
   });
 });
