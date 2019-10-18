@@ -137,7 +137,7 @@ describe('Checking BulkRequest.addRecord function', () => {
     .updateRecords({app: updateRecordsData.app, records: updateRecordsData.records})
     .deleteRecords({app: deleteRecordsData.app, ids: deleteRecordsData.ids})
     .deleteRecordsWithRevision({app: deleteRecordsWithRevisionData.app, idsWithRevision: deleteRecordsWithRevisionData.idsWithRevision})
-    .updateRecordAssignees({app: updateRecordAssigneesData.app, id: updateRecordAssigneesData.id, assignees: updateRecordAssigneesData.assignees});
+    .updateRecordAssignees({app: updateRecordAssigneesData.app, record: updateRecordAssigneesData.id, assignees: updateRecordAssigneesData.assignees});
 
   it('should execute correctly all methods', () => {
     return bulkRequestResult.execute().then((resp) => {
