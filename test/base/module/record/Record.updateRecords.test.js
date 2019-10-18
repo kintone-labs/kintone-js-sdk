@@ -53,26 +53,19 @@ describe('Checking Record.updateRecords', () => {
   });
 
   it('should throw error when called with empty parameters', () => {
-    const appID = 1;
-    const recordDataUpdate = {
-      id: 1,
-      record: {
-        Text_0: 'test'
-      },
-      revision: 2
-    };
-    const recordsData = [recordDataUpdate];
     const expectResult = {
-      'records': [{
-        id: 1,
-        revision: 3
-      }]
+      'code': 'CB_VA01',
+      'id': '3YXLHNi01btxOqdJwb0h',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        }
+      }
     };
-
     nock(URI)
       .put(RECORDS_ROUTE, (rqBody) => {
-        expect(rqBody.app).toEqual(appID);
-        expect(rqBody.records).toEqual(recordsData);
+        expect(rqBody).toEqual({records: []});
         return true;
       })
       .matchHeader(PASSWORD_AUTH_HEADER, (authHeader) => {
@@ -83,10 +76,10 @@ describe('Checking Record.updateRecords', () => {
         expect(type).toBe('application/json;charset=utf-8');
         return true;
       })
-      .reply(200, expectResult);
-
+      .reply(400, expectResult);
     return recordModule.updateRecords().catch((err) => {
       expect(err).toBeInstanceOf(KintoneAPIException);
+      expect(err.errorResponse).toMatchObject(expectResult);
     });
   });
 });
