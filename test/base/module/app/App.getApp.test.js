@@ -42,10 +42,30 @@ describe('Checking App.getApp', () => {
 
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getApp().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': 'i6A0C71CEthGwQrYoYwT',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'id': {
+          'messages': ['Required field.']
+        }
+      }
+    };
+    nock(URI)
+      .get(APP_API_ROUTE, (rqBody) => {
+        expect(rqBody).toEqual('');
+        return true;
+      })
+      .matchHeader(PASSWORD_AURH_HEADER, (authHeader) => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(400, expectResult);
+    return appModule.getApp()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 });

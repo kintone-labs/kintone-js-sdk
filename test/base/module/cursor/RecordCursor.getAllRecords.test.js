@@ -68,7 +68,7 @@ describe('Checking RecordCursor getAllRecords function', () => {
         expect(authHeader).toBe(getPasswordAuth(USERNAME, PASSWORD));
         return true;
       })
-      .reply(404, ILLEGAL_REQUEST);
+      .reply(520, ILLEGAL_REQUEST);
 
     const rc = new RecordCursor({connection: conn});
     return rc.getAllRecords({id: cursorID})

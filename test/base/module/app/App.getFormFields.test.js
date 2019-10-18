@@ -83,10 +83,27 @@ describe('Checking App.getFormFields', () => {
 
   it('verify call app function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getFormFields().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      'code': 'CB_VA01',
+      'id': '5l01R1geBmVm6QQxzA3u',
+      'message': 'Missing or invalid input.',
+      'errors': {
+        'app': {
+          'messages': ['Required field.']
+        }
+      }
+    };
+    nock(URI)
+      .get(APP_FORM_FIELD_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, (authHeader) => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(400, expectResult);
+    return appModule.getFormFields()
+      .catch((error) => {
+        // (Resolved)TODO: verify the error
+        expect(error.errorResponse).toMatchObject(expectResult);
+      });
   });
 });

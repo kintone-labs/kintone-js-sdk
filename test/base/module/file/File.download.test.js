@@ -14,7 +14,8 @@ describe('Check File.download', () => {
   it('should be called successfully', ()=>{
     const fileKey = '201809040332204A3B5797BC804153AFF1BBB78C86CAE9207';
     nock('https://' + DOMAIN)
-      .get(`/k/v1/file.json?fileKey=${fileKey}`)
+      .get('/k/v1/file.json')
+      .query({fileKey: fileKey})
       .reply(200, Buffer.from('hello buffer'));
     return fileModule.download({fileKey: fileKey})
       .then((resp) => {

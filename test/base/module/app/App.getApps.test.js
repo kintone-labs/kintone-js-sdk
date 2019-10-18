@@ -244,46 +244,193 @@ describe('Checking App.getApps', () => {
 
   it('verify call getApps function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getApps().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
+    const expectResult = {
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(200, expectResult);
+
+    return appModule.getApps().then((rsp) => {
+      // (Resolved)TODO: verify the resp
+      expect(rsp).toMatchObject(expectResult);
     });
   });
 
   it('verify call getAppsByCodes function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsByCodes().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(200, expectResult);
+
+    return appModule.getAppsByCodes()
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
+      });
   });
 
   it('verify call getAppsByName function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsByName().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(200, expectResult);
+
+    return appModule.getAppsByName()
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
+      });
   });
 
   it('verify call getAppsByIDs function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsByIDs().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(200, expectResult);
+    return appModule.getAppsByIDs()
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
+      });
   });
 
   it('verify call getAppsBySpaceIDs function without params', () => {
     const appModule = createAppToSendRequest();
-    return appModule.getAppsBySpaceIDs().then((resp) => {
-      // TODO: verify the resp
-    }).catch((error) => {
-      // TODO: verify the error
-    });
+    const expectResult = {
+      apps: [
+        {
+          appId: '1',
+          code: 'task',
+          name: 'My Test App',
+          description: 'Testing this app',
+          spaceId: null,
+          threadId: null,
+          createdAt: '2014-06-02T05:14:05.000Z',
+          creator: {
+            code: 'user1',
+            name: 'user1'
+          },
+          modifiedAt: '2014-06-02T05:14:05.000Z',
+          modifier: {
+            code: 'user1',
+            name: 'user1'
+          }
+        }
+      ]
+    };
+    nock(URI)
+      .get(APPS_API_ROUTE)
+      .matchHeader(PASSWORD_AURH_HEADER, authHeader => {
+        expect(authHeader).toBe(createPasswordAuthToCheck());
+        return true;
+      })
+      .reply(200, expectResult);
+    return appModule.getAppsBySpaceIDs()
+      .then((rsp) => {
+        // (Resolved)TODO: verify the resp
+        expect(rsp).toMatchObject(expectResult);
+      });
   });
 });
