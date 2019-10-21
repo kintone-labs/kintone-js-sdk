@@ -1,4 +1,3 @@
-
 import common from '../utils/Common';
 import KintoneAPIException from '../exception/KintoneAPIException';
 import Auth from '../authentication/Auth';
@@ -37,6 +36,7 @@ class Connection {
   _validateRequiredArgs(params) {
     return common.validateRequiredArgs(params);
   }
+
   /**
    * Get header request
    * @return {Object}
