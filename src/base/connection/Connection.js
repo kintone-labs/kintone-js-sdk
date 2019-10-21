@@ -180,6 +180,7 @@ class Connection {
    * @return {this}
    */
   setHeader({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.globalHeaders.push(new HTTPHeader(key, value));
     return this;
   }
