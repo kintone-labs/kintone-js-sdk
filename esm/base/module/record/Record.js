@@ -1,13 +1,16 @@
 import "core-js/modules/es.array.concat";
 import "core-js/modules/es.array.index-of";
 import "core-js/modules/es.array.slice";
+import "core-js/modules/es.object.to-string";
+import "core-js/modules/es.promise";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-import common from "../../utils/Common";
-import RecordCursor from "../../module/cursor/RecordCursor";
-import BulkRequest from "../../module/bulkRequest/BulkRequest";
-import RecordModel from "../../model/record/RecordModels";
-import Connection from "../../connection/Connection";
+import common from '../../utils/Common';
+import RecordCursor from '../../module/cursor/RecordCursor';
+import BulkRequest from '../../module/bulkRequest/BulkRequest';
+import RecordModel from '../../model/record/RecordModels';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
 
 var LIMIT_UPDATE_RECORD = 100;
@@ -36,7 +39,7 @@ function () {
     _classCallCheck(this, Record);
 
     if (!(connection instanceof Connection)) {
-      throw new Error("".concat(connection, " not an instance of Connection"));
+      throw new KintoneAPIException("".concat(connection, " is not an instance of Connection"));
     }
 
     this.connection = connection;
@@ -53,6 +56,25 @@ function () {
     key: "sendRequest",
     value: function sendRequest(method, url, model) {
       return common.sendRequest(method, url, model, this.connection);
+    }
+    /**
+     * check required arguments
+     *
+     * @param {Object} params
+     * @returns {Promise<Boolean>}
+     */
+
+  }, {
+    key: "_validateRequiredArgs",
+    value: function _validateRequiredArgs(params) {
+      return new Promise(function (resolve, reject) {
+        try {
+          common.validateRequiredArgs(params);
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
     }
     /**
      * Get record by specific ID
@@ -97,41 +119,47 @@ function () {
   }, {
     key: "getAllRecordsByCursor",
     value: function getAllRecordsByCursor() {
+      var _this = this;
+
       var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           app = _ref4.app,
           query = _ref4.query,
           fields = _ref4.fields;
 
-      var kintoneRC = new RecordCursor({
-        connection: this.connection
-      });
-      var myCursor;
-      return kintoneRC.createCursor({
-        app: app,
-        fields: fields,
-        query: query,
-        DEFAULT_CURSOR_SIZE: DEFAULT_CURSOR_SIZE
-      }).then(function (creatCursorResponse) {
-        myCursor = creatCursorResponse;
-        return kintoneRC.getAllRecords({
-          id: myCursor.id
+      return this._validateRequiredArgs({
+        app: app
+      }).then(function () {
+        var kintoneRC = new RecordCursor({
+          connection: _this.connection
         });
-      }).then(function (allRecords) {
-        if (allRecords.totalCount < myCursor.totalCount) {
-          kintoneRC.deleteCursor({
+        var myCursor;
+        return kintoneRC.createCursor({
+          app: app,
+          fields: fields,
+          query: query,
+          DEFAULT_CURSOR_SIZE: DEFAULT_CURSOR_SIZE
+        }).then(function (creatCursorResponse) {
+          myCursor = creatCursorResponse;
+          return kintoneRC.getAllRecords({
             id: myCursor.id
           });
-        }
+        }).then(function (allRecords) {
+          if (allRecords.totalCount < myCursor.totalCount) {
+            kintoneRC.deleteCursor({
+              id: myCursor.id
+            });
+          }
 
-        return allRecords;
-      }).catch(function (err) {
-        if (myCursor) {
-          kintoneRC.deleteCursor({
-            id: myCursor.id
-          });
-        }
+          return allRecords;
+        }).catch(function (err) {
+          if (myCursor) {
+            kintoneRC.deleteCursor({
+              id: myCursor.id
+            });
+          }
 
-        throw err;
+          throw err;
+        });
       });
     }
     /**
@@ -149,6 +177,8 @@ function () {
   }, {
     key: "getAllRecordsByQuery",
     value: function getAllRecordsByQuery() {
+      var _this2 = this;
+
       var _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           app = _ref5.app,
           query = _ref5.query,
@@ -157,12 +187,16 @@ function () {
           _ref5$seek = _ref5.seek,
           seek = _ref5$seek === void 0 ? false : _ref5$seek;
 
-      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
+      return this._validateRequiredArgs({
+        app: app
+      }).then(function () {
+        return _this2.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
+      });
     }
   }, {
     key: "getAllRecordsByQueryRecursive",
     value: function getAllRecordsByQueryRecursive(app, query, fields, totalCount, lastCount, records, seek) {
-      var _this = this;
+      var _this3 = this;
 
       var allRecords = records || [];
       var validQuery;
@@ -196,7 +230,7 @@ function () {
           nextCountNum = lastCount + limit;
         }
 
-        return _this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, nextCountNum, allRecords, seek);
+        return _this3.getAllRecordsByQueryRecursive(app, query, fields, totalCount, nextCountNum, allRecords, seek);
       });
     }
   }, {
@@ -259,7 +293,7 @@ function () {
   }, {
     key: "addAllRecordsRecursive",
     value: function addAllRecordsRecursive(app) {
-      var _this2 = this;
+      var _this4 = this;
 
       var records = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
       var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
@@ -278,7 +312,7 @@ function () {
           return allResults;
         }
 
-        return _this2.addAllRecordsRecursive(app, records, begin, allResults);
+        return _this4.addAllRecordsRecursive(app, records, begin, allResults);
       }).catch(function (errors) {
         if (errors.length <= NUM_BULK_REQUEST) {
           errors = allResults.concat(errors);
@@ -298,22 +332,24 @@ function () {
   }, {
     key: "addAllRecords",
     value: function addAllRecords(_ref8) {
+      var _this5 = this;
+
       var app = _ref8.app,
           records = _ref8.records;
-      return this.addAllRecordsRecursive(app, records).then(function (response) {
-        return {
-          results: response
-        };
-      }).catch(function (errors) {
-        if (!Array.isArray(errors)) {
-          var emptyArray = [];
-          errors = emptyArray.concat(errors);
-        }
-
-        var errorsResponse = {
-          results: errors
-        };
-        throw errorsResponse;
+      return this._validateRequiredArgs({
+        app: app,
+        records: records
+      }).then(function () {
+        return _this5.addAllRecordsRecursive(app, records).then(function (response) {
+          return {
+            results: response
+          };
+        }).catch(function (errors) {
+          var errorsResponse = {
+            results: errors
+          };
+          throw errorsResponse;
+        });
       });
     }
   }, {
@@ -445,12 +481,12 @@ function () {
       return this.sendRequest('DELETE', 'records', deleteRecordsRequest);
     }
     /**
-       * Delete records at the specific revision
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Object} params.idsWithRevision
-       * @return {Promise}
-       */
+     * Delete records at the specific revision
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Object} params.idsWithRevision
+     * @return {Promise}
+     */
 
   }, {
     key: "deleteRecordsWithRevision",
@@ -487,7 +523,7 @@ function () {
   }, {
     key: "deleteAllRecords",
     value: function deleteAllRecords(app, ids) {
-      var _this3 = this;
+      var _this6 = this;
 
       var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var results = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
@@ -505,7 +541,7 @@ function () {
           return allResults;
         }
 
-        return _this3.deleteAllRecords(app, ids, begin, allResults);
+        return _this6.deleteAllRecords(app, ids, begin, allResults);
       }).catch(function (errors) {
         if (errors.length <= NUM_BULK_REQUEST) {
           errors = allResults.concat(errors);
@@ -515,63 +551,67 @@ function () {
       });
     }
     /**
-       * deleteAllRecordsByQuery for use with update all records
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {String} params.query
-       * @return {}
-    **/
+     * deleteAllRecordsByQuery for use with update all records
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {String} params.query
+     * @return {}
+     **/
 
   }, {
     key: "deleteAllRecordsByQuery",
     value: function deleteAllRecordsByQuery() {
-      var _this4 = this;
+      var _this7 = this;
 
       var _ref14 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           app = _ref14.app,
           query = _ref14.query;
 
-      return this.getAllRecordsByQuery({
-        app: app,
-        query: query
-      }).then(function (resp) {
-        var ids = [];
-        var records = resp.records;
+      return this._validateRequiredArgs({
+        app: app
+      }).then(function () {
+        return _this7.getAllRecordsByQuery({
+          app: app,
+          query: query
+        }).then(function (resp) {
+          var ids = [];
+          var records = resp.records;
 
-        if (!records || !records.length) {
-          return {};
-        }
+          if (!records || !records.length) {
+            return {};
+          }
 
-        for (var i = 0; i < records.length; i++) {
-          ids.push(records[i].$id.value);
-        }
+          for (var i = 0; i < records.length; i++) {
+            ids.push(records[i].$id.value);
+          }
 
-        return _this4.deleteAllRecords(app, ids).then(function (response) {
-          return {
-            results: response
+          return _this7.deleteAllRecords(app, ids).then(function (response) {
+            return {
+              results: response
+            };
+          });
+        }).catch(function (errors) {
+          if (!Array.isArray(errors)) {
+            var emptyArray = [];
+            errors = emptyArray.concat(errors);
+          }
+
+          var errorsResponse = {
+            results: errors
           };
+          throw errorsResponse;
         });
-      }).catch(function (errors) {
-        if (!Array.isArray(errors)) {
-          var emptyArray = [];
-          errors = emptyArray.concat(errors);
-        }
-
-        var errorsResponse = {
-          results: errors
-        };
-        throw errorsResponse;
       });
     }
     /**
-       * Update assignees of the specific record
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Number} params.id
-       * @param {Array<String>} params.assignees
-       * @param {Number} params.revision
-       * @return {Promise}
-       */
+     * Update assignees of the specific record
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.id
+     * @param {Array<String>} params.assignees
+     * @param {Number} params.revision
+     * @return {Promise}
+     */
 
   }, {
     key: "updateRecordAssignees",
@@ -586,15 +626,15 @@ function () {
       return this.sendRequest('PUT', 'RECORD_ASSIGNEES', updateRecordRequest);
     }
     /**
-       * Update status of the specific record
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Number} params.id
-       * @param {String} params.action
-       * @param {String} params.assignee
-       * @param {Number} params.revision
-       * @return {Promise}
-       */
+     * Update status of the specific record
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.id
+     * @param {String} params.action
+     * @param {String} params.assignee
+     * @param {Number} params.revision
+     * @return {Promise}
+     */
 
   }, {
     key: "updateRecordStatus",
@@ -610,12 +650,12 @@ function () {
       return this.sendRequest('PUT', 'RECORD_STATUS', updateRecordRequest);
     }
     /**
-       * Update status of the multi records
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Array <{RecordStatusUpdate}>} records
-       * @return {Promise}
-       */
+     * Update status of the multi records
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Array <{RecordStatusUpdate}>} records
+     * @return {Promise}
+     */
 
   }, {
     key: "updateRecordsStatus",
@@ -649,17 +689,17 @@ function () {
       return bulkRequest.execute();
     }
     /**
-       * updateAllRecords for use with update all records
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Object} params.records
-       * @return {UpdateRecordsResponse}
-    **/
+     * updateAllRecords for use with update all records
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Object} params.records
+     * @return {UpdateRecordsResponse}
+     **/
 
   }, {
     key: "updateAllRecordsRecursive",
     value: function updateAllRecordsRecursive(app, records, offset, results) {
-      var _this5 = this;
+      var _this8 = this;
 
       var numRecordsPerBulk = NUM_BULK_REQUEST * LIMIT_UPDATE_RECORD;
       var begin = offset || 0;
@@ -676,7 +716,7 @@ function () {
           return allResults;
         }
 
-        return _this5.updateAllRecordsRecursive(app, validRecord, begin, allResults);
+        return _this8.updateAllRecordsRecursive(app, validRecord, begin, allResults);
       }).catch(function (err) {
         var error = Array.isArray(err) ? err : [err];
 
@@ -690,19 +730,26 @@ function () {
   }, {
     key: "updateAllRecords",
     value: function updateAllRecords() {
+      var _this9 = this;
+
       var _ref18 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           app = _ref18.app,
           records = _ref18.records;
 
-      return this.updateAllRecordsRecursive(app, records).then(function (rsp) {
-        return {
-          'results': rsp
-        };
-      }).catch(function (err) {
-        var errorsResponse = {
-          results: err
-        };
-        throw errorsResponse;
+      return this._validateRequiredArgs({
+        app: app,
+        records: records
+      }).then(function () {
+        return _this9.updateAllRecordsRecursive(app, records).then(function (rsp) {
+          return {
+            results: rsp
+          };
+        }).catch(function (err) {
+          var errorsResponse = {
+            results: err
+          };
+          throw errorsResponse;
+        });
       });
     }
     /**
@@ -718,7 +765,7 @@ function () {
   }, {
     key: "upsertRecord",
     value: function upsertRecord() {
-      var _this6 = this;
+      var _this10 = this;
 
       var _ref19 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           app = _ref19.app,
@@ -726,31 +773,37 @@ function () {
           record = _ref19.record,
           revision = _ref19.revision;
 
-      var getRecordsParam = {
+      return this._validateRequiredArgs({
         app: app,
-        query: "".concat(updateKey.field, " = \"").concat(updateKey.value, "\""),
-        fields: [updateKey.field],
-        totalCount: false
-      };
-      return this.getRecords(getRecordsParam).then(function (resp) {
-        if (updateKey.value === '' || resp.records.length < 1) {
-          record[updateKey.field] = {
-            value: updateKey.value
-          };
-          return _this6.addRecord({
-            app: app,
-            record: record
-          });
-        } else if (resp.records.length === 1) {
-          return _this6.updateRecordByUpdateKey({
-            app: app,
-            updateKey: updateKey,
-            record: record,
-            revision: revision
-          });
-        }
+        updateKey: updateKey,
+        record: record
+      }).then(function () {
+        var getRecordsParam = {
+          app: app,
+          query: "".concat(updateKey.field, " = \"").concat(updateKey.value, "\""),
+          fields: [updateKey.field],
+          totalCount: false
+        };
+        return _this10.getRecords(getRecordsParam).then(function (resp) {
+          if (updateKey.value === '' || resp.records.length < 1) {
+            record[updateKey.field] = {
+              value: updateKey.value
+            };
+            return _this10.addRecord({
+              app: app,
+              record: record
+            });
+          } else if (resp.records.length === 1) {
+            return _this10.updateRecordByUpdateKey({
+              app: app,
+              updateKey: updateKey,
+              record: record,
+              revision: revision
+            });
+          }
 
-        throw new Error("".concat(updateKey.field, " is not unique field"));
+          throw new KintoneAPIException("".concat(updateKey.field, " is not unique field"));
+        });
       });
     }
     /**
@@ -764,17 +817,11 @@ function () {
   }, {
     key: "upsertRecords",
     value: function upsertRecords() {
-      var _this7 = this;
+      var _this11 = this;
 
       var _ref20 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           app = _ref20.app,
           records = _ref20.records;
-
-      var validRecords = Array.isArray(records) ? records : [];
-
-      if (validRecords.length > LIMIT_UPSERT_RECORD) {
-        throw new Error("upsertRecords can't handle over ".concat(LIMIT_UPSERT_RECORD, " records."));
-      }
 
       var doesExistSameFieldValue = function doesExistSameFieldValue(allRecords, comparedRecord) {
         if (comparedRecord.updateKey.value === '') {
@@ -795,39 +842,50 @@ function () {
 
       var executeUpsertBulkRequest = function executeUpsertBulkRequest(recordsForPost, recordsForPut) {
         var bulkRequest = new BulkRequest({
-          connection: _this7.connection
+          connection: _this11.connection
         });
-        bulkRequest = _this7.makeBulkReq(app, bulkRequest, recordsForPost, 'POST');
-        bulkRequest = _this7.makeBulkReq(app, bulkRequest, recordsForPut, 'PUT');
+        bulkRequest = _this11.makeBulkReq(app, bulkRequest, recordsForPost, 'POST');
+        bulkRequest = _this11.makeBulkReq(app, bulkRequest, recordsForPut, 'PUT');
         return bulkRequest.execute();
       };
 
-      return this.getAllRecordsByQuery({
-        app: app
-      }).then(function (resp) {
-        var allRecords = resp.records;
-        var recordsForPut = [];
-        var recordsForPost = [];
+      return this._validateRequiredArgs({
+        app: app,
+        records: records
+      }).then(function () {
+        var validRecords = Array.isArray(records) ? records : [];
 
-        for (var i = 0; i < validRecords.length; i++) {
-          if (doesExistSameFieldValue(allRecords, validRecords[i])) {
-            recordsForPut.push(validRecords[i]);
-          } else {
-            var record = validRecords[i].record;
-            record[validRecords[i].updateKey.field] = {
-              value: validRecords[i].updateKey.value
-            };
-            recordsForPost.push(record);
-          }
+        if (validRecords.length > LIMIT_UPSERT_RECORD) {
+          throw new KintoneAPIException("upsertRecords can't handle over ".concat(LIMIT_UPSERT_RECORD, " records."));
         }
 
-        return executeUpsertBulkRequest(recordsForPost, recordsForPut);
-      }).catch(function (errors) {
-        var errorsArray = Array.isArray(errors) ? errors : [errors];
-        var errorsResponse = {
-          results: errorsArray
-        };
-        throw errorsResponse;
+        return _this11.getAllRecordsByQuery({
+          app: app
+        }).then(function (resp) {
+          var allRecords = resp.records;
+          var recordsForPut = [];
+          var recordsForPost = [];
+
+          for (var i = 0; i < validRecords.length; i++) {
+            if (doesExistSameFieldValue(allRecords, validRecords[i])) {
+              recordsForPut.push(validRecords[i]);
+            } else {
+              var record = validRecords[i].record;
+              record[validRecords[i].updateKey.field] = {
+                value: validRecords[i].updateKey.value
+              };
+              recordsForPost.push(record);
+            }
+          }
+
+          return executeUpsertBulkRequest(recordsForPost, recordsForPut);
+        }).catch(function (errors) {
+          var errorsArray = Array.isArray(errors) ? errors : [errors];
+          var errorsResponse = {
+            results: errorsArray
+          };
+          throw errorsResponse;
+        });
       });
     }
   }, {
@@ -865,14 +923,14 @@ function () {
       return bulkRequest;
     }
     /**
-       * createRecordStatusItem for use with update multi record status
-       * @param {Object} params
-       * @param {Number} params.recordIDInput
-       * @param {String} params.actionNameInput
-       * @param {String} params.assigneeIDInput
-       * @param {String} params.revisionIDInput
-       * @return {RecordsUpdateStatusItem}
-       */
+     * createRecordStatusItem for use with update multi record status
+     * @param {Object} params
+     * @param {Number} params.recordIDInput
+     * @param {String} params.actionNameInput
+     * @param {String} params.assigneeIDInput
+     * @param {String} params.revisionIDInput
+     * @return {RecordsUpdateStatusItem}
+     */
 
   }, {
     key: "createRecordStatusItem",
@@ -880,15 +938,15 @@ function () {
       return new RecordModel.RecordsUpdateStatusItem(recordIDInput, actionNameInput, assigneeIDInput, revisionIDInput);
     }
     /**
-       * Get comments of the specific record
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Number} params.record
-       * @param {string} params.order  {asc|desc}
-       * @param {Number} params.offset
-       * @param {Number} params.limit
-       * @return {Promise}
-       */
+     * Get comments of the specific record
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
+     * @param {string} params.order  {asc|desc}
+     * @param {Number} params.offset
+     * @param {Number} params.limit
+     * @return {Promise}
+     */
 
   }, {
     key: "getComments",
@@ -902,13 +960,13 @@ function () {
       return this.sendRequest('GET', 'RECORD_COMMENTS', getCommentsRequest);
     }
     /**
-       * Add new comment to the specific record
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Number} params.record
-       * @param {CommentContent} comment
-       * @return {Promise}
-       */
+     * Add new comment to the specific record
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
+     * @param {CommentContent} comment
+     * @return {Promise}
+     */
 
   }, {
     key: "addComment",
@@ -922,13 +980,13 @@ function () {
       return this.sendRequest('POST', 'RECORD_COMMENT', addCommentRequest);
     }
     /**
-       * Delete a comment
-       * @param {Object} params
-       * @param {Number} params.app
-       * @param {Number} params.record
-       * @param {Number} params.comment
-       * @return {Promise}
-       */
+     * Delete a comment
+     * @param {Object} params
+     * @param {Number} params.app
+     * @param {Number} params.record
+     * @param {Number} params.comment
+     * @return {Promise}
+     */
 
   }, {
     key: "deleteComment",

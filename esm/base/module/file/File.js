@@ -1,8 +1,9 @@
 import "core-js/modules/web.url.to-json";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-import FileModel from "../../model/file/FileModels";
-import Connection from "../../connection/Connection";
+import FileModel from '../../model/file/FileModels';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 /**
  * File module
  */
@@ -22,7 +23,7 @@ function () {
     _classCallCheck(this, File);
 
     if (!(connection instanceof Connection)) {
-      throw new Error("".concat(connection, " not an instance of Connection"));
+      throw new KintoneAPIException("".concat(connection, " is not an instance of Connection"));
     }
 
     this.connection = connection;

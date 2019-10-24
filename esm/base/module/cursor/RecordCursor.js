@@ -7,10 +7,10 @@ import "regenerator-runtime/runtime";
 import _asyncToGenerator from "@babel/runtime/helpers/asyncToGenerator";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-import KintoneAPIException from "../../model/exception/KintoneAPIException";
-import CursorModel from "../../model/cursor/CursorModels";
-import common from "../../utils/Common";
-import Connection from "../../connection/Connection";
+import KintoneAPIException from '../../exception/KintoneAPIException';
+import CursorModel from '../../model/cursor/CursorModels';
+import common from '../../utils/Common';
+import Connection from '../../connection/Connection';
 /* eslint-disable no-loop-func */
 
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
@@ -34,7 +34,7 @@ function () {
     _classCallCheck(this, RecordCursor);
 
     if (!(connection instanceof Connection)) {
-      throw new Error("".concat(connection, " not an instance of Connection"));
+      throw new KintoneAPIException("".concat(connection, " is not an instance of Connection"));
     }
 
     this.connection = connection;
@@ -56,6 +56,25 @@ function () {
           url = _ref2.url,
           model = _ref2.model;
       return common.sendRequest(method, url, model, this.connection);
+    }
+    /**
+     * check required arguments
+     *
+     * @param {Object} params
+     * @returns {Boolean}
+     */
+
+  }, {
+    key: "_validateRequiredArgs",
+    value: function _validateRequiredArgs(params) {
+      return new Promise(function (resolve, reject) {
+        try {
+          common.validateRequiredArgs(params);
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
     }
     /**
      * Create a new record cursor
@@ -131,22 +150,28 @@ function () {
             switch (_context.prev = _context.next) {
               case 0:
                 _ref5 = _args.length > 0 && _args[0] !== undefined ? _args[0] : {}, id = _ref5.id;
+                _context.next = 3;
+                return this._validateRequiredArgs({
+                  id: id
+                });
+
+              case 3:
                 next = true;
                 allRecords = [];
 
-              case 3:
+              case 5:
                 if (!next) {
-                  _context.next = 17;
+                  _context.next = 19;
                   break;
                 }
 
-                _context.prev = 4;
-                _context.next = 7;
+                _context.prev = 6;
+                _context.next = 9;
                 return this.getRecords({
                   id: id
                 });
 
-              case 7:
+              case 9:
                 recordBlockResponse = _context.sent;
 
                 if (!(recordBlockResponse instanceof KintoneAPIException)) {
@@ -156,31 +181,31 @@ function () {
                   next = false;
                 }
 
-                _context.next = 15;
+                _context.next = 17;
                 break;
 
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](4);
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](6);
                 next = false;
                 throw _context.t0;
 
-              case 15:
-                _context.next = 3;
+              case 17:
+                _context.next = 5;
                 break;
 
-              case 17:
+              case 19:
                 return _context.abrupt("return", {
                   records: allRecords,
                   totalCount: allRecords.length
                 });
 
-              case 18:
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 11]]);
+        }, _callee, this, [[6, 13]]);
       }));
 
       function getAllRecords() {

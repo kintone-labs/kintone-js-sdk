@@ -2,6 +2,7 @@ import "core-js/modules/es.object.to-string";
 import "core-js/modules/es.regexp.to-string";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
+import common from '../utils/Common';
 import AUTH_CONST from './constant';
 import KintoneCredential from '../model/authentication/Credential';
 import KintoneHTTPHeader from '../model/http/HTTPHeader';
@@ -20,6 +21,19 @@ function () {
     this.apiToken = null;
   }
   /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+
+
+  _createClass(Auth, [{
+    key: "_validateRequiredArgs",
+    value: function _validateRequiredArgs(params) {
+      return common.validateRequiredArgs(params);
+    }
+    /**
      * setBasicAuth
      * @param {Object} params
      * @param {String} params.username
@@ -27,19 +41,24 @@ function () {
      * @return {this}
      */
 
-
-  _createClass(Auth, [{
+  }, {
     key: "setBasicAuth",
     value: function setBasicAuth(_ref) {
       var username = _ref.username,
           password = _ref.password;
+
+      this._validateRequiredArgs({
+        username: username,
+        password: password
+      });
+
       this.basicAuth = new KintoneCredential(username, password);
       return this;
     }
     /**
-       * getBasicAuth
-       * @return {KintoneCredential}
-       */
+     * getBasicAuth
+     * @return {KintoneCredential}
+     */
 
   }, {
     key: "getBasicAuth",
@@ -47,25 +66,31 @@ function () {
       return this.basicAuth;
     }
     /**
-       * setPasswordAuth
-       * @param {Object} params
-       * @param {String} params.username
-       * @param {String} params.password
-       * @return {this}
-       */
+     * setPasswordAuth
+     * @param {Object} params
+     * @param {String} params.username
+     * @param {String} params.password
+     * @return {this}
+     */
 
   }, {
     key: "setPasswordAuth",
     value: function setPasswordAuth(_ref2) {
       var username = _ref2.username,
           password = _ref2.password;
+
+      this._validateRequiredArgs({
+        username: username,
+        password: password
+      });
+
       this.passwordAuth = new KintoneCredential(username, password);
       return this;
     }
     /**
-       * getPasswordAuth
-       * @return {KintoneCredential}
-       */
+     * getPasswordAuth
+     * @return {KintoneCredential}
+     */
 
   }, {
     key: "getPasswordAuth",
@@ -73,23 +98,28 @@ function () {
       return this.passwordAuth;
     }
     /**
-       * setApiToken
-       * @param {Object} params
-       * @param {String} params.apiToken
-       * @return {this}
-       */
+     * setApiToken
+     * @param {Object} params
+     * @param {String} params.apiToken
+     * @return {this}
+     */
 
   }, {
     key: "setApiToken",
     value: function setApiToken(_ref3) {
       var apiToken = _ref3.apiToken;
+
+      this._validateRequiredArgs({
+        apiToken: apiToken
+      });
+
       this.apiToken = apiToken;
       return this;
     }
     /**
-       * getApiToken
-       * @return {String}
-       */
+     * getApiToken
+     * @return {String}
+     */
 
   }, {
     key: "getApiToken",
@@ -97,9 +127,9 @@ function () {
       return this.apiToken;
     }
     /**
-       * createHeaderCredentials
-       * @return {Array<HTTPHeader>}
-       */
+     * createHeaderCredentials
+     * @return {Array<HTTPHeader>}
+     */
 
   }, {
     key: "createHeaderCredentials",

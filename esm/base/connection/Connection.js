@@ -9,6 +9,8 @@ import "core-js/modules/web.dom-collections.for-each";
 import _typeof from "@babel/runtime/helpers/typeof";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
+import common from '../utils/Common';
+import KintoneAPIException from '../exception/KintoneAPIException';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
 import packageFile from '../../../package.json';
@@ -47,12 +49,24 @@ function () {
     });
   }
   /**
-   * Get header request
-   * @return {Object}
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
    */
 
 
   _createClass(Connection, [{
+    key: "_validateRequiredArgs",
+    value: function _validateRequiredArgs(params) {
+      return common.validateRequiredArgs(params);
+    }
+    /**
+     * Get header request
+     * @return {Object}
+     */
+
+  }, {
     key: "getRequestHeader",
     value: function getRequestHeader() {
       var headersRequest = {}; // set header with credentials
@@ -203,6 +217,12 @@ function () {
     value: function addRequestOption(_ref2) {
       var key = _ref2.key,
           value = _ref2.value;
+
+      this._validateRequiredArgs({
+        key: key,
+        value: value
+      });
+
       this.options[key] = value;
       return this;
     }
@@ -219,6 +239,12 @@ function () {
     value: function setHeader(_ref3) {
       var key = _ref3.key,
           value = _ref3.value;
+
+      this._validateRequiredArgs({
+        key: key,
+        value: value
+      });
+
       this.globalHeaders.push(new HTTPHeader(key, value));
       return this;
     }
@@ -248,7 +274,7 @@ function () {
     key: "setAuth",
     value: function setAuth(auth) {
       if (!(auth instanceof Auth)) {
-        throw new Error("".concat(auth, " not an instance of Auth"));
+        throw new KintoneAPIException("".concat(auth, " is not an instance of Auth"));
       }
 
       this.auth = auth;

@@ -11,6 +11,7 @@ import { Connection } from '../connection/Connection';
  */
 
 import FileModel from '../../../base/model/file/FileModels';
+import KintoneAPIException from '../../../base/main';
 export var File =
 /*#__PURE__*/
 function () {
@@ -32,7 +33,7 @@ function () {
     }
 
     if (!(connection instanceof Connection)) {
-      throw new Error("".concat(connection) + "not an instance of kintoneConnection");
+      throw new KintoneAPIException("".concat(connection, " is not an instance of Connection"));
     }
 
     this.connection = connection;

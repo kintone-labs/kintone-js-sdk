@@ -33,99 +33,127 @@ import _typeof from "@babel/runtime/helpers/typeof";
 import _toConsumableArray from "@babel/runtime/helpers/toConsumableArray";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-import _KintoneAPIExceptionModel from "../model/exception/KintoneAPIException";
-import _KintoneErrorResponseModel from "../model/exception/ErrorResponse";
-var KintoneErrorResponseModel = _KintoneErrorResponseModel;
-var KintoneAPIExceptionModel = _KintoneAPIExceptionModel;
+import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstructorReturn";
+import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
+import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized";
+import _inherits from "@babel/runtime/helpers/inherits";
+import _wrapNativeSuper from "@babel/runtime/helpers/wrapNativeSuper";
+import KintoneErrorResponseModel from './ErrorResponse';
 /**
  * kintone Exception Module
  */
 
 var KintoneAPIException =
 /*#__PURE__*/
-function () {
+function (_Error) {
+  _inherits(KintoneAPIException, _Error);
+
   /**
-     * The constructor ofc  KintoneAPIException functions
-     * @param {Error} errors
-     */
-  function KintoneAPIException(errors) {
+   * The constructor of KintoneAPIException functions
+   * @param {Error} [errors={}]
+   * @param {String} [message='']
+   * @param {*} args
+   * @memberof KintoneAPIException
+   */
+  function KintoneAPIException() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var errors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     _classCallCheck(this, KintoneAPIException);
 
+    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      args[_key - 2] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(KintoneAPIException)).call.apply(_getPrototypeOf2, [this, message].concat(args)));
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(_assertThisInitialized(_this), KintoneAPIException);
+    }
+
     var errorResponse;
-    this.errorRaw = errors;
+    _this.originError = errors;
 
     if (!errors.hasOwnProperty('response') || !errors.response) {
       errorResponse = new KintoneErrorResponseModel(0, null, errors.message, errors);
     } else {
       var dataResponse = errors.response.data;
-      errorResponse = this.getErrorResponse(dataResponse);
+      var errorToCreate;
 
       if (Buffer.isBuffer(dataResponse)) {
-        var stringError = errors.response.data.toString();
-        errorResponse = this.getErrorResponse(stringError);
+        errorToCreate = dataResponse.toString();
       } else if (dataResponse instanceof ArrayBuffer) {
-        var _stringError = String.fromCharCode.apply(String, _toConsumableArray(new Uint8Array(dataResponse)));
+        errorToCreate = String.fromCharCode.apply(String, _toConsumableArray(new Uint8Array(dataResponse)));
+      } else {
+        errorToCreate = dataResponse;
+      }
 
-        errorResponse = this.getErrorResponse(_stringError);
+      errorResponse = _this._createErrorResponse(errorToCreate);
+
+      if (!(errorResponse instanceof KintoneErrorResponseModel)) {
+        errorResponse = new KintoneErrorResponseModel(0, null, errors.response.statusMessage, errorResponse);
       }
     }
 
-    if (!(errorResponse instanceof KintoneErrorResponseModel)) {
-      errorResponse = new KintoneErrorResponseModel(0, null, errors.response.statusMessage, errorResponse);
-    }
-
-    var statusCode = errors.response ? errors.response.statusCode || 0 : 0;
-    this.error = new KintoneAPIExceptionModel(statusCode, errorResponse);
+    var statusCode = errors.response ? errors.response.status || 0 : 0;
+    _this.httpErrorCode = statusCode;
+    _this.errorResponse = errorResponse;
+    return _this;
   }
   /**
-     * get origin errors
-     * @return {Error}
-     */
+   * get origin errors
+   * @return {Error}
+   */
 
 
   _createClass(KintoneAPIException, [{
-    key: "getAll",
-    value: function getAll() {
-      return this.errorRaw;
+    key: "getOriginError",
+    value: function getOriginError() {
+      return this.originError;
     }
     /**
-       * Show origin error
-       */
-
-  }, {
-    key: "throwAll",
-    value: function throwAll() {
-      throw this.getAll();
-    }
-    /**
-       * Show Error
-       * @return {Error}
-       */
+     * get ErrorResponse
+     * @return {ErrorResponse}
+     */
 
   }, {
     key: "get",
     value: function get() {
-      return this.error.getErrorResponse().toJSON();
+      return this.getErrorResponse();
     }
     /**
-       * Show Error
-       */
-
-  }, {
-    key: "throw",
-    value: function _throw() {
-      var errorString = "HttpErrorCode: ".concat(this.error.getHttpErrorCode(), "\nDetails:\n  + ID: ").concat(this.error.getErrorResponse().getID() || '(none)', "\n  + Code: ").concat(this.error.getErrorResponse().getCode() || '(none)', "\n  + Message: ").concat(this.error.getErrorResponse().getMessage() || '(none)', "\n  + Errors:") + JSON.stringify(this.error.getErrorResponse().getErrors() || '(none)');
-      throw new Error(errorString);
-    }
-    /**
-       * getErrorResponse
-       * @param {String} bodyResponse
-       * @return {KintoneErrorResponseModel}
-       */
+     * get ErrorResponse
+     * @return {ErrorResponse}
+     */
 
   }, {
     key: "getErrorResponse",
-    value: function getErrorResponse(bodyResponse) {
+    value: function getErrorResponse() {
+      return this.errorResponse.toJSON();
+    }
+    /**
+     * get HttpErrorCode
+     * @return {Number}
+     */
+
+  }, {
+    key: "getHttpErrorCode",
+    value: function getHttpErrorCode() {
+      return this.httpErrorCode;
+    }
+    /**
+     * create ErrorResponse
+     * @param {Any} bodyResponse
+     * @return {ErrorResponse}
+     */
+
+  }, {
+    key: "_createErrorResponse",
+    value: function _createErrorResponse(bodyResponse) {
       var response = null;
 
       if (_typeof(bodyResponse) === 'object') {
@@ -134,24 +162,16 @@ function () {
         // Validate isJSON
         try {
           response = JSON.parse(bodyResponse);
-        } catch (error) {// console.log(error)
+        } catch (error) {
+          response = new KintoneErrorResponseModel(0, null, error.message, error);
         }
-      } // Detect the error response from bulkrequest.
-      // if (response !== null && response.hasOwnProperty('results')) {
-      //     for (let index = 0; index < response.results.length; index++) {
-      //         if (response.results[index].hasOwnProperty('code')) {
-      //             response = response.results[index];
-      //             break;
-      //         }
-      //     }
-      // }
-
+      }
 
       return response && response.id ? new KintoneErrorResponseModel(response.id, response.code, response.message, response.errors) : response;
     }
   }]);
 
   return KintoneAPIException;
-}();
+}(_wrapNativeSuper(Error));
 
 export default KintoneAPIException;

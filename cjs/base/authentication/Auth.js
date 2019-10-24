@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _Common = _interopRequireDefault(require("../utils/Common"));
+
 var _constant = _interopRequireDefault(require("./constant"));
 
 var _Credential = _interopRequireDefault(require("../model/authentication/Credential"));
@@ -23,82 +25,107 @@ class Auth {
     this.apiToken = null;
   }
   /**
-     * setBasicAuth
-     * @param {Object} params
-     * @param {String} params.username
-     * @param {String} params.password
-     * @return {this}
-     */
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+
+
+  _validateRequiredArgs(params) {
+    return _Common.default.validateRequiredArgs(params);
+  }
+  /**
+   * setBasicAuth
+   * @param {Object} params
+   * @param {String} params.username
+   * @param {String} params.password
+   * @return {this}
+   */
 
 
   setBasicAuth({
     username,
     password
   }) {
+    this._validateRequiredArgs({
+      username,
+      password
+    });
+
     this.basicAuth = new _Credential.default(username, password);
     return this;
   }
   /**
-     * getBasicAuth
-     * @return {KintoneCredential}
-     */
+   * getBasicAuth
+   * @return {KintoneCredential}
+   */
 
 
   getBasicAuth() {
     return this.basicAuth;
   }
   /**
-     * setPasswordAuth
-     * @param {Object} params
-     * @param {String} params.username
-     * @param {String} params.password
-     * @return {this}
-     */
+   * setPasswordAuth
+   * @param {Object} params
+   * @param {String} params.username
+   * @param {String} params.password
+   * @return {this}
+   */
 
 
   setPasswordAuth({
     username,
     password
   }) {
+    this._validateRequiredArgs({
+      username,
+      password
+    });
+
     this.passwordAuth = new _Credential.default(username, password);
     return this;
   }
   /**
-     * getPasswordAuth
-     * @return {KintoneCredential}
-     */
+   * getPasswordAuth
+   * @return {KintoneCredential}
+   */
 
 
   getPasswordAuth() {
     return this.passwordAuth;
   }
   /**
-     * setApiToken
-     * @param {Object} params
-     * @param {String} params.apiToken
-     * @return {this}
-     */
+   * setApiToken
+   * @param {Object} params
+   * @param {String} params.apiToken
+   * @return {this}
+   */
 
 
   setApiToken({
     apiToken
   }) {
+    this._validateRequiredArgs({
+      apiToken
+    });
+
     this.apiToken = apiToken;
     return this;
   }
   /**
-     * getApiToken
-     * @return {String}
-     */
+   * getApiToken
+   * @return {String}
+   */
 
 
   getApiToken() {
     return this.apiToken;
   }
   /**
-     * createHeaderCredentials
-     * @return {Array<HTTPHeader>}
-     */
+   * createHeaderCredentials
+   * @return {Array<HTTPHeader>}
+   */
 
 
   createHeaderCredentials() {

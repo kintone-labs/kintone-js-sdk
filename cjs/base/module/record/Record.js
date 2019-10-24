@@ -15,6 +15,8 @@ var _RecordModels = _interopRequireDefault(require("../../model/record/RecordMod
 
 var _Connection = _interopRequireDefault(require("../../connection/Connection"));
 
+var _KintoneAPIException = _interopRequireDefault(require("../../exception/KintoneAPIException"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* eslint-disable no-async-promise-executor, require-atomic-updates */
@@ -39,7 +41,7 @@ class Record {
     connection
   } = {}) {
     if (!(connection instanceof _Connection.default)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new _KintoneAPIException.default(`${connection} is not an instance of Connection`);
     }
 
     this.connection = connection;
@@ -54,6 +56,25 @@ class Record {
 
   sendRequest(method, url, model) {
     return _Common.default.sendRequest(method, url, model, this.connection);
+  }
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Promise<Boolean>}
+   */
+
+
+  _validateRequiredArgs(params) {
+    return new Promise((resolve, reject) => {
+      try {
+        _Common.default.validateRequiredArgs(params);
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
   /**
    * Get record by specific ID
@@ -99,36 +120,40 @@ class Record {
     query,
     fields
   } = {}) {
-    const kintoneRC = new _RecordCursor.default({
-      connection: this.connection
-    });
-    let myCursor;
-    return kintoneRC.createCursor({
-      app,
-      fields,
-      query,
-      DEFAULT_CURSOR_SIZE
-    }).then(creatCursorResponse => {
-      myCursor = creatCursorResponse;
-      return kintoneRC.getAllRecords({
-        id: myCursor.id
+    return this._validateRequiredArgs({
+      app
+    }).then(() => {
+      const kintoneRC = new _RecordCursor.default({
+        connection: this.connection
       });
-    }).then(allRecords => {
-      if (allRecords.totalCount < myCursor.totalCount) {
-        kintoneRC.deleteCursor({
+      let myCursor;
+      return kintoneRC.createCursor({
+        app,
+        fields,
+        query,
+        DEFAULT_CURSOR_SIZE
+      }).then(creatCursorResponse => {
+        myCursor = creatCursorResponse;
+        return kintoneRC.getAllRecords({
           id: myCursor.id
         });
-      }
+      }).then(allRecords => {
+        if (allRecords.totalCount < myCursor.totalCount) {
+          kintoneRC.deleteCursor({
+            id: myCursor.id
+          });
+        }
 
-      return allRecords;
-    }).catch(err => {
-      if (myCursor) {
-        kintoneRC.deleteCursor({
-          id: myCursor.id
-        });
-      }
+        return allRecords;
+      }).catch(err => {
+        if (myCursor) {
+          kintoneRC.deleteCursor({
+            id: myCursor.id
+          });
+        }
 
-      throw err;
+        throw err;
+      });
     });
   }
   /**
@@ -151,7 +176,11 @@ class Record {
     totalCount,
     seek = false
   } = {}) {
-    return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
+    return this._validateRequiredArgs({
+      app
+    }).then(() => {
+      return this.getAllRecordsByQueryRecursive(app, query, fields, totalCount, null, null, seek);
+    });
   }
 
   getAllRecordsByQueryRecursive(app, query, fields, totalCount, lastCount, records, seek) {
@@ -279,20 +308,20 @@ class Record {
     app,
     records
   }) {
-    return this.addAllRecordsRecursive(app, records).then(response => {
-      return {
-        results: response
-      };
-    }).catch(errors => {
-      if (!Array.isArray(errors)) {
-        const emptyArray = [];
-        errors = emptyArray.concat(errors);
-      }
-
-      const errorsResponse = {
-        results: errors
-      };
-      throw errorsResponse;
+    return this._validateRequiredArgs({
+      app,
+      records
+    }).then(() => {
+      return this.addAllRecordsRecursive(app, records).then(response => {
+        return {
+          results: response
+        };
+      }).catch(errors => {
+        const errorsResponse = {
+          results: errors
+        };
+        throw errorsResponse;
+      });
     });
   }
 
@@ -417,12 +446,12 @@ class Record {
     return this.sendRequest('DELETE', 'records', deleteRecordsRequest);
   }
   /**
-     * Delete records at the specific revision
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Object} params.idsWithRevision
-     * @return {Promise}
-     */
+   * Delete records at the specific revision
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.idsWithRevision
+   * @return {Promise}
+   */
 
 
   deleteRecordsWithRevision({
@@ -479,59 +508,63 @@ class Record {
     });
   }
   /**
-     * deleteAllRecordsByQuery for use with update all records
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {String} params.query
-     * @return {}
-  **/
+   * deleteAllRecordsByQuery for use with update all records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {String} params.query
+   * @return {}
+   **/
 
 
   deleteAllRecordsByQuery({
     app,
     query
   } = {}) {
-    return this.getAllRecordsByQuery({
-      app,
-      query
-    }).then(resp => {
-      const ids = [];
-      const records = resp.records;
+    return this._validateRequiredArgs({
+      app
+    }).then(() => {
+      return this.getAllRecordsByQuery({
+        app,
+        query
+      }).then(resp => {
+        const ids = [];
+        const records = resp.records;
 
-      if (!records || !records.length) {
-        return {};
-      }
+        if (!records || !records.length) {
+          return {};
+        }
 
-      for (let i = 0; i < records.length; i++) {
-        ids.push(records[i].$id.value);
-      }
+        for (let i = 0; i < records.length; i++) {
+          ids.push(records[i].$id.value);
+        }
 
-      return this.deleteAllRecords(app, ids).then(response => {
-        return {
-          results: response
+        return this.deleteAllRecords(app, ids).then(response => {
+          return {
+            results: response
+          };
+        });
+      }).catch(errors => {
+        if (!Array.isArray(errors)) {
+          const emptyArray = [];
+          errors = emptyArray.concat(errors);
+        }
+
+        const errorsResponse = {
+          results: errors
         };
+        throw errorsResponse;
       });
-    }).catch(errors => {
-      if (!Array.isArray(errors)) {
-        const emptyArray = [];
-        errors = emptyArray.concat(errors);
-      }
-
-      const errorsResponse = {
-        results: errors
-      };
-      throw errorsResponse;
     });
   }
   /**
-     * Update assignees of the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.id
-     * @param {Array<String>} params.assignees
-     * @param {Number} params.revision
-     * @return {Promise}
-     */
+   * Update assignees of the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
+   * @param {Array<String>} params.assignees
+   * @param {Number} params.revision
+   * @return {Promise}
+   */
 
 
   updateRecordAssignees({
@@ -544,15 +577,15 @@ class Record {
     return this.sendRequest('PUT', 'RECORD_ASSIGNEES', updateRecordRequest);
   }
   /**
-     * Update status of the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.id
-     * @param {String} params.action
-     * @param {String} params.assignee
-     * @param {Number} params.revision
-     * @return {Promise}
-     */
+   * Update status of the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.id
+   * @param {String} params.action
+   * @param {String} params.assignee
+   * @param {Number} params.revision
+   * @return {Promise}
+   */
 
 
   updateRecordStatus({
@@ -566,12 +599,12 @@ class Record {
     return this.sendRequest('PUT', 'RECORD_STATUS', updateRecordRequest);
   }
   /**
-     * Update status of the multi records
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Array <{RecordStatusUpdate}>} records
-     * @return {Promise}
-     */
+   * Update status of the multi records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Array <{RecordStatusUpdate}>} records
+   * @return {Promise}
+   */
 
 
   updateRecordsStatus({
@@ -602,12 +635,12 @@ class Record {
     return bulkRequest.execute();
   }
   /**
-     * updateAllRecords for use with update all records
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Object} params.records
-     * @return {UpdateRecordsResponse}
-  **/
+   * updateAllRecords for use with update all records
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Object} params.records
+   * @return {UpdateRecordsResponse}
+   **/
 
 
   updateAllRecordsRecursive(app, records, offset, results) {
@@ -642,15 +675,20 @@ class Record {
     app,
     records
   } = {}) {
-    return this.updateAllRecordsRecursive(app, records).then(rsp => {
-      return {
-        'results': rsp
-      };
-    }).catch(err => {
-      const errorsResponse = {
-        results: err
-      };
-      throw errorsResponse;
+    return this._validateRequiredArgs({
+      app,
+      records
+    }).then(() => {
+      return this.updateAllRecordsRecursive(app, records).then(rsp => {
+        return {
+          results: rsp
+        };
+      }).catch(err => {
+        const errorsResponse = {
+          results: err
+        };
+        throw errorsResponse;
+      });
     });
   }
   /**
@@ -670,31 +708,37 @@ class Record {
     record,
     revision
   } = {}) {
-    const getRecordsParam = {
-      app: app,
-      query: `${updateKey.field} = "${updateKey.value}"`,
-      fields: [updateKey.field],
-      totalCount: false
-    };
-    return this.getRecords(getRecordsParam).then(resp => {
-      if (updateKey.value === '' || resp.records.length < 1) {
-        record[updateKey.field] = {
-          value: updateKey.value
-        };
-        return this.addRecord({
-          app,
-          record
-        });
-      } else if (resp.records.length === 1) {
-        return this.updateRecordByUpdateKey({
-          app,
-          updateKey,
-          record,
-          revision
-        });
-      }
+    return this._validateRequiredArgs({
+      app,
+      updateKey,
+      record
+    }).then(() => {
+      const getRecordsParam = {
+        app: app,
+        query: `${updateKey.field} = "${updateKey.value}"`,
+        fields: [updateKey.field],
+        totalCount: false
+      };
+      return this.getRecords(getRecordsParam).then(resp => {
+        if (updateKey.value === '' || resp.records.length < 1) {
+          record[updateKey.field] = {
+            value: updateKey.value
+          };
+          return this.addRecord({
+            app,
+            record
+          });
+        } else if (resp.records.length === 1) {
+          return this.updateRecordByUpdateKey({
+            app,
+            updateKey,
+            record,
+            revision
+          });
+        }
 
-      throw new Error(`${updateKey.field} is not unique field`);
+        throw new _KintoneAPIException.default(`${updateKey.field} is not unique field`);
+      });
     });
   }
   /**
@@ -710,12 +754,6 @@ class Record {
     app,
     records
   } = {}) {
-    const validRecords = Array.isArray(records) ? records : [];
-
-    if (validRecords.length > LIMIT_UPSERT_RECORD) {
-      throw new Error(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
-    }
-
     const doesExistSameFieldValue = (allRecords, comparedRecord) => {
       if (comparedRecord.updateKey.value === '') {
         // updateKey.value is '' => post
@@ -742,32 +780,43 @@ class Record {
       return bulkRequest.execute();
     };
 
-    return this.getAllRecordsByQuery({
-      app
-    }).then(resp => {
-      const allRecords = resp.records;
-      const recordsForPut = [];
-      const recordsForPost = [];
+    return this._validateRequiredArgs({
+      app,
+      records
+    }).then(() => {
+      const validRecords = Array.isArray(records) ? records : [];
 
-      for (let i = 0; i < validRecords.length; i++) {
-        if (doesExistSameFieldValue(allRecords, validRecords[i])) {
-          recordsForPut.push(validRecords[i]);
-        } else {
-          const record = validRecords[i].record;
-          record[validRecords[i].updateKey.field] = {
-            value: validRecords[i].updateKey.value
-          };
-          recordsForPost.push(record);
-        }
+      if (validRecords.length > LIMIT_UPSERT_RECORD) {
+        throw new _KintoneAPIException.default(`upsertRecords can't handle over ${LIMIT_UPSERT_RECORD} records.`);
       }
 
-      return executeUpsertBulkRequest(recordsForPost, recordsForPut);
-    }).catch(errors => {
-      const errorsArray = Array.isArray(errors) ? errors : [errors];
-      const errorsResponse = {
-        results: errorsArray
-      };
-      throw errorsResponse;
+      return this.getAllRecordsByQuery({
+        app
+      }).then(resp => {
+        const allRecords = resp.records;
+        const recordsForPut = [];
+        const recordsForPost = [];
+
+        for (let i = 0; i < validRecords.length; i++) {
+          if (doesExistSameFieldValue(allRecords, validRecords[i])) {
+            recordsForPut.push(validRecords[i]);
+          } else {
+            const record = validRecords[i].record;
+            record[validRecords[i].updateKey.field] = {
+              value: validRecords[i].updateKey.value
+            };
+            recordsForPost.push(record);
+          }
+        }
+
+        return executeUpsertBulkRequest(recordsForPost, recordsForPut);
+      }).catch(errors => {
+        const errorsArray = Array.isArray(errors) ? errors : [errors];
+        const errorsResponse = {
+          results: errorsArray
+        };
+        throw errorsResponse;
+      });
     });
   }
 
@@ -804,29 +853,29 @@ class Record {
     return bulkRequest;
   }
   /**
-     * createRecordStatusItem for use with update multi record status
-     * @param {Object} params
-     * @param {Number} params.recordIDInput
-     * @param {String} params.actionNameInput
-     * @param {String} params.assigneeIDInput
-     * @param {String} params.revisionIDInput
-     * @return {RecordsUpdateStatusItem}
-     */
+   * createRecordStatusItem for use with update multi record status
+   * @param {Object} params
+   * @param {Number} params.recordIDInput
+   * @param {String} params.actionNameInput
+   * @param {String} params.assigneeIDInput
+   * @param {String} params.revisionIDInput
+   * @return {RecordsUpdateStatusItem}
+   */
 
 
   createRecordStatusItem(recordIDInput, actionNameInput, assigneeIDInput, revisionIDInput) {
     return new _RecordModels.default.RecordsUpdateStatusItem(recordIDInput, actionNameInput, assigneeIDInput, revisionIDInput);
   }
   /**
-     * Get comments of the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.record
-     * @param {string} params.order  {asc|desc}
-     * @param {Number} params.offset
-     * @param {Number} params.limit
-     * @return {Promise}
-     */
+   * Get comments of the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.record
+   * @param {string} params.order  {asc|desc}
+   * @param {Number} params.offset
+   * @param {Number} params.limit
+   * @return {Promise}
+   */
 
 
   getComments({
@@ -840,13 +889,13 @@ class Record {
     return this.sendRequest('GET', 'RECORD_COMMENTS', getCommentsRequest);
   }
   /**
-     * Add new comment to the specific record
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.record
-     * @param {CommentContent} comment
-     * @return {Promise}
-     */
+   * Add new comment to the specific record
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.record
+   * @param {CommentContent} comment
+   * @return {Promise}
+   */
 
 
   addComment({
@@ -858,13 +907,13 @@ class Record {
     return this.sendRequest('POST', 'RECORD_COMMENT', addCommentRequest);
   }
   /**
-     * Delete a comment
-     * @param {Object} params
-     * @param {Number} params.app
-     * @param {Number} params.record
-     * @param {Number} params.comment
-     * @return {Promise}
-     */
+   * Delete a comment
+   * @param {Object} params
+   * @param {Number} params.app
+   * @param {Number} params.record
+   * @param {Number} params.comment
+   * @return {Promise}
+   */
 
 
   deleteComment({

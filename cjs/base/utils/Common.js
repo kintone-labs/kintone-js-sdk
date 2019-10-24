@@ -10,7 +10,6 @@ var _KintoneAPIException = _interopRequireDefault(require("../exception/KintoneA
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * kintone api - nodejs client
  * Common function
  */
 class Common {
@@ -26,8 +25,24 @@ class Common {
     return connection.request(method, url, body).then(result => {
       return result;
     }).catch(err => {
-      throw new _KintoneAPIException.default(err);
+      throw new _KintoneAPIException.default(err.message, err);
     });
+  }
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+
+
+  validateRequiredArgs(params) {
+    Object.keys(params).forEach(key => {
+      if (params[key] === undefined || params[key] === null) {
+        throw new _KintoneAPIException.default(`${key} is a required argument.`);
+      }
+    });
+    return true;
   }
 
 }

@@ -33,6 +33,11 @@ class Auth extends _main.Auth {
     cert,
     password
   }) {
+    this._validateRequiredArgs({
+      cert,
+      password
+    });
+
     this.cert = cert;
     this.passwordCert = password;
     return this;
@@ -50,6 +55,11 @@ class Auth extends _main.Auth {
     filePath,
     password
   }) {
+    this._validateRequiredArgs({
+      filePath,
+      password
+    });
+
     try {
       const fileContent = _fs.default.readFileSync(filePath);
 
@@ -57,7 +67,7 @@ class Auth extends _main.Auth {
       this.passwordCert = password;
       return this;
     } catch (err) {
-      throw new Error(`File path is not valid`);
+      throw new _main.KintoneAPIException(err.message, err);
     }
   }
   /**

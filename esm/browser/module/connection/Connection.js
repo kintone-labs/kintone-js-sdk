@@ -72,12 +72,7 @@ function (_kintoneBaseJSSDK$Con) {
         return kintone.api(_get(_getPrototypeOf(Connection.prototype), "getURL", this).call(this, restAPIName), String(methodName).toUpperCase(), body).then(function (response) {
           return response;
         }).catch(function (err) {
-          var error = {
-            response: {
-              data: err
-            }
-          };
-          throw error;
+          throw new kintoneBaseJSSDK.KintoneAPIException(err.message, err);
         });
       }
 
@@ -169,7 +164,7 @@ function (_kintoneBaseJSSDK$Con) {
       }).catch(function (err) {
         return _this2._handleError(err);
       }).catch(function (err) {
-        throw new kintoneBaseJSSDK.KintoneAPIException(err);
+        throw new kintoneBaseJSSDK.KintoneAPIException(err.message, err);
       });
       return request;
     }

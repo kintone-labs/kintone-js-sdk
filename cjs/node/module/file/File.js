@@ -32,7 +32,7 @@ class File extends _main.File {
     connection
   } = {}) {
     if (!(connection instanceof _main.Connection)) {
-      throw new Error(`${connection}` + `not an instance of kintoneConnection`);
+      throw new _main.KintoneAPIException(`${connection} is not an instance of Connection`);
     }
 
     super({
@@ -62,7 +62,7 @@ class File extends _main.File {
 
         _fs.default.writeFileSync(outPutFilePath, fileContent, options);
       } catch (err) {
-        throw new _main.KintoneAPIException(err);
+        throw new _main.KintoneAPIException(err.message, err);
       }
     });
   }

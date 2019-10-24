@@ -43,6 +43,12 @@ class Connection extends _main.Connection {
       auth,
       guestSpaceID
     });
+
+    this._validateRequiredArgs({
+      domain,
+      auth
+    });
+
     this.setClientCert();
   }
   /**
@@ -87,6 +93,11 @@ class Connection extends _main.Connection {
     proxyHost,
     proxyPort
   }) {
+    this._validateRequiredArgs({
+      proxyHost,
+      proxyPort
+    });
+
     const option = {
       proxy: {
         host: proxyHost,
@@ -131,6 +142,11 @@ class Connection extends _main.Connection {
     proxyHost,
     proxyPort
   }) {
+    this._validateRequiredArgs({
+      proxyHost,
+      proxyPort
+    });
+
     const option = {
       proxy: {
         host: proxyHost,
@@ -235,7 +251,7 @@ class Connection extends _main.Connection {
     }).then(response => {
       return response.data;
     }).catch(err => {
-      throw new _main.KintoneAPIException(err);
+      throw new _main.KintoneAPIException(err.message, err);
     });
   }
 

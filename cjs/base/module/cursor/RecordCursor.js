@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _KintoneAPIException = _interopRequireDefault(require("../../model/exception/KintoneAPIException"));
+var _KintoneAPIException = _interopRequireDefault(require("../../exception/KintoneAPIException"));
 
 var _CursorModels = _interopRequireDefault(require("../../model/cursor/CursorModels"));
 
@@ -32,7 +32,7 @@ class RecordCursor {
     connection
   } = {}) {
     if (!(connection instanceof _Connection.default)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new _KintoneAPIException.default(`${connection} is not an instance of Connection`);
     }
 
     this.connection = connection;
@@ -53,6 +53,25 @@ class RecordCursor {
     model
   }) {
     return _Common.default.sendRequest(method, url, model, this.connection);
+  }
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+
+
+  _validateRequiredArgs(params) {
+    return new Promise((resolve, reject) => {
+      try {
+        _Common.default.validateRequiredArgs(params);
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
   /**
    * Create a new record cursor
@@ -112,6 +131,9 @@ class RecordCursor {
   async getAllRecords({
     id
   } = {}) {
+    await this._validateRequiredArgs({
+      id
+    });
     let next = true;
     let allRecords = [];
 

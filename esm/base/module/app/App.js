@@ -1,9 +1,10 @@
 import "core-js/modules/es.function.name";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-import common from "../../utils/Common";
-import AppModel from "../../model/app/AppModels";
-import Connection from "../../connection/Connection";
+import common from '../../utils/Common';
+import AppModel from '../../model/app/AppModels';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 /**
  * App module
  */
@@ -12,7 +13,7 @@ var App =
 /*#__PURE__*/
 function () {
   /**
-   * The constructor for this module 
+   * The constructor for this module
    * @param {Connection} connection
    */
   function App() {
@@ -22,7 +23,7 @@ function () {
     _classCallCheck(this, App);
 
     if (!(connection instanceof Connection)) {
-      throw new Error("".concat(connection, " not an instance of Connection"));
+      throw new KintoneAPIException("".concat(connection, " is not an instance of Connection"));
     }
 
     this.connection = connection;

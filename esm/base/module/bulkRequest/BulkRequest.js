@@ -1,11 +1,11 @@
 import "core-js/modules/web.url.to-json";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-import RecordModel from "../../model/record/RecordModels";
-import BulkRequestItemModel from "../../model/bulkRequest/BulkRequestItem";
-import BulkRequestModel from "../../model/bulkRequest/BulkRequest";
-import Connection from "../../connection/Connection";
-import KintoneAPIException from "../../exception/KintoneAPIException";
+import RecordModel from '../../model/record/RecordModels';
+import BulkRequestItemModel from '../../model/bulkRequest/BulkRequestItem';
+import BulkRequestModel from '../../model/bulkRequest/BulkRequest';
+import Connection from '../../connection/Connection';
+import KintoneAPIException from '../../exception/KintoneAPIException';
 /**
  * BulkRequest module
  */
@@ -25,7 +25,7 @@ function () {
     _classCallCheck(this, BulkRequest);
 
     if (!(connection instanceof Connection)) {
-      throw new Error("".concat(connection, " not an instance of Connection"));
+      throw new KintoneAPIException("".concat(connection, " is not an instance of Connection"));
     }
 
     this.connection = connection;
@@ -274,7 +274,7 @@ function () {
         return result;
       }).catch(function (err) {
         if (!err || !err.response || !err.response.data || err.response.data.code) {
-          throw new KintoneAPIException(err);
+          throw new KintoneAPIException(err.message, err);
         }
 
         var errors = err.response.data.results;
@@ -293,7 +293,7 @@ function () {
         if (errors[key].hasOwnProperty('code')) {
           var errObject = JSON.parse(formatErr);
           errObject.response.data = errors[key];
-          formatErrors.push(new KintoneAPIException(errObject));
+          formatErrors.push(new KintoneAPIException(errObject.message, errObject));
         } else {
           formatErrors.push(errors[key]);
         }

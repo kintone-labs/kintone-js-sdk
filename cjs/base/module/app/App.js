@@ -11,6 +11,8 @@ var _AppModels = _interopRequireDefault(require("../../model/app/AppModels"));
 
 var _Connection = _interopRequireDefault(require("../../connection/Connection"));
 
+var _KintoneAPIException = _interopRequireDefault(require("../../exception/KintoneAPIException"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -18,14 +20,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class App {
   /**
-   * The constructor for this module 
+   * The constructor for this module
    * @param {Connection} connection
    */
   constructor({
     connection
   } = {}) {
     if (!(connection instanceof _Connection.default)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new _KintoneAPIException.default(`${connection} is not an instance of Connection`);
     }
 
     this.connection = connection;

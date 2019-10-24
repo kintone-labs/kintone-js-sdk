@@ -30,7 +30,7 @@ class BulkRequest {
     connection
   } = {}) {
     if (!(connection instanceof _Connection.default)) {
-      throw new Error(`${connection} not an instance of Connection`);
+      throw new _KintoneAPIException.default(`${connection} is not an instance of Connection`);
     }
 
     this.connection = connection;
@@ -255,7 +255,7 @@ class BulkRequest {
       return result;
     }).catch(err => {
       if (!err || !err.response || !err.response.data || err.response.data.code) {
-        throw new _KintoneAPIException.default(err);
+        throw new _KintoneAPIException.default(err.message, err);
       }
 
       const errors = err.response.data.results;
@@ -273,7 +273,7 @@ class BulkRequest {
       if (errors[key].hasOwnProperty('code')) {
         const errObject = JSON.parse(formatErr);
         errObject.response.data = errors[key];
-        formatErrors.push(new _KintoneAPIException.default(errObject));
+        formatErrors.push(new _KintoneAPIException.default(errObject.message, errObject));
       } else {
         formatErrors.push(errors[key]);
       }

@@ -1,12 +1,12 @@
+import "core-js/modules/es.object.keys";
+import "core-js/modules/web.dom-collections.for-each";
 import "core-js/modules/web.url.to-json";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-
+import KintoneAPIException from '../exception/KintoneAPIException';
 /**
- * kintone api - nodejs client
  * Common function
  */
-import KintoneAPIException from '../exception/KintoneAPIException';
 
 var Common =
 /*#__PURE__*/
@@ -30,8 +30,25 @@ function () {
       return connection.request(method, url, body).then(function (result) {
         return result;
       }).catch(function (err) {
-        throw new KintoneAPIException(err);
+        throw new KintoneAPIException(err.message, err);
       });
+    }
+    /**
+     * check required arguments
+     *
+     * @param {Object} params
+     * @returns {Boolean}
+     */
+
+  }, {
+    key: "validateRequiredArgs",
+    value: function validateRequiredArgs(params) {
+      Object.keys(params).forEach(function (key) {
+        if (params[key] === undefined || params[key] === null) {
+          throw new KintoneAPIException("".concat(key, " is a required argument."));
+        }
+      });
+      return true;
     }
   }]);
 

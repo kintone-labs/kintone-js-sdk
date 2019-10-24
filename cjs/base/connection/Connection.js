@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _Common = _interopRequireDefault(require("../utils/Common"));
+
+var _KintoneAPIException = _interopRequireDefault(require("../exception/KintoneAPIException"));
+
 var _Auth = _interopRequireDefault(require("../authentication/Auth"));
 
 var _HTTPHeader = _interopRequireDefault(require("../model/http/HTTPHeader"));
@@ -42,6 +46,17 @@ class Connection {
       key: _constant.default.BASE.PROXY,
       value: false
     });
+  }
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+
+
+  _validateRequiredArgs(params) {
+    return _Common.default.validateRequiredArgs(params);
   }
   /**
    * Get header request
@@ -195,6 +210,11 @@ class Connection {
     key,
     value
   }) {
+    this._validateRequiredArgs({
+      key,
+      value
+    });
+
     this.options[key] = value;
     return this;
   }
@@ -211,6 +231,11 @@ class Connection {
     key,
     value
   }) {
+    this._validateRequiredArgs({
+      key,
+      value
+    });
+
     this.globalHeaders.push(new _HTTPHeader.default(key, value));
     return this;
   }
@@ -239,7 +264,7 @@ class Connection {
 
   setAuth(auth) {
     if (!(auth instanceof _Auth.default)) {
-      throw new Error(`${auth} not an instance of Auth`);
+      throw new _KintoneAPIException.default(`${auth} is not an instance of Auth`);
     }
 
     this.auth = auth;
