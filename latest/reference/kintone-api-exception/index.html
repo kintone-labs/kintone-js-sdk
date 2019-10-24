@@ -140,7 +140,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.6.4</a>
+            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.7.0</a>
         </div>
       </div>
  
@@ -443,6 +443,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#gethttperrorcode" title="getHttpErrorCode()" class="md-nav__link">
+    getHttpErrorCode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geterrorresponse" title="getErrorResponse()" class="md-nav__link">
+    getErrorResponse()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get" title="get()" class="md-nav__link">
     get()
   </a>
@@ -450,22 +464,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#getall" title="getAll()" class="md-nav__link">
-    getAll()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#throw" title="throw()" class="md-nav__link">
-    throw()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#throwall" title="throwAll()" class="md-nav__link">
-    throwAll()
+  <a href="#getoriginerror" title="getOriginError()" class="md-nav__link">
+    getOriginError()
   </a>
   
 </li>
@@ -539,6 +539,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#gethttperrorcode" title="getHttpErrorCode()" class="md-nav__link">
+    getHttpErrorCode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geterrorresponse" title="getErrorResponse()" class="md-nav__link">
+    getErrorResponse()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get" title="get()" class="md-nav__link">
     get()
   </a>
@@ -546,22 +560,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#getall" title="getAll()" class="md-nav__link">
-    getAll()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#throw" title="throw()" class="md-nav__link">
-    throw()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#throwall" title="throwAll()" class="md-nav__link">
-    throwAll()
+  <a href="#getoriginerror" title="getOriginError()" class="md-nav__link">
+    getOriginError()
   </a>
   
 </li>
@@ -600,25 +600,93 @@
                 <h1 id="kintoneapiexception">kintoneAPIException</h1>
 <p>Handle error responses from kintone Rest API</p>
 <h2 id="methods">Methods</h2>
+<h3 id="gethttperrorcode">getHttpErrorCode()</h3>
+<p><strong>Parameters</strong></p>
+<p>(none)</p>
+<p><strong>Return</strong></p>
+<p>Integer</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get HTTP error code</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+    var appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch(function(err) {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.getHttpErrorCode());
+    });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    let appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch((err) => {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.getHttpErrorCode());
+    });
+
+</pre>
+
+</details>
+
+<h3 id="geterrorresponse">getErrorResponse()</h3>
+<p><strong>Parameters</strong></p>
+<p>(none)</p>
+<p><strong>Return</strong></p>
+<p><a href="https://developer.kintone.io/hc/en-us/articles/212495188#responses">Error Response</a></p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get error response</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+    var appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch(function(err) {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.getErrorResponse());
+    });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+    let appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch((err) => {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.getErrorResponse());
+    });
+
+</pre>
+
+</details>
+
 <h3 id="get">get()</h3>
 <p><strong>Parameters</strong></p>
 <p>(none)</p>
 <p><strong>Return</strong></p>
-<p><a href="https://developer.kintone.io/hc/en-us/articles/212495188#responses">Kintone Error Response</a></p>
+<p><a href="https://developer.kintone.io/hc/en-us/articles/212495188#responses">Error Response</a></p>
 <p><strong>Sample code</strong></p>
 <details class="tab-container" open>
-<Summary>Get app with error response</Summary>
+<Summary>Get original error</Summary>
 
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
-    var id = YOUR_APP_ID;
-    kintoneApp.getApp({id}).then((rsp) => {
-        console.log(rsp);
-    }).catch((err) => {
-        // This SDK return err with KintoneAPIException
-        console.log(err.get());
+    var appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch(function(err) {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.get());
     });
 
 </pre>
@@ -627,52 +695,33 @@
 
 <pre class="inline-code">
 
-    let id = YOUR_APP_ID;
-    kintoneApp.getApp({id}).then((rsp) => {
-        console.log(rsp);
-    }).catch((err) => {
-        // This SDK return err with KintoneAPIException
-        console.log(err.get());
+    let appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch((err) => {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.get());
     });
-
-</pre>
-
-<strong class="tab-name">Response</strong>
-
-<pre class="inline-code">
-    {
-        "id":"KINTONE_ERROR_ID",
-        "code":"KINTONE_ERROR_CODE",
-        "message":"KINTONE_ERROR_MESSAGE",
-        "errors": [
-            /*errors items here*/
-        ]
-
-    }
 
 </pre>
 
 </details>
 
-<h3 id="getall">getAll()</h3>
+<h3 id="getoriginerror">getOriginError()</h3>
 <p><strong>Parameters</strong></p>
 <p>(none)</p>
 <p><strong>Return</strong></p>
-<p>The result of Promise.Reject()</p>
+<p>Object</p>
 <p><strong>Sample code</strong></p>
 <details class="tab-container" open>
-<Summary>Get apps with error response</Summary>
+<Summary>Get original error</Summary>
 
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
 
-    var id = YOUR_APP_ID;
-    kintoneApp.getApp({id}).then((rsp) => {
-        console.log(rsp);
-    }).catch((err) => {
-        // This SDK return err with KintoneAPIException
-        console.log(err.getAll());
+    var appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch(function(err) {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.getOriginError());
     });
 
 </pre>
@@ -681,41 +730,16 @@
 
 <pre class="inline-code">
 
-    let id = YOUR_APP_ID;
-    kintoneApp.getApp({id}).then((rsp) => {
-        console.log(rsp);
-    }).catch((err) => {
-        // This SDK return err with KintoneAPIException
-        console.log(err.getAll());
+    let appID = {your_invalid_app_id};
+    kintoneApp.getApp(appID).catch((err) => {
+      // This SDK return err with KintoneAPIExeption
+      console.log(err.getOriginError());
     });
-
-</pre>
-
-<strong class="tab-name">Response</strong>
-
-<pre class="inline-code">
-    // Response error object
 
 </pre>
 
 </details>
 
-<h3 id="throw">throw()</h3>
-<blockquote>
-<p>This function will throw result of <a href="#get">get()</a> function</p>
-</blockquote>
-<p><strong class="tab-name">Parameter</strong></p>
-<p>(none)</p>
-<p><strong>Return</strong></p>
-<p>(none)</p>
-<h3 id="throwall">throwAll()</h3>
-<blockquote>
-<p>This function will throw result of <a href="#getall">getAll()</a> function</p>
-</blockquote>
-<p><strong>Parameters</strong></p>
-<p>(none)</p>
-<p><strong>Return</strong></p>
-<p>(none)</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://developer.kintone.io/hc/en-us/articles/212495188">kintone REST API Overview</a><code>on developer network</code></li>
