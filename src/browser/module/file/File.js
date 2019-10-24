@@ -5,8 +5,8 @@ import {Connection} from '../connection/Connection';
 /**
  * File module
  */
-
 import FileModel from '../../../base/model/file/FileModels';
+import KintoneAPIException from '../../../base/main';
 
 export class File {
   /**
@@ -20,8 +20,7 @@ export class File {
       connection = new Connection();
     }
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection}` +
-                  `not an instance of kintoneConnection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     this.connection = connection;
   }

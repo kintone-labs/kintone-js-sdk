@@ -1,3 +1,5 @@
+import common from '../utils/Common';
+import KintoneAPIException from '../exception/KintoneAPIException';
 import Auth from '../authentication/Auth';
 import HTTPHeader from '../model/http/HTTPHeader';
 import packageFile from '../../../package.json';
@@ -23,6 +25,16 @@ class Connection {
 
     this.setAuth(auth);
     this.addRequestOption({key: CONNECTION_CONST.BASE.PROXY, value: false});
+  }
+
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Boolean}
+   */
+  _validateRequiredArgs(params) {
+    return common.validateRequiredArgs(params);
   }
 
   /**
@@ -156,6 +168,7 @@ class Connection {
    * @return {this}
    */
   addRequestOption({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.options[key] = value;
     return this;
   }
@@ -167,6 +180,7 @@ class Connection {
    * @return {this}
    */
   setHeader({key, value}) {
+    this._validateRequiredArgs({key, value});
     this.globalHeaders.push(new HTTPHeader(key, value));
     return this;
   }
@@ -188,7 +202,7 @@ class Connection {
    */
   setAuth(auth) {
     if (!(auth instanceof Auth)) {
-      throw new Error(`${auth} not an instance of Auth`);
+      throw new KintoneAPIException(`${auth} is not an instance of Auth`);
     }
     this.auth = auth;
     return this;

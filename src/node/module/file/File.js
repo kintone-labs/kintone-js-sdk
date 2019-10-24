@@ -4,10 +4,10 @@
  */
 
 'use-strict';
-import { File as FileModule } from "../../../base/main";
-import path from "path";
-import fs from "fs";
-import { Connection, KintoneAPIException } from "../../../base/main";
+import {File as FileModule, Connection, KintoneAPIException} from '../../../base/main';
+import path from 'path';
+import fs from 'fs';
+
 
 /**
  * File module for NodeJS
@@ -20,8 +20,7 @@ class File extends FileModule {
      */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
-      throw new Error(`${connection}` +
-                  `not an instance of kintoneConnection`);
+      throw new KintoneAPIException(`${connection} is not an instance of Connection`);
     }
     super({connection});
   }
@@ -40,7 +39,7 @@ class File extends FileModule {
         };
         fs.writeFileSync(outPutFilePath, fileContent, options);
       } catch (err) {
-        throw new KintoneAPIException(err);
+        throw new KintoneAPIException(err.message, err);
       }
     });
   }
