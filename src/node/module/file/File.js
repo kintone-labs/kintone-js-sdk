@@ -1,23 +1,17 @@
-/**
- * kintone api - nodejs client
- * File module
- */
-
 'use-strict';
 import {File as FileModule, Connection, KintoneAPIException} from '../../../base/main';
 import path from 'path';
 import fs from 'fs';
-
 
 /**
  * File module for NodeJS
  */
 class File extends FileModule {
   /**
-     * The constructor for this module
-     * @param {Object} params
-     * @param {Connection} params.connection
-     */
+   * The constructor for this module
+   * @param {Object} params
+   * @param {Connection} params.connection
+   */
   constructor({connection} = {}) {
     if (!(connection instanceof Connection)) {
       throw new KintoneAPIException(`${connection} is not an instance of Connection`);
@@ -25,14 +19,14 @@ class File extends FileModule {
     super({connection});
   }
   /**
-     * Download file from kintone
-     * @param {Object} params
-     * @param {String} params.fileKey
-     * @param {String} params.outPutFilePath
-     * @return {Promise}
-     */
+   * Download file from kintone
+   * @param {Object} params
+   * @param {String} params.fileKey
+   * @param {String} params.outPutFilePath
+   * @return {Promise}
+   */
   download({fileKey, outPutFilePath}) {
-    return super.download({fileKey}).then((fileContent) => {
+    return super.download({fileKey}).then(fileContent => {
       try {
         const options = {
           encoding: 'utf16le'
@@ -44,14 +38,14 @@ class File extends FileModule {
     });
   }
   /**
-     * Upload file from local to kintone environment
-     * @param {Object} params
-     * @param {String} params.filePath
-     * @param {String} params.fileName
-     * @param {String} params.fileContent
-     * @return {Promise}
-     */
-  upload({filePath, fileName, fileContent} = {}) {  
+   * Upload file from local to kintone environment
+   * @param {Object} params
+   * @param {String} params.filePath
+   * @param {String} params.fileName
+   * @param {String} params.fileContent
+   * @return {Promise}
+   */
+  upload({filePath, fileName, fileContent} = {}) {
     let validFilecontent = fileContent;
     let validFilename = fileName;
     if (filePath) {
