@@ -47,14 +47,12 @@ export class File {
    * @return {Promise}
    */
   download({fileKey}) {
-    return this._validateRequiredArgs({fileKey}).then(() => {
-      if (window.kintone !== undefined) {
-        this.connection._setLocalHeaders({key: 'X-Requested-With', value: 'XMLHttpRequest'});
-      }
-      const dataRequest =
-                new FileModel.GetFileRequest(fileKey);
-      return this.connection.download(dataRequest.toJSON());
-    });
+    if (window.kintone !== undefined) {
+      this.connection._setLocalHeaders({key: 'X-Requested-With', value: 'XMLHttpRequest'});
+    }
+    const dataRequest =
+              new FileModel.GetFileRequest(fileKey);
+    return this.connection.download(dataRequest.toJSON());
   }
   /**
    * Upload file from local to kintone environment
