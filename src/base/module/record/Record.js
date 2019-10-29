@@ -424,11 +424,7 @@ class Record {
         return {results: response};
       });
     }).catch(errors => {
-      if (!Array.isArray(errors)) {
-        const emptyArray = [];
-        errors = emptyArray.concat(errors);
-      }
-      const errorsResponse = {results: errors};
+      const errorsResponse = {results: Array.isArray(errors) ? errors : [errors]};
       throw errorsResponse;
     });
   }
