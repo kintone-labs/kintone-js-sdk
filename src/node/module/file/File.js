@@ -48,11 +48,17 @@ class File extends FileModule {
   upload({filePath, fileName, fileContent} = {}) {
     let validFilecontent = fileContent;
     let validFilename = fileName;
-    if (filePath) {
-      validFilecontent = fs.createReadStream(filePath);
-      validFilename = path.basename(filePath);
-    }
-    return super.upload({fileName: validFilename, fileContent: validFilecontent});
+    return new Promise((resolve, reject) => {
+      if (filePath) {
+        try {
+          validFilecontent = fs.createReadStream(filePath);
+          validFilename = path.basename(filePath);
+        } catch (error) {
+          reject(new KintoneAPIException(error.message, error));
+        }
+      }
+      resolve(super.upload({fileName: validFilename, fileContent: validFilecontent}));
+    });
   }
 }
 export default File;
