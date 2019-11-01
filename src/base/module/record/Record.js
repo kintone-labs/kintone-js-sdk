@@ -410,28 +410,22 @@ class Record {
    **/
   deleteAllRecordsByQuery({app, query} = {}) {
     return this._validateRequiredArgs({app}).then(() => {
-      return this.getAllRecordsByQuery({app, query})
-        .then(resp => {
-          const ids = [];
-          const records = resp.records;
-          if (!records || !records.length) {
-            return {};
-          }
-          for (let i = 0; i < records.length; i++) {
-            ids.push(records[i].$id.value);
-          }
-          return this.deleteAllRecords(app, ids).then(response => {
-            return {results: response};
-          });
-        })
-        .catch(errors => {
-          if (!Array.isArray(errors)) {
-            const emptyArray = [];
-            errors = emptyArray.concat(errors);
-          }
-          const errorsResponse = {results: errors};
-          throw errorsResponse;
-        });
+      return this.getAllRecordsByQuery({app, query});
+    }).then(resp => {
+      const ids = [];
+      const records = resp.records;
+      if (!records || !records.length) {
+        return {};
+      }
+      for (let i = 0; i < records.length; i++) {
+        ids.push(records[i].$id.value);
+      }
+      return this.deleteAllRecords(app, ids).then(response => {
+        return {results: response};
+      });
+    }).catch(errors => {
+      const errorsResponse = {results: Array.isArray(errors) ? errors : [errors]};
+      throw errorsResponse;
     });
   }
 
