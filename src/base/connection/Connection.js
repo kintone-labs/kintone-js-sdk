@@ -52,12 +52,14 @@ class Connection {
       .replace('{name}', packageFile.name || 'kintone-js-sdk')
       .replace('{version}', packageFile.version || '(none)');
 
+    headersRequest[CONNECTION_CONST.BASE.USER_AGENT] = userAgent;
+
     const headers = this.globalHeaders.concat(this.localHeaders);
     this.localHeaders = [];
     headers.forEach((httpHeaderObj) => {
       const headerKey = httpHeaderObj.getKey();
       if (headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
-        headersRequest[headerKey] = userAgent + ' ' + httpHeaderObj.getValue();
+        headersRequest[headerKey] += ' ' + httpHeaderObj.getValue();
       } else {
         headersRequest[headerKey] = httpHeaderObj.getValue();
       }
