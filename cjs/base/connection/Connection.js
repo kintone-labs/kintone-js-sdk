@@ -73,13 +73,14 @@ class Connection {
 
     const userAgent = _constant.default.BASE.USER_AGENT_BASE_VALUE.replace('{name}', _package.default.name || 'kintone-js-sdk').replace('{version}', _package.default.version || '(none)');
 
+    headersRequest[_constant.default.BASE.USER_AGENT] = userAgent;
     const headers = this.globalHeaders.concat(this.localHeaders);
     this.localHeaders = [];
     headers.forEach(httpHeaderObj => {
       const headerKey = httpHeaderObj.getKey();
 
       if (headerKey === _constant.default.BASE.USER_AGENT) {
-        headersRequest[headerKey] = userAgent + ' ' + httpHeaderObj.getValue();
+        headersRequest[headerKey] += ' ' + httpHeaderObj.getValue();
       } else {
         headersRequest[headerKey] = httpHeaderObj.getValue();
       }

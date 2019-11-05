@@ -75,13 +75,14 @@ function () {
         headersRequest[httpHeaderObj.getKey()] = httpHeaderObj.getValue();
       });
       var userAgent = CONNECTION_CONST.BASE.USER_AGENT_BASE_VALUE.replace('{name}', packageFile.name || 'kintone-js-sdk').replace('{version}', packageFile.version || '(none)');
+      headersRequest[CONNECTION_CONST.BASE.USER_AGENT] = userAgent;
       var headers = this.globalHeaders.concat(this.localHeaders);
       this.localHeaders = [];
       headers.forEach(function (httpHeaderObj) {
         var headerKey = httpHeaderObj.getKey();
 
         if (headerKey === CONNECTION_CONST.BASE.USER_AGENT) {
-          headersRequest[headerKey] = userAgent + ' ' + httpHeaderObj.getValue();
+          headersRequest[headerKey] += ' ' + httpHeaderObj.getValue();
         } else {
           headersRequest[headerKey] = httpHeaderObj.getValue();
         }

@@ -573,34 +573,29 @@ function () {
         return _this7.getAllRecordsByQuery({
           app: app,
           query: query
-        }).then(function (resp) {
-          var ids = [];
-          var records = resp.records;
-
-          if (!records || !records.length) {
-            return {};
-          }
-
-          for (var i = 0; i < records.length; i++) {
-            ids.push(records[i].$id.value);
-          }
-
-          return _this7.deleteAllRecords(app, ids).then(function (response) {
-            return {
-              results: response
-            };
-          });
-        }).catch(function (errors) {
-          if (!Array.isArray(errors)) {
-            var emptyArray = [];
-            errors = emptyArray.concat(errors);
-          }
-
-          var errorsResponse = {
-            results: errors
-          };
-          throw errorsResponse;
         });
+      }).then(function (resp) {
+        var ids = [];
+        var records = resp.records;
+
+        if (!records || !records.length) {
+          return {};
+        }
+
+        for (var i = 0; i < records.length; i++) {
+          ids.push(records[i].$id.value);
+        }
+
+        return _this7.deleteAllRecords(app, ids).then(function (response) {
+          return {
+            results: response
+          };
+        });
+      }).catch(function (errors) {
+        var errorsResponse = {
+          results: Array.isArray(errors) ? errors : [errors]
+        };
+        throw errorsResponse;
       });
     }
     /**
