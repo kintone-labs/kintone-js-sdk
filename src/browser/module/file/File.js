@@ -1,7 +1,7 @@
 import common from '../../../base/utils/Common';
 import {Connection} from '../connection/Connection';
 import FileModel from '../../../base/model/file/FileModels';
-import KintoneAPIException from '../../../base/main';
+import {KintoneAPIException} from '../../../base/main';
 
 /**
  * File module
