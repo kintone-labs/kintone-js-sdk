@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _Common = _interopRequireDefault(require("../../utils/Common"));
+
 var _FileModels = _interopRequireDefault(require("../../model/file/FileModels"));
 
 var _Connection = _interopRequireDefault(require("../../connection/Connection"));
@@ -30,6 +32,25 @@ class File {
     }
 
     this.connection = connection;
+  }
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Promise<Boolean>}
+   */
+
+
+  _validateRequiredArgs(params) {
+    return new Promise((resolve, reject) => {
+      try {
+        _Common.default.validateRequiredArgs(params);
+
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
   /**
    * Download file from kintone
@@ -58,7 +79,12 @@ class File {
     fileName,
     fileContent
   }) {
-    return this.connection.upload(fileName, fileContent);
+    return this._validateRequiredArgs({
+      fileName,
+      fileContent
+    }).then(() => {
+      return this.connection.upload(fileName, fileContent);
+    });
   }
 
 }

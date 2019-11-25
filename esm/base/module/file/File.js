@@ -1,6 +1,9 @@
+import "core-js/modules/es.object.to-string";
+import "core-js/modules/es.promise";
 import "core-js/modules/web.url.to-json";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
+import common from '../../utils/Common';
 import FileModel from '../../model/file/FileModels';
 import Connection from '../../connection/Connection';
 import KintoneAPIException from '../../exception/KintoneAPIException';
@@ -29,14 +32,33 @@ function () {
     this.connection = connection;
   }
   /**
-   * Download file from kintone
+   * check required arguments
+   *
    * @param {Object} params
-   * @param {String} params.fileKey
-   * @return {Promise}
+   * @returns {Promise<Boolean>}
    */
 
 
   _createClass(File, [{
+    key: "_validateRequiredArgs",
+    value: function _validateRequiredArgs(params) {
+      return new Promise(function (resolve, reject) {
+        try {
+          common.validateRequiredArgs(params);
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+    /**
+     * Download file from kintone
+     * @param {Object} params
+     * @param {String} params.fileKey
+     * @return {Promise}
+     */
+
+  }, {
     key: "download",
     value: function download(_ref2) {
       var fileKey = _ref2.fileKey;
@@ -54,9 +76,16 @@ function () {
   }, {
     key: "upload",
     value: function upload(_ref3) {
+      var _this = this;
+
       var fileName = _ref3.fileName,
           fileContent = _ref3.fileContent;
-      return this.connection.upload(fileName, fileContent);
+      return this._validateRequiredArgs({
+        fileName: fileName,
+        fileContent: fileContent
+      }).then(function () {
+        return _this.connection.upload(fileName, fileContent);
+      });
     }
   }]);
 

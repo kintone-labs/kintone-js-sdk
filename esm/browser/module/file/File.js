@@ -1,17 +1,16 @@
+import "core-js/modules/es.object.to-string";
+import "core-js/modules/es.promise";
 import "core-js/modules/web.url.to-json";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
-
-/**
- * kintone api - js client
- */
+import common from '../../../base/utils/Common';
 import { Connection } from '../connection/Connection';
+import FileModel from '../../../base/model/file/FileModels';
+import KintoneAPIException from '../../../base/main';
 /**
  * File module
  */
 
-import FileModel from '../../../base/model/file/FileModels';
-import KintoneAPIException from '../../../base/main';
 export var File =
 /*#__PURE__*/
 function () {
@@ -39,14 +38,33 @@ function () {
     this.connection = connection;
   }
   /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Promise<Boolean>}
+   */
+
+
+  _createClass(File, [{
+    key: "_validateRequiredArgs",
+    value: function _validateRequiredArgs(params) {
+      return new Promise(function (resolve, reject) {
+        try {
+          common.validateRequiredArgs(params);
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+    /**
      * Download file from kintone
      * @param {Object} params
      * @param {String} params.fileKey
      * @return {Promise}
      */
 
-
-  _createClass(File, [{
+  }, {
     key: "download",
     value: function download(_ref2) {
       var fileKey = _ref2.fileKey;
@@ -62,19 +80,26 @@ function () {
       return this.connection.download(dataRequest.toJSON());
     }
     /**
-       * Upload file from local to kintone environment
-       * @param {Object} params
-       * @param {String} params.fileName
-       * @param {Blob} params.fileBlob
-       * @return {Promise}
-       */
+     * Upload file from local to kintone environment
+     * @param {Object} params
+     * @param {String} params.fileName
+     * @param {Blob} params.fileBlob
+     * @return {Promise}
+     */
 
   }, {
     key: "upload",
     value: function upload(_ref3) {
+      var _this = this;
+
       var fileName = _ref3.fileName,
           fileBlob = _ref3.fileBlob;
-      return this.connection.upload(fileName, fileBlob);
+      return this._validateRequiredArgs({
+        fileName: fileName,
+        fileBlob: fileBlob
+      }).then(function () {
+        return _this.connection.upload(fileName, fileBlob);
+      });
     }
   }]);
 
