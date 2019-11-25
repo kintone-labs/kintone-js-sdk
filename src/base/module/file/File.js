@@ -1,3 +1,4 @@
+import common from '../../utils/Common';
 import FileModel from '../../model/file/FileModels';
 import Connection from '../../connection/Connection';
 import KintoneAPIException from '../../exception/KintoneAPIException';
@@ -17,6 +18,24 @@ class File {
     }
     this.connection = connection;
   }
+
+  /**
+   * check required arguments
+   *
+   * @param {Object} params
+   * @returns {Promise<Boolean>}
+   */
+  _validateRequiredArgs(params) {
+    return new Promise((resolve, reject) => {
+      try {
+        common.validateRequiredArgs(params);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   /**
    * Download file from kintone
    * @param {Object} params
@@ -24,8 +43,7 @@ class File {
    * @return {Promise}
    */
   download({fileKey}) {
-    const dataRequest =
-              new FileModel.GetFileRequest(fileKey);
+    const dataRequest = new FileModel.GetFileRequest(fileKey);
     return this.connection.download(dataRequest.toJSON());
   }
   /**
@@ -36,7 +54,12 @@ class File {
    * @return {Promise}
    */
   upload({fileName, fileContent}) {
-    return this.connection.upload(fileName, fileContent);
+    return this._validateRequiredArgs({
+      fileName,
+      fileContent
+    }).then(() => {
+      return this.connection.upload(fileName, fileContent);
+    });
   }
 }
 export default File;
