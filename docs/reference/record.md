@@ -472,7 +472,7 @@ Promise
 ### addAllRecords(params)
 
 >* Add multiple records to an app.
->* Can insert no limit records from index 101 onwards to kintone app, rollback on per unit of 2000 record.
+>* Can insert unlimited number of records to kintone app, rollback can be performed on each block of 2000 records.
 
 **Parameters**
 
