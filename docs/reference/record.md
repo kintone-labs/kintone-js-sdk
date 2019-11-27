@@ -399,7 +399,7 @@ Promise
 ### addRecords(params)
 
 >* Add multiple records to an app.
->* Can insert over 100 record to kintone app.
+>* Can insert upto 100 record to kintone app.
 
 **Parameters**
 
@@ -791,7 +791,7 @@ Promise
 ### updateRecords(params)
 
 >* Updates details of multiple records in an app, by specifying their record number, or a different unique key.
->* Can update over 100 records to kintone app.
+>* Can update upto 100 records to kintone app.
 
 **Parameters**
 
@@ -889,7 +889,7 @@ Promise
 ### updateAllRecords(params)
 
 >* Updates details of multiple records in an app, by specifying their record number, or a different unique key.
->* Can update no limit records from index 101 onwards to kintone app, rollback on per unit of 2000 record.
+>* Can update unlimited number of records to kintone app, rollback can be performed on each block of 2000 records.
 
 **Parameters**
 
@@ -1088,7 +1088,7 @@ Promise
 ### deleteRecords(params)
 
 >* Delete multiple records in an app.
->* Can delete over 100 records to kintone app.
+>* Can delete upto 100 records to kintone app.
 
 **Parameters**
 
@@ -1199,7 +1199,7 @@ None
 ### deleteAllRecordsByQuery(params)
 
 >* Deletes all records in an app by query string
->* Can delete no limit records from index 101 onwards to kintone app, rollback on per unit of 2000 record.
+>* Can delete unlimited number of records to kintone app, rollback can be performed on each block of 2000 records.
 
 **Parameters**
 
