@@ -791,7 +791,7 @@ Promise
 ### updateRecords(params)
 
 >* Updates details of multiple records in an app, by specifying their record number, or a different unique key.
->* Can update over 100 record to kintone app.
+>* Can update over 100 records to kintone app.
 
 **Parameters**
 
