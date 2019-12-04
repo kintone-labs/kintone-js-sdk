@@ -1,0 +1,38 @@
+site_name: kintone js SDK
+site_description: The SDK of kintone REST API client on browser
+
+
+repo_url: https://github.com/kintone/kintone-js-sdk
+site_url: https://kintone.github.io/kintone-js-sdk/
+theme:
+  name: 'material'
+  custom_dir: 'docs/custom_theme'
+  favicon: favicon.ico
+  palette:
+    primary: 'Light Blue'
+    accent: 'Light Blue'
+  logo:
+    icon: 'cloud'
+extra_javascript:
+  - 'asset/js/extra.js'
+extra_css:
+  - 'asset/style/extra.css'
+extra:
+  version: 0.7.3
+markdown_extensions:
+  - admonition
+
+nav:
+- Home: index.md
+- Getting Started: 
+  - Quickstart Javascript: getting-started/quickstart-browser.md
+  - Quickstart Nodejs: getting-started/quickstart-node.md
+- Reference:
+  - Authentication: reference/authentication.md
+  - Connection: reference/connection.md
+  - Record: reference/record.md
+  - Record Cursor: reference/record-cursor.md
+  - Bulk Request: reference/bulk-request.md
+  - App: reference/app.md
+  - Kintone API Exception: reference/kintone-api-exception.md
+  - File: reference/file.md
