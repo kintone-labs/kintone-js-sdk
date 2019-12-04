@@ -1,7 +1,6 @@
 import "core-js/modules/es.array.concat";
 import "core-js/modules/es.array.iterator";
 import "core-js/modules/es.array-buffer.constructor";
-import "core-js/modules/es.array-buffer.slice";
 import "core-js/modules/es.object.to-string";
 import "core-js/modules/es.regexp.to-string";
 import "core-js/modules/es.typed-array.uint8-array";
