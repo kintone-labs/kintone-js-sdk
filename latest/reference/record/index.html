@@ -140,7 +140,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.7.3</a>
+            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.7.4</a>
         </div>
       </div>
  
@@ -1409,7 +1409,10 @@
 
 <h3 id="addrecordsparams">addRecords(params)</h3>
 <blockquote>
-<p>Add multiple records to an app.</p>
+<ul>
+<li>Add multiple records to an app.</li>
+<li>Can insert upto 100 record to kintone app.</li>
+</ul>
 </blockquote>
 <p><strong>Parameters</strong></p>
 <table>
@@ -1502,7 +1505,7 @@
 <blockquote>
 <ul>
 <li>Add multiple records to an app.</li>
-<li>Can insert over 2000 records to kintone app, but can't do the rollback.</li>
+<li>Can insert unlimited number of records to kintone app, rollback can be performed on each block of 2000 records.</li>
 </ul>
 </blockquote>
 <p><strong>Parameters</strong></p>
@@ -1900,7 +1903,10 @@
 
 <h3 id="updaterecordsparams">updateRecords(params)</h3>
 <blockquote>
-<p>Updates details of multiple records in an app, by specifying their record number, or a different unique key.</p>
+<ul>
+<li>Updates details of multiple records in an app, by specifying their record number, or a different unique key.</li>
+<li>Can update upto 100 records to kintone app.</li>
+</ul>
 </blockquote>
 <p><strong>Parameters</strong></p>
 <table>
@@ -2019,7 +2025,7 @@
 <blockquote>
 <ul>
 <li>Updates details of multiple records in an app, by specifying their record number, or a different unique key.</li>
-<li>Can update over 2000 records to kintone app, but can't do the rollback.</li>
+<li>Can update unlimited number of records to kintone app, rollback can be performed on each block of 2000 records.</li>
 </ul>
 </blockquote>
 <p><strong>Parameters</strong></p>
@@ -2238,7 +2244,10 @@
 
 <h3 id="deleterecordsparams">deleteRecords(params)</h3>
 <blockquote>
-<p>Delete multiple records in an app.</p>
+<ul>
+<li>Delete multiple records in an app.</li>
+<li>Can delete upto 100 records to kintone app.</li>
+</ul>
 </blockquote>
 <p><strong>Parameters</strong></p>
 <table>
@@ -2390,7 +2399,7 @@
 <blockquote>
 <ul>
 <li>Deletes all records in an app by query string</li>
-<li>Can delete over 2000 records, but can't do the rollback.</li>
+<li>Can delete unlimited number of records to kintone app, rollback can be performed on each block of 2000 records.</li>
 </ul>
 </blockquote>
 <p><strong>Parameters</strong></p>
