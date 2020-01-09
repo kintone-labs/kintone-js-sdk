@@ -1,8 +1,10 @@
 import "core-js/modules/es.array.concat";
+import "core-js/modules/es.array.for-each";
 import "core-js/modules/es.array.join";
 import "core-js/modules/es.function.name";
 import "core-js/modules/es.object.assign";
 import "core-js/modules/es.parse-int";
+import "core-js/modules/es.regexp.exec";
 import "core-js/modules/es.string.match";
 import "core-js/modules/es.string.replace";
 import "core-js/modules/web.dom-collections.for-each";

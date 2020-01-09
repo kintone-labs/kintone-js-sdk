@@ -1,3 +1,4 @@
+import "core-js/modules/es.array.for-each";
 import "core-js/modules/es.object.keys";
 import "core-js/modules/web.dom-collections.for-each";
 import "core-js/modules/web.url.to-json";

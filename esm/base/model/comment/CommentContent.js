@@ -1,3 +1,4 @@
+import "core-js/modules/es.array.for-each";
 import "core-js/modules/web.dom-collections.for-each";
 import "core-js/modules/web.url.to-json";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
