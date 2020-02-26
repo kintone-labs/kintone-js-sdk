@@ -1,0 +1,2763 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="The SDK of kintone REST API client on browser">
+      
+      
+        <link rel="canonical" href="https://kintone.github.io/kintone-js-sdk/reference/app/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
+    
+    
+      
+        <title>App - kintone js SDK</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#03a9f4">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../asset/style/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="light-blue" data-md-color-accent="light-blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#app" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+ 
+      <!-- Link to home -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.."
+            title="kintone js SDK"
+            class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">cloud</i>
+          
+        </a>
+      </div>
+ 
+      <!-- Button to toggle drawer -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button"
+            for="__drawer"></label>
+      </div>
+ 
+      <!-- Header title -->
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title"
+            data-md-component="title">
+            <a href="../..">kintone js SDK</a> <a style="text-decoration: underline;" href="../../versions">v0.7.5</a>
+        </div>
+      </div>
+ 
+      <!-- Button to open search dialogue -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button"
+              for="__search"></label>
+ 
+          <!-- Search interface -->
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+ 
+      <!-- Repository containing source -->
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://kintone.github.io/kintone-js-sdk/" title="kintone js SDK" class="md-nav__button md-logo">
+      
+        <i class="md-icon">cloud</i>
+      
+    </a>
+    kintone js SDK
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/kintone/kintone-js-sdk/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/quickstart-browser/" title="Quickstart Javascript" class="md-nav__link">
+      Quickstart Javascript
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/quickstart-node/" title="Quickstart Nodejs" class="md-nav__link">
+      Quickstart Nodejs
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../authentication/" title="Authentication" class="md-nav__link">
+      Authentication
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../connection/" title="Connection" class="md-nav__link">
+      Connection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../record/" title="Record" class="md-nav__link">
+      Record
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../record-cursor/" title="Record Cursor" class="md-nav__link">
+      Record Cursor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bulk-request/" title="Bulk Request" class="md-nav__link">
+      Bulk Request
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        App
+      </label>
+    
+    <a href="./" title="App" class="md-nav__link md-nav__link--active">
+      App
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#constructor" title="Constructor" class="md-nav__link">
+    Constructor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getappparams" title="getApp(params)" class="md-nav__link">
+    getApp(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsparams" title="getApps(params)" class="md-nav__link">
+    getApps(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbyidsparams" title="getAppsByIDs(params)" class="md-nav__link">
+    getAppsByIDs(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbycodesparams" title="getAppsByCodes(params)" class="md-nav__link">
+    getAppsByCodes(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbynameparams" title="getAppsByName(params)" class="md-nav__link">
+    getAppsByName(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbyspaceidsparams" title="getAppsBySpaceIDs(params)" class="md-nav__link">
+    getAppsBySpaceIDs(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addpreviewappparams" title="addPreviewApp(params)" class="md-nav__link">
+    addPreviewApp(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployappsettingsparams" title="deployAppSettings(params)" class="md-nav__link">
+    deployAppSettings(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappdeploystatusparams" title="getAppDeployStatus(params)" class="md-nav__link">
+    getAppDeployStatus(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getviewsparams" title="getViews(params)" class="md-nav__link">
+    getViews(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateviewsparams" title="updateViews(params)" class="md-nav__link">
+    updateViews(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getgeneralsettingsparams" title="getGeneralSettings(params)" class="md-nav__link">
+    getGeneralSettings(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updategeneralsettingsparams" title="updateGeneralSettings(params)" class="md-nav__link">
+    updateGeneralSettings(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getformfieldsparams" title="getFormFields(params)" class="md-nav__link">
+    getFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addformfieldsparams" title="addFormFields(params)" class="md-nav__link">
+    addFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateformfieldsparams" title="updateFormFields(params)" class="md-nav__link">
+    updateFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteformfieldsparams" title="deleteFormFields(params)" class="md-nav__link">
+    deleteFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getformlayoutparams" title="getFormLayout(params)" class="md-nav__link">
+    getFormLayout(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateformlayoutparams" title="updateFormLayout(params)" class="md-nav__link">
+    updateFormLayout(params)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" title="Reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../kintone-api-exception/" title="Kintone API Exception" class="md-nav__link">
+      Kintone API Exception
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../file/" title="File" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#constructor" title="Constructor" class="md-nav__link">
+    Constructor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getappparams" title="getApp(params)" class="md-nav__link">
+    getApp(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsparams" title="getApps(params)" class="md-nav__link">
+    getApps(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbyidsparams" title="getAppsByIDs(params)" class="md-nav__link">
+    getAppsByIDs(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbycodesparams" title="getAppsByCodes(params)" class="md-nav__link">
+    getAppsByCodes(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbynameparams" title="getAppsByName(params)" class="md-nav__link">
+    getAppsByName(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappsbyspaceidsparams" title="getAppsBySpaceIDs(params)" class="md-nav__link">
+    getAppsBySpaceIDs(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addpreviewappparams" title="addPreviewApp(params)" class="md-nav__link">
+    addPreviewApp(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployappsettingsparams" title="deployAppSettings(params)" class="md-nav__link">
+    deployAppSettings(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getappdeploystatusparams" title="getAppDeployStatus(params)" class="md-nav__link">
+    getAppDeployStatus(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getviewsparams" title="getViews(params)" class="md-nav__link">
+    getViews(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateviewsparams" title="updateViews(params)" class="md-nav__link">
+    updateViews(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getgeneralsettingsparams" title="getGeneralSettings(params)" class="md-nav__link">
+    getGeneralSettings(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updategeneralsettingsparams" title="updateGeneralSettings(params)" class="md-nav__link">
+    updateGeneralSettings(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getformfieldsparams" title="getFormFields(params)" class="md-nav__link">
+    getFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addformfieldsparams" title="addFormFields(params)" class="md-nav__link">
+    addFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateformfieldsparams" title="updateFormFields(params)" class="md-nav__link">
+    updateFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteformfieldsparams" title="deleteFormFields(params)" class="md-nav__link">
+    deleteFormFields(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getformlayoutparams" title="getFormLayout(params)" class="md-nav__link">
+    getFormLayout(params)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateformlayoutparams" title="updateFormLayout(params)" class="md-nav__link">
+    updateFormLayout(params)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" title="Reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/kintone/kintone-js-sdk/edit/master/docs/reference/app.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="app">App</h1>
+<p>Gets general information of an App, including the name, description, related Space, creator and updater information.</p>
+<ul>
+<li>Permissions to view the App is needed.</li>
+<li>API Tokens cannot be used with this API.</li>
+</ul>
+<h2 id="constructor">Constructor</h2>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>(conditional)</td>
+<td><code>Required for nodejs</code> <br>Constructor params.</td>
+</tr>
+<tr>
+<td>params.connection</td>
+<td><a href="../connection">Connection</a></td>
+<td>(conditional)</td>
+<td>The connection module of this SDK. If initializing in browser environment on kintone, this parameter can be ommited to use session authentication.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Init app sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+  (function(kintoneJSSDK) {
+      'use strict';
+      // with connection
+      // Define Authentication object
+      var kintoneAuth = new kintoneJSSDK.Auth();
+      var paramsAuth = {
+          username: 'YOUR_USER_NAME',
+          password: 'YOUR_PASSWORD'
+      };
+      kintoneAuth.setPasswordAuth(paramsAuth);
+
+      var paramsConnection = {
+          domain: 'YOUR_DOMAIN',
+          auth: kintoneAuth
+      };
+      var connection = new kintoneJSSDK.Connection(paramsConnection);
+
+      // with connection
+      var kintoneApp = new kintoneJSSDK.App({connection});
+
+      // without connection, module will use session authentication of kintone
+      var kintoneApp = new kintoneJSSDK.App();
+  }(window.kintoneJSSDK));
+
+
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+  const kintone = require('@kintone/kintone-js-sdk');
+
+  const kintoneAuth = new kintone.Auth();
+  const paramsAuth = {
+      username: 'YOUR_USER_NAME',
+      password: 'YOUR_PASSWORD'
+  };
+  kintoneAuth.setPasswordAuth(paramsAuth);
+
+  const paramsConnection = {
+      domain: 'YOUR_DOMAIN',
+      auth: kintoneAuth
+  };
+  const connection = new kintone.Connection(paramsConnection);
+  const kintoneApp = new kintone.App({connection});
+
+</pre>
+
+</details>
+
+<h2 id="methods">Methods</h2>
+<h3 id="getappparams">getApp(params)</h3>
+<blockquote>
+<p>Get single app</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get app params.</td>
+</tr>
+<tr>
+<td>params.id</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app ID</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get app sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var id = YOUR_APP_ID;
+  kintoneApp.getApp({id}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const id = YOUR_APP_ID;
+  kintoneApp.getApp({id}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getappsparams">getApps(params)</h3>
+<blockquote>
+<p>Get multiple apps</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>(optional)</td>
+<td>Get apps params.</td>
+</tr>
+<tr>
+<td>params.offset</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The offset off data result</td>
+</tr>
+<tr>
+<td>params.limit</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The limit number of result</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get apps sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getApps({offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getApps({offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getappsbyidsparams">getAppsByIDs(params)</h3>
+<blockquote>
+<p>Get multiple apps by list of ids</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get apps by ids params.</td>
+</tr>
+<tr>
+<td>params.ids</td>
+<td>Array&lt;Integer></td>
+<td>(optional)</td>
+<td>The array of app ids</td>
+</tr>
+<tr>
+<td>params.offset</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The offset off data result</td>
+</tr>
+<tr>
+<td>params.limit</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The limit number of result</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get apps sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var ids = [YOUR_APP_ID_1, YOUR_APP_ID_2, YOUR_APP_ID_n];
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsByIDs({ids, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const ids = [YOUR_APP_ID_1, YOUR_APP_ID_2, YOUR_APP_ID_n];
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsByIDs({ids, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getappsbycodesparams">getAppsByCodes(params)</h3>
+<blockquote>
+<p>Get multiple apps by a list of codes name</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get apps by codes params.</td>
+</tr>
+<tr>
+<td>params.codes</td>
+<td>Array&lt;String></td>
+<td>(optional)</td>
+<td>The array of app codes</td>
+</tr>
+<tr>
+<td>params.offset</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The offset off data result</td>
+</tr>
+<tr>
+<td>params.limit</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The limit number of result</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get apps sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var codes = ['YOUR_APP_CODE_1', 'YOUR_APP_CODE_2'];
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsByCodes({codes, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const codes = ['YOUR_APP_CODE_1', 'YOUR_APP_CODE_2'];
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsByCodes({codes, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getappsbynameparams">getAppsByName(params)</h3>
+<blockquote>
+<p>Get multiple apps by name</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get apps by name params.</td>
+</tr>
+<tr>
+<td>params.name</td>
+<td>String</td>
+<td>(optional)</td>
+<td>The app name</td>
+</tr>
+<tr>
+<td>params.offset</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The offset off data result</td>
+</tr>
+<tr>
+<td>params.limit</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The limit number of result</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get apps sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var name = 'YOUR_APP_NAME';
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsByName({name, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const name = 'YOUR_APP_NAME';
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsByName({name, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getappsbyspaceidsparams">getAppsBySpaceIDs(params)</h3>
+<blockquote>
+<p>Get multiple apps by list of space's ids</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get apps by space ids params.</td>
+</tr>
+<tr>
+<td>params.spaceIds</td>
+<td>Array&lt;Integer></td>
+<td>(optional)</td>
+<td>The array of space ids</td>
+</tr>
+<tr>
+<td>params.offset</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The offset off data result</td>
+</tr>
+<tr>
+<td>params.limit</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The limit number of result</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get apps sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var spaceIds = [];
+  var limit = YOUR_LIMIT_NUMBER;
+  var offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsBySpaceIDs({spaceIds, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const spaceIds = [];
+  const limit = YOUR_LIMIT_NUMBER;
+  const offset = YOUR_OFFSET_NUMBER;
+  kintoneApp.getAppsBySpaceIDs({spaceIds, offset, limit}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="addpreviewappparams">addPreviewApp(params)</h3>
+<blockquote>
+<p>Creates a preview App.</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>After using this method, use the <a href="#deployappsettingsapps-revert">deployAppSettings</a> to deploy the settings to the live App.</li>
+</ul>
+</div>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to add preview app.</td>
+</tr>
+<tr>
+<td>params.name</td>
+<td>String</td>
+<td>yes</td>
+<td>The App name. The maximum length is 64 characters.</td>
+</tr>
+<tr>
+<td>params.space</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The Space ID of where the App will be created.</td>
+</tr>
+<tr>
+<td>params.thread</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>The Thread ID of the thread in the Space where the App will be created. It is recommended to ignore this parameter so that Apps are created in the default thread. There is currently no helpful reason to create Apps in threads other than the default thread, as there are no visual representations in kintone of Apps being related to threads. There are only visual representations of Apps being related to Spaces.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Add preview App sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var name = 'YOUR_APP_NAME';
+  var space = YOUR_APP_SPACE_ID;
+  var thread = YOUR_THREAD_ID_OF_SPACE;
+  kintoneApp.addPreviewApp({name, space, thread}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const name = 'YOUR_APP_NAME';
+  const space = YOUR_APP_SPACE_ID;
+  const thread = YOUR_THREAD_ID_OF_SPACE;
+  kintoneApp.addPreviewApp({name, space, thread}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="deployappsettingsparams">deployAppSettings(params)</h3>
+<blockquote>
+<p>Updates the settings of a pre-live App to the live App.</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to deploy app settings.</td>
+</tr>
+<tr>
+<td>params.apps</td>
+<td>Array&lt;JSONObject></td>
+<td>yes</td>
+<td>The list of preview apps.</td>
+</tr>
+<tr>
+<td>params.revert</td>
+<td>Boolean</td>
+<td>(optional)</td>
+<td>Specify "true" to cancel all changes made to the pre-live settings. The pre-live settings will be reverted back to the current settings of the live app.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Deploy app settings sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var apps = [
+    {
+      revision: YOUR_REVISION,
+      app: YOUR_APP_ID
+    }
+  // Another app preview here
+  ];
+  var revert = false;
+  kintoneApp.deployAppSettings({apps, revert}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const apps = [
+      {
+        revision: YOUR_REVISION,
+        app: YOUR_APP_ID
+      }
+      // Another app preview here
+  ];
+  const revert = false;
+  kintoneApp.deployAppSettings({apps, revert}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getappdeploystatusparams">getAppDeployStatus(params)</h3>
+<blockquote>
+<p>Gets the deployment status of the App settings for multiple Apps.</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get app deploy status params.</td>
+</tr>
+<tr>
+<td>params.apps</td>
+<td>Array&lt;Integer></td>
+<td>yes</td>
+<td>The list of Apps to check the deploy statuses of. The Maximum limit is 300. If Apps in Guest Spaces are specified, all Apps specified in the request must belong to that Guest Space.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get app deploy status sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var apps = [
+    YOUR_APP_ID
+  // Another app id here
+  ];
+  kintoneApp.getAppDeployStatus({apps}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const apps = [
+    YOUR_APP_ID
+    // Another app id here
+  ];
+  kintoneApp.getAppDeployStatus({apps}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getviewsparams">getViews(params)</h3>
+<blockquote>
+<p>Gets the View settings of a an App.</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get views params.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.lang</td>
+<td>String</td>
+<td>(optional)</td>
+<td>The language code. Support: <ul><li>DEFAULT: Default language setting of system </li><li>JA: Japanese language setting</li><li>ZH: Chinese language setting</li><li>EN: English language setting</li></td>
+</tr>
+<tr>
+<td>params.isPreview</td>
+<td>Boolean</td>
+<td>(optional)</td>
+<td>Get the views with a <a href="https://developer.kintone.io/hc/en-us/articles/115004401787">pre-live settings</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get views sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
+  kintoneApp.getViews({app, lang}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a pre-live (preview) views
+  var previewApp = YOUR_APP_ID;
+  var previewLang = 'LANGUAGE_CODE'; // Ex: JA
+  var isPreview = true;
+  kintoneApp.getViews({app: previewApp, lang: previewLang, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
+  kintoneApp.getViews({app, lang}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a pre-live (preview) views
+  const previewApp = YOUR_APP_ID;
+  const previewLang = 'LANGUAGE_CODE'; // Ex: JA
+  const isPreview = true;
+  kintoneApp.getViews({app: previewApp, lang: previewLang, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="updateviewsparams">updateViews(params)</h3>
+<blockquote>
+<p>Get field of form in kintone app</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to update views.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.views</td>
+<td>JSONObject</td>
+<td>yes</td>
+<td>An object of data of Views. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page</td>
+</tr>
+<tr>
+<td>params.revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>Specify the revision number of the settings that will be deployed.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Update views sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var views = {
+    'YOUR_VIEW_NAME': {
+      'index': 0,
+      'type': 'YOUR_VIEW_TYPE', // Default: 'LIST', 'CALENDAR', 'CUSTOM'
+      'name': 'YOUR_VIEW_NAME',
+      'fields': [
+        'YOUR_FIELD_CODE'
+        // Another field code here
+      ],
+      'filterCond': 'YOUR_QUERY',
+      'sort': 'YOUR_SORT'
+    }
+    // Another view here
+  };
+  var revision = 'YOUR_SETTINGS_REVISION';
+
+  kintoneApp.updateViews({app, views, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const views = {
+      "YOUR_VIEW_NAME": {
+        "index": 0,
+        "type": "YOUR_VIEW_TYPE", // Default: 'LIST', 'CALENDAR', 'CUSTOM'
+        "name": "YOUR_VIEW_NAME",
+        "fields": [
+          "YOUR_FIELD_CODE"
+          // Another field code here
+        ],
+        "filterCond": "YOUR_QUERY",
+        "sort": "YOUR_SORT"      
+      }
+      // Another view here
+  }; 
+  const revision = 'YOUR_SETTINGS_REVISION';
+
+  kintoneApp.updateViews({app, views, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getgeneralsettingsparams">getGeneralSettings(params)</h3>
+<blockquote>
+<p>Gets the description, name, icon, revision and color theme of an App.</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get general settings params.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.lang</td>
+<td>String</td>
+<td>(optional)</td>
+<td>The language code. Support: <ul><li>DEFAULT: Default language setting of system </li><li>JA: English language setting</li><li>ZH: Chinese language setting</li><li>EN: English language setting</li></td>
+</tr>
+<tr>
+<td>params.isPreview</td>
+<td>Boolean</td>
+<td>(optional)</td>
+<td>Get the general with a <a href="https://developer.kintone.io/hc/en-us/articles/115004811668">pre-live settings</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get general settings sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
+  kintoneApp.getGeneralSettings({app, lang}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a pre-live (preview) general settings
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
+  var isPreview = true;
+  kintoneApp.getGeneralSettings({app, lang, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
+  kintoneApp.getGeneralSettings({app, lang}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a pre-live (preview) general settings
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
+  const isPreview = true;
+  kintoneApp.getGeneralSettings({app, lang, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="updategeneralsettingsparams">updateGeneralSettings(params)</h3>
+<blockquote>
+<p>Update the description, name, icon, revision and color theme of an App.</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to update general settings.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.name</td>
+<td>String</td>
+<td>(Conditional)</td>
+<td>Name of an App.</td>
+</tr>
+<tr>
+<td>params.description</td>
+<td>String</td>
+<td>(Conditional)</td>
+<td>The description of an App.</td>
+</tr>
+<tr>
+<td>params.icon</td>
+<td>Icon</td>
+<td>(Conditional)</td>
+<td>The icon of an App.</td>
+</tr>
+<tr>
+<td>params.theme</td>
+<td>String</td>
+<td>(Conditional)</td>
+<td>Color theme of an App.</td>
+</tr>
+<tr>
+<td>params.revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>Specify the revision number of the settings that will be deployed.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Update general settings sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var params= {
+    app: YOUR_APP_ID,
+    name: 'YOUR_APP_NAME',
+    description: 'YOUR_COOL_DESCRIPTION',
+    icon: {
+      type: 'YOUR_ICON_TYPE', // specified: FILE, PRESET
+      key: 'YOUR_ICON_KEY'
+    },
+    theme: 'YOUR_THEME', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
+    revision: 'YOUR_SETTINGS_REVISION'
+  };
+
+  kintoneApp.updateGeneralSettings(params).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  var params= {
+      app: YOUR_APP_ID,
+      name: 'YOUR_APP_NAME',
+      description: 'YOUR_COOL_DESCRIPTION',
+      icon: {
+        type: 'YOUR_ICON_TYPE', // specified: FILE, PRESET
+        key: 'YOUR_ICON_KEY'
+      },
+      theme: 'YOUR_THEME', // specified: WHITE, RED, BLUE, GREEN, YELLOW, BLACK
+      revision: 'YOUR_SETTINGS_REVISION'
+    };
+
+  kintoneApp.updateGeneralSettings(params).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getformfieldsparams">getFormFields(params)</h3>
+<blockquote>
+<p>Get field of form in kintone app</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get form fields params.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.lang</td>
+<td>String</td>
+<td>(optional)</td>
+<td>The language code. Support: <ul><li>DEFAULT: Default language setting of system </li><li>JA: English language setting</li><li>ZH: Chinese language setting</li><li>EN: English language setting</li></td>
+</tr>
+<tr>
+<td>params.isPreview</td>
+<td>Boolean</td>
+<td>(optional)</td>
+<td>Get the app form fields with a <a href="https://developer.kintone.io/hc/en-us/articles/115005509288">pre-live settings</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get app form field sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
+  kintoneApp.getFormFields({app, lang}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a pre-live (preview) form fields
+  var app = YOUR_APP_ID;
+  var lang = 'LANGUAGE_CODE'; // Ex: JA
+  var isPreview = true;
+  kintoneApp.getFormFields({app, lang, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
+  kintoneApp.getFormFields({app, lang}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a pre-live (preview) form fields
+  const app = YOUR_APP_ID;
+  const lang = 'LANGUAGE_CODE'; // Ex: JA
+  const isPreview = true;
+  kintoneApp.getFormFields({app, lang, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="addformfieldsparams">addFormFields(params)</h3>
+<blockquote>
+<p>Adds fields to a form of an App.</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>After using this method, use the <a href="#deployappsettingsapps-revert">deployAppSettings</a> to deploy the settings to the live App.</li>
+</ul>
+</div>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to add form fields.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.fields</td>
+<td>JSONObject</td>
+<td>yes</td>
+<td>The formFields which will add to form of kintone app. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this</td>
+</tr>
+<tr>
+<td>params.revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>Specify the revision number of the settings that will be deployed.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Add app form field sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var fields = {
+    'YOUR_FIELD_CODE': {
+      'type': 'SINGLE_LINE_TEXT',
+      'code': 'YOUR_FIELD_CODE',
+      'label': 'Text (single-line)',
+      'noLabel': false,
+      'required': true,
+      'unique': true
+    }
+    // Another field here
+  };
+  var revision = 'YOUR_SETTINGS_REVISION';
+  kintoneApp.addFormFields({app, fields, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const fields = {
+    'YOUR_FIELD_CODE': {
+      'type': 'SINGLE_LINE_TEXT',
+      'code': 'YOUR_FIELD_CODE',
+      'label': 'Text (single-line)',
+      'noLabel': false,
+      'required': true,
+      'unique': true
+    }
+    // Another field here
+  };
+  const revision = 'YOUR_SETTINGS_REVISION';
+  kintoneApp.addFormFields({app, fields, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="updateformfieldsparams">updateFormFields(params)</h3>
+<blockquote>
+<p>Updates the field settings of fields in a form of an App.</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>After using this method, use the <a href="#deployappsettingsapps-revert">deployAppSettings</a> to deploy the settings to the live App.</li>
+</ul>
+</div>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to update form fields.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.fields</td>
+<td>JSONObject</td>
+<td>yes</td>
+<td>The formFields which will add to form of kintone app. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this</td>
+</tr>
+<tr>
+<td>params.revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>Specify the revision number of the settings that will be deployed.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Update app form field sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var fields = {
+    'YOUR_FIELD_CODE': {
+      'type': 'SINGLE_LINE_TEXT',
+      'code': 'YOUR_FIELD_CODE',
+      'label': 'Text (single-line)',
+      'noLabel': false,
+      'required': true,
+      'unique': true
+    }
+    // Another field here
+  };
+  var revision = 'the_revision_of_the_settings ';
+  kintoneApp.updateFormFields({app, fields, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const fields = {
+    'YOUR_FIELD_CODE': {
+      'type': 'SINGLE_LINE_TEXT',
+      'code': 'YOUR_FIELD_CODE',
+      'label': 'Text (single-line)',
+      'noLabel': false,
+      'required': true,
+      'unique': true
+    }
+    // Another field here
+  };
+  const revision = 'YOUR_SETTINGS_REVISION';
+  kintoneApp.updateFormFields({app, fields, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="deleteformfieldsparams">deleteFormFields(params)</h3>
+<blockquote>
+<p>Updates the field settings of fields in a form of an App.</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>After using this method, use the <a href="#deployappsettingsapps-revert">deployAppSettings</a> to deploy the settings to the live App.</li>
+</ul>
+</div>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to delete form fields.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The app ID</td>
+</tr>
+<tr>
+<td>params.fields</td>
+<td>Array&lt;String></td>
+<td>yes</td>
+<td>The list of field codes of the fields to delete. Up to 100 field codes can be specified.</td>
+</tr>
+<tr>
+<td>params.revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>Specify the revision number of the settings that will be deployed.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Delete app form field sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var fields = [
+    'YOUR_FIELD_CODE'
+    // Another field code here
+  ];
+  var revision = 'YOUR_SETTINGS_REVISION';
+  kintoneApp.deleteFormFields({app, fields, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const fields = [
+    'YOUR_FIELD_CODE'
+    // Another field code here
+  ];
+  const revision = 'YOUR_SETTINGS_REVISION';
+  kintoneApp.deleteFormFields({app, fields, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="getformlayoutparams">getFormLayout(params)</h3>
+<blockquote>
+<p>Get layout of form in kintone app</p>
+</blockquote>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Get form layout params.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app id</td>
+</tr>
+<tr>
+<td>params.isPreview</td>
+<td>Boolean</td>
+<td>(optional)</td>
+<td>Get the app form layout with a <a href="https://developer.kintone.io/hc/en-us/articles/115005509288">pre-live settings</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Get form layout sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  // Get form layout
+  kintoneApp.getFormLayout({app}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a preview (pre-live) form layout
+  var isPreview = true;
+  kintoneApp.getFormLayout({app, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  // Get form layout
+  kintoneApp.getFormLayout({app}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+  // Get a preview (pre-live) form layout
+  const isPreview = true;
+  kintoneApp.getFormLayout({app, isPreview}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h3 id="updateformlayoutparams">updateFormLayout(params)</h3>
+<blockquote>
+<p>Updates the field layout info of a form in an App.</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>After using this method, use the <a href="#deployappsettingsapps-revert">deployAppSettings</a> to deploy the settings to the live App.</li>
+</ul>
+</div>
+<p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>yes</td>
+<td>Params to update form layout.</td>
+</tr>
+<tr>
+<td>params.app</td>
+<td>Integer</td>
+<td>yes</td>
+<td>The kintone app id</td>
+</tr>
+<tr>
+<td>params.layout</td>
+<td>Array&lt;JSONObject></td>
+<td>yes</td>
+<td>A list of field layouts for each row. About the format, please look the sample below or <a href="#reference">reference</a> at the end of this page.</td>
+</tr>
+<tr>
+<td>params.revision</td>
+<td>Integer</td>
+<td>(optional)</td>
+<td>Specify the revision number of the settings that will be deployed. The request will fail if the revision number is not the latest revision.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return</strong></p>
+<p>Promise</p>
+<p><strong>Sample code</strong></p>
+<details class="tab-container" open>
+<Summary>Update form layout sample</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = YOUR_APP_ID;
+  var firstRowLayout = {
+    'type': 'YOUR_LAYOUT_TYPE',
+    'fields': [
+      {
+        'type': 'YOUR_FIELD_TYPE',
+        'code': 'YOUR_FIELD_CODE',
+        'size': {
+          'width': 'YOUR_FIELD_WIDTH'
+        }
+      }
+    ]
+  };
+  var layout = [
+    firstRowLayout
+    // Another row layout here
+  ];
+  var revision = 'YOUR_SETTINGS_REVISION';
+
+  // Update form layout
+  kintoneApp.updateFormLayout({app, layout, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = YOUR_APP_ID;
+  const fisrtRowLayout = {
+    'type': 'YOUR_LAYOUT_TYPE',
+    'fields': [
+      {
+        'type': 'YOUR_FIELD_TYPE',
+        'code': 'YOUR_FIELD_CODE',
+        'size': {
+          'width': 'YOUR_FIELD_WIDTH'
+        }
+      }
+    ]
+  };
+  const layout = [
+    fisrtRowLayout
+  // Another row layout here
+  ];
+  const revision = 'YOUR_SETTINGS_REVISION';
+
+  // Update form layout
+  kintoneApp.updateFormLayout({app, layout, revision}).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+  // This SDK return err with KintoneAPIException
+    console.log(err);
+  });
+
+</pre>
+
+</details>
+
+<h2 id="reference">Reference</h2>
+<p>Developer network's reference:
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/212494888">Get App</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005336727">Get Apps</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005509288">Get Form fields</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005506868">Add Form Fields</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005507788">Update Form Fields</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005341187">Delete Form Fields</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005509068">Get Form Layout</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115004881348">Deploy App Settings</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115004890947">Get App Deploy Status</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115004401787">Get Views</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115004880588">Update Views</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115004811668">Get General Settings</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115004868628">Update General Settings</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005509068">Get Form Layout</a>
+<br/><a href="https://developer.kintone.io/hc/en-us/articles/115005341427">Update Form Layout</a></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../bulk-request/" title="Bulk Request" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Bulk Request
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../kintone-api-exception/" title="Kintone API Exception" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Kintone API Exception
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.d9aa80ab.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../asset/js/extra.js"></script>
+      
+    
+  </body>
+</html>
