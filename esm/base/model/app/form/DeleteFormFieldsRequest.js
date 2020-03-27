@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * DeleteFormFieldsRequest model
  */
-var DeleteFormFieldsRequest =
-/*#__PURE__*/
-function () {
+var DeleteFormFieldsRequest = /*#__PURE__*/function () {
   /**
      * @param {Integer} app
      * @param {Array<String>} fields

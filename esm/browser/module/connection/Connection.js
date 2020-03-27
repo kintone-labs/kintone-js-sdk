@@ -1,12 +1,19 @@
 import "core-js/modules/es.object.assign";
 import "core-js/modules/es.object.to-string";
 import "core-js/modules/es.promise";
+import "core-js/modules/es.reflect.construct";
+import "core-js/modules/es.regexp.to-string";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
+import _get from "@babel/runtime/helpers/get";
 import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstructorReturn";
 import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
-import _get from "@babel/runtime/helpers/get";
 import _inherits from "@babel/runtime/helpers/inherits";
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 import axios from 'axios';
 import * as kintoneBaseJSSDK from '../../../base/main';
 var FILE_RESPONSE_TYPE_KEY = 'responseType';
@@ -15,10 +22,10 @@ var FILE_RESPONSE_TYPE_VALUE = 'blob';
  * Connection module
  */
 
-export var Connection =
-/*#__PURE__*/
-function (_kintoneBaseJSSDK$Con) {
+export var Connection = /*#__PURE__*/function (_kintoneBaseJSSDK$Con) {
   _inherits(Connection, _kintoneBaseJSSDK$Con);
+
+  var _super = _createSuper(Connection);
 
   /**
      * @param {Object} params
@@ -36,20 +43,20 @@ function (_kintoneBaseJSSDK$Con) {
 
     if (auth instanceof kintoneBaseJSSDK.Auth) {
       var domain = window.location.host;
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Connection).call(this, {
+      _this = _super.call(this, {
         domain: domain,
         auth: auth,
         guestSpaceID: guestSpaceID
-      }));
+      });
       _this.kintoneAuth = auth;
     } else {
       var _domain = window.location.host;
       var basicAuth = new kintoneBaseJSSDK.Auth();
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Connection).call(this, {
+      _this = _super.call(this, {
         domain: _domain,
         auth: basicAuth,
         guestSpaceID: guestSpaceID
-      }));
+      });
       _this.kintoneAuth = undefined;
     }
 

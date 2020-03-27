@@ -9,9 +9,7 @@ import KintoneAPIException from '../exception/KintoneAPIException';
  * Common function
  */
 
-var Common =
-/*#__PURE__*/
-function () {
+var Common = /*#__PURE__*/function () {
   function Common() {
     _classCallCheck(this, Common);
   }

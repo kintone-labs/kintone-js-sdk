@@ -10,9 +10,7 @@ import KintoneHTTPHeader from '../model/http/HTTPHeader';
  * Authentication module
  */
 
-var Auth =
-/*#__PURE__*/
-function () {
+var Auth = /*#__PURE__*/function () {
   function Auth() {
     _classCallCheck(this, Auth);
 

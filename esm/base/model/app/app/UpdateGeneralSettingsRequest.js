@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * UpdateGeneralSettingsRequest model
  */
-var UpdateGeneralSettingsRequest =
-/*#__PURE__*/
-function () {
+var UpdateGeneralSettingsRequest = /*#__PURE__*/function () {
   /**
      * @param {Integer} app
      * @param {GeneralSettings } generalSettings

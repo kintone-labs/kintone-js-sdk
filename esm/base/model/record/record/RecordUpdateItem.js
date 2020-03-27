@@ -6,9 +6,7 @@ import RecordUpdateKey from "./RecordUpdateKey";
  * RecordUpdateItem model
  */
 
-var RecordUpdateItem =
-/*#__PURE__*/
-function () {
+var RecordUpdateItem = /*#__PURE__*/function () {
   /**
      * constructor
      */

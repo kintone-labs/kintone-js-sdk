@@ -4,9 +4,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * Error response model
  */
-var ErrorResponse =
-/*#__PURE__*/
-function () {
+var ErrorResponse = /*#__PURE__*/function () {
   /**
    * constructor
    * @param {String} id

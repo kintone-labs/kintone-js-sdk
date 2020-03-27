@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * UserBase model
  */
-var UserBase =
-/*#__PURE__*/
-function () {
+var UserBase = /*#__PURE__*/function () {
   /**
      * @param {String} name
      * @param {String} code

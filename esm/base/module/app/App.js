@@ -9,9 +9,7 @@ import KintoneAPIException from '../../exception/KintoneAPIException';
  * App module
  */
 
-var App =
-/*#__PURE__*/
-function () {
+var App = /*#__PURE__*/function () {
   /**
    * The constructor for this module
    * @param {Connection} connection

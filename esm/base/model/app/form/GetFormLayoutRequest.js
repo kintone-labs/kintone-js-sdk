@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * GetFormLayoutRequest model
  */
-var GetFormLayoutRequest =
-/*#__PURE__*/
-function () {
+var GetFormLayoutRequest = /*#__PURE__*/function () {
   /**
      * @param {String} appID
      */

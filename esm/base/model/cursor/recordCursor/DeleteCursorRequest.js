@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * DeleteCursorRequest model
  */
-var DeleteCursorRequest =
-/*#__PURE__*/
-function () {
+var DeleteCursorRequest = /*#__PURE__*/function () {
   /**
    * constructor for DeleteCursorRequest
    * @param {String} cursorID

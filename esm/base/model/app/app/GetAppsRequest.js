@@ -6,9 +6,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * GetAppsRequest model
  */
-var GetAppsRequest =
-/*#__PURE__*/
-function () {
+var GetAppsRequest = /*#__PURE__*/function () {
   /**
      * @param {String} offset
      * @param {String} limit

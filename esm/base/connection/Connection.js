@@ -22,9 +22,7 @@ var DEFAULT_PORT = '443';
  * Connection module
  */
 
-var Connection =
-/*#__PURE__*/
-function () {
+var Connection = /*#__PURE__*/function () {
   /**
    * @param {Object} params
    * @param {String} params.domain

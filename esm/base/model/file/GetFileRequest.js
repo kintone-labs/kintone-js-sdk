@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * GetFileRequest model
  */
-var GetFileRequest =
-/*#__PURE__*/
-function () {
+var GetFileRequest = /*#__PURE__*/function () {
   /**
      * @param {String} fileKey
      */

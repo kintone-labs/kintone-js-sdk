@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * AddRecordRequest model
  */
-var AddRecordRequest =
-/*#__PURE__*/
-function () {
+var AddRecordRequest = /*#__PURE__*/function () {
   /**
      * constructor for AddRecordRequest
      * @param {integer} appID

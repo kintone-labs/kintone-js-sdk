@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * RecordUpdateKey model
  */
-var RecordUpdateKey =
-/*#__PURE__*/
-function () {
+var RecordUpdateKey = /*#__PURE__*/function () {
   /**
      * constructor
      * @param {String} field

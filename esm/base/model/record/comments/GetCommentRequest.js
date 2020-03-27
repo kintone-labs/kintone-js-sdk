@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * GetCommentRequest model
  */
-var GetCommentRequest =
-/*#__PURE__*/
-function () {
+var GetCommentRequest = /*#__PURE__*/function () {
   /**
      * constructor
      * @param {Integer} appID

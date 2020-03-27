@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * BulkRequestItem model
  */
-var BulkRequestItem =
-/*#__PURE__*/
-function () {
+var BulkRequestItem = /*#__PURE__*/function () {
   /**
      * @param {String} method
      * @param {String} api

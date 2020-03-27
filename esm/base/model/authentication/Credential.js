@@ -4,9 +4,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * Credential model
  */
-var Credential =
-/*#__PURE__*/
-function () {
+var Credential = /*#__PURE__*/function () {
   /**
      * @param {String} username
      * @param {String} password

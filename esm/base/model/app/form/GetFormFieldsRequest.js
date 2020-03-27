@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * GetFormFieldsRequest model
  */
-var GetFormFieldsRequest =
-/*#__PURE__*/
-function () {
+var GetFormFieldsRequest = /*#__PURE__*/function () {
   /**
      * @param {Integer} appID
      * @param {String} lang

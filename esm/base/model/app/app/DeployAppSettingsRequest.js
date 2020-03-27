@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * DeployAppSettingsRequest model
  */
-var DeployAppSettingsRequest =
-/*#__PURE__*/
-function () {
+var DeployAppSettingsRequest = /*#__PURE__*/function () {
   /**
      * constructor for DeployAppSettingsRequest
      * @param {Array} apps

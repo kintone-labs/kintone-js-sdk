@@ -11,9 +11,7 @@ import { KintoneAPIException } from '../../../base/main';
  * File module
  */
 
-export var File =
-/*#__PURE__*/
-function () {
+export var File = /*#__PURE__*/function () {
   /**
      * The constructor for this module
      * @param {Object} params

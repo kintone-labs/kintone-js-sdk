@@ -6,9 +6,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * AddPreviewAppRequest model
  */
-var AddPreviewAppRequest =
-/*#__PURE__*/
-function () {
+var AddPreviewAppRequest = /*#__PURE__*/function () {
   /**
      * constructor for AddPreviewAppRequest
      * @param {String} name

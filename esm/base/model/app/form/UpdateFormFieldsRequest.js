@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * UpdateFormFieldsRequest model
  */
-var UpdateFormFieldsRequest =
-/*#__PURE__*/
-function () {
+var UpdateFormFieldsRequest = /*#__PURE__*/function () {
   /**
      * @param {Integer} app
      * @param {Array<HashTable<String, Field>>} fields

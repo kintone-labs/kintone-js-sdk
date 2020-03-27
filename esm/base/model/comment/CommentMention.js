@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * CommentMention model
  */
-var CommentMention =
-/*#__PURE__*/
-function () {
+var CommentMention = /*#__PURE__*/function () {
   /**
      * constructor
      * @param {String} code

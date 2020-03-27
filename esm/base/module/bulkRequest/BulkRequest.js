@@ -10,9 +10,7 @@ import KintoneAPIException from '../../exception/KintoneAPIException';
  * BulkRequest module
  */
 
-var BulkRequest =
-/*#__PURE__*/
-function () {
+var BulkRequest = /*#__PURE__*/function () {
   /**
    * Constructor function of BulkRequest
    * @param {Object} params

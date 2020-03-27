@@ -24,9 +24,7 @@ var DEFAULT_CURSOR_SIZE = 500;
  * Record module
  */
 
-var Record =
-/*#__PURE__*/
-function () {
+var Record = /*#__PURE__*/function () {
   /**
    * The constructor for Record module
    * @param {Object} params

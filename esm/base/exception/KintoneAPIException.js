@@ -2,6 +2,7 @@ import "core-js/modules/es.array.concat";
 import "core-js/modules/es.array.iterator";
 import "core-js/modules/es.array-buffer.constructor";
 import "core-js/modules/es.object.to-string";
+import "core-js/modules/es.reflect.construct";
 import "core-js/modules/es.regexp.to-string";
 import "core-js/modules/es.typed-array.uint8-array";
 import "core-js/modules/es.typed-array.copy-within";
@@ -32,20 +33,25 @@ import _typeof from "@babel/runtime/helpers/typeof";
 import _toConsumableArray from "@babel/runtime/helpers/toConsumableArray";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _createClass from "@babel/runtime/helpers/createClass";
+import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized";
 import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstructorReturn";
 import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
-import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _wrapNativeSuper from "@babel/runtime/helpers/wrapNativeSuper";
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 import KintoneErrorResponseModel from './ErrorResponse';
 /**
  * kintone Exception Module
  */
 
-var KintoneAPIException =
-/*#__PURE__*/
-function (_Error) {
+var KintoneAPIException = /*#__PURE__*/function (_Error) {
   _inherits(KintoneAPIException, _Error);
+
+  var _super = _createSuper(KintoneAPIException);
 
   /**
    * The constructor of KintoneAPIException functions
@@ -55,8 +61,6 @@ function (_Error) {
    * @memberof KintoneAPIException
    */
   function KintoneAPIException() {
-    var _getPrototypeOf2;
-
     var _this;
 
     var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -68,7 +72,7 @@ function (_Error) {
       args[_key - 2] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(KintoneAPIException)).call.apply(_getPrototypeOf2, [this, message].concat(args)));
+    _this = _super.call.apply(_super, [this, message].concat(args));
 
     if (Error.captureStackTrace) {
       Error.captureStackTrace(_assertThisInitialized(_this), KintoneAPIException);
@@ -171,6 +175,6 @@ function (_Error) {
   }]);
 
   return KintoneAPIException;
-}(_wrapNativeSuper(Error));
+}( /*#__PURE__*/_wrapNativeSuper(Error));
 
 export default KintoneAPIException;

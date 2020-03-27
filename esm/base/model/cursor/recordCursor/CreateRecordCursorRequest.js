@@ -7,9 +7,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * CreateRecordCursorRequest model
  */
-var CreateRecordCursorRequest =
-/*#__PURE__*/
-function () {
+var CreateRecordCursorRequest = /*#__PURE__*/function () {
   /**
    * constructor for CreateRecordCursorRequest
    * @param {Integer} app

@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * DeleteRecordsRequest model
  */
-var DeleteRecordsRequest =
-/*#__PURE__*/
-function () {
+var DeleteRecordsRequest = /*#__PURE__*/function () {
   /**
      * @param {String} appID
      */

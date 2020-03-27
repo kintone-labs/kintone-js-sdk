@@ -19,9 +19,7 @@ import Connection from '../../connection/Connection';
  * RecordCursor module
  */
 
-var RecordCursor =
-/*#__PURE__*/
-function () {
+var RecordCursor = /*#__PURE__*/function () {
   /**
    * The constructor for RecordCursor module
    * @param {Object} params
@@ -135,9 +133,7 @@ function () {
   }, {
     key: "getAllRecords",
     value: function () {
-      var _getAllRecords = _asyncToGenerator(
-      /*#__PURE__*/
-      _regeneratorRuntime.mark(function _callee() {
+      var _getAllRecords = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
         var _ref5,
             id,
             next,

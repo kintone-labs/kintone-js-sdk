@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * UpdateFormLayoutRequest model
  */
-var UpdateFormLayoutRequest =
-/*#__PURE__*/
-function () {
+var UpdateFormLayoutRequest = /*#__PURE__*/function () {
   /**
      * @param {Integer} app
      * @param {Array<HashTable<String, Field>>} fields

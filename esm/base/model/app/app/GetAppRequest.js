@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * GetAppRequest model
  */
-var GetAppRequest =
-/*#__PURE__*/
-function () {
+var GetAppRequest = /*#__PURE__*/function () {
   /**
      * @param {String} appID
      */

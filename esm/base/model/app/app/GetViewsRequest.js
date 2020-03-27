@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * GetViewsRequest model
  */
-var GetViewsRequest =
-/*#__PURE__*/
-function () {
+var GetViewsRequest = /*#__PURE__*/function () {
   /**
      * @param {Integer} app
      * @param {String} lang

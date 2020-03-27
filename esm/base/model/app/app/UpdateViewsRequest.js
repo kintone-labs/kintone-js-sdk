@@ -5,9 +5,7 @@ import _createClass from "@babel/runtime/helpers/createClass";
 /**
  * UpdateViewsRequest model
  */
-var UpdateViewsRequest =
-/*#__PURE__*/
-function () {
+var UpdateViewsRequest = /*#__PURE__*/function () {
   /**
      * @param {Integer} app
      * @param {HashTable<String, View>} views
