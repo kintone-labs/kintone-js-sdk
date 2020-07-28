@@ -1,12 +1,7 @@
 # kintone-js-sdk
 REST API client of kintone for node.js and javascript 
 
-## ⚠️This package will be deprecated. Please use [@kintone/rest-api-client](https://github.com/kintone/js-sdk/tree/master/packages/rest-api-client) instead.
-### Note when using [@kintone/rest-api-client](https://github.com/kintone/js-sdk/tree/master/packages/rest-api-client)
-rest-api-client is being updated weekly.  
-Currently, not all kintone-js-sdk's features are being supported on the rest-api-client.  
-Once the rest-api-client supports all the necessary features for your use, it is highly recommended to switch over.  
-For the latest features and news regarding the rest-api-client, please check the [reference](https://github.com/kintone/js-sdk/tree/master/packages/rest-api-client#references).
+## :warning::warning: This package has been deprecated. Please use [@kintone/rest-api-client](https://github.com/kintone/js-sdk/tree/master/packages/rest-api-client) instead. :warning::warning:
 
 # How to build
 
@@ -57,7 +52,7 @@ import * as kintoneJSSDK from '@kintone/kintone-js-sdk'
 
 
 # Document
-[kintone-js-sdk](https://kintone.github.io/kintone-js-sdk)
+[kintone-js-sdk](https://kintone-labs.github.io/kintone-js-sdk)
 
 # License
 MIT License
